@@ -31,29 +31,35 @@ La solución de copilotos integrará los datos personalizados en un flujo de avi
 Ahora ya puede crear un proyecto de Azure AI Studio y los recursos de Azure AI para admitirlo.
 
 1. En un explorador web, abra [Azure AI Studio](https://ai.azure.com) en `https://ai.azure.com` e inicie sesión con sus credenciales de Azure.
-1. En la página **Compilar**, seleccione **+ Nuevo proyecto**. A continuación, en el **Asistente para crear un proyecto**, cree un proyecto con la siguiente configuración:
+1. En la página **Compilar**, seleccione **+Nuevo proyecto**. A continuación, en el asistente **Introducción**, cree un proyecto con la siguiente configuración:
     - **Nombre del proyecto**: *Un nombre exclusivo para el proyecto*
     - **AI Hub**: *Cree un nuevo recurso con la siguiente configuración:*
         - **Nombre del centro de IA**: *un nombre único*
         - **Suscripción de Azure**: *suscripción de Azure*
-        - **Grupo de recursos**: *Seleccione el grupo de recursos que contiene el recurso de Azure Ai Search*
+        - **Grupo de recursos**: *seleccione el grupo de recursos que contiene el recurso Búsqueda de Azure AI*.
         - **Ubicación**: *La misma ubicación que el recurso de Azure AI Search (o una ubicación geográficamente cercana)*
-        - **Azure OpenAI**: (Nuevo) *nombre_hub*
+        - **Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*.
         - **Azure AI Search**: *Seleccione el recurso de Azure AI Search*
+
 1. Espere a que se cree el proyecto.
 
 ## Implementación de modelos
 
-Necesitará dos modelos para implementar la solución:
+Necesita dos modelos para implementar la solución:
 
 - Un modelo de *inserción* para vectorizar datos de texto para una indexación y procesamiento eficaces.
 - Modelo que puede generar respuestas de lenguaje natural a preguntas a partir de sus datos.
 
-1. En Azure AI Studio, en el proyecto, en el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Implementaciones**.
-1. Cree una nueva implementación (mediante un punto de conexión en tiempo real) del modelo **text-embeding-ada-002** con el nombre `text-embedding-ada-002`. Establezca las opciones **avanzadas** para usar el filtro de contenido predeterminado y para restringir los tokens por minuto (TPM) a **5K**.
-1. Cree una nueva implementación del modelo **gpt-35-turbo** con el nombre `gpt-35-turbo`. Establezca las opciones **avanzadas** para usar el filtro de contenido predeterminado y para restringir los tokens por minuto (TPM) a **5K**.
+1. En Inteligencia artificial de Azure Studio, en el proyecto, en el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Implementaciones**.
+1. Cree una nueva implementación (mediante un **punto de conexión en tiempo real**) del modelo **text-embeding-ada-002** con la siguiente configuración:
 
-> **Nota**: Reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
+    - **Nombre de implementación**:`text-embedding-ada-002`
+    - **Versión del modelo**: *Valor predeterminado*
+    - **Opciones avanzadas**:
+        - **Filtro de contenido**: *Valor predeterminado*
+        - **Límite de velocidad de tokens por minuto**: `5K`
+
+> **Nota**: Reducir los tokens por minuto (TPM) ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
 
 ## Adición de datos al proyecto
 
@@ -61,7 +67,10 @@ Los datos del copiloto constan de un conjunto de folletos de viaje en formato PD
 
 1. Descargue el [archivo comprimido de los folletos](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) desde `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` y extráigalo en una carpeta denominada **folletos** en su sistema de archivos local.
 1. En Azure AI Studio, en el proyecto, en el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Datos**.
-1. Seleccione **+ Nuevos datos** y agregue una nueva conexión de origen de datos cargando la carpeta **folletos** (elija la opción para cargar una *carpeta*, no un *archivo*). Asigne al nuevo origen de datos el nombre **folletos**.
+1. Seleccione **+Nuevos datos**.
+1. En el asistente **Agregar datos**, expanda el menú desplegable para seleccionar **Cargar archivos o carpetas**.
+1. Seleccione **Cargar carpeta** y seleccione la carpeta **folletos**.
+1. Establezca el nombre de los datos en **folletos**.
 
 ## Creación de un índice para los datos
 
@@ -82,9 +91,10 @@ Ahora que ha agregado un origen de datos al proyecto, puede usarlo para crear un
         - **Nombre del índice**: folletos-índice
         - **Máquina virtual**: Selección automática
 1. Espere a que el índice esté listo (puede tardar varios minutos). La operación de creación de índices consta de los siguientes trabajos:
-    - descifrar, fragmentar e insertar los tokens de texto en los datos de los folletos
-    - Actualización del índice
-    - Registro del recurso de índice
+
+    - Descifre, fragmente e inserte los tokens de texto en los datos de los folletos.
+    - Actualiza el índice.
+    - Registre el recurso de índice.
 
 ## Prueba del índice
 
@@ -200,4 +210,3 @@ Para evitar costos innecesarios de Azure y uso de recursos, debe quitar los recu
 
 1. En Azure AI Studio, vaya a la página **Compilar**. A continuación, seleccione el proyecto que creó en este ejercicio y use el botón **Eliminar proyecto** para quitarlo. Puede tardar unos minutos en eliminar todos los componentes.
 1. Si ha terminado de explorar Azure AI Studio, vuelva a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicie sesión con sus credenciales de Azure si es necesario. A continuación, elimine el grupo de recursos que creó para los recursos de Azure AI Search y Azure AI.
-
