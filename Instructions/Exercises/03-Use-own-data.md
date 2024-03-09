@@ -19,11 +19,13 @@ La solución de copilotos integrará los datos personalizados en un flujo de avi
 
 1. En un explorador web, abra [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicie sesión con sus credenciales de Azure.
 1. En la página principal, seleccione **+ Crear un recurso** y busque `Azure AI Search`. A continuación, cree un nuevo recurso de Azure AI Search con la siguiente configuración:
+
     - **Suscripción**: *Seleccione la suscripción de Azure*
     - **Grupo de recursos**: *seleccione o cree un grupo de recursos*
     - **Nombre del servicio**: *Escriba un nombre de servicio único*
     - **Ubicación**: *Seleccione cualquier ubicación disponible*
     - **Plan de tarifa**: estándar
+
 1. Espere a que se complete la implementación de recursos de Azure AI Search.
 
 ## Crear un proyecto de Azure AI
@@ -32,8 +34,10 @@ Ahora ya puede crear un proyecto de Azure AI Studio y los recursos de Azure AI p
 
 1. En un explorador web, abra [Azure AI Studio](https://ai.azure.com) en `https://ai.azure.com` e inicie sesión con sus credenciales de Azure.
 1. En la página **Compilar**, seleccione **+Nuevo proyecto**. A continuación, en el asistente **Introducción**, cree un proyecto con la siguiente configuración:
+
     - **Nombre del proyecto**: *Un nombre exclusivo para el proyecto*
     - **AI Hub**: *Cree un nuevo recurso con la siguiente configuración:*
+
         - **Nombre del centro de IA**: *un nombre único*
         - **Suscripción de Azure**: *suscripción de Azure*
         - **Grupo de recursos**: *seleccione el grupo de recursos que contiene el recurso Búsqueda de Azure AI*.
@@ -104,19 +108,23 @@ Antes de usar el índice en un flujo de avisos basado en RAG, vamos a comprobar 
 1. En la página Área de juegos, en el panel **Configuración**, asegúrese de que la implementación del modelo **gpt-35-turbo** esté seleccionada. A continuación, en el panel **Sesión de chat**, envíe el aviso `Where can I stay in New York?`.
 1. Revise la respuesta, que debe ser una respuesta genérica del modelo sin datos procedentes del índice.
 1. En el panel **Configuración del Asistente**, seleccione **Agregar los datos** y agregue un origen de datos con la siguiente configuración:
+
     - **Origen de datos**:
         - **Selección del origen de datos**: Azure AI Search
         - **Suscripción**: *suscripción de Azure*
         - **Servicio Azure AI Search**: *Su recurso de Azure AI Search*
         - **Índice de Azure AI Search**: folletos-índice
-        - **Agregación de una búsqueda vectorial**: <u>sin</u>seleccionar
+        - **Agregar vector de búsqueda**: <u>No</u> seleccionada
+        - **Usar asignación de campo personalizado**: seleccionado
+        - Active la casilla para confirmar el uso incurrido.
     - **Asignación de campos de datos**:
         - **Datos de contenido**: contenido
         - **Nombre de archivo**: ruta de archivo
         - **Título**: título
         - **URL**: url
     - **Administración de datos**:
-        - **Tipo de búsqueda**: palabra clave
+        - **tipo de búsqueda**: Palabra clave
+
 1. Después de agregar el origen de datos y de reiniciar la sesión de chat, vuelva a enviar el aviso `Where can I stay in New York?`.
 1. Revise la respuesta, que debe basarse en los datos del índice.
 
@@ -125,46 +133,64 @@ Antes de usar el índice en un flujo de avisos basado en RAG, vamos a comprobar 
 El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le permite usarlo fácilmente en un flujo de avisos.
 
 1. En Azure AI Studio, en el proyecto, en el panel de navegación de la izquierda, en **Componentes**, seleccione **Datos**.
-1. Seleccione la carpeta **folletos-índice**, que contiene los datos del índice que creó anteriormente.
-1. En la sección **Vínculos de datos** del índice, copie el valor de **URI de almacenamiento** en el portapapeles (debería ser similar a `https://xxx.blob.core.windows.net/xxx/azureml/xxx/index/`). Necesitará este URI para conectarse a los datos de índice en el flujo de avisos.
+1. Seleccione la carpeta **brochures-index**, que contiene el índice que creó anteriormente.
+1. En la sección **Vínculos de datos** del índice, copie el valor de **URI de conexión de datos** en el portapapeles (debería ser similar a `azureml://subscriptions/xxx/resourcegroups/xxx/workspaces/xxx/datastores/workspaceblobstore/paths/azureml/xxx/index/`). Necesitará este URI para conectarse al índice en el flujo de avisos.
 1. En el proyecto, en el panel de navegación de la izquierda, en **Herramientas**, seleccione la página **Flujo de avisos**.
 1. Cree un nuevo flujo de avisos mediante la clonación del ejemplo de **Multi-Round Q&A on Your Data** de la galería. Guarde el clon de este ejemplo en una carpeta denominada `brochure-flow`.
 1. Cuando se abra la página del diseñador de flujos de avisos, revise **brochure-flow**. Su grafo debe ser similar a la imagen siguiente:
 
-    ![Captura de pantalla de un grafo de flujo de avisos](./media/brochure-flow.png)
+    ![Captura de pantalla de un grafo de flujo de avisos](./media/chat-flow.png)
 
     El flujo de avisos de ejemplo que usa implementa la lógica de avisos de una aplicación de chat en la que el usuario puede enviar de forma iterativa la entrada de texto a la interfaz del chat. El historial de conversaciones se conserva y se incluye en el contexto de cada iteración. El flujo de avisos organiza una secuencia de *herramientas* para:
 
-    1. Anexe el historial a la entrada de chat para definir un aviso como forma contextualizada de una pregunta.
-    1. Cree una *inserción* para la pregunta (use un modelo de inserción para convertir el texto en vectores).
-    1. Busque un índice vectorial para obtener información relevante en función de la pregunta.
-    1. Genere el contexto del aviso mediante el uso de los datos recuperados del índice para aumentar la pregunta.
-    1. Cree variantes de aviso agregando un mensaje del sistema y estructurando el historial de chats.
-    1. Envíe el aviso a un modelo de lenguaje para generar una respuesta de lenguaje natural.
+    - Anexe el historial a la entrada de chat para definir un aviso como forma contextualizada de una pregunta.
+    - Recupere el contexto mediante el índice y un tipo de consulta de su propia elección en función de la pregunta.
+    - Genere el contexto del aviso mediante el uso de los datos recuperados del índice para aumentar la pregunta.
+    - Cree variantes de aviso agregando un mensaje del sistema y estructurando el historial de chats.
+    - Envíe el aviso a un modelo de lenguaje para generar una respuesta de lenguaje natural.
 
-1. En la lista **Tiempo de ejecución**, seleccione **Iniciar** para iniciar el entorno de ejecución automático. A continuación, espere a que se inicie. Esto proporciona un contexto de proceso para el flujo de avisos. Mientras espera, en la pestaña **Flujo**, revise las secciones de las herramientas del flujo.
-1. En la sección **Entradas**, asegúrese de que las entradas incluyen **chat_history** y **chat_input**. El historial de chat predeterminado de este ejemplo incluye alguna conversación sobre IA.
-1. En la sección **Salidas**, asegúrese de que el valor de **chat_output** sea *${chat_with_context.output}*.
+1. En la lista **Tiempo de ejecución**, seleccione **Iniciar** para iniciar el entorno de ejecución automático.
+
+    A continuación, espere a que se inicie. Esto proporciona un contexto de proceso para el flujo de avisos. Mientras espera, en la pestaña **Flujo**, revise las secciones de las herramientas del flujo.
+
+1. En la sección **Entradas**, asegúrese de que las entradas incluyen:
+    - **chat_history**
+    - **chat_input**
+
+    El historial de chat predeterminado de este ejemplo incluye alguna conversación sobre IA.
+
+1. En la sección **Salidas**, asegúrese de que la salida incluye:
+
+    - **chat_output** con el valor `${chat_with_context.output}`
+
 1. En la sección **modify_query_with_history**, seleccione la siguiente configuración (dejando las demás como están):
-    - **Conexión**: Default_AzureOpenAI
-    - **API**: Chat
-    - **deployment_name**: gpt-35-turbo
-    - **response_format**: {"type":"text"}
-1. En la sección **embed_the_question**, establezca los siguientes valores de parámetro:
-    - **Conexión** *(Azure OpenAI, OpenAI)*: Default_AzureOpenAI
-    - **deployment_name** *(string)*: text-embedding-ada-00
-    - **input** *(string)*: ${modify_query_with_history.output}
-1. En la sección **search_question_from_indexed_docs**, establezca los siguientes valores de parámetro:
-    - **path** *(string)*: *Elimine el URI existente y pegue el URI del índice de vectores*
-    - **query** *(object)*: ${embed_the_question.output}
-    - **top_k** *(int)*: 2
+
+    - **Conexión**: `Default_AzureOpenAI`
+    - **Api**: `chat`
+    - **deployment_name**: `gpt-35-turbo`
+    - **response_format**: `{"type":"text"}`
+
+1. En la sección **lookup**, establezca los siguientes valores de parámetro:
+
+    - **mlindex_content**: *Seleccione el campo vacío para abrir el panel Generar*
+        - **index_type**: `MLIndex file from path`
+        - **mlindex_path**: *Pegue el URI del índice de vectores*
+    - **queries**: `${modify_query_with_history.output}`
+    - **query_type**: `Hybrid (vector + keyword)`
+    - **top_k**: 2
+
 1. En la sección **generate_prompt_context**, revise el script de Python y asegúrese de que las **entradas** de esta herramienta incluyan el parámetro siguiente:
+
     - **search_result** *(object)*: ${search_question_from_indexed_docs.output}
+
 1. En la sección **Prompt_variants**, revise el script de Python y asegúrese de que las **entradas** de esta herramienta incluyan los parámetros siguientes:
+
     - **contexts** *(string)*: ${generate_prompt_context.output}
     - **chat_history** *(string)*: ${inputs.chat_history}
     - **chat_input** *(string)*: ${inputs.chat_input}
+
 1. En la sección **chat_with_context**, seleccione la siguiente configuración (dejando las demás como están):
+
     - **Conexión**: Default_AzureOpenAI
     - **API**: Chat
     - **deployment_name**: gpt-35-turbo
