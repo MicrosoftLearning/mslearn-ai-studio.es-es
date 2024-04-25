@@ -29,7 +29,20 @@ Para empezar, cree un proyecto de Azure AI Studio y una instancia de Azure AI Hu
         - **Nombre del centro de IA**: *un nombre único*
         - **Suscripción**: *suscripción de Azure*
         - **Grupo de recursos**: *Un nuevo grupo de recursos*
-        - **Ubicación**: *Elija una ubicación cercana*
+        - **Ubicación**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
+        - Este de Australia
+        - Este de Canadá
+        - Este de EE. UU.
+        - Este de EE. UU. 2
+        - Centro de Francia
+        - Japón Oriental
+        - Centro-Norte de EE. UU
+        - Centro de Suecia
+        - Norte de Suiza
+        - Sur de Reino Unido 2
+
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
+
 1. Revise la configuración y cree el proyecto.
 1. Espere entre 5 y 10 minutos para que se cree el proyecto.
 
