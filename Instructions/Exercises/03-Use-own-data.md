@@ -52,7 +52,7 @@ Ahora ya puede crear un proyecto de Azure AI Studio y los recursos de Azure AI p
         - **Nombre del centro de IA**: *un nombre único*
         - **Suscripción de Azure**: *suscripción de Azure*
         - **Grupo de recursos**: *seleccione el grupo de recursos que contiene el recurso Búsqueda de Azure AI*.
-        - **Ubicación**: *la misma ubicación que el recurso de Búsqueda de Azure AI*
+        - **Ubicación**: *La misma ubicación que el recurso de Búsqueda de Azure AI*
         - **Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*.
         - **Azure AI Search**: *Seleccione el recurso de Azure AI Search*
 
