@@ -31,9 +31,21 @@ Necesita un centro de Azure AI en su suscripción de Azure para hospedar proyect
     - **Nombre del centro de Azure AI**: *un nombre único*
     - **Suscripción**: *suscripción de Azure*
     - **Grupo de recursos**: *Cree un nuevo grupo de recursos con un nombre único o seleccione uno existente*
-    - **Ubicación**: *Elija cualquier ubicación compatible con el servicio OpenAI de Azure*
+    - **Ubicación**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
+        - Este de Australia
+        - Este de Canadá
+        - Este de EE. UU.
+        - Este de EE. UU. 2
+        - Centro de Francia
+        - Japón Oriental
+        - Centro-Norte de EE. UU
+        - Centro de Suecia
+        - Norte de Suiza
+        - Sur de Reino Unido 2
     - **Azure OpenAI**: (Nuevo) ai-*hub_name*
     - **Búsqueda de Azure AI**: (Ninguno)
+
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
 
     La siguiente imagen ejemplifica lo que debería ver tras crear el centro de Azure AI:
 
