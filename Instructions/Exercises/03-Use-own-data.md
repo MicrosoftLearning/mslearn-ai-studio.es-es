@@ -52,7 +52,7 @@ Ahora ya puede crear un proyecto de Azure AI Studio y los recursos de Azure AI p
         - **Nombre del centro de IA**: *un nombre único*
         - **Suscripción de Azure**: *suscripción de Azure*
         - **Grupo de recursos**: *seleccione el grupo de recursos que contiene el recurso Búsqueda de Azure AI*.
-        - **Ubicación**: *La misma ubicación que el recurso de Búsqueda de Azure AI*
+        - **Ubicación**: *la misma ubicación que el recurso de Búsqueda de Azure AI*
         - **Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*.
         - **Azure AI Search**: *Seleccione el recurso de Azure AI Search*
 
@@ -220,6 +220,18 @@ Ahora que tiene un flujo en curso que usa los datos indexados, puede implementar
 1. Cuando la implementación se haya realizado correctamente, selecciónela. A continuación, en la página **Prueba**, escriba el aviso `What is there to do in San Francisco?` y revise la respuesta.
 1. Escriba el aviso `Where else could I go?` y revise la respuesta.
 1. Vea la página **Consumir** del punto de conexión y tenga en cuenta que contiene información de la conexión y código de ejemplo que puede usar para compilar una aplicación cliente para el punto de conexión, lo que le permite integrar la solución del flujo de avisos en una aplicación como copiloto personalizado.
+
+## Desafío 
+
+Ahora que ha experimentado cómo integrar sus propios datos en un copiloto creado con Inteligencia artificial de Azure Studio, vamos a explorar más.
+
+Pruebe a agregar un nuevo origen de datos a través de Inteligencia artificial de Azure Studio, indéxelo e integre los datos indexados en un flujo de avisos. Algunos conjuntos de datos que podría probar son:
+
+- Una colección de artículos (de investigación) que tiene en su ordenador.
+- Un conjunto de presentaciones de conferencias anteriores.
+- Cualquiera de los conjuntos de datos disponibles en el repositorio de [datos de ejemplo de Azure Search](https://github.com/Azure-Samples/azure-search-sample-data).
+
+Use todos los recursos que pueda para crear el origen de datos e integrarlo en el flujo de avisos. Pruebe el nuevo flujo de avisos y envíe avisos a los que solo pueda responder el conjunto de datos que eligió.
 
 ## Limpiar
 
