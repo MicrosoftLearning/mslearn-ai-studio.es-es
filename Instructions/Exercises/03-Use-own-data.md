@@ -95,17 +95,17 @@ Ahora que ha agregado un origen de datos al proyecto, puede usarlo para crear un
 1. En Azure AI Studio, en el proyecto, en el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Índices**.
 1. Agregue un nuevo índice con la siguiente configuración:
     - **Datos de origen**:
-        - **Origen de datos**: Uso de datos de proyecto existentes
+        - **Origen de datos**: Datos en Azure AI Studio
             - *Seleccione el origen de datos **folletos***
-    - **Almacenamiento de índices**:
-        - *Seleccione la conexión de **AzureAISearch** al recurso de Azure AI Search*
+    - **Configuración del índice**:
+        - **Seleccione el servicio Azure AI Search**: *Seleccione la conexión de **AzureAISearch** al recurso de Azure AI Search*
+        - **Nombre del índice**: folletos-índice
+        - **Máquina virtual**: Selección automática
     - **Configuración de búsqueda**:
         - **Configuración de vectores**: Agregación de una búsqueda vectorial a este recurso de búsqueda
         - **Recurso de Azure OpenAI**: Default_AzureOpenAI
-        - *Confirmación de que se implementará un modelo de inserción si todavía no existe*
-    - **Configuración del índice**:
-        - **Nombre del índice**: folletos-índice
-        - **Máquina virtual**: Selección automática
+        - *Si se le solicita, confirme que se implementará un modelo de inserción si todavía no existe*
+        
 1. Espera a que se complete el proceso de indexación, lo cual puede tardar varios minutos. La operación de creación de índices consta de los siguientes trabajos:
 
     - Descifre, fragmente e inserte los tokens de texto en los datos de los folletos.
