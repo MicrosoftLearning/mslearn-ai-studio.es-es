@@ -27,8 +27,8 @@ Para comenzar, veamos Inteligencia artificial de Azure Studio.
 
 Necesita un centro de Azure AI en su suscripción de Azure para hospedar proyectos. Puede crear este recurso al crear un proyecto o aprovisionarlo con antelación (que es lo que haremos en este ejercicio).
 
-1. En la página **Administrar**, seleccione **+ Nuevo centro de Azure AI**. A continuación, en el asistente para **crear un nuevo centro de Azure AI**, cree un nuevo recurso con la siguiente configuración:
-    - **Nombre del centro de Azure AI**: *un nombre único*
+1. En la sección **Administración**, seleccione **Todos los centros** y, a continuación, seleccione **+ Nuevo centro**. Cree un nuevo centro con la siguiente configuración:
+    - **Nombre del centro**: *un nombre único*
     - **Suscripción**: *suscripción de Azure*
     - **Grupo de recursos**: *Cree un nuevo grupo de recursos con un nombre único o seleccione uno existente*
     - **Ubicación**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
@@ -42,8 +42,8 @@ Necesita un centro de Azure AI en su suscripción de Azure para hospedar proyect
         - Centro de Suecia
         - Norte de Suiza
         - Sur de Reino Unido 2
-    - **Azure OpenAI**: (Nuevo) ai-*hub_name*
-    - **Búsqueda de Azure AI**: (Ninguno)
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: Seleccione esta opción para crear una nueva instancia de Servicios de IA o usar una existente
+    - **Conectar Búsqueda de Azure AI**: Omitir la conexión
 
     > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
 
@@ -65,7 +65,7 @@ Un centro de Azure AI proporciona un área de trabajo de colaboración en la que
 
 1. En Inteligencia artificial de Azure Studio, en la página **Compilar**, seleccione **+ Nuevo proyecto**. A continuación, en el **Asistente para crear un proyecto**, cree un proyecto con la siguiente configuración:
     - **Nombre del proyecto**: *Un nombre exclusivo para el proyecto*
-    - **Centro de Azure AI**: *Su centro de Azure AI*
+    - **Concentrador**: *Su centro de Azure AI*
 1. Espere a que se cree el proyecto. El resultado debe tener un aspecto similar a la imagen siguiente:
 
     ![Captura de pantalla de una página de detalles del proyecto en Inteligencia artificial de Azure Studio.](./media/azure-ai-project.png)
