@@ -44,12 +44,12 @@ La solución de copilotos integrará los datos personalizados en un flujo de avi
 Ahora ya puede crear un proyecto de Azure AI Studio y los recursos de Azure AI para admitirlo.
 
 1. En un explorador web, abra [Azure AI Studio](https://ai.azure.com) en `https://ai.azure.com` e inicie sesión con sus credenciales de Azure.
-1. En la página **Compilar**, seleccione **+Nuevo proyecto**. A continuación, en el asistente **Introducción**, cree un proyecto con la siguiente configuración:
+1. En la página **Inicio** de Inteligencia artificial de Azure Studio, seleccione **+ Nuevo proyecto**. Después, en el asistente para **Crear un proyecto**, cree un proyecto con la siguiente configuración:
 
     - **Nombre del proyecto**: *Un nombre exclusivo para el proyecto*
-    - **AI Hub**: *Cree un nuevo recurso con la siguiente configuración:*
+    - **Concentrador**: *Cree un nuevo recurso con la siguiente configuración:*
 
-        - **Nombre del centro de IA**: *un nombre único*
+        - **Nombre del centro**: *un nombre único*
         - **Suscripción de Azure**: *suscripción de Azure*
         - **Grupo de recursos**: *seleccione el grupo de recursos que contiene el recurso Búsqueda de Azure AI*.
         - **Ubicación**: *la misma ubicación que el recurso de Búsqueda de Azure AI*
@@ -116,8 +116,8 @@ Ahora que ha agregado un origen de datos al proyecto, puede usarlo para crear un
 
 Antes de usar el índice en un flujo de avisos basado en RAG, vamos a comprobar que se puede usar para afectar a las respuestas de IA generativa.
 
-1. En el panel de navegación de la izquierda, en **Herramientas**, seleccione la página **Área de juegos**.
-1. En la página Área de juegos, en el panel Opciones, asegúrate de que la implementación del modelo **gpt-35-turbo** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
+1. En el panel de navegación de la izquierda, en **Área de juegos del proyecto**, seleccione la página **Chat**.
+1. En la página Chat, en el panel Opciones, asegúrese de que la implementación de modelo **gpt-35-turbo** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
 1. Revise la respuesta, que debe ser una respuesta genérica del modelo sin datos procedentes del índice.
 1. En el panel Configuración, selecciona la pestaña **Agregar los datos** y, después, agrega el índice del proyecto **brochures-index** y selecciona el tipo de búsqueda **híbrido (vector + palabra clave)**.
 1. Después de agregar el índice y de reiniciar la sesión de chat, vuelve a enviar el mensaje `Where can I stay in New York?`.
