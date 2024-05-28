@@ -73,7 +73,7 @@ Necesita dos modelos para implementar la solución:
     - **Opciones avanzadas**:
         - **Filtro de contenido**: *Valor predeterminado*
         - **Límite de velocidad de tokens por minuto**: `5K`
-1. Repite los pasos anteriores para implementar un modelo de **gpt-35-turbo** con el nombre de implementación `gpt-35-turbo`.
+1. Repite los pasos anteriores para implementar un modelo de **gpt-35-turbo-16k** con el nombre de implementación `gpt-35-turbo-16k`.
 
     > **Nota**: Reducir los tokens por minuto (TPM) ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
 
@@ -117,7 +117,7 @@ Ahora que ha agregado un origen de datos al proyecto, puede usarlo para crear un
 Antes de usar el índice en un flujo de avisos basado en RAG, vamos a comprobar que se puede usar para afectar a las respuestas de IA generativa.
 
 1. En el panel de navegación de la izquierda, en **Área de juegos del proyecto**, seleccione la página **Chat**.
-1. En la página Chat, en el panel Opciones, asegúrese de que la implementación de modelo **gpt-35-turbo** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
+1. En la página Chat, en el panel Opciones, asegúrese de que la implementación de modelo **gpt-35-turbo-16k** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
 1. Revise la respuesta, que debe ser una respuesta genérica del modelo sin datos procedentes del índice.
 1. En el panel Configuración, selecciona la pestaña **Agregar los datos** y, después, agrega el índice del proyecto **brochures-index** y selecciona el tipo de búsqueda **híbrido (vector + palabra clave)**.
 1. Después de agregar el índice y de reiniciar la sesión de chat, vuelve a enviar el mensaje `Where can I stay in New York?`.
@@ -159,7 +159,7 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
 
     - **Conexión**: `Default_AzureOpenAI`
     - **Api**: `chat`
-    - **deployment_name**: `gpt-35-turbo`
+    - **deployment_name**: `gpt-35-turbo-16k`
     - **response_format**: `{"type":"text"}`
 
 1. En la sección **lookup**, establezca los siguientes valores de parámetro:
@@ -185,7 +185,7 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
 
     - **Conexión**: Default_AzureOpenAI
     - **API**: Chat
-    - **deployment_name**: gpt-35-turbo
+    - **deployment_name**: gpt-35-turbo-16k
     - **response_format**: {"type":"text"}
 
     A continuación, asegúrese de que las **entradas** de esta herramienta incluyan los parámetros siguientes:
@@ -203,6 +203,8 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
 ## Implementación del flujo
 
 Ahora que tiene un flujo en curso que usa los datos indexados, puede implementarlo como servicio para que lo consuma una aplicación de copilotos.
+
+> **Nota**: En función de la región y la carga del centro de datos, las implementaciones a veces pueden tardar un poco. Pase a la sección de desafíos que aparece a continuación mientras se implementa u omita la prueba de la implementación si dispone de poco tiempo.
 
 1. En la barra de herramientas, seleccione **Implementar**.
 1. Cree una implementación con la siguiente configuración:
