@@ -8,5 +8,5 @@ layout: home
 
 Los siguientes ejercicios están diseñados como apoyo para los módulos de [Microsoft Learn](https://learn.microsoft.com/training).
 
-{% assign labs = site.pages | where_exp:"page", "page.url contains '/Instructions/Exercises'" %} {% for activity in labs  %}
+{% assign labs = site.pages | where_exp:"page", "page.url contains '/Instructions'" %} {% para la actividad en laboratorios %}
 - [{{ activity.lab.title }}]({{ site.github.url }}{{ activity.url }}) {% endfor %}
