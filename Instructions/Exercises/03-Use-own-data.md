@@ -66,7 +66,7 @@ Necesita dos modelos para implementar la solución:
 - Modelo que puede generar respuestas de lenguaje natural a preguntas a partir de sus datos.
 
 1. En Inteligencia artificial de Azure Studio, en el proyecto, en el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Implementaciones**.
-1. Cree una nueva implementación (mediante un **punto de conexión en tiempo real**) del modelo **text-embeding-ada-002** con la siguiente configuración:
+1. Cree una nueva implementación del modelo **text-embedding-ada-002** con la siguiente configuración:
 
     - **Nombre de implementación**:`text-embedding-ada-002`
     - **Versión del modelo**: *Valor predeterminado*
@@ -141,7 +141,7 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
     - Cree variantes de aviso agregando un mensaje del sistema y estructurando el historial de chats.
     - Envíe el aviso a un modelo de lenguaje para generar una respuesta de lenguaje natural.
 
-1. En la lista **Tiempo de ejecución**, seleccione **Iniciar** para iniciar el entorno de ejecución automático.
+1. Use el botón **Iniciar sesión de proceso** para iniciar el proceso del entorno de ejecución para el flujo.
 
     Espere a que se inicie el tiempo de ejecución. Esto proporciona un contexto de proceso para el flujo de avisos. Mientras espera, en la pestaña **Flujo**, revise las secciones de las herramientas del flujo.
 
@@ -153,22 +153,22 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
 
 1. En la sección **Salidas**, asegúrese de que la salida incluye:
 
-    - **chat_output** con el valor `${chat_with_context.output}`
+    - **chat_output** con valor ${chat_with_context.output}
 
 1. En la sección **modify_query_with_history**, seleccione la siguiente configuración (dejando las demás como están):
 
-    - **Conexión**: `Default_AzureOpenAI`
-    - **Api**: `chat`
-    - **deployment_name**: `gpt-35-turbo-16k`
-    - **response_format**: `{"type":"text"}`
+    - **Conexión**: *El recurso predeterminado de Azure OpenAI para el centro de IA*
+    - **Api**: chat
+    - **deployment_name**: gpt-35-turbo-16k
+    - **response_format**: {"type":"text"}
 
 1. En la sección **lookup**, establezca los siguientes valores de parámetro:
 
     - **mlindex_content**: *Seleccione el campo vacío para abrir el panel Generar*
         - **index_type**: Índice registrado
         - **mlindex_asset_id**: brochures-index:1
-    - **queries**: `${modify_query_with_history.output}`
-    - **query_type**: `Hybrid (vector + keyword)`
+    - **queries**: ${modify_query_with_history.output}
+    - **query_type**: Híbrido (vector + palabra clave)
     - **top_k**: 2
 
 1. En la sección **generate_prompt_context**, revise el script de Python y asegúrese de que las **entradas** de esta herramienta incluyan el parámetro siguiente:
