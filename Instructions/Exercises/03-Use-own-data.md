@@ -86,7 +86,8 @@ Los datos del copiloto constan de un conjunto de folletos de viaje en formato PD
 1. Seleccione **+Nuevos datos**.
 1. En el asistente **Agregar datos**, expanda el menú desplegable para seleccionar **Cargar archivos o carpetas**.
 1. Seleccione **Cargar carpeta** y seleccione la carpeta **folletos**.
-1. Establezca el nombre de los datos en **folletos**.
+1. Establezca el nombre de datos en `brochures`.
+1. Espere a que se cargue la carpeta y observe que contiene varios archivos .pdf.
 
 ## Creación de un índice para los datos
 
@@ -99,17 +100,16 @@ Ahora que ha agregado un origen de datos al proyecto, puede usarlo para crear un
             - *Seleccione el origen de datos **folletos***
     - **Configuración del índice**:
         - **Seleccione el servicio Azure AI Search**: *Seleccione la conexión de **AzureAISearch** al recurso de Azure AI Search*
-        - **Nombre del índice**: folletos-índice
+        - **Nombre de índice**: `brochures-index`
         - **Máquina virtual**: Selección automática
     - **Configuración de búsqueda**:
         - **Configuración de vectores**: Agregación de una búsqueda vectorial a este recurso de búsqueda
-        - **Recurso de Azure OpenAI**: Default_AzureOpenAI
-        - *Si se le solicita, confirme que se implementará un modelo de inserción si todavía no existe*
+        - **Seleccione un modelo de inserción**: *Seleccione el recurso predeterminado de Azure OpenAI para el centro.*
         
 1. Espera a que se complete el proceso de indexación, lo cual puede tardar varios minutos. La operación de creación de índices consta de los siguientes trabajos:
 
     - Descifre, fragmente e inserte los tokens de texto en los datos de los folletos.
-    - Actualiza Búsqueda de Azure AI con el nuevo índice.
+    - Crear el índice de Búsqueda de Azure AI.
     - Registre el recurso de índice.
 
 ## Prueba del índice
@@ -210,8 +210,8 @@ Ahora que tiene un flujo en curso que usa los datos indexados, puede implementar
 1. Cree una implementación con la siguiente configuración:
     - **Configuración básica**:
         - **Punto de conexión**: Nuevo
-        - **Endpoint name**: `brochure-endpoint`
-        - **Nombre de la implementación**: folleto-punto_conexión-1
+        - **Nombre del punto de conexión**: *Usar el nombre de punto de conexión único predeterminado*
+        - **Nombre de implementación**: *Usar el nombre de punto de conexión de implementación predeterminado*
         - **Máquina virtual**: Standard_DS3_v2
         - **Recuento de instancias**: 3
         - **Recopilación de datos de inferencia**: seleccionado
@@ -239,5 +239,4 @@ Use todos los recursos que pueda para crear el origen de datos e integrarlo en e
 
 Para evitar costos innecesarios de Azure y uso de recursos, debe quitar los recursos que implementó en este ejercicio.
 
-1. En Azure AI Studio, vaya a la página **Compilar**. A continuación, seleccione el proyecto que creó en este ejercicio y use el botón **Eliminar proyecto** para quitarlo. Puede tardar unos minutos en eliminar todos los componentes.
-1. Si ha terminado de explorar Azure AI Studio, vuelva a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicie sesión con sus credenciales de Azure si es necesario. A continuación, elimine el grupo de recursos que creó para los recursos de Azure AI Search y Azure AI.
+1. Si ha terminado de explorar Azure AI Studio, vuelva a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicie sesión con sus credenciales de Azure si es necesario. A continuación, elimine los recursos del grupo de recursos donde aprovisionó los recursos de Búsqueda de Azure AI y Azure AI.
