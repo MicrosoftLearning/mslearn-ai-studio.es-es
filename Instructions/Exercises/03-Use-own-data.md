@@ -44,15 +44,15 @@ La solución de copilotos integrará los datos personalizados en un flujo de avi
 Ahora ya puede crear un proyecto de Azure AI Studio y los recursos de Azure AI para admitirlo.
 
 1. En un explorador web, abra [Azure AI Studio](https://ai.azure.com) en `https://ai.azure.com` e inicie sesión con sus credenciales de Azure.
-1. En la página **Compilar**, seleccione **+Nuevo proyecto**. A continuación, en el asistente **Introducción**, cree un proyecto con la siguiente configuración:
+1. En la página **Inicio** de Inteligencia artificial de Azure Studio, seleccione **+ Nuevo proyecto**. Después, en el asistente para **Crear un proyecto**, cree un proyecto con la siguiente configuración:
 
     - **Nombre del proyecto**: *Un nombre exclusivo para el proyecto*
-    - **AI Hub**: *Cree un nuevo recurso con la siguiente configuración:*
+    - **Concentrador**: *Cree un nuevo recurso con la siguiente configuración:*
 
-        - **Nombre del centro de IA**: *un nombre único*
+        - **Nombre del centro**: *un nombre único*
         - **Suscripción de Azure**: *suscripción de Azure*
         - **Grupo de recursos**: *seleccione el grupo de recursos que contiene el recurso Búsqueda de Azure AI*.
-        - **Ubicación**: *La misma ubicación que el recurso de Búsqueda de Azure AI*
+        - **Ubicación**: *la misma ubicación que el recurso de Búsqueda de Azure AI*
         - **Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*.
         - **Azure AI Search**: *Seleccione el recurso de Azure AI Search*
 
@@ -66,14 +66,14 @@ Necesita dos modelos para implementar la solución:
 - Modelo que puede generar respuestas de lenguaje natural a preguntas a partir de sus datos.
 
 1. En Inteligencia artificial de Azure Studio, en el proyecto, en el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Implementaciones**.
-1. Cree una nueva implementación (mediante un **punto de conexión en tiempo real**) del modelo **text-embeding-ada-002** con la siguiente configuración:
+1. Cree una nueva implementación del modelo **text-embedding-ada-002** con la siguiente configuración:
 
     - **Nombre de implementación**:`text-embedding-ada-002`
     - **Versión del modelo**: *Valor predeterminado*
     - **Opciones avanzadas**:
         - **Filtro de contenido**: *Valor predeterminado*
         - **Límite de velocidad de tokens por minuto**: `5K`
-1. Repite los pasos anteriores para implementar un modelo de **gpt-35-turbo** con el nombre de implementación `gpt-35-turbo`.
+1. Repite los pasos anteriores para implementar un modelo de **gpt-35-turbo-16k** con el nombre de implementación `gpt-35-turbo-16k`.
 
     > **Nota**: Reducir los tokens por minuto (TPM) ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
 
@@ -86,7 +86,8 @@ Los datos del copiloto constan de un conjunto de folletos de viaje en formato PD
 1. Seleccione **+Nuevos datos**.
 1. En el asistente **Agregar datos**, expanda el menú desplegable para seleccionar **Cargar archivos o carpetas**.
 1. Seleccione **Cargar carpeta** y seleccione la carpeta **folletos**.
-1. Establezca el nombre de los datos en **folletos**.
+1. Establezca el nombre de datos en `brochures`.
+1. Espere a que se cargue la carpeta y observe que contiene varios archivos .pdf.
 
 ## Creación de un índice para los datos
 
@@ -95,29 +96,28 @@ Ahora que ha agregado un origen de datos al proyecto, puede usarlo para crear un
 1. En Azure AI Studio, en el proyecto, en el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Índices**.
 1. Agregue un nuevo índice con la siguiente configuración:
     - **Datos de origen**:
-        - **Origen de datos**: Uso de datos de proyecto existentes
+        - **Origen de datos**: Datos en Azure AI Studio
             - *Seleccione el origen de datos **folletos***
-    - **Almacenamiento de índices**:
-        - *Seleccione la conexión de **AzureAISearch** al recurso de Azure AI Search*
+    - **Configuración del índice**:
+        - **Seleccione el servicio Azure AI Search**: *Seleccione la conexión de **AzureAISearch** al recurso de Azure AI Search*
+        - **Nombre de índice**: `brochures-index`
+        - **Máquina virtual**: Selección automática
     - **Configuración de búsqueda**:
         - **Configuración de vectores**: Agregación de una búsqueda vectorial a este recurso de búsqueda
-        - **Recurso de Azure OpenAI**: Default_AzureOpenAI
-        - *Confirmación de que se implementará un modelo de inserción si todavía no existe*
-    - **Configuración del índice**:
-        - **Nombre del índice**: folletos-índice
-        - **Máquina virtual**: Selección automática
+        - **Seleccione un modelo de inserción**: *Seleccione el recurso predeterminado de Azure OpenAI para el centro.*
+        
 1. Espera a que se complete el proceso de indexación, lo cual puede tardar varios minutos. La operación de creación de índices consta de los siguientes trabajos:
 
     - Descifre, fragmente e inserte los tokens de texto en los datos de los folletos.
-    - Actualiza Búsqueda de Azure AI con el nuevo índice.
+    - Crear el índice de Búsqueda de Azure AI.
     - Registre el recurso de índice.
 
 ## Prueba del índice
 
 Antes de usar el índice en un flujo de avisos basado en RAG, vamos a comprobar que se puede usar para afectar a las respuestas de IA generativa.
 
-1. En el panel de navegación de la izquierda, en **Herramientas**, seleccione la página **Área de juegos**.
-1. En la página Área de juegos, en el panel Opciones, asegúrate de que la implementación del modelo **gpt-35-turbo** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
+1. En el panel de navegación de la izquierda, en **Área de juegos del proyecto**, seleccione la página **Chat**.
+1. En la página Chat, en el panel Opciones, asegúrese de que la implementación de modelo **gpt-35-turbo-16k** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
 1. Revise la respuesta, que debe ser una respuesta genérica del modelo sin datos procedentes del índice.
 1. En el panel Configuración, selecciona la pestaña **Agregar los datos** y, después, agrega el índice del proyecto **brochures-index** y selecciona el tipo de búsqueda **híbrido (vector + palabra clave)**.
 1. Después de agregar el índice y de reiniciar la sesión de chat, vuelve a enviar el mensaje `Where can I stay in New York?`.
@@ -141,7 +141,7 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
     - Cree variantes de aviso agregando un mensaje del sistema y estructurando el historial de chats.
     - Envíe el aviso a un modelo de lenguaje para generar una respuesta de lenguaje natural.
 
-1. En la lista **Tiempo de ejecución**, seleccione **Iniciar** para iniciar el entorno de ejecución automático.
+1. Use el botón **Iniciar sesión de proceso** para iniciar el proceso del entorno de ejecución para el flujo.
 
     Espere a que se inicie el tiempo de ejecución. Esto proporciona un contexto de proceso para el flujo de avisos. Mientras espera, en la pestaña **Flujo**, revise las secciones de las herramientas del flujo.
 
@@ -153,22 +153,22 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
 
 1. En la sección **Salidas**, asegúrese de que la salida incluye:
 
-    - **chat_output** con el valor `${chat_with_context.output}`
+    - **chat_output** con valor ${chat_with_context.output}
 
 1. En la sección **modify_query_with_history**, seleccione la siguiente configuración (dejando las demás como están):
 
-    - **Conexión**: `Default_AzureOpenAI`
-    - **Api**: `chat`
-    - **deployment_name**: `gpt-35-turbo`
-    - **response_format**: `{"type":"text"}`
+    - **Conexión**: *El recurso predeterminado de Azure OpenAI para el centro de IA*
+    - **Api**: chat
+    - **deployment_name**: gpt-35-turbo-16k
+    - **response_format**: {"type":"text"}
 
 1. En la sección **lookup**, establezca los siguientes valores de parámetro:
 
     - **mlindex_content**: *Seleccione el campo vacío para abrir el panel Generar*
         - **index_type**: Índice registrado
         - **mlindex_asset_id**: brochures-index:1
-    - **queries**: `${modify_query_with_history.output}`
-    - **query_type**: `Hybrid (vector + keyword)`
+    - **queries**: ${modify_query_with_history.output}
+    - **query_type**: Híbrido (vector + palabra clave)
     - **top_k**: 2
 
 1. En la sección **generate_prompt_context**, revise el script de Python y asegúrese de que las **entradas** de esta herramienta incluyan el parámetro siguiente:
@@ -185,7 +185,7 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
 
     - **Conexión**: Default_AzureOpenAI
     - **API**: Chat
-    - **deployment_name**: gpt-35-turbo
+    - **deployment_name**: gpt-35-turbo-16k
     - **response_format**: {"type":"text"}
 
     A continuación, asegúrese de que las **entradas** de esta herramienta incluyan los parámetros siguientes:
@@ -204,12 +204,14 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
 
 Ahora que tiene un flujo en curso que usa los datos indexados, puede implementarlo como servicio para que lo consuma una aplicación de copilotos.
 
+> **Nota**: En función de la región y la carga del centro de datos, las implementaciones a veces pueden tardar un poco. Pase a la sección de desafíos que aparece a continuación mientras se implementa u omita la prueba de la implementación si dispone de poco tiempo.
+
 1. En la barra de herramientas, seleccione **Implementar**.
 1. Cree una implementación con la siguiente configuración:
     - **Configuración básica**:
         - **Punto de conexión**: Nuevo
-        - **Endpoint name**: `brochure-endpoint`
-        - **Nombre de la implementación**: folleto-punto_conexión-1
+        - **Nombre del punto de conexión**: *Usar el nombre de punto de conexión único predeterminado*
+        - **Nombre de implementación**: *Usar el nombre de punto de conexión de implementación predeterminado*
         - **Máquina virtual**: Standard_DS3_v2
         - **Recuento de instancias**: 3
         - **Recopilación de datos de inferencia**: seleccionado
@@ -221,9 +223,20 @@ Ahora que tiene un flujo en curso que usa los datos indexados, puede implementar
 1. Escriba el aviso `Where else could I go?` y revise la respuesta.
 1. Vea la página **Consumir** del punto de conexión y tenga en cuenta que contiene información de la conexión y código de ejemplo que puede usar para compilar una aplicación cliente para el punto de conexión, lo que le permite integrar la solución del flujo de avisos en una aplicación como copiloto personalizado.
 
+## Desafío 
+
+Ahora que ha experimentado cómo integrar sus propios datos en un copiloto creado con Inteligencia artificial de Azure Studio, vamos a explorar más.
+
+Pruebe a agregar un nuevo origen de datos a través de Inteligencia artificial de Azure Studio, indéxelo e integre los datos indexados en un flujo de avisos. Algunos conjuntos de datos que podría probar son:
+
+- Una colección de artículos (de investigación) que tiene en su ordenador.
+- Un conjunto de presentaciones de conferencias anteriores.
+- Cualquiera de los conjuntos de datos disponibles en el repositorio de [datos de ejemplo de Azure Search](https://github.com/Azure-Samples/azure-search-sample-data).
+
+Use todos los recursos que pueda para crear el origen de datos e integrarlo en el flujo de avisos. Pruebe el nuevo flujo de avisos y envíe avisos a los que solo pueda responder el conjunto de datos que eligió.
+
 ## Limpiar
 
 Para evitar costos innecesarios de Azure y uso de recursos, debe quitar los recursos que implementó en este ejercicio.
 
-1. En Azure AI Studio, vaya a la página **Compilar**. A continuación, seleccione el proyecto que creó en este ejercicio y use el botón **Eliminar proyecto** para quitarlo. Puede tardar unos minutos en eliminar todos los componentes.
-1. Si ha terminado de explorar Azure AI Studio, vuelva a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicie sesión con sus credenciales de Azure si es necesario. A continuación, elimine el grupo de recursos que creó para los recursos de Azure AI Search y Azure AI.
+1. Si ha terminado de explorar Azure AI Studio, vuelva a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicie sesión con sus credenciales de Azure si es necesario. A continuación, elimine los recursos del grupo de recursos donde aprovisionó los recursos de Búsqueda de Azure AI y Azure AI.
