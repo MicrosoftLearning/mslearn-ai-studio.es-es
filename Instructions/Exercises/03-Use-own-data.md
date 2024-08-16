@@ -1,8 +1,3 @@
----
-lab:
-  title: Crear un copiloto personalizado que use sus propios datos
----
-
 # Crear un copiloto personalizado que use sus propios datos
 
 La generación aumentada de recuperación (RAG) es una técnica que se usa para compilar aplicaciones que integran datos de orígenes de datos personalizados en un aviso de un modelo de IA generativa. La RAG es un patrón que se usa habitualmente para desarrollar *copilotos* personalizados: aplicaciones basadas en chat que usan un modelo de lenguaje para interpretar entradas y generar respuestas adecuadas.
