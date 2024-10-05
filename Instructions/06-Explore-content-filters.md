@@ -17,7 +17,7 @@ Necesitas un centro de Azure AI en tu suscripción de Azure para hospedar proyec
 
 1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
 
-1. En la sección Administración, selecciona Todos los centros y, a continuación, selecciona **+ Nuevo centro**. Crea un nuevo centro con la siguiente configuración:
+1. En la sección Administración, selecciona Todos los recursos y, después, selecciona **+ Nuevo centro**. Crea un nuevo centro con la siguiente configuración:
     - **Nombre del centro**: *un nombre único*
     - **Suscripción**: *suscripción de Azure*
     - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único o selecciona uno existente*
@@ -50,7 +50,7 @@ Necesitas un centro de Azure AI en tu suscripción de Azure para hospedar proyec
 
 Un centro de Azure AI proporciona un área de trabajo de colaboración en la que puedes definir uno o varios *proyectos*. Vamos a crear un proyecto en el centro de Azure AI.
 
-1. En Inteligencia artificial de Azure Studio, en la página **Compilar**, selecciona **+ Nuevo proyecto**. A continuación, en el **Asistente para crear un proyecto**, crea un proyecto con la siguiente configuración:
+1. En Inteligencia artificial de Azure Studio, en la página **Información general sobre el centro**, selecciona **+ Nuevo proyecto**. A continuación, en el **Asistente para crear un proyecto**, crea un proyecto con la siguiente configuración:
 
     - **Nombre del proyecto**: *Un nombre exclusivo para el proyecto*
     - **Concentrador**: *Su centro de Azure AI*
@@ -82,7 +82,7 @@ Ahora está listo para implementar un modelo para usarlo a través de **Intelige
 
 Los filtros de contenido se aplican a solicitudes y finalizaciones para evitar que se genere lenguaje potencialmente dañino u ofensivo.
 
-1. En la página **Compilación**, seleccione **Filtros de contenido** en la barra de navegación izquierda y, a continuación, seleccione **+ Crear filtro de contenido**.
+1. En la página **Componentes**, en la barra de navegación izquierda, selecciona **Filtros de contenido** y, a continuación, selecciona **+ Crear filtro de contenido**.
 
 1. En la pestaña **Información básica**, proporcione la siguiente información: 
     - **Nombre**: *Un nombre único para el filtro de contenido*
@@ -117,7 +117,7 @@ Los filtros de contenido se aplican a solicitudes y finalizaciones para evitar q
 
 Veamos cómo se comporta el modelo en una interacción conversacional.
 
-1. Vaya al **Área de juegos** en el panel izquierdo.
+1. Ve al **Área de juegos del proyecto** en el panel izquierdo.
 
 1. En el modo **Chat**, escriba el siguiente mensaje en la sección **Sesión de chat**.
 

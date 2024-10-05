@@ -13,13 +13,13 @@ Este ejercicio dura aproximadamente **25** minutos.
 
 ## Creación de un centro de Azure AI
 
-Necesita un centro de Azure AI en su suscripción de Azure para hospedar proyectos. Puede crear este recurso al crear un proyecto o aprovisionarlo con antelación (que es lo que haremos en este ejercicio).
+Necesitas un centro de Azure AI en tu suscripción de Azure para hospedar proyectos. Puedes crear este recurso al crear un proyecto o aprovisionarlo con antelación (que es lo que haremos en este ejercicio).
 
-1. En la sección **Administración**, seleccione **Todos los centros** y, a continuación, seleccione **+ Nuevo centro**. Cree un nuevo centro con la siguiente configuración:
+1. En la sección **Administración**, selecciona **Todos los recursos** y, después, selecciona **+ Nuevo centro**. Crea un nuevo centro con la siguiente configuración:
     - **Nombre del centro**: *un nombre único*
     - **Suscripción**: *suscripción de Azure*
-    - **Grupo de recursos**: *Cree un nuevo grupo de recursos con un nombre único o seleccione uno existente*
-    - **Ubicación**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
+    - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único o selecciona uno existente*
+    - **Ubicación**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
         - Este de Australia
         - Este de Canadá
         - Este de EE. UU.
@@ -30,31 +30,31 @@ Necesita un centro de Azure AI en su suscripción de Azure para hospedar proyec
         - Centro de Suecia
         - Norte de Suiza
         - Sur de Reino Unido 2
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *Seleccione esta opción para crear una nueva instancia de Servicios de IA o usar una existente*
-    - **Conectar Búsqueda de Azure AI**: Omitir la conexión
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *selecciona esta opción para crear una nueva instancia de Servicios de IA o usar una existente*
+    - **Conectar Búsqueda de Azure AI**: omitir la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-    La siguiente imagen ejemplifica lo que debería ver tras crear el centro de Azure AI:
+    La siguiente imagen ejemplifica lo que deberías ver tras crear el centro de Azure AI:
 
     ![Captura de pantalla de los detalles de un centro de Azure AI en Inteligencia artificial de Azure Studio.](./media/azure-ai-resource.png)
 
-1. Abra una nueva pestaña del explorador (dejando abierta la pestaña Inteligencia artificial de Azure Studio) y vaya a Azure Portal en [https://portal.azure.com](https://portal.azure.com?azure-portal=true), inicie sesión con sus credenciales de Azure si se le solicita.
-1. Vaya al grupo de recursos en el que creó el centro de Azure AI y vea los recursos de Azure que se han creado.
+1. Abre una nueva pestaña del explorador (dejando abierta la pestaña Inteligencia artificial de Azure Studio) y ve a Azure Portal en [https://portal.azure.com](https://portal.azure.com?azure-portal=true), inicia sesión con tus credenciales de Azure si se te solicita.
+1. Ve al grupo de recursos en el que creaste el centro de Azure AI y mira los recursos de Azure que se han creado.
 
     ![Captura de pantalla de un centro de Azure AI y recursos relacionados en Azure Portal.](./media/azure-portal.png)
 
-1. Vuelva a la pestaña del explorador de Inteligencia artificial de Azure Studio.
-1. Vea cada una de las páginas del panel en el lado izquierdo de la página del centro de Azure AI y anote los artefactos que puede crear y administrar. En la página **Conexiones**, observe que ya se han creado las conexiones a Azure OpenAI y los servicios de IA.
+1. Vuelve a la pestaña del explorador de Inteligencia artificial de Azure Studio.
+1. Mira cada una de las páginas del panel en el lado izquierdo de la página del centro de Azure AI y anota los artefactos que puedes crear y administrar. En la página **Conexiones**, observa que ya se han creado las conexiones a Azure OpenAI y los servicios de IA.
 
 ## Creación de un proyecto
 
-Un centro de Azure AI proporciona un área de trabajo de colaboración en la que puede definir uno o varios *proyectos*. Vamos a crear un proyecto en el centro de Azure AI.
+Un centro de Azure AI proporciona un área de trabajo de colaboración en la que puedes definir uno o varios *proyectos*. Vamos a crear un proyecto en el centro de Azure AI.
 
-1. En Inteligencia artificial de Azure Studio, asegúrese de que está en el centro que acaba de crear (puede comprobar la ubicación al comprobar la ruta de acceso en la parte superior de la pantalla).
-1. Vaya a **Todos los proyectos** con el menú de la izquierda.
-1. Seleccione **+ Nuevo proyecto**.
-1. En el asistente para **Crear un nuevo proyecto**, cree un proyecto con la siguiente configuración:
+1. En Inteligencia artificial de Azure Studio, asegúrate de que está en el centro que acabas de crear (puedes comprobar la ubicación al comprobar la ruta de acceso en la parte superior de la pantalla).
+1. Ve a **Todos los proyectos** con el menú de la izquierda.
+1. Selecciona **+ Nuevo proyecto**.
+1. En el asistente para **Crear un nuevo proyecto**, crea un proyecto con la siguiente configuración:
     - **Centro actual**: *Su centro de Azure AI*
     - **Nombre del proyecto**: *Un nombre exclusivo para el proyecto*
 1. Espere a que se cree el proyecto. El resultado debe tener un aspecto similar a la imagen siguiente:
