@@ -51,13 +51,13 @@ El siguiente paso es conectar el entorno de desarrollo local con la suscripción
 
 1. En primer lugar, comprueba que está instalada la [versión más reciente](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_1.9.3) de Azure Developer CLI.
     ```bash
-        azd version
+    azd version
     ```
 
 1. A continuación, inicia sesión en tu cuenta de Azure desde el terminal de VS Code.
 
     ```bash
-        azd auth login 
+    azd auth login 
     ```
 
 ## Aprovisionamiento de recursos de Azure para el proyecto
@@ -67,7 +67,7 @@ Una vez que hayas iniciado sesión, estarás listo para empezar a aprovisionar l
 1. Aprovisiona *e implementa* tu aplicación de IA mediante azd.
 
     ```bash
-        azd up
+    azd up
     ```
 
 1. Deberías ver los siguientes mensajes. Responde usando la guía siguiente:
@@ -144,7 +144,7 @@ Para comprobar que el Copilot implementado funciona, usa la capacidad de área d
 1. Por ahora, prueba la implementación de copiloto con la siguiente **entrada** de prueba:
 
     ```bash
-      {"question": "tell me about your hiking shoes", "customerId": "2", "chat_history": []}
+    {"question": "tell me about your hiking shoes", "customerId": "2", "chat_history": []}
     ```
 
 Debes obtener una respuesta JSON válida en el componente de salida como se muestra.
@@ -193,13 +193,13 @@ El comando **azd up** no solo aprovisiona e implementa la aplicación en Azure, 
 1. Comprueba que tienes instaladas las **herramientas de Promptflow** en el entorno de desarrollo.
 
     ```bash
-        pf version
+    pf version
     ```
 
 1. Usa la herramienta de **prueba de flujo pf** para probar la aplicación de flujo flexible de **contoso_chat** localmente, con la pregunta de ejemplo siguiente. Ten en cuenta la sintaxis del comando para pasar las entradas:
 
     ```bash
-        pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[]
+    pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[]
     ```
 
 Debes recibir una respuesta como esta.
@@ -211,7 +211,7 @@ Debes recibir una respuesta como esta.
 1. Puedes realizar un seguimiento de los detalles de la ejecución con la marca `--ui` como se muestra a continuación.
 
     ```bash
-        pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[] --ui
+    pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[] --ui
     ```
 
 Este comando debe iniciar una **vista de seguimiento** en el explorador (en una nueva pestaña) con una tabla que proporcione detalles generales sobre esa ejecución de prueba, incluida la latencia y el uso de tokens.
@@ -316,7 +316,7 @@ Reemplaza el conjunto de datos de prueba usado para ejecutar la canalización de
 Este proyecto usa modelos y servicios (por ejemplo, Azure AI Search) que pueden incurrir en costes no triviales si se deja ejecutar a largo plazo. Cuando termines de explorar Azure AI Studio, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure. Para ello, ejecuta el siguiente comando en el terminal VS Code: 
 
 ```bash
-    azd down
+azd down
 ```
 
 Esto no solo invierte los pasos realizados para aprovisionar e implementar la aplicación, sino que también realiza pasos adicionales para *purgar* los recursos que, de lo contrario, se pueden mantener en estado de "eliminación temporal", lo que afecta a la capacidad de reutilizar nombres de recursos o reclamar la cuota del modelo. **Este comando te pedirá estas acciones durante el apagado, así que asegúrate de que respondes correctamente**.
