@@ -23,26 +23,19 @@ Comencemos por explorar Inteligencia artificial de Azure Studio.
 
 Necesitas un centro de Azure AI en tu suscripción de Azure para hospedar proyectos. Puedes crear este recurso al crear un proyecto o aprovisionarlo con antelación (que es lo que haremos en este ejercicio).
 
-1. En la sección **Administración**, selecciona **Todos los centros** y, a continuación, selecciona **+ Nuevo centro**. Crea un nuevo centro con la siguiente configuración:
+1. En la sección **Administración**, selecciona **Todos los recursos** y, después, selecciona **+ Nuevo centro**. Crea un nuevo centro con la siguiente configuración:
     - **Nombre del centro**: *un nombre único*
     - **Suscripción**: *suscripción de Azure*
     - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único o selecciona uno existente*
-    - **Ubicación**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Australia
-        - Este de Canadá
-        - Este de EE. UU.
-        - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
-        - Centro-Norte de EE. UU
-        - Centro de Suecia
-        - Norte de Suiza
-        - Sur de Reino Unido 2
+    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
     - **Conectar Servicios de Azure AI o Azure OpenAI**: *selecciona esta opción para crear una nueva instancia de Servicios de IA o usar una existente*
     - **Conectar Búsqueda de Azure AI**: omitir la conexión
 
     > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
+1. Selecciona **Siguiente** y revisa tu configuración.
+1. Selecciona **Crear** y espera a que se complete el proceso.
+   
     La siguiente imagen ejemplifica lo que deberías ver tras crear el centro de Azure AI:
 
     ![Captura de pantalla de los detalles de un centro de Azure AI en Inteligencia artificial de Azure Studio.](./media/azure-ai-resource.png)
@@ -76,16 +69,17 @@ Un centro de Azure AI proporciona un área de trabajo de colaboración en la qu
 Puede usar un proyecto para crear soluciones de inteligencia artificial complejas basadas en modelos de IA generativa. Una exploración completa de todas las opciones de desarrollo disponibles en Inteligencia artificial de Azure Studio excede el propósito de este ejercicio, pero exploraremos algunas formas básicas de trabajar con modelos en un proyecto.
 
 1. En el panel en el lado izquierdo del proyecto, en la sección **Componentes**, seleccione la página **Implementaciones**.
-1. En la página **Implementaciones**, en la pestaña **Implementaciones de modelos**, seleccione **+ Crear implementación**.
+1. En la página **Implementaciones**, en la pestaña **Implementaciones de modelos**, selecciona **+ Implementación de un modelo**.
 1. Busque el modelo **gpt-35-turbo** de la lista, seleccione y confirme.
 1. Implemente el modelo con la siguiente configuración:
     - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
-    - **Versión del modelo**: *Seleccione la versión predeterminada*
-    - **Tipo de implementación**: Estándar
-    - **Recurso de Azure OpenAI conectado**: *Seleccione la conexión predeterminada que se creó al crear el centro*
+    - **Tipo de implementación**: estándar
+    - **Versión del modelo**: *Selecciona la versión predeterminada*
+    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
-    - **Filtro de contenido**: valor predeterminado
-
+    - **Filtro de contenido**: DefaultV2
+    - **Habilitación de la cuota dinámica**: deshabilitada
+      
     > **Nota**: Reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
 
 1. Una vez implementado el modelo, en la página de información general de implementación, seleccione **Abrir en el área de juegos**.

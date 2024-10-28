@@ -11,34 +11,22 @@ Este ejercicio dura aproximadamente **30** minutos.
 
 ## Crear un centro de inteligencia artificial y un proyecto en Inteligencia artificial de Azure Studio
 
-Para empezar, cree un proyecto de Inteligencia artificial de Azure Studio en un concentrador de Azure AI:
+Para empezar, crea un proyecto de Inteligencia artificial de Azure Studio en un concentrador de Azure AI:
 
-1. En un explorador web, abra [https://ai.azure.com](https://ai.azure.com) e inicie sesión con sus credenciales de Azure.
-1. Seleccione la página **Inicio** y luego **+ Nuevo proyecto**.
-1. En el asistente para **Crear un nuevo proyecto**, cree un proyecto con la siguiente configuración:
-    - **Nombre del proyecto**: *Un nombre exclusivo para el proyecto*
-    - **Concentrador**: *Crear un centro con la siguiente configuración:*
-        - **Nombre del centro**: *un nombre único*
-        - **Suscripción**: *suscripción de Azure*
-        - **Grupo de recursos**: *Un nuevo grupo de recursos*
-        - **Ubicación**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Australia
-        - Este de Canadá
-        - Este de EE. UU.
-        - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
-        - Centro-Norte de EE. UU
-        - Centro de Suecia
-        - Norte de Suiza
-        - Sur de Reino Unido 2
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *Crear una conexión*
-    - **Conectar Búsqueda de Azure AI**: Omitir la conexión
+1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
+1. Selecciona la página **Inicio** y luego **+ Nuevo proyecto**.
+1. En el asistente para **Crear un proyecto**, asigna un nombre único al proyecto y, después, selecciona **Personalizar** y establece la siguiente configuración:
+    - **Nombre del centro**: *un nombre único*
+    - **Suscripción**: *suscripción de Azure*
+    - **Grupo de recursos**: *un nuevo grupo de recursos*
+    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crear una conexión*
+    - **Conectar Búsqueda de Azure AI**: omitir la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Revise la configuración y cree el proyecto.
-1. Espere a que se cree el proyecto.
+1. Selecciona **Siguiente** y revisa tu configuración.
+1. Selecciona **Crear un proyecto** y espera a que se complete el proceso.
 
 ## Implementación de un modelo GPT
 
@@ -47,11 +35,12 @@ Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar 
 1. En el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Implementaciones**.
 1. Cree una nueva implementación del modelo de **gpt-35-turbo** con la siguiente configuración:
     - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
-    - **Versión del modelo**: *Seleccione la versión predeterminada*
-    - **Tipo de implementación**: Estándar
-    - **Recurso de Azure OpenAI conectado**: *Seleccione la conexión predeterminada*
+    - **Tipo de implementación**: estándar
+    - **Versión del modelo**: *Selecciona la versión predeterminada*
+    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
-    - **Filtro de contenido**: valor predeterminado
+    - **Filtro de contenido**: DefaultV2
+    - **Habilitación de la cuota dinámica**: deshabilitada
 1. Espere a que se implemente el modelo. Cuando la implementación esté lista, seleccione **Abrir en el área de juegos**.
 1. Cambie el **Mensaje del sistema** a lo siguiente:
 
@@ -73,7 +62,7 @@ Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar 
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Seleccione **Aplicar cambios**.
+1. Seleccione **Guardar**.
 1. En la ventana de chat, escriba la consulta: `What can you do?` para comprobar que el modelo de lenguaje se comporta según lo previsto.
 
 Ahora que tiene un modelo implementado con un mensaje del sistema actualizado, puede evaluar el modelo.
@@ -118,7 +107,7 @@ Puede revisar manualmente las respuestas del modelo en función de los datos de 
 1. Seleccione **Ejecutar** en la barra superior a fin de generar salidas para todas las preguntas que ha agregado como entradas.
 1. Ahora puede revisar manualmente las salidas de cada pregunta seleccionando la opción del pulgar hacia arriba o hacia abajo en la parte inferior derecha de una respuesta. Evalúe cada respuesta, asegurándose de incluir al menos una respuesta de pulgar hacia arriba y hacia abajo en las clasificaciones.
 1. Seleccione **Guardar resultados** en la barra superior. Escriba `manual_evaluation_results` como nombre de los resultados.
-1. Vaya a **Evaluaciones** mediante el menú de la izquierda.
+1. Mediante el menú de la izquierda, ve a **Evaluación**.
 1. Seleccione la pestaña **Evaluaciones manuales** para encontrar las evaluaciones manuales que acaba de guardar. Tenga en cuenta que puede explorar las evaluaciones manuales creadas anteriormente, continuar donde lo dejó y guardar las evaluaciones actualizadas.
 
 ## Evalúa tu Copilot con las métricas integradas
@@ -130,7 +119,7 @@ Cuando hayas creado un Copilot con un flujo de chat, puedes evaluar el flujo al 
         <p>Si recibes un error de permisos al crear un nuevo flujo de avisos, prueba lo siguiente para solucionar los problemas:</p>
         <ul>
           <li>En Azure Portal, selecciona el recurso Servicios de IA.</li>
-          <li>En la página IAM, en la pestaña Identidad, confirma que se trata de una identidad administrada asignada por el sistema.</li>
+          <li>En la pestaña Identidad, en Administración de recursos, confirma que se trata de una identidad administrada asignada por el sistema.</li>
           <li>Ve a la cuenta de almacenamiento asociada. En la página IAM, agrega la asignación de roles <em>Lector de datos de Storage Blob</em>.</li>
           <li>En <strong>Asignar acceso a</strong>, elige <strong>Identidad administrada</strong>, <strong>+ Seleccionar miembros</strong> y selecciona <strong>Todas las identidades administradas asignadas por el sistema</strong>.</li>
           <li>Selecciona Revisar y asignar para guardar la nueva configuración y volver a intentar el paso anterior.</li>
@@ -140,21 +129,23 @@ Cuando hayas creado un Copilot con un flujo de chat, puedes evaluar el flujo al 
     - **¿Qué quieres evaluar?**: conjunto de datos
     - **Nombre de evaluación**: *Escriba un nombre único*
     - **¿Qué tipo de escenario está evaluando?**: preguntas y respuestas sin contexto.
+    - Seleccione **Siguiente**.
     - **Seleccione los datos que quiera evaluar**: agregue el conjunto de datos.
         - Descargue el archivo JSONL https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl y cárguelo en la interfaz de usuario.
     - **Seleccionar métricas**: coherencia, fluidez
     - **Conexión**: *tu conexión de Servicios de IA*
     - **Nombre y modelo de la implementación**: *el modelo de GPT-3.5 implementado*
+1. Selecciona **Siguiente**, a continuación, revisa los datos y envía la nueva evaluación.
 1. Espere a que se completen las evaluaciones; es posible que tenga que actualizar.
 1. Seleccione la ejecución de la evaluación que acaba de crear.
 1. Explore el **panel Métricas** y **Resultado detallado de métricas**.
 
 ## Eliminación de recursos de Azure
 
-Cuando termine de explorar Azure AI Studio, debe eliminar los recursos que ha creado para evitar costos innecesarios de Azure.
+Cuando termines de explorar Inteligencia artificial de Azure Studio, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure.
 
-- Vaya a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com`.
-- En Azure Portal, en la página **Inicio**, seleccione **Grupos de recursos**.
-- Seleccione el grupo de recursos que creó para este ejercicio.
-- En la parte superior de la página **Información general** del grupo de recursos, seleccione **Eliminar grupo de recursos**.
-- Escriba el nombre del grupo de recursos para confirmar que quiere eliminarlo y seleccione **Eliminar**.
+- Ve a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com`.
+- En Azure Portal, en la página **Inicio**, selecciona **Grupos de recursos**.
+- Selecciona el grupo de recursos que creaste para este ejercicio.
+- En la parte superior de la página **Información general** del grupo de recursos, selecciona **Eliminar grupo de recursos**.
+- Escribe el nombre del grupo de recursos para confirmar que quieres eliminarlo y selecciona **Eliminar**.

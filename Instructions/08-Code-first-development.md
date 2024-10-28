@@ -37,17 +37,18 @@ En este ejercicio usarás [GitHub Codespaces](https://github.com/features/codesp
 
 Para inicializar el entorno de desarrollo, sigue los siguientes pasos:
 
-1. **Bifurcar el repositorio**: selecciona el botón **Bifurcar** en la esquina superior derecha de la página del repositorio de GitHub para crear una copia del repositorio en la cuenta de GitHub.
+1. Ve al repositorio **contoso-chat**: `https://github.com/Azure-Samples/contoso-chat`
+1. Selecciona el botón **Bifurcar** en la esquina superior derecha de la página del repositorio de GitHub contoso-chat para crear una copia del repositorio en la cuenta de GitHub.
 1. Una vez que tengas el repositorio bifurcado, selecciona el botón **Código** y selecciona **Codespaces**.
 1. Selecciona **+** botón para crear un nuevo espacio de código en la rama principal del repositorio bifurcado.
 
     ![Creación de GitHub Codespaces](./media/create_codespaces.png)
 
-1. En unos segundos, se te redirigirá a una nueva pestaña del explorador donde el entorno de Codespaces está configurado con un [editor de Visual Studio Code](https://code.visualstudio.com/docs/devcontainers/containers) asociado de forma predeterminada. Puedes continuar trabajando en la pestaña del explorador o volver a conectarte a los Codespaces en ejecución desde tu editor local de Visual Studio Code al hacer clic en el botón **Abrir en el escritorio de VS Code** del menú superior izquierdo.
+1. En unos segundos, se te redirigirá a una nueva pestaña del explorador donde el entorno de Codespaces está configurado con un [editor de Visual Studio Code asociado](https://code.visualstudio.com/docs/devcontainers/containers) de forma predeterminada.
 
 ## Conexión del entorno de VS Code a Azure
 
-El siguiente paso es conectar el entorno de desarrollo local con la suscripción a Azure donde deseas implementar el proyecto. Comienza al abrir un nuevo terminal en el IDE de Visual Studio Code.
+El siguiente paso es conectar tu entorno de desarrollo local con la suscripción a Azure donde quieres implementar el proyecto. Comienza abriendo un nuevo terminal en tu entorno de VS Code que se ejecuta en Codespaces.
 
 1. En primer lugar, comprueba que está instalada la [versión más reciente](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_1.9.3) de Azure Developer CLI.
     ```bash

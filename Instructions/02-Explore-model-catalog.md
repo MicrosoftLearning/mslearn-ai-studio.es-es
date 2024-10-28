@@ -18,22 +18,12 @@ Necesitas un centro de Azure AI en tu suscripción de Azure para hospedar proye
 1. En la sección **Administración**, selecciona **Todos los recursos** y, después, selecciona **+ Nuevo centro**. Crea un nuevo centro con la siguiente configuración:
     - **Nombre del centro**: *un nombre único*
     - **Suscripción**: *suscripción de Azure*
-    - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único o selecciona uno existente*
-    - **Ubicación**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Australia
-        - Este de Canadá
-        - Este de EE. UU.
-        - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
-        - Centro-Norte de EE. UU
-        - Centro de Suecia
-        - Norte de Suiza
-        - Sur de Reino Unido 2
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *selecciona esta opción para crear una nueva instancia de Servicios de IA o usar una existente*
+    - **Grupo de recursos**: *un nuevo grupo de recursos*
+    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crear una conexión*
     - **Conectar Búsqueda de Azure AI**: omitir la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
     La siguiente imagen ejemplifica lo que deberías ver tras crear el centro de Azure AI:
 
@@ -94,12 +84,13 @@ Comencemos implementando un modelo del Catálogo de modelos. Es posible que pref
 
 1. Ve a la página **Catálogo de modelos** en la sección **Comenzar**, mediante el menú de la izquierda.
 1. Busca e implementa el modelo `gpt-35-turbo`, preparado por Azure AI, con la siguiente configuración:
-    - **Nombre de implementación**: *un nombre único para la implementación de modelo, que indique que es GPT-3.5*
-    - **Versión del modelo**: *Seleccione la versión predeterminada*
-    - **Tipo de implementación**: Estándar
-    - **Recurso de Azure OpenAI conectado**: *Seleccione la conexión predeterminada que se creó al crear el centro*
+    - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
+    - **Tipo de implementación**: estándar
+    - **Versión del modelo**: *Selecciona la versión predeterminada*
+    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
-    - **Filtro de contenido**: valor predeterminado
+    - **Filtro de contenido**: DefaultV2
+    - **Habilitación de la cuota dinámica**: deshabilitada
 
 ### Implementación de un modelo mediante Implementaciones
 
@@ -108,12 +99,13 @@ Si ya sabes exactamente qué modelo quieres implementar, es posible que prefiera
 1. Ve a la página **Implementaciones** en la sección **Componentes**, mediante el menú de la izquierda.
 1. En la pestaña **Implementaciones de modelos**, crea una implementación con la siguiente configuración:
     - **Modelo**: GPT-4
-    - **Nombre de implementación**: *un nombre único para la implementación de modelo, que indique que es GPT-4*
-    - **Versión del modelo**: *Seleccione la versión predeterminada*
-    - **Tipo de implementación**: Estándar
-    - **Recurso de Azure OpenAI conectado**: *Seleccione la conexión predeterminada que se creó al crear el centro*
+    - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
+    - **Tipo de implementación**: estándar
+    - **Versión del modelo**: *Selecciona la versión predeterminada*
+    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
-    - **Filtro de contenido**: valor predeterminado
+    - **Filtro de contenido**: DefaultV2
+    - **Habilitación de la cuota dinámica**: deshabilitada
 
     > **Nota**: Es posible que hayas observado algunos modelos que muestran las pruebas comparativas de modelos, pero no figuran como opción en el catálogo de modelos. La disponibilidad de los modelos difiere según la ubicación. Tu ubicación se especifica en el nivel de centro de IA, donde puedes usar el **Asistente de ubicación** para especificar el modelo que deseas implementar a fin de obtener una lista de las ubicaciones en las que puedes implementarlo.
 
@@ -132,11 +124,11 @@ Ahora que tenemos dos modelos que comparar, veamos cómo se comportan en una int
    You are an AI travel assistant that helps people plan their trips. Your objective is to offer support for travel-related inquiries, such as visa requirements, weather forecasts, local attractions, and cultural norms.
    ```
 
-1. Selecciona **Aplicar cambios** y **Borrar chat**.
+1. Selecciona **Guardar** y **Borrar chat**.
 1. En la ventana de chat, escribe la consulta `What can you do?` y analiza la nueva respuesta. Observa en qué se diferencia de la respuesta que recibiste antes. Ahora, la respuesta es específica sobre viajes.
 1. Continúa la conversación preguntando: `I'm planning a trip to London, what can I do there?`. El copiloto ofrece una gran cantidad de información relacionada con los viajes. Es posible que quieras mejorar más la salida. Por ejemplo, puedes querer que la respuesta sea más concisa.
 1. Actualiza el mensaje del sistema agregando `Answer with a maximum of two sentences.` al final del mensaje. Aplica el cambio, borra el chat y vuelve a probarlo preguntando: `I'm planning a trip to London, what can I do there?`. También puede que quieras que el copiloto continúe la conversación en lugar de simplemente responder a la pregunta.
-1. Actualiza el mensaje del sistema agregando `End your answer with a follow-up question.` al final del mensaje. Aplica el cambio, borra el chat y vuelve a probarlo preguntando: `I'm planning a trip to London, what can I do there?`
+1. Actualiza el mensaje del sistema agregando `End your answer with a follow-up question.` al final del mensaje. Guarda el cambio, borra el chat y vuelve a probarlo preguntando: `I'm planning a trip to London, what can I do there?`
 1. Cambia la **Implementación** al modelo GPT-4 y repite todos los pasos de esta sección. Observa cómo los modelos pueden ofrecer salidas diferentes.
 1. Por último, prueba ambos modelos con la consulta `Who is the prime minister of the UK?`. El rendimiento de esta pregunta está relacionado con la base (si la respuesta es precisa y real) de los modelos. ¿El rendimiento se pone en correlación con tus conclusiones de las pruebas comparativas de los modelos?
 

@@ -75,9 +75,9 @@ Ahora que has implementado el modelo con ajuste preciso, puedes probar el modelo
 1. En la ventana de chat, escriba la consulta `What can you do?` Observa que, aunque no especificaste el mensaje del sistema para indicar al modelo que responda a preguntas relacionadas con viajes, el modelo ya entiende en lo que debe centrarse.
 1. Prueba con otra consulta como `Where should I go on holiday for my 30th birthday?`
 
-## Eliminación de recursos de Azure
+## Limpiar
 
-Cuando termines de explorar Inteligencia artificial de Azure Studio, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure.
+Si has terminado de explorar Inteligencia artificial de Azure Studio, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure.
 
 - Ve a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com`.
 - En Azure Portal, en la página **Inicio**, selecciona **Grupos de recursos**.
