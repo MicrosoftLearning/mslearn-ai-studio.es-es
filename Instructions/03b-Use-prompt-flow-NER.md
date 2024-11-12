@@ -22,42 +22,36 @@ En primer lugar, debes crear un proyecto en Inteligencia artificial de Azure Stu
 Para empezar, crea un proyecto de Inteligencia artificial de Azure Studio y una instancia del Centro de Azure AI para admitirlo.
 
 1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
-1. Selecciona la página **Compilar** y, a continuación, selecciona **+ Nuevo proyecto**.
+1. Selecciona la página **Inicio** y luego **+ Nuevo proyecto**.
 1. En el asistente para **Crear un nuevo proyecto**, crea un proyecto con la siguiente configuración:
     - **Nombre del proyecto**: *un nombre exclusivo para el proyecto*
-    - **Menú central de Azure**: *crear un nuevo recurso con la siguiente configuración:*
-        - **Nombre del centro de IA**: *un nombre único*
-        - **Suscripción**: *suscripción de Azure*
-        - **Grupo de recursos**: *Un nuevo grupo de recursos*
-        - **Ubicación**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Australia
-        - Este de Canadá
-        - Este de EE. UU.
-        - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
-        - Centro-Norte de EE. UU
-        - Centro de Suecia
-        - Norte de Suiza
-        - Sur de Reino Unido 2
+    - **Concentrador**: *crear un centro con la siguiente configuración:*
+    - **Nombre del centro**: *un nombre único*
+    - **Suscripción**: *suscripción de Azure*
+    - **Grupo de recursos**: *un nuevo grupo de recursos*
+    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crear una conexión*
+    - **Conectar Búsqueda de Azure AI**: omitir la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Revisa la configuración y crea el proyecto.
-1. Espera entre 5 y 10 minutos para que se cree el proyecto.
+1. Espera a que se cree el proyecto.
 
 ## Implementación de un modelo GPT
 
 Para usar un modelo LLM en el flujo de solicitud, primero debes implementar un modelo. Inteligencia artificial de Azure Studio permite implementar modelos de OpenAI que puedes usar en los flujos.
 
-1. En el panel de navegación de la izquierda, en **Componentes**, selecciona la página **Implementaciones**.
-1. En Azure OpenAI Studio, ve a la página **Implementaciones**.
-1. Crea una nueva implementación del modelo de **gpt-35-turbo** con la siguiente configuración:
-    - **Modelo**: `gpt-35-turbo`
-    - **Versión del modelo**: *deja el valor predeterminado*
-    - **Nombre de implementación**:`gpt-35-turbo`
-    - Establezca las opciones **avanzadas** para usar el filtro de contenido predeterminado y para restringir los tokens por minuto (TPM) a **5K**.
-
+1. En el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Implementaciones**.
+1. Cree una nueva implementación del modelo de **gpt-35-turbo** con la siguiente configuración:
+    - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
+    - **Tipo de implementación**: estándar
+    - **Versión del modelo**: *Selecciona la versión predeterminada*
+    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
+    - **Límite de frecuencia de tokens por minuto (miles)**: 5000
+    - **Filtro de contenido**: DefaultV2
+    - **Habilitación de la cuota dinámica**: deshabilitada
+   
 Ahora que ha implementado el modelo LLM, puede crear un flujo en Azure AI Studio que llame al modelo implementado.
 
 ## Creación y ejecución de un flujo en Azure AI Studio
@@ -72,6 +66,18 @@ Para crear un nuevo flujo con una plantilla, puede seleccionar uno de los tipos 
 1. Seleccione **+ Crear** para crear un nuevo flujo.
 1. Cree un nuevo **flujo estándar** y escriba `entity-recognition` como nombre de carpeta.
 
+<details>  
+    <summary><b>Sugerencia de solución de problemas: error de permisos</b></summary>
+    <p>Si recibes un error de permisos al crear un nuevo flujo de avisos, prueba lo siguiente para solucionar los problemas:</p>
+    <ul>
+        <li>En Azure Portal, selecciona el recurso Servicios de IA.</li>
+        <li>En la página IAM, en la pestaña Identidad, confirma que se trata de una identidad administrada asignada por el sistema.</li>
+        <li>Ve a la cuenta de almacenamiento asociada. En la página IAM, agrega la asignación de roles <em>Lector de datos de Storage Blob</em>.</li>
+        <li>En <strong>Asignar acceso a</strong>, elige <strong>Identidad administrada</strong>, <strong>+ Seleccionar miembros</strong> y selecciona <strong>Todas las identidades administradas asignadas por el sistema</strong>.</li>
+        <li>Selecciona Revisar y asignar para guardar la nueva configuración y volver a intentar el paso anterior.</li>
+    </ul>
+</details>
+
 Se crea un flujo estándar con una entrada, dos nodos y una salida. Actualizará el flujo para tomar dos entradas, extraer entidades, limpiar la salida del nodo LLM y devolver las entidades como salida.
 
 ### Iniciar el entorno de ejecución automático
@@ -79,9 +85,8 @@ Se crea un flujo estándar con una entrada, dos nodos y una salida. Actualizará
 Para probar el flujo, necesita proceso. El proceso necesario está disponible a través del entorno de ejecución.
 
 1. Después de crear el nuevo flujo denominado `entity-recognition`, el flujo debe abrirse en Studio.
-1. Seleccione el campo **Seleccionar tiempo de ejecución** en la barra superior.
-1. En la lista **Tiempo de ejecución automático**, seleccione **Iniciar** para iniciar el entorno de ejecución automático.
-1. Espere a que se inicie el tiempo de ejecución.
+1. Seleccione **Iniciar sesión de proceso** en la barra superior.
+1. La sesión de proceso tardará entre 1 y 3 minutos en iniciarse.
 
 ### Configuración de las entradas
 
@@ -175,10 +180,10 @@ Ahora que ha desarrollado el flujo, puede ejecutarlo para probarlo. Dado que ha 
 
 ## Eliminación de recursos de Azure
 
-Cuando termine de explorar Azure AI Studio, debe eliminar los recursos que ha creado para evitar costos innecesarios de Azure.
+Cuando termines de explorar Inteligencia artificial de Azure Studio, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure.
 
-- Vaya a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com`.
-- En Azure Portal, en la página **Inicio**, seleccione **Grupos de recursos**.
-- Seleccione el grupo de recursos que creó para este ejercicio.
-- En la parte superior de la página **Información general** del grupo de recursos, seleccione **Eliminar grupo de recursos**.
-- Escriba el nombre del grupo de recursos para confirmar que quiere eliminarlo y seleccione **Eliminar**.
+- Ve a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com`.
+- En Azure Portal, en la página **Inicio**, selecciona **Grupos de recursos**.
+- Selecciona el grupo de recursos que creaste para este ejercicio.
+- En la parte superior de la página **Información general** del grupo de recursos, selecciona **Eliminar grupo de recursos**.
+- Escribe el nombre del grupo de recursos para confirmar que quieres eliminarlo y selecciona **Eliminar**.

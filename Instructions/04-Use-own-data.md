@@ -42,17 +42,17 @@ La solución de copilotos integrará los datos personalizados en un flujo de avi
 Ahora ya puede crear un proyecto de Azure AI Studio y los recursos de Azure AI para admitirlo.
 
 1. En un explorador web, abra [Azure AI Studio](https://ai.azure.com) en `https://ai.azure.com` e inicie sesión con sus credenciales de Azure.
-1. En la página **Inicio** de Inteligencia artificial de Azure Studio, seleccione **+ Nuevo proyecto**. Después, en el asistente para **Crear un proyecto**, cree un proyecto con la siguiente configuración:
+1. En la página **Inicio** de Inteligencia artificial de Azure Studio, seleccione **+ Nuevo proyecto**.
+1. En el asistente para **Crear un proyecto**, asigna un nombre único a tu proyecto, después, selecciona **Personalizar** y crea un proyecto con la siguiente configuración:
 
-    - **Nombre del proyecto**: *Un nombre exclusivo para el proyecto*
-    - **Concentrador**: *Cree un nuevo recurso con la siguiente configuración:*
+    - **Crear un concentrador**: *crea un nuevo recurso con la siguiente configuración:*
 
         - **Nombre del centro**: *un nombre único*
         - **Suscripción de Azure**: *suscripción de Azure*
         - **Grupo de recursos**: *seleccione el grupo de recursos que contiene el recurso Búsqueda de Azure AI*.
         - **Ubicación**: *la misma ubicación que el recurso de Búsqueda de Azure AI*
-        - **Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*.
-        - **Azure AI Search**: *Seleccione el recurso de Azure AI Search*
+        - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
+        - **Conectar Búsqueda de Azure AI**: *selecciona el recurso de Búsqueda de Azure AI*
 
 1. Espere a que se cree el proyecto.
 
@@ -64,13 +64,16 @@ Necesita dos modelos para implementar la solución:
 - Modelo que puede generar respuestas de lenguaje natural a preguntas a partir de sus datos.
 
 1. En Inteligencia artificial de Azure Studio, en el proyecto, en el panel de navegación de la izquierda, en **Componentes**, selecciona la página **Implementaciones**.
-1. Crea una nueva implementación del modelo **text-embedding-ada-002** con la siguiente configuración:
+1. Crea una nueva implementación del modelo **text-embedding-ada-002** con la siguiente configuración mediante la selección de **Personalizar** en el asistente para Implementar modelo:
 
     - **Nombre de implementación**:`text-embedding-ada-002`
-    - **Versión del modelo**: *valor predeterminado*
-    - **Opciones avanzadas**:
-        - **Filtro de contenido**: *valor predeterminado*
-        - **Límite de velocidad de tokens por minuto**: `5K`
+    - **Tipo de implementación**: estándar
+    - **Versión del modelo**: *Selecciona la versión predeterminada*
+    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
+    - **Límite de frecuencia de tokens por minuto (miles)**: 5000
+    - **Filtro de contenido**: DefaultV2
+    - **Habilitación de la cuota dinámica**: deshabilitada
+      
 1. Repite los pasos anteriores para implementar un modelo de **gpt-35-turbo-16k** con el nombre de implementación `gpt-35-turbo-16k`.
 
     > **Nota**: reducir los tokens por minuto (TPM) ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
@@ -93,16 +96,16 @@ Ahora que has agregado un origen de datos al proyecto, puedes usarlo para crear 
 
 1. En Inteligencia artificial de Azure Studio, en el proyecto, en el panel de navegación de la izquierda, en **Componentes**, selecciona la página **Índices**.
 1. Agrega un nuevo índice con la siguiente configuración:
-    - **Datos de origen**:
+    - **Ubicación de origen**:
         - **Origen de datos**: datos en Inteligencia artificial de Azure Studio
             - *Selecciona el origen de datos **folletos***
-    - **Configuración del índice**:
+    - **Configuración de índice**:
         - **Selecciona el servicio Azure AI Search**: *Selecciona la conexión de **AzureAISearch** al recurso de Azure AI Search*
-        - **Nombre de índice**: `brochures-index`
+        - **Índice vectorial**: `brochures-index`
         - **Máquina virtual**: selección automática
     - **Configuración de búsqueda**:
         - **Configuración de vectores**: agregación de una búsqueda vectorial a este recurso de búsqueda
-        - **Selecciona un modelo de inserción**: *Selecciona el recurso predeterminado de Azure OpenAI para el centro.*
+        - **Conexión de Azure OpenAI**: *selecciona el recurso predeterminado de Azure OpenAI para tu centro.*
         
 1. Espera a que se complete el proceso de indexación, lo cual puede tardar varios minutos. La operación de creación de índices consta de los siguientes trabajos:
 
@@ -115,12 +118,12 @@ Ahora que has agregado un origen de datos al proyecto, puedes usarlo para crear 
 Antes de usar el índice en un flujo de avisos basado en RAG, vamos a comprobar que se puede usar para afectar a las respuestas de IA generativa.
 
 1. En el panel de navegación de la izquierda, en **Área de juegos del proyecto**, selecciona la página **Chat**.
-1. En la página Chat, en el panel Opciones, asegúrate de que la implementación de modelo **gpt-35-turbo-16k** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
+1. En la página Chat, en el panel Configuración, asegúrate de que la implementación de modelo **gpt-35-turbo-16k** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
 1. Revisa la respuesta, que debe ser una respuesta genérica del modelo sin datos procedentes del índice.
 1. En el panel Configuración, selecciona la pestaña **Agregar los datos** y, después, agrega el índice del proyecto **brochures-index** y selecciona el tipo de búsqueda **híbrido (vector + palabra clave)**.
 
    > **Nota**: algunos usuarios se encuentran que los índices recién creados no están disponibles inmediatamente. La actualización del explorador suele ser útil, pero si sigues experimentando el problema por el que no encuentras el índice, es posible que tengas que esperar hasta que se reconozca el índice.
-   
+
 1. Después de agregar el índice y de reiniciar la sesión de chat, vuelve a enviar el mensaje `Where can I stay in New York?`.
 1. Revisa la respuesta, que debe basarse en los datos del índice.
 
@@ -135,9 +138,9 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
         <p>Si recibes un error de permisos al crear un nuevo flujo de avisos, prueba lo siguiente para solucionar los problemas:</p>
         <ul>
           <li>En Azure Portal, selecciona el recurso Servicios de IA.</li>
-          <li>En la página IAM, en la pestaña Identidad, confirma que se trata de una identidad administrada asignada por el sistema.</li>
+          <li>En Administración de recursos, en la pestaña Identidad, confirma que se trata de una identidad administrada asignada por el sistema.</li>
           <li>Ve a la cuenta de almacenamiento asociada. En la página IAM, agrega la asignación de roles <em>Lector de datos de Storage Blob</em>.</li>
-          <li>En <strong>Asignar acceso a</strong>, elige <strong>Identidad administrada</strong>, <strong>+ Seleccionar miembros</strong> y selecciona <strong>Todas las identidades administradas asignadas por el sistema</strong>.</li>
+          <li>En <strong>Asignar acceso a</strong>, elige <strong>Identidad administrada</strong>, <strong>+ Seleccionar miembros</strong>, selecciona <strong>Todas las identidades administradas asignadas por el sistema</strong> y selecciona tu recurso de Servicios de Azure AI.</li>
           <li>Selecciona Revisar y asignar para guardar la nueva configuración y volver a intentar el paso anterior.</li>
         </ul>
     </details>
@@ -175,7 +178,7 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
     - **deployment_name**: gpt-35-turbo-16k
     - **response_format**: {"type":"text"}
 
-1. En la sección **lookup**, establezca los siguientes valores de parámetro:
+1. Espera a que se inicie la sesión de proceso y, a continuación, en la sección **búsqueda**, establece los siguientes valores de parámetro:
 
     - **mlindex_content**: *Seleccione el campo vacío para abrir el panel Generar*
         - **index_type**: Índice registrado
@@ -217,7 +220,7 @@ El índice vectorial se ha guardado en el proyecto de Azure AI Studio, lo que le
 
 Ahora que tiene un flujo en curso que usa los datos indexados, puede implementarlo como servicio para que lo consuma una aplicación de copilotos.
 
-> **Nota**: En función de la región y la carga del centro de datos, las implementaciones a veces pueden tardar un poco. Pase a la sección de desafíos que aparece a continuación mientras se implementa u omita la prueba de la implementación si dispone de poco tiempo.
+> **Nota**: según la región y la carga del centro de datos, las implementaciones a veces pueden tardar un tiempo y, a veces, producirán un error al interactuar con la implementación. Pase a la sección de desafíos que aparece a continuación mientras se implementa u omita la prueba de la implementación si dispone de poco tiempo.
 
 1. En la barra de herramientas, seleccione **Implementar**.
 1. Cree una implementación con la siguiente configuración:
