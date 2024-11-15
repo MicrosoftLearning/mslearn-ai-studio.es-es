@@ -5,7 +5,7 @@ lab:
 
 # Ajusta de un modelo de lenguaje para la finalización del chat en Inteligencia artificial de Azure Studio
 
-Cuando quieras que un modelo de lenguaje se comporte de una manera determinada, puedes usar la ingeniería de solicitudes para definir el comportamiento deseado. Cuando quieras mejorar la coherencia del comportamiento deseado, puedes optar por ajustar un modelo, comparándolo con el enfoque de ingeniería de solicitud para evaluar qué método se adapta mejor a tus necesidades.
+Cuando desees que un modelo de lenguaje se comporte de una manera determinada, puedes usar la ingeniería de avisos para definir el comportamiento deseado. Cuando quieras mejorar la coherencia del comportamiento deseado, puedes optar por ajustar un modelo, comparándolo con el enfoque de ingeniería de petición para evaluar qué método se adapta mejor a tus necesidades.
 
 En este ejercicio, ajustarás un modelo de lenguaje con Inteligencia artificial de Azure Studio que quieres usar para un escenario de aplicación de chat personalizado. Compararás el modelo ajustado con un modelo base para evaluar si el modelo ajustado se adapta mejor a tus necesidades.
 
@@ -25,11 +25,11 @@ Para empezar, crea un proyecto de Inteligencia artificial de Azure Studio en un 
     - **Nombre del centro**: *un nombre único*
     - **Suscripción**: *suscripción de Azure*
     - **Grupo de recursos**: *un nuevo grupo de recursos*
-    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Ubicación**: elige una de las siguientes regiones **Este de EE. UU. 2**, **Centro-norte de EE. UU.**, **Centro de Suecia**, **Oeste de Suiza**\*
     - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
     - **Conectar Búsqueda de Azure AI**: omitir la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre las [regiones de modelo de precisión](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#fine-tuning-models)
 
 1. Revisa la configuración y crea el proyecto.
 1. Espera a que se cree el proyecto.
@@ -40,7 +40,7 @@ Dado que el ajuste preciso de un modelo tarda algún tiempo en completarse, prim
 
 1. Guarda el conjunto de datos de aprendizaje como archivo JSONL localmente: [https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-finetune.jsonl](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl)
 
-    > **Nota**: es posible que tu dispositivo guarde el archivo de forma predeterminada como un archivo .txt. Selecciona todos los archivos y quita el sufijo .txt para asegurarte de que vas a guardar el archivo como JSONL.
+    > **Nota**: Es posible que el dispositivo guarde el archivo de forma predeterminada como un archivo .txt. Selecciona todos los archivos y quita el sufijo .txt para asegurarte de que vas a guardar el archivo como JSONL.
 
 1. Ve a la página **Ajuste preciso** en la sección **Herramientas** con el menú de la izquierda.
 1. Selecciona el botón para agregar un nuevo modelo de ajuste, selecciona el modelo `gpt-35-turbo` y selecciona **Confirmar**.
