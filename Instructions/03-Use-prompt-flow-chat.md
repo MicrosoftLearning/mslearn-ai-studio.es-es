@@ -11,34 +11,24 @@ Este ejercicio dura aproximadamente **30** minutos.
 
 ## Crear un centro de inteligencia artificial y un proyecto en Inteligencia artificial de Azure Studio
 
-Para empezar, cree un proyecto de Inteligencia artificial de Azure Studio en un concentrador de Azure AI:
+Para empezar, crea un proyecto de Inteligencia artificial de Azure Studio en un concentrador de Azure AI:
 
-1. En un explorador web, abra [https://ai.azure.com](https://ai.azure.com) e inicie sesión con sus credenciales de Azure.
-1. Seleccione la página **Inicio** y luego **+ Nuevo proyecto**.
-1. En el asistente para **Crear un nuevo proyecto**, cree un proyecto con la siguiente configuración:
-    - **Nombre del proyecto**: *Un nombre exclusivo para el proyecto*
-    - **Concentrador**: *Crear un centro con la siguiente configuración:*
-        - **Nombre del centro**: *un nombre único*
-        - **Suscripción**: *suscripción de Azure*
-        - **Grupo de recursos**: *Un nuevo grupo de recursos*
-        - **Ubicación**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Australia
-        - Este de Canadá
-        - Este de EE. UU.
-        - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
-        - Centro-Norte de EE. UU
-        - Centro de Suecia
-        - Norte de Suiza
-        - Sur de Reino Unido 2
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *Crear una conexión*
-    - **Conectar Búsqueda de Azure AI**: Omitir la conexión
+1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
+1. Selecciona la página **Inicio** y luego **+ Nuevo proyecto**.
+1. En el asistente para **Crear un nuevo proyecto**, crea un proyecto con la siguiente configuración:
+    - **Nombre del proyecto**: *un nombre exclusivo para el proyecto*
+    - **Concentrador**: *crear un centro con la siguiente configuración:*
+    - **Nombre del centro**: *un nombre único*
+    - **Suscripción**: *suscripción de Azure*
+    - **Grupo de recursos**: *un nuevo grupo de recursos*
+    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crear una conexión*
+    - **Conectar Búsqueda de Azure AI**: omitir la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Revise la configuración y cree el proyecto.
-1. Espere a que se cree el proyecto.
+1. Revisa la configuración y crea el proyecto.
+1. Espera a que se cree el proyecto.
 
 ## Implementación de un modelo GPT
 
@@ -47,11 +37,12 @@ Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar 
 1. En el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Implementaciones**.
 1. Cree una nueva implementación del modelo de **gpt-35-turbo** con la siguiente configuración:
     - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
-    - **Versión del modelo**: *Seleccione la versión predeterminada*
-    - **Tipo de implementación**: Estándar
-    - **Recurso de Azure OpenAI conectado**: *Seleccione la conexión predeterminada*
+    - **Tipo de implementación**: estándar
+    - **Versión del modelo**: *Selecciona la versión predeterminada*
+    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
-    - **Filtro de contenido**: valor predeterminado
+    - **Filtro de contenido**: DefaultV2
+    - **Habilitación de la cuota dinámica**: deshabilitada
 1. Espere a que se implemente el modelo. Cuando la implementación esté lista, seleccione **Abrir en el área de juegos**.
 1. En la ventana de chat, escriba la consulta `What can you do?`.
 
@@ -77,7 +68,7 @@ Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar 
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Seleccione **Aplicar cambios**.
+1. Seleccione **Guardar**.
 1. En la ventana de chat, escriba la misma consulta que antes: `What can you do?` Observe el cambio en respuesta.
 
 Ahora que ha jugado con el mensaje del sistema para el modelo GPT implementado, puede personalizar aún más la aplicación trabajando con el flujo de avisos.
@@ -178,10 +169,10 @@ Ahora que ha desarrollado el flujo, puede usar la ventana de chat para probar el
 
 ## Eliminación de recursos de Azure
 
-Cuando termine de explorar Azure AI Studio, debe eliminar los recursos que ha creado para evitar costos innecesarios de Azure.
+Cuando termines de explorar Inteligencia artificial de Azure Studio, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure.
 
-- Vaya a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com`.
-- En Azure Portal, en la página **Inicio**, seleccione **Grupos de recursos**.
-- Seleccione el grupo de recursos que creó para este ejercicio.
-- En la parte superior de la página **Información general** del grupo de recursos, seleccione **Eliminar grupo de recursos**.
-- Escriba el nombre del grupo de recursos para confirmar que quiere eliminarlo y seleccione **Eliminar**.
+- Ve a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com`.
+- En Azure Portal, en la página **Inicio**, selecciona **Grupos de recursos**.
+- Selecciona el grupo de recursos que creaste para este ejercicio.
+- En la parte superior de la página **Información general** del grupo de recursos, selecciona **Eliminar grupo de recursos**.
+- Escribe el nombre del grupo de recursos para confirmar que quieres eliminarlo y selecciona **Eliminar**.

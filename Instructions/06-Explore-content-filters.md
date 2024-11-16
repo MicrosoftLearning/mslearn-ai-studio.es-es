@@ -20,24 +20,14 @@ Necesitas un centro de Azure AI en tu suscripción de Azure para hospedar proyec
 1. En la sección Administración, selecciona Todos los recursos y, después, selecciona **+ Nuevo centro**. Crea un nuevo centro con la siguiente configuración:
     - **Nombre del centro**: *un nombre único*
     - **Suscripción**: *suscripción de Azure*
-    - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único o selecciona uno existente*
-    - **Ubicación**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Australia
-        - Este de Canadá
-        - Este de EE. UU.
-        - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
-        - Centro-Norte de EE. UU
-        - Centro de Suecia
-        - Norte de Suiza
-        - Sur de Reino Unido 2
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: selecciona esta opción para crear una nueva instancia de Servicios de IA o usar una existente
+    - **Grupo de recursos**: *un nuevo grupo de recursos*
+    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crear una conexión*
     - **Conectar Búsqueda de Azure AI**: omitir la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Selecciona **Crear**. La creación del primer centro puede tardar unos minutos en completarse. Durante la creación del centro, también se crearán los siguientes recursos de inteligencia artificial: 
+1. Seleccione **Crear**. La creación del primer centro puede tardar unos minutos en completarse. Durante la creación del centro, también se crearán los siguientes recursos de inteligencia artificial: 
     - AI Services
     - Cuenta de almacenamiento
     - Key vault
@@ -68,14 +58,14 @@ Ahora está listo para implementar un modelo para usarlo a través de **Intelige
 1. En Inteligencia artificial de Azure Studio, cree una implementación con la siguiente configuración:
 
     - **Modelo**: gpt-35-turbo
-    - **Tipo de implementación**: Estándar
-    - **Recurso de Azure OpenAI conectado**: *Su conexión de Azure OpenAI*
-    - **Versión de Modev**: actualización automática al valor predeterminado.
-    - **Nombre de implementación**: *nombre único que prefieras*
-    - **Opciones avanzadas**
-        - **Filtro de contenido**: valor predeterminado
-        - **Límite de velocidad de tokens por minuto**: 5000
-
+    - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
+    - **Tipo de implementación**: estándar
+    - **Versión del modelo**: *Selecciona la versión predeterminada*
+    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
+    - **Límite de frecuencia de tokens por minuto (miles)**: 5000
+    - **Filtro de contenido**: DefaultV2
+    - **Habilitación de la cuota dinámica**: deshabilitada
+      
 > **Nota**: Cada modelo de Inteligencia artificial de Azure Studio está optimizado para lograr un equilibrio diferente de funcionalidad y rendimiento. Usaremos el modelo de **GPT 3.5 Turbo** en este ejercicio, que es altamente capaz de la generación de lenguaje natural y escenarios de chat.
 
 ## Exploración de filtros de contenido
