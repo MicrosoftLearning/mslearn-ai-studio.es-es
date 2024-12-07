@@ -1,9 +1,9 @@
 ---
 lab:
-  title: Uso del flujo de avisos para el Reconocimiento de entidades con nombre (NER) en Inteligencia artificial de Azure Studio
+  title: Uso del flujo de solicitudes para el reconocimiento de entidades con nombre (NER) en el portal de Azure AI Foundry
 ---
 
-# Uso del flujo de avisos para el Reconocimiento de entidades con nombre (NER) en Inteligencia artificial de Azure Studio
+# Uso del flujo de solicitudes para el reconocimiento de entidades con nombre (NER) en el portal de Azure AI Foundry
 
 La extracción de información valiosa del texto se conoce como Reconocimiento de entidades con nombre (NER). Las entidades son palabras clave que te interesan en un texto determinado.
 
@@ -11,39 +11,41 @@ La extracción de información valiosa del texto se conoce como Reconocimiento d
 
 Los modelos de lenguaje grande (LLM) se pueden usar para realizar NER. Para crear una aplicación que tome un texto como entidades de entrada y salida, puedes crear un flujo que use un nodo LLM con flujo de solicitud.
 
-En este ejercicio, usarás el flujo de avisos de Inteligencia artificial de Azure Studio para crear una aplicación LLM que espera un tipo de entidad y un texto como entrada. Llama a un modelo GPT de Azure OpenAI a través de un nodo LLM para extraer la entidad necesaria del texto especificado, limpia el resultado y genera las entidades extraídas.
+En este ejercicio, usarás el flujo de solicitudes del portal de Azure AI Foundry para crear una aplicación LLM que espera un tipo de entidad y texto como entrada. Llama a un modelo GPT de Azure OpenAI a través de un nodo LLM para extraer la entidad necesaria del texto especificado, limpia el resultado y genera las entidades extraídas.
 
 ![Información general del ejercicio](./media/get-started-lab.png)
 
-En primer lugar, debes crear un proyecto en Inteligencia artificial de Azure Studio para crear los recursos de Azure necesarios. A continuación, puedes implementar un modelo GPT con el servicio Azure OpenAI. Una vez que tengas los recursos necesarios, puedes crear el flujo. Por último, ejecutarás el flujo para probarlo y ver la salida de ejemplo.
+En primer lugar, debes crear un proyecto en Azure AI Foundry para crear los recursos de Azure necesarios. A continuación, puedes implementar un modelo GPT con el servicio Azure OpenAI. Una vez que tengas los recursos necesarios, puedes crear el flujo. Por último, ejecutarás el flujo para probarlo y ver la salida de ejemplo.
 
-## Creación de un proyecto en Inteligencia artificial de Azure Studio
+## Creación de un proyecto en el portal de Azure AI Foundry
 
-Para empezar, crea un proyecto de Inteligencia artificial de Azure Studio y una instancia del Centro de Azure AI para admitirlo.
+Para empezar, crea un proyecto del portal de Azure AI Foundry y una instancia del Centro de Azure AI para admitirlo.
 
 1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
-1. Selecciona la página **Inicio** y luego **+ Nuevo proyecto**.
-1. En el asistente para **Crear un nuevo proyecto**, crea un proyecto con la siguiente configuración:
+1. En la página principal, selecciona **+Crear proyecto**.
+1. En el asistente **Crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
+
     - **Nombre del proyecto**: *un nombre exclusivo para el proyecto*
     - **Concentrador**: *crear un centro con la siguiente configuración:*
     - **Nombre del centro**: *un nombre único*
     - **Suscripción**: *suscripción de Azure*
     - **Grupo de recursos**: *un nuevo grupo de recursos*
     - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crear una conexión*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
     - **Conectar Búsqueda de Azure AI**: omitir la conexión
 
     > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Revisa la configuración y crea el proyecto.
-1. Espera a que se cree el proyecto.
+1. Si has seleccionado **Personalizar**, selecciona **Siguiente** y revisa tu configuración.
+1. Selecciona **Crear** y espera a que se complete el proceso.
 
 ## Implementación de un modelo GPT
 
-Para usar un modelo LLM en el flujo de solicitud, primero debes implementar un modelo. Inteligencia artificial de Azure Studio permite implementar modelos de OpenAI que puedes usar en los flujos.
+Para usar un modelo LLM en el flujo de solicitud, primero debes implementar un modelo. El portal de Azure AI Foundry permite implementar modelos de OpenAI que puedes usar en los flujos.
 
-1. En el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Implementaciones**.
-1. Cree una nueva implementación del modelo de **gpt-35-turbo** con la siguiente configuración:
+1. En el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
+1. Crea una nueva implementación del modelo **gpt-35-turbo** con la siguiente configuración mediante la selección de **Personalizar** en los detalles de la implementación:
+   
     - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
     - **Tipo de implementación**: estándar
     - **Versión del modelo**: *Selecciona la versión predeterminada*
@@ -52,9 +54,9 @@ Para usar un modelo LLM en el flujo de solicitud, primero debes implementar un m
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
    
-Ahora que ha implementado el modelo LLM, puede crear un flujo en Azure AI Studio que llame al modelo implementado.
+Ahora que has implementado tu modelo de lenguaje, puedes crear un flujo en el portal de Azure AI Foundry que llame al modelo implementado.
 
-## Creación y ejecución de un flujo en Azure AI Studio
+## Creación y ejecución de un flujo en el portal de Azure AI Foundry
 
 Ahora que tiene todos los recursos necesarios aprovisionados, puede crear un flujo.
 
@@ -62,7 +64,7 @@ Ahora que tiene todos los recursos necesarios aprovisionados, puede crear un flu
 
 Para crear un nuevo flujo con una plantilla, puede seleccionar uno de los tipos de flujos que desea desarrollar.
 
-1. En el panel de navegación de la izquierda, en **Herramientas**, seleccione **Flujo de mensajes**.
+1. En el panel de navegación de la izquierda, en **Crear y personalizar**, selecciona **Flujo de solicitudes**.
 1. Seleccione **+ Crear** para crear un nuevo flujo.
 1. Cree un nuevo **flujo estándar** y escriba `entity-recognition` como nombre de carpeta.
 
@@ -71,7 +73,7 @@ Para crear un nuevo flujo con una plantilla, puede seleccionar uno de los tipos 
     <p>Si recibes un error de permisos al crear un nuevo flujo de avisos, prueba lo siguiente para solucionar los problemas:</p>
     <ul>
         <li>En Azure Portal, selecciona el recurso Servicios de IA.</li>
-        <li>En la página IAM, en la pestaña Identidad, confirma que se trata de una identidad administrada asignada por el sistema.</li>
+        <li>En Administración de recursos, en la pestaña Identidad, confirma que se trata de una identidad administrada asignada por el sistema.</li>
         <li>Ve a la cuenta de almacenamiento asociada. En la página IAM, agrega la asignación de roles <em>Lector de datos de Storage Blob</em>.</li>
         <li>En <strong>Asignar acceso a</strong>, elige <strong>Identidad administrada</strong>, <strong>+ Seleccionar miembros</strong> y selecciona <strong>Todas las identidades administradas asignadas por el sistema</strong>.</li>
         <li>Selecciona Revisar y asignar para guardar la nueva configuración y volver a intentar el paso anterior.</li>
@@ -108,12 +110,11 @@ El flujo estándar ya incluye un nodo que usa la herramienta LLM. Puede encontra
 
 1. Vaya al **nodo LLM** denominado `joke`.
 1. Reemplace el nombre por `NER_LLM`
-1. Para **Conexión**, seleccione la conexión `Default_AzureOpenAI`.
+1. En **Conexión**, selecciona la conexión que se ha creado automáticamente al crear el centro de IA.
 1. Para **deployment_name**, seleccione el modelo `gpt-35-turbo` que implementó.
 1. Reemplace el campo de solicitud por el código siguiente:
 
    ```yml
-   {% raw %}
    system:
 
    Your task is to find entities of a certain type from the given text content.
@@ -126,7 +127,6 @@ El flujo estándar ya incluye un nodo que usa la herramienta LLM. Puede encontra
    Entity type: {{entity_type}}
    Text content: {{text}}
    Entities:
-   {% endraw %}
    ```
 
 1. Seleccione **Validar y analizar la entrada**.
@@ -180,7 +180,7 @@ Ahora que ha desarrollado el flujo, puede ejecutarlo para probarlo. Dado que ha 
 
 ## Eliminación de recursos de Azure
 
-Cuando termines de explorar Inteligencia artificial de Azure Studio, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure.
+Cuando termines de explorar el portal de Azure AI Foundry, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure.
 
 - Ve a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com`.
 - En Azure Portal, en la página **Inicio**, selecciona **Grupos de recursos**.

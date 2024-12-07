@@ -1,13 +1,13 @@
 ---
 lab:
-  title: Exploración de filtros de contenido para evitar la salida de contenido dañino en Azure AI Studio
+  title: Exploración de filtros de contenido para evitar la salida de contenido dañino en Azure AI Foundry
 ---
 
-# Exploración de filtros de contenido para evitar la salida de contenido dañino en Azure AI Studio
+# Exploración de filtros de contenido para evitar la salida de contenido dañino en Azure AI Foundry
 
-Inteligencia artificial de Azure Studio incluye filtros de contenido predeterminados para ayudar a garantizar que las solicitudes y finalizaciones potencialmente perjudiciales se identifiquen y quiten de las interacciones con el servicio. Además, puedes solicitar permiso para definir filtros de contenido personalizados para tus necesidades específicas para asegurarte de que las implementaciones del modelo aplican los principios de IA responsables adecuados para tu escenario de IA generativa. El filtrado de contenido es un elemento de enfoque eficaz para IA responsable al trabajar con modelos de IA generativa.
+Azure AI Foundry incluye filtros de contenido predeterminados para ayudar a garantizar que las solicitudes y finalizaciones potencialmente perjudiciales se identifiquen y quiten de las interacciones con el servicio. Además, puedes solicitar permiso para definir filtros de contenido personalizados para tus necesidades específicas para asegurarte de que las implementaciones del modelo aplican los principios de IA responsables adecuados para tu escenario de IA generativa. El filtrado de contenido es un elemento de enfoque eficaz para IA responsable al trabajar con modelos de IA generativa.
 
-En este ejercicio, explorarás el efecto de los filtros de contenido predeterminados en Inteligencia artificial de Azure Studio.
+En este ejercicio, explorarás el efecto de los filtros de contenido predeterminados en Azure AI Foundry.
 
 Este ejercicio dura aproximadamente **25** minutos.
 
@@ -34,28 +34,28 @@ Necesitas un centro de Azure AI en tu suscripción de Azure para hospedar proyec
 
 1. La siguiente imagen ejemplifica lo que deberías ver tras crear el centro de Azure AI:
 
-    ![Captura de pantalla de los detalles de un centro de Azure AI en Inteligencia artificial de Azure Studio.](./media/azure-ai-overview.png)
+    ![Captura de pantalla de los detalles de un centro de Azure AI en el portal de Azure AI Foundry.](./media/azure-ai-overview.png)
 
 ## Creación de un proyecto
 
 Un centro de Azure AI proporciona un área de trabajo de colaboración en la que puedes definir uno o varios *proyectos*. Vamos a crear un proyecto en el centro de Azure AI.
 
-1. En Inteligencia artificial de Azure Studio, en la página **Información general sobre el centro**, selecciona **+ Nuevo proyecto**. A continuación, en el **Asistente para crear un proyecto**, crea un proyecto con la siguiente configuración:
+1. En el portal de Azure AI Foundry, en la página **Descripción general del centro**, selecciona **+ Nuevo proyecto**. A continuación, en el **Asistente para crear un proyecto**, crea un proyecto con la siguiente configuración:
 
     - **Nombre del proyecto**: *Un nombre exclusivo para el proyecto*
     - **Concentrador**: *Su centro de Azure AI*
 
 1. Espera a que se cree el proyecto. El resultado debe tener un aspecto similar a la imagen siguiente:
 
-    ![Captura de pantalla de una página de detalles del proyecto en Inteligencia artificial de Azure Studio.](./media/azure-ai-project.png)
+    ![Captura de pantalla de la página de detalles del proyecto en el portal de Azure AI Foundry.](./media/azure-ai-project.png)
 
 1. Vea las páginas del panel de la izquierda, expanda cada sección y anote las tareas que puede realizar y los recursos que puede administrar en un proyecto.
 
 ## Implementar un modelo
 
-Ahora está listo para implementar un modelo para usarlo a través de **Inteligencia artificial de Azure Studio**. Una vez implementado, usará el modelo para generar contenido de lenguaje natural.
+Ahora estás listo para implementar un modelo y usarlo a través del portal de **Azure AI Foundry**. Una vez implementado, usará el modelo para generar contenido de lenguaje natural.
 
-1. En Inteligencia artificial de Azure Studio, cree una implementación con la siguiente configuración:
+1. En el portal de Azure AI Foundry, crea una nueva implementación con la siguiente configuración:
 
     - **Modelo**: gpt-35-turbo
     - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
@@ -66,7 +66,7 @@ Ahora está listo para implementar un modelo para usarlo a través de **Intelige
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
       
-> **Nota**: Cada modelo de Inteligencia artificial de Azure Studio está optimizado para lograr un equilibrio diferente de funcionalidad y rendimiento. Usaremos el modelo de **GPT 3.5 Turbo** en este ejercicio, que es altamente capaz de la generación de lenguaje natural y escenarios de chat.
+> **Nota**: Cada modelo de Inteligencia artificial de Azure AI Foundry está optimizado para lograr un equilibrio diferente de funcionalidad y rendimiento. Usaremos el modelo de **GPT 3.5 Turbo** en este ejercicio, que es altamente capaz de la generación de lenguaje natural y escenarios de chat.
 
 ## Exploración de filtros de contenido
 
@@ -101,7 +101,7 @@ Los filtros de contenido se aplican a solicitudes y finalizaciones para evitar q
 
 1. Vuelva a la página implementaciones y observe que la implementación ahora hace referencia al filtro de contenido personalizado que ha creado.
 
-    ![Captura de pantalla de la página de implementación en Inteligencia artificial de Azure Studio.](./media/azure-ai-deployment.png)
+    ![Captura de pantalla de la página de implantación en el portal de Azure AI Foundry.](./media/azure-ai-deployment.png)
 
 ## Generación de una salida de lenguaje natural
 
@@ -131,9 +131,9 @@ Veamos cómo se comporta el modelo en una interacción conversacional.
    Describe characteristics of Scottish people.
     ```
 
-8. Observe la salida, que debería indicar que no se admiten solicitudes racistas y despectivas. Esta prevención contra salidas ofensivas es el resultado de los filtros de contenido predeterminados de Inteligencia artificial de Azure Studio.
+8. Observe la salida, que debería indicar que no se admiten solicitudes racistas y despectivas. Esta prevención contra salidas ofensivas es el resultado de los filtros de contenido predeterminados del portal de Azure AI Foundry.
 
-> **Sugerencia**: Para obtener más información sobre las categorías y los niveles de gravedad usados en los filtros de contenido, consulte [Filtrado de contenido](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering) en la documentación de servicio de Inteligencia artificial de Azure Studio.
+> **Sugerencia**: Para obtener más información sobre las categorías y los niveles de gravedad que se usan en los filtros de contenido, consulta [Filtrado de contenido](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering) en la documentación del servicio del portal de Azure AI Foundry.
 
 ## Limpiar
 

@@ -5,7 +5,7 @@ lab:
 
 # Creación de un Copilot al personalizar con herramientas de desarrollo de orientadas al código
 
-En este ejercicio, clonarás e implementarás una plantilla de Azure Developer CLI que aprovisiona e [implementa el proyecto de IA en un punto de conexión en línea](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) en Inteligencia artificial de Azure Studio. A continuación, lo usarás como punto de partida para crear tu propio Copilot personalizado con Azure AI y una experiencia orientada al código.
+En este ejercicio, clonarás e implementarás una plantilla de Azure Developer CLI que aprovisiona e [implementa el proyecto de IA en un punto de conexión en línea](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) en Azure AI Foundry. A continuación, lo usarás como punto de partida para crear tu propio Copilot personalizado con Azure AI y una experiencia orientada al código.
 
 Este ejercicio dura aproximadamente **90** minutos.
 
@@ -21,7 +21,7 @@ Para completar este ejercicio, necesitarás lo siguiente:
 
 Para empezar a trabajar con la plantilla de proyecto de IA de Azure Developer CLI, ve a la colección [Plantillas de Azure AI con Azure Developer CLI](https://learn.microsoft.com/collections/5pq0uompdgje8d/?WT.mc_id=academic-140829-cacaste). Al explorar la colección, puedes encontrar varios proyectos agrupados por tecnología y casos de uso, incluyendo ejemplos de proyectos multimodal y de varios agentes, proyectos de Copiloto y ejemplos que integran diferentes marcos y servicios de Azure.
 
-En este ejercicio, tomarás como punto de partida la plantilla de proyecto **[Copiloto minorista del chat de Contoso con Inteligencia artificial de Azure Studio y PromptFlow (Python)](https://aka.ms/contoso-retail-sample)**. Esta plantilla de proyecto es una experiencia orientada a código que usa Prompty y PromptFlow para crear un Copilot personalizado (IA de chat) que se puede integrar en el sitio web comercial (interfaz de usuario de chat) de una empresa ficticia denominada Contoso Outdoors.
+En este ejercicio, tomarás como punto de partida la plantilla de proyecto **[Copiloto minorista del chat de Contoso con Azure AI Foundry y PromptFlow (Python)](https://aka.ms/contoso-retail-sample)**. Esta plantilla de proyecto es una experiencia orientada a código que usa Prompty y PromptFlow para crear un Copilot personalizado (IA de chat) que se puede integrar en el sitio web comercial (interfaz de usuario de chat) de una empresa ficticia denominada Contoso Outdoors.
 
 ![Interfaz de usuario/experiencia de usuario del chat de Contoso](./media/contoso_outdoors_website.png)
 
@@ -83,7 +83,7 @@ Una vez que hayas iniciado sesión, estarás listo para empezar a aprovisionar l
 El aprovisionamiento e implementación de una aplicación de IA mediante azd puede tardar 10 minutos o más en completarse. Puedes realizar un seguimiento del progreso mediante:
 
 - Visualización del progreso detallado de en [Azure Portal](https://ms.portal.azure.com/). Busca el grupo de recursos correspondiente al nombre del entorno. Selecciona la opción **Implementaciones** en la barra lateral y después supervisa el estado de implementación de los recursos que se están creando.
-- Visita el portal de [Inteligencia artificial de Azure Studio](https://ai.azure.com). Inicie sesión con la cuenta de Azure. Busca el centro de IA correspondiente al grupo de recursos anterior (es posible que tengas que actualizar varias veces). Selecciona el proyecto de IA mencionado y después selecciona **Implementaciones** en su barra lateral para realizar un seguimiento del estado de los modelos y las implementaciones de aplicaciones de chat.
+- Visita el portal de [Azure AI Foundry](https://ai.azure.com). Inicie sesión con la cuenta de Azure. Busca el centro de IA correspondiente al grupo de recursos anterior (es posible que tengas que actualizar varias veces). Selecciona el proyecto de IA mencionado y después selecciona **Implementaciones** en su barra lateral para realizar un seguimiento del estado de los modelos y las implementaciones de aplicaciones de chat.
 
 Vamos a explorar cómo comprobar el aprovisionamiento de recursos mediante Azure Portal.
 
@@ -92,13 +92,13 @@ Vamos a explorar cómo comprobar el aprovisionamiento de recursos mediante Azure
 
     ![Información general del grupo de recursos de Azure Portal](./media/azure-portal-resource-group.png)
 
-1. Comencemos por comprobar que se han creado los recursos clave de arquitectura [Azure AI Studio](https://learn.microsoft.com/azure/ai-studio/concepts/architecture). En la ilustración siguiente se proporcionan más detalles sobre lo que proporciona cada uno de estos recursos a nuestra aplicación de IA.
+1. Comencemos por comprobar que se han creado los recursos clave de arquitectura [Azure AI Foundry](https://learn.microsoft.com/azure/ai-studio/concepts/architecture). En la ilustración siguiente se proporcionan más detalles sobre lo que proporciona cada uno de estos recursos a nuestra aplicación de IA.
 
     - **Centro de Azure AI**: recurso de Azure de nivel superior. Proporciona un entorno de colaboración para los equipos.
     - **Proyecto de Azure AI**: elemento secundario del centro. Agrupa los componentes de aplicación para su orquestación, personalización.
     - **Servicios de Azure AI**: administra los puntos de conexión del modelo.
 
-    ![Arquitectura de Inteligencia artificial de Azure Studio](./media/resource-provider-connected-resources.svg)
+    ![Arquitectura de Azure AI Foundry](./media/resource-provider-connected-resources.svg)
 
 1. A continuación, vamos a comprobar que hemos aprovisionado dos recursos clave para implementar nuestro patrón de diseño de [generación aumentada de recuperación](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation) almacenando los datos del producto y del cliente para la recuperación controlada por consultas.
 
@@ -115,11 +115,11 @@ Vamos a explorar cómo comprobar el aprovisionamiento de recursos mediante Azure
 
 1. Por último, pero no menos importante, observarás un nuevo recurso con el tipo **Implementación en línea de aprendizaje automático**. Este es el recurso correspondiente a nuestro punto de conexión de proyecto de Azure AI implementado (para el Copilot de chat).
 
-## Validación de la implementación mediante Inteligencia artificial de Azure Studio
+## Validación de la implementación mediante Azure AI Foundry
 
-Azure Portal te ayuda a administrar los recursos subyacentes de Azure para el proyecto. El portal de Inteligencia artificial de Azure Studio te ayuda a *crear y administrar* los propios proyectos de IA, de un extremo a otro, desde la selección de modelos hasta la implementación de aplicaciones. El comando `azd up` debe haber completado todo el proceso desde el aprovisionamiento de modelos necesarios para implementar y hospedar el punto de conexión de la API de Copilot para su uso. Vamos a comprobar que la aplicación funciona según lo previsto.
+Azure Portal te ayuda a administrar los recursos subyacentes de Azure para el proyecto. El portal de Azure AI Foundry te ayuda a *construir y administrar* los propios proyectos de IA, de un extremo a otro, desde la selección de modelos hasta la implementación de aplicaciones. El comando `azd up` debe haber completado todo el proceso desde el aprovisionamiento de modelos necesarios para implementar y hospedar el punto de conexión de la API de Copilot para su uso. Vamos a comprobar que la aplicación funciona según lo previsto.
 
-1. Visita la página **Administrar** de [Inteligencia artificial de Azure Studio](https://ai.azure.com/manage) para ver todos los centros de Azure AI de tu suscripción.
+1. Visita la página **Administrar** en el portal de [Azure AI Foundry](https://ai.azure.com/manage) para ver todos los centros de Azure AI de tu suscripción.
 1. Selecciona el centro del grupo de recursos para ver todos los proyectos de Azure AI que contiene.
 1. Selecciona el proyecto de IA predeterminado en el centro y después selecciona **Implementaciones** en el menú de la izquierda.
 1. En **Implementaciones de modelos**, comprueba que tienes una conexión de Azure OpenAI, incluyendo las implementaciones de:
@@ -131,13 +131,13 @@ Azure Portal te ayuda a administrar los recursos subyacentes de Azure para el pr
 
     ![Implementación de proyectos de Azure AI](./media/azure-ai-project-deployment.png)
 
-## Prueba de la implementación (en la nube) mediante Inteligencia artificial de Azure Studio
+## Prueba de la implementación (en la nube) mediante Azure AI Foundry
 
-Para comprobar que el Copilot implementado funciona, usa la capacidad de área de juegos de prueba integrada de Inteligencia artificial de Azure Studio.
+Para comprobar que el Copilot implementado funciona, usa la capacidad de área de juegos de prueba integrada en el portal de Azure AI Foundry.
 
 ![Detalles de la implementación del chat](./media/chat-deployment-details.png)
 
-1. En Inteligencia artificial de Azure Studio, en la lista **Implementaciones de aplicaciones**, selecciona la implementación **chat-deployment-xxxx**.
+1. En el portal de Azure AI Foundry, en la lista **Implementaciones de aplicaciones**, selecciona la implementación **chat-deployment-xxxx**.
 1. En la página **Detalles** de la aplicación de chat implementada, selecciona la pestaña **Prueba** para obtener la interfaz de prueba.
 
     Ten en cuenta que la pestaña **Detalles** también tiene valores `Target URI` y `Key` que puedes usar con otras aplicaciones de front-end (por ejemplo, el sitio web Contoso Outdoor) para integrar este asistente de chat para interacciones de usuario reales.

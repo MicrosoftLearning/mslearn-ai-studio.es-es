@@ -1,17 +1,17 @@
 ---
 lab:
-  title: Evaluación del rendimiento de tu copiloto personalizado en Inteligencia artificial de Azure Studio
+  title: Evaluación del rendimiento de tu copiloto personalizado en Azure AI Foundry
 ---
 
-# Evaluación del rendimiento de tu copiloto personalizado en Inteligencia artificial de Azure Studio
+# Evaluación del rendimiento de tu copiloto personalizado en Azure AI Foundry
 
-En este ejercicio, explorará las evaluaciones integradas y personalizadas para evaluar y comparar el rendimiento de las aplicaciones de IA con Inteligencia artificial de Azure Studio.
+En este ejercicio, explorarás las evaluaciones integradas y personalizadas para evaluar y comparar el rendimiento de tus aplicaciones de IA con el portal de Azure AI Foundry.
 
 Este ejercicio dura aproximadamente **30** minutos.
 
-## Crear un centro de inteligencia artificial y un proyecto en Inteligencia artificial de Azure Studio
+## Crear un centro y un proyecto de IA en Azure AI Foundry
 
-Para empezar, crea un proyecto de Inteligencia artificial de Azure Studio en un concentrador de Azure AI:
+Se empieza creando un proyecto de Azure AI Foundry dentro de un centro de Azure AI:
 
 1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
 1. Selecciona la página **Inicio** y luego **+ Nuevo proyecto**.
@@ -30,9 +30,10 @@ Para empezar, crea un proyecto de Inteligencia artificial de Azure Studio en un 
 
 ## Implementación de un modelo GPT
 
-Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar un modelo. Azure AI Studio permite implementar modelos de OpenAI que puede usar en los flujos.
+Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar un modelo. El portal de Azure AI Foundry permite implementar modelos de OpenAI que puedes usar en los flujos.
 
-1. En el panel de navegación de la izquierda, en **Componentes**, selecciona la página **Implementaciones**.
+1. Ve a la página **Modelos + puntos de conexión** en la sección **Mis recursos**, mediante el menú de la izquierda.
+1. Selecciona el botón **+ Implementar modelo** y selecciona la opción **Implementar modelo base**.
 1. Crea una nueva implementación del modelo **gpt-35-turbo** con la siguiente configuración mediante la selección de **Personalizar** en el asistente para **Implementar modelo**:
     - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
     - **Tipo de implementación**: estándar
@@ -62,12 +63,12 @@ Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar 
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Seleccione **Guardar**.
-1. En la ventana de chat, escriba la consulta: `What can you do?` para comprobar que el modelo de lenguaje se comporta según lo previsto.
+1. Seleccione **Aplicar cambios**.
+1. En la ventana de chat (historial), escribe la consulta `What can you do?` para comprobar que el modelo de lenguaje se comporta según lo previsto.
 
 Ahora que tiene un modelo implementado con un mensaje del sistema actualizado, puede evaluar el modelo.
 
-## Evaluación manual de un modelo de lenguaje en Inteligencia artificial de Azure Studio
+## Evaluación manual de un modelo de lenguaje en el portal de Azure AI Foundry
 
 Puede revisar manualmente las respuestas del modelo en función de los datos de prueba. La revisión manual permite probar entradas diferentes de una en una para evaluar si el modelo funciona según lo previsto.
 
@@ -112,7 +113,13 @@ Puede revisar manualmente las respuestas del modelo en función de los datos de 
 
 ## Evalúa tu Copilot con las métricas integradas
 
-Cuando hayas creado un Copilot con un flujo de chat, puedes evaluar el flujo al realizar una ejecución por lotes y evaluar el rendimiento del flujo con métricas integradas.
+Cuando hayas creado una aplicación de chat con un flujo de solicitudes, puedes evaluar el flujo al realizar una ejecución por lotes y evaluar el rendimiento del flujo con las métricas integradas.
+
+![Diagrama de construcción del conjunto de datos de entrada para su evaluación.](./media/diagram-dataset-evaluation.png)
+
+Para evaluar un flujo de chat, las consultas de usuario y las respuestas de chat se proporcionan como entrada para su evaluación.
+
+Para ahorrar tiempo, hemos creado un conjunto de datos de salida por lotes para ti que contiene los resultados de varias entradas que procesa un flujo de solicitud. Cada uno de los resultados se almacenan en el conjunto de datos que evaluarás en el paso siguiente.
 
 1. Selecciona la pestaña **Evaluaciones automatizadas** y crea una **Nueva evaluación** con la siguiente configuración: <details>  
       <summary><b>Sugerencia de solución de problemas: error de permisos</b></summary>
@@ -130,7 +137,7 @@ Cuando hayas creado un Copilot con un flujo de chat, puedes evaluar el flujo al 
     - **Nombre de evaluación**: *Escriba un nombre único*
     - Seleccione **Siguiente**.
     - **Seleccione los datos que quiera evaluar**: agregue el conjunto de datos.
-        - Descargue el archivo JSONL https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl y cárguelo en la interfaz de usuario.
+        - Descarga el [conjunto de datos de validación](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) en `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl`, guárdalo como archivo JSONL y cárgalo en la interfaz de usuario.
     - Seleccione **Siguiente**.
     - **Seleccionar métricas**: coherencia, fluidez
     - **Conexión**: *tu conexión de Servicios de IA*
@@ -145,7 +152,7 @@ Cuando hayas creado un Copilot con un flujo de chat, puedes evaluar el flujo al 
 
 ## Eliminación de recursos de Azure
 
-Cuando termines de explorar Inteligencia artificial de Azure Studio, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure.
+Cuando termines de explorar Azure AI Foundry, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure.
 
 - Ve a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com`.
 - En Azure Portal, en la página **Inicio**, selecciona **Grupos de recursos**.

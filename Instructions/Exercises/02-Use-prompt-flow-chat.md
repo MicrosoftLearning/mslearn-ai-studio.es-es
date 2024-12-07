@@ -1,55 +1,72 @@
 ---
 lab:
-  title: Creación de copilotos personalizados con el flujo de solicitudes del portal de Azure AI Foundry
+  title: Introducción a la creación de copilotos personalizados con el flujo de avisos en Inteligencia artificial de Azure Studio
 ---
 
-# Creación de copilotos personalizados con el flujo de solicitudes del portal de Azure AI Foundry
+# Introducción a la creación de copilotos personalizados con el flujo de avisos en Inteligencia artificial de Azure Studio
 
-En este ejercicio, usarás el flujo de solicitudes del portal de Azure AI Foundry para crear un copiloto personalizado que use una solicitud de usuario y el historial de chat como entradas, y use un modelo GPT de Azure OpenAI para generar una salida.
+En este ejercicio, usará el flujo de avisos de Inteligencia artificial de Azure Studio para crear un copiloto personalizado que use un aviso de usuario y una historial de chats como entradas, y use un modelo GPT de Azure OpenAI para generar una salida.
 
-Este ejercicio dura aproximadamente **30** minutos.
+> Para completar este ejercicio, la suscripción de Azure debe estar aprobada para el acceso al servicio Azure OpenAI. Rellene el [formulario de registro](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access) para solicitar acceso a los modelos de Azure OpenAI.
 
-## Creación de un centro de IA en el portal de Azure AI Foundry
+Para crear un copiloto con el flujo de avisos, necesita hacer lo siguiente:
 
-Para empezar, crea un proyecto de Azure AI Foundry en un concentrador de Azure AI:
+- Crear un centro de inteligencia artificial y un proyecto en Inteligencia artificial de Azure Studio.
+- Implementar un modelo GPT.
+- Cree un flujo que use el modelo GPT implementado para generar una respuesta basada en la entrada del usuario.
+- Probar e implementar el flujo.
+
+## Crear un centro de inteligencia artificial y un proyecto en Inteligencia artificial de Azure Studio
+
+Para empezar, crea un proyecto de Inteligencia artificial de Azure Studio en un concentrador de Azure AI:
 
 1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
-1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente **Crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
-
-    - **Nombre del centro**: *un nombre único*
-    - **Suscripción**: *suscripción de Azure*
-    - **Grupo de recursos**: *un nuevo grupo de recursos*
-    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
+1. Selecciona la página **Inicio** y luego **+ Nuevo proyecto**.
+1. En el asistente para **Crear un nuevo proyecto**, crea un proyecto con la siguiente configuración:
+    - **Nombre del proyecto**: *un nombre exclusivo para el proyecto*
+    - **Concentrador**: *crear un centro con la siguiente configuración:*
+        - **Nombre del centro**: *un nombre único*
+        - **Suscripción**: *suscripción de Azure*
+        - **Grupo de recursos**: *un nuevo grupo de recursos*
+        - **Ubicación**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
+        - Este de Australia
+        - Este de Canadá
+        - Este de EE. UU.
+        - Este de EE. UU. 2
+        - Centro de Francia
+        - Japón Oriental
+        - Centro-Norte de EE. UU
+        - Centro de Suecia
+        - Norte de Suiza
+        - Sur de Reino Unido 2
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *Crear una conexión*
     - **Conectar Búsqueda de Azure AI**: omitir la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Si has seleccionado **Personalizar**, selecciona **Siguiente** y revisa tu configuración.
-1. Selecciona **Crear** y espera a que se complete el proceso.
+1. Revise la configuración y cree el proyecto.
+1. Espera entre 5 y 10 minutos para que se cree el proyecto.
 
 ## Implementación de un modelo GPT
 
-Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar un modelo. El portal de Azure AI Foundry permite implementar modelos de OpenAI que puedes usar en los flujos.
+Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar un modelo. Azure AI Studio permite implementar modelos de OpenAI que puede usar en los flujos.
 
-1. En el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
+1. En el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Implementaciones**.
 1. Cree una nueva implementación del modelo de **gpt-35-turbo** con la siguiente configuración:
     - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
-    - **Tipo de implementación**: estándar
-    - **Versión del modelo**: *Selecciona la versión predeterminada*
-    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
+    - **Versión del modelo**: *Seleccione la versión predeterminada*
+    - **Tipo de implementación**: Estándar
+    - **Recurso de Azure OpenAI conectado**: *Seleccione la conexión predeterminada*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
-    - **Filtro de contenido**: DefaultV2
-    - **Habilitación de la cuota dinámica**: deshabilitada
+    - **Filtro de contenido**: valor predeterminado
 1. Espere a que se implemente el modelo. Cuando la implementación esté lista, seleccione **Abrir en el área de juegos**.
 1. En la ventana de chat, escriba la consulta `What can you do?`.
 
     Tenga en cuenta que la respuesta es genérica porque no hay instrucciones específicas para el asistente. Para que se centre en una tarea, puede cambiar el símbolo del sistema.
 
-1. Cambia el mensaje **Dar instrucciones y contexto al modelo** a lo siguiente:
+1. Cambie el **Mensaje del sistema** a lo siguiente:
 
-   ```md
+   ```
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
    **Capabilities**:
@@ -72,21 +89,9 @@ Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar 
 
 Ahora que ha jugado con el mensaje del sistema para el modelo GPT implementado, puede personalizar aún más la aplicación trabajando con el flujo de avisos.
 
-## Creación y ejecución de un flujo de chat en el portal de Azure AI Foundry
+## Creación y ejecución de un flujo de chat en Inteligencia artificial de Azure Studio
 
 Puede crear un flujo a partir de una plantilla o crear un flujo en función de las configuraciones del área de juegos. Puesto que ya estaba experimentando en el área de juegos, usará esta opción para crear un nuevo flujo.
-
-<details>  
-    <summary><b>Sugerencia de solución de problemas: error de permisos</b></summary>
-    <p>Si recibes un error de permisos al crear un nuevo flujo de avisos, prueba lo siguiente para solucionar los problemas:</p>
-    <ul>
-        <li>En Azure Portal, selecciona el recurso Servicios de IA.</li>
-        <li>En Administración de recursos, en la pestaña Identidad, confirma que se trata de una identidad administrada asignada por el sistema.</li>
-        <li>Ve a la cuenta de almacenamiento asociada. En la página IAM, agrega la asignación de roles <em>Lector de datos de Storage Blob</em>.</li>
-        <li>En <strong>Asignar acceso a</strong>, elige <strong>Identidad administrada</strong>, <strong>+ Seleccionar miembros</strong> y selecciona <strong>Todas las identidades administradas asignadas por el sistema</strong>.</li>
-        <li>Selecciona Revisar y asignar para guardar la nueva configuración y volver a intentar el paso anterior.</li>
-    </ul>
-</details>
 
 1. En la barra superior del **Área de juegos de chat**, seleccione **Flujo de avisos**.
 1. Escriba `Travel-Chat` como nombre de carpeta.
@@ -108,6 +113,7 @@ Puede crear un flujo a partir de una plantilla o crear un flujo en función de l
 1. Revise el campo de aviso y asegúrese de que tiene el siguiente aspecto:
 
    ```yml
+   {% raw %}
    system:
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
@@ -134,6 +140,7 @@ Puede crear un flujo a partir de una plantilla o crear un flujo en función de l
 
    user:
    {{question}}
+   {% endraw %}
    ```
 
 ### Probar e implementar el modelo
@@ -157,15 +164,16 @@ Ahora que ha desarrollado el flujo, puede usar la ventana de chat para probar el
         - **Recopilación de datos de inferencia**: Habilitado
     - **Configuración avanzada**:
         - *Use la configuración predeterminada*
-1. En el portal de Azure AI Foundry, en tu proyecto, en el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
-1. Ten en cuenta que,de forma predeterminada, aparecen en la lista los **Modelos implementados**, incluyendo tu modelo de lenguaje implementado y el flujo implementado. La implementación puede tardar algún tiempo antes de que se muestre y se cree correctamente.
+1. En Azure AI Studio, en el proyecto, en el panel de navegación de la izquierda, en **Componentes**, seleccione la página **Implementaciones**.
+1. Tenga en cuenta que, de forma predeterminada, se muestran las **implementaciones del modelo**, incluido el modelo de lenguaje implementado.
+1. Seleccione la pestaña **Implementaciones de aplicaciones** para buscar el flujo implementado. La implementación puede tardar algún tiempo antes de que se muestre y se cree correctamente.
 1. Cuando la implementación se haya realizado correctamente, selecciónela. A continuación, en la página **Prueba**, escriba el aviso `What is there to do in San Francisco?` y revise la respuesta.
 1. Escriba el aviso `Where else could I go?` y revise la respuesta.
 1. Vea la página **Consumir** del punto de conexión y tenga en cuenta que contiene información de la conexión y código de ejemplo que puede usar para compilar una aplicación cliente para el punto de conexión, lo que le permite integrar la solución del flujo de avisos en una aplicación como copiloto personalizado.
 
 ## Eliminación de recursos de Azure
 
-Cuando termines de explorar el portal de Azure AI Foundry, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure.
+Cuando termines de explorar Inteligencia artificial de Azure Studio, debes eliminar los recursos que has creado para evitar costes innecesarios de Azure.
 
 - Ve a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com`.
 - En Azure Portal, en la página **Inicio**, selecciona **Grupos de recursos**.
