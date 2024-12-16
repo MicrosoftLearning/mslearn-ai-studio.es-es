@@ -1,11 +1,11 @@
 ---
 lab:
-  title: Crear un copiloto personalizado que use sus propios datos
+  title: Creación de una aplicación de IA generativa que use tus propios datos
 ---
 
-# Crear un copiloto personalizado que use sus propios datos
+# Creación de una aplicación de IA generativa que use tus propios datos
 
-La generación aumentada de recuperación (RAG) es una técnica que se usa para compilar aplicaciones que integran datos de orígenes de datos personalizados en un aviso de un modelo de IA generativa. La RAG es un patrón que se usa habitualmente para desarrollar *copilotos* personalizados: aplicaciones basadas en chat que usan un modelo de lenguaje para interpretar entradas y generar respuestas adecuadas.
+La generación aumentada de recuperación (RAG) es una técnica que se usa para compilar aplicaciones que integran datos de orígenes de datos personalizados en un aviso de un modelo de IA generativa. La RAG es un patrón que se usa habitualmente para desarrollar aplicaciones de IA generativa: aplicaciones basadas en chat que usan un modelo de lenguaje para interpretar entradas y generar respuestas adecuadas.
 
 En este ejercicio, usarás el portal de Azure AI Foundry para integrar datos personalizados en un flujo de consultas de IA generativa.
 
@@ -13,7 +13,7 @@ Este ejercicio dura aproximadamente **45** minutos.
 
 ## Creación de un recurso de Búsqueda de Azure AI
 
-La solución de copilotos integrará los datos personalizados en un flujo de avisos. Para admitir esta integración, necesitará un recurso de Azure AI Search con el que indexar los datos.
+Tu solución de aplicación de IA generativa integrará datos personalizados en un flujo de avisos. Para admitir esta integración, necesitará un recurso de Azure AI Search con el que indexar los datos.
 
 1. En un explorador web, abra [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicie sesión con sus credenciales de Azure.
 1. En la página principal, seleccione **+ Crear un recurso** y busque `Azure AI Search`. A continuación, cree un nuevo recurso de Azure AI Search con la siguiente configuración:
@@ -240,7 +240,7 @@ Ahora que tiene un flujo en curso que usa los datos indexados, puede implementar
 
 ## Desafío 
 
-Ahora que has experimentado cómo integrar tus propios datos en un copiloto creado con el portal de Azure AI Foundry, vamos a explorar más.
+Ahora que has experimentado cómo integrar tus propios datos en una aplicación de Ia generativa creada con el portal de Azure AI Foundry, vamos a explorar más.
 
 Prueba a agregar un nuevo origen de datos a través del portal de Azure AI Foundry, indéxalo e integra los datos indexados en un flujo de solicitudes. Algunos conjuntos de datos que podría probar son:
 
