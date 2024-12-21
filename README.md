@@ -1,6 +1,6 @@
-# Ejercicios de Azure AI Studio
+# Ejercicios de Azure AI Foundry
 
-Este repositorio contiene instrucciones y recursos de apoyo para los ejercicios prácticos de los [módulos de Microsoft Learn sobre Azure AI Studio](https://docs.microsoft.com/training).
+Este repositorio contiene instrucciones y recursos de apoyo para los ejercicios prácticos de los [módulos de Microsoft Learn sobre el portal de Azure AI Foundry](https://learn.microsoft.com/en-us/training/paths/create-custom-copilots-ai-studio/).
 
 ## Información sobre los problemas
 
