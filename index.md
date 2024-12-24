@@ -4,7 +4,7 @@ permalink: index.html
 layout: home
 ---
 
-# Desarrollo de aplicaciones de IA generativa con Inteligencia artificial de Azure Studio
+# Desarrollo de aplicaciones de IA generativas en el portal de Azure AI Foundry
 
 Los ejercicios siguientes están diseñados para proporcionarte una experiencia práctica de aprendizaje en la que explorarás patrones y técnicas comunes que los desarrolladores usan para crear aplicaciones de IA generativas como "Copilots" basadas en chat y aprender a implementar esos patrones mediante Servicios de Azure AI, en particular, Azure OpenAI Service e Inteligencia artificial de Azure Studio.
 
