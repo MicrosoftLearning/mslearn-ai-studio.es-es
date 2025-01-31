@@ -141,6 +141,9 @@ Para ahorrar tiempo, hemos creado un conjunto de datos de salida por lotes para 
     - Seleccione **Siguiente**.
     - **Seleccione los datos que quiera evaluar**: agregue el conjunto de datos.
         - Descarga el [conjunto de datos de validación](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) en `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl`, guárdalo como archivo JSONL y cárgalo en la interfaz de usuario.
+
+    > **Nota**: Es posible que el dispositivo guarde el archivo de forma predeterminada como un archivo .txt. Selecciona todos los archivos y quita el sufijo .txt para asegurarte de que vas a guardar el archivo como JSONL.
+
     - Seleccione **Siguiente**.
     - **Seleccionar métricas**: coherencia, fluidez
     - **Conexión**: *tu conexión de Servicios de IA*
