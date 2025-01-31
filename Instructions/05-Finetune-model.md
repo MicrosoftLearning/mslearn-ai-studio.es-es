@@ -55,9 +55,9 @@ Dado que el ajuste preciso de un modelo tarda algún tiempo en completarse, prim
     <p>Si recibes un error de permisos, prueba lo siguiente para solucionar los problemas:</p>
     <ul>
         <li>En Azure Portal, selecciona el recurso Servicios de IA.</li>
-        <li>En la página IAM, en la pestaña Identidad, confirma que se trata de una identidad administrada asignada por el sistema.</li>
-        <li>Ve a la cuenta de almacenamiento asociada. En la página IAM, agrega la asignación de roles <em>Lector de datos de Storage Blob</em>.</li>
-        <li>En <strong>Asignar acceso a</strong>, elige <strong>Identidad administrada</strong>, <strong>++ Seleccionar miembros</strong> y selecciona <strong>Todas las identidades administradas asignadas por el sistema</strong>.</li>
+        <li>En Administración de recursos, en la pestaña Identidad, confirma que se trata de una identidad administrada asignada por el sistema.</li>
+        <li>Ve a la cuenta de almacenamiento asociada. En la página IAM, agrega la asignación de roles <em>Propietario de datos de Storage Blob</em>.</li>
+        <li>En <strong>Asignar acceso a</strong>, elige <strong>Identidad administrada</strong>, <strong>+Seleccionar miembros</strong>, selecciona <strong>Todas las identidades administradas asignadas por el sistema</strong> y selecciona tu recurso de Servicios de Azure AI.</li>
         <li>Selecciona Revisar y asignar para guardar la nueva configuración y volver a intentar el paso anterior.</li>
     </ul>
     </details>
@@ -76,6 +76,9 @@ Mientras esperas a que se complete el trabajo de ajuste, vamos a chatear con un 
 1. Ve a la página **Modelos + puntos de conexión** en la sección **Mis recursos**, mediante el menú de la izquierda.
 1. Selecciona el botón **+ Implementar modelo** y selecciona la opción **Implementar modelo base**.
 1. Implementa un modelo `gpt-35-turbo`, que es el mismo tipo de modelo que usaste al ajustar.
+
+> **Nota**: Si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
+
 1. Cuando la implementación esté lista, selecciona el botón **Abrir en el área de juegos**.
 1. Comprueba que el modelo base `gpt-35-model` implementado está seleccionado en el panel de configuración.
 1. En la ventana de chat, escribe una consulta como `What can you do?` y analiza la respuesta:
@@ -122,7 +125,7 @@ Cuando se ha completado correctamente el ajuste preciso, puedes implementar el m
 
 ## Prueba del modelo con ajuste preciso
 
-Ahora que has implementado tu modelo con ajuste preciso, puedes probar el modelo del mismo modo que puedes probar tu modelo base implementado.
+Ahora que has implementado tu modelo con ajuste preciso, puedes probarlo del mismo modo que probaste tu modelo base implementado.
 
 1. Cuando la implementación esté lista, ve al modelo con ajuste preciso y selecciona **Abrir en área de juegos**.
 1. Actualiza el mensaje del sistema con las siguientes instrucciones:
@@ -141,7 +144,7 @@ Ahora que has implementado tu modelo con ajuste preciso, puedes probar el modelo
 
     `Give me a list of five bed and breakfasts in Trastevere.`
 
-## Limpiar
+## Limpieza
 
 Si has terminado de explorar Azure AI Foundry, deberías eliminar los recursos que has creado para evitar costes innecesarios de Azure.
 

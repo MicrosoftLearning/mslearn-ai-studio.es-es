@@ -124,8 +124,10 @@ El flujo estándar ya incluye un nodo que usa la herramienta LLM. Puede encontra
 
    user:
    
+   {% raw %}
    Entity type: {{entity_type}}
    Text content: {{text}}
+   {% endraw %}
    Entities:
    ```
 
