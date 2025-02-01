@@ -42,6 +42,9 @@ Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar 
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
+
+    > **Nota**: Si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
+
 1. Espere a que se implemente el modelo. Cuando la implementación esté lista, seleccione **Abrir en el área de juegos**.
 1. En la ventana de chat, escriba la consulta `What can you do?`.
 
@@ -83,7 +86,7 @@ Puede crear un flujo a partir de una plantilla o crear un flujo en función de l
         <li>En Azure Portal, selecciona el recurso Servicios de IA.</li>
         <li>En Administración de recursos, en la pestaña Identidad, confirma que se trata de una identidad administrada asignada por el sistema.</li>
         <li>Ve a la cuenta de almacenamiento asociada. En la página IAM, agrega la asignación de roles <em>Lector de datos de Storage Blob</em>.</li>
-        <li>En <strong>Asignar acceso a</strong>, elige <strong>Identidad administrada</strong>, <strong>+ Seleccionar miembros</strong> y selecciona <strong>Todas las identidades administradas asignadas por el sistema</strong>.</li>
+        <li>En <strong>Asignar acceso a</strong>, elige <strong>Identidad administrada</strong>, <strong>+ Seleccionar miembros</strong>, selecciona <strong>Todas las identidades administradas asignadas por el sistema</strong> y selecciona tu recurso de Servicios de Azure AI.</li>
         <li>Selecciona Revisar y asignar para guardar la nueva configuración y volver a intentar el paso anterior.</li>
     </ul>
 </details>

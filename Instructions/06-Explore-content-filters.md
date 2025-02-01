@@ -31,7 +31,7 @@ Para empezar, crea un proyecto de Azure AI Foundry en un concentrador de Azure A
 1. Si has seleccionado **Personalizar**, selecciona **Siguiente** y revisa tu configuración.
 1. Selecciona **Crear** y espera a que se complete el proceso.
 
-## Implementar un modelo
+## Implementación de un modelo
 
 Ahora estás listo para implementar un modelo y usarlo a través del portal de **Azure AI Foundry**. Una vez implementado, usará el modelo para generar contenido de lenguaje natural.
 
