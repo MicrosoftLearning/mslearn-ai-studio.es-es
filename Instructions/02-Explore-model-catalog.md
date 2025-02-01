@@ -15,6 +15,8 @@ Este ejercicio dura aproximadamente **25** minutos.
 
 Un centro de Azure AI proporciona un área de trabajo de colaboración en la que puedes definir uno o varios *proyectos*. Vamos a crear un proyecto y un centro de Azure AI.
 
+1. En un explorador web, abre el [portal de Azure AI Foundry](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure.
+
 1. En la página principal, selecciona **+Crear proyecto**. En el asistente **Crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
 
     - **Nombre del centro**: *un nombre único*
@@ -27,7 +29,7 @@ Un centro de Azure AI proporciona un área de trabajo de colaboración en la qu
     > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Si has seleccionado **Personalizar**, selecciona **Siguiente** y revisa tu configuración.
-1. 1. Selecciona **Crear** y espera a que se complete el proceso.
+1. Selecciona **Crear** y espera a que se complete el proceso.
    
     Una vez creados el centro y el proyecto de Azure AI, debería tener un aspecto similar al de la siguiente imagen:
 
@@ -50,16 +52,16 @@ Imagina que quieres crear un copiloto personalizado que actúe como asistente pa
 
 El copiloto tendrá que proporcionar información precisa y correcta, por lo que la base es importante. Además, quieres que las respuestas del copiloto sean fáciles de leer y entender. Por lo tanto, también quieres elegir un modelo que tenga tasas altas de fluidez y coherencia.
 
-1. En el portal del proyecto de Azure AI Foundry, ve a **Pruebas comparativas de modelos** mediante el menú de la izquierda.
-    En la pestaña **Pruebas comparativas de calidad**, puedes encontrar algunos gráficos ya disponibles para ti y comprar los diferentes modelos.
-1. Filtra los modelos mostrados:
-    - **Tareas**: respuesta a preguntas
-    - **Colecciones**: Azure OpenAI
-    - **Métricas**: coherencia, fluidez, base
-1. Explora los gráficos resultantes y la tabla de comparación. Durante la exploración, puedes intentar responder a las siguientes preguntas:
+1. En el portal de proyectos de Fundición de IA de Azure, ve a **Catálogo de modelo** mediante el menú de la izquierda.
+    En la página del catálogo, selecciona **Comparar con pruebas comparativas**. En la página Pruebas comparativas de modelos, encontrarás un gráfico ya trazado automáticamente que compara diferentes modelos.
+1. Selecciona **+ Modelo para comparar** y agrega **gpt-4-32k** y **gpt-4** al gráfico de métricas. En el menú desplegable **eje X**, en **Calidad**, selecciona las siguientes métricas y observa cada gráfico resultante antes de pasar al siguiente:
+    - Coherencia
+    - Fluidez
+    - Base
+1. Al explorar los resultados, puedes intentar responder a las siguientes preguntas:
     - ¿Observas diferencias de rendimiento entre los modelos GPT-3.5 y GPT-4?
     - ¿Hay alguna diferencia entre las versiones del mismo modelo?
-    - ¿Cómo difieren las variantes de 32k de los modelos base?
+    - ¿En qué se diferencia la variante 32k de GPT-4 del modelo base?
 
 En la colección de Azure OpenAI, puedes elegir entre los modelos GPT-3.5 y GPT-4. Implementemos estos dos modelos y exploremos en qué se diferencian en tu caso de uso.
 
@@ -82,6 +84,8 @@ Comencemos implementando un modelo del Catálogo de modelos. Es posible que pref
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
 
+    > **Nota**: Si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
+
 ### Implementación de un modelo a través de Modelos + puntos de conexión
 
 Si ya sabes exactamente qué modelo quieres implementar, es posible que prefieras hacerlo a través de **Modelos + puntos de conexión**.
@@ -96,8 +100,6 @@ Si ya sabes exactamente qué modelo quieres implementar, es posible que prefiera
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
-
-    > **Nota**: Si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
 
 ## Prueba de modelos en el área de juegos de chat
 
@@ -124,7 +126,7 @@ Ahora que tenemos dos modelos que comparar, veamos cómo se comportan en una int
 
 Ahora que has explorado ambos modelos, reflexiona sobre qué modelo elegirías para tu caso de uso. Al principio, las salidas de los modelos pueden diferir y es posible que prefieras uno al otro. Sin embargo, después de actualizar el mensaje del sistema, puedes observar que la diferencia es mínima. Desde una perspectiva de optimización de costes, puedes optar por el modelo GPT-3.5 sobre el GPT-4, ya que el rendimiento es muy similar.
 
-## Limpiar
+## Limpieza
 
 Si has terminado de explorar el portal de Azure AI Foundry, deberías eliminar los recursos que has creado en este ejercicio para evitar incurrir en costes innecesarios de Azure.
 

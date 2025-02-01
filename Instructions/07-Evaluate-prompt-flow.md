@@ -42,6 +42,9 @@ Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar 
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
+
+    > **Nota**: Si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
+
 1. Espere a que se implemente el modelo. Cuando la implementación esté lista, seleccione **Abrir en el área de juegos**.
 1. En el cuadro de texto **Proporcionar las instrucciones del modelo y el contexto**, cambia el contenido a lo siguiente:
 
@@ -138,11 +141,14 @@ Para ahorrar tiempo, hemos creado un conjunto de datos de salida por lotes para 
     - Seleccione **Siguiente**.
     - **Seleccione los datos que quiera evaluar**: agregue el conjunto de datos.
         - Descarga el [conjunto de datos de validación](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) en `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl`, guárdalo como archivo JSONL y cárgalo en la interfaz de usuario.
+
+    > **Nota**: Es posible que el dispositivo guarde el archivo de forma predeterminada como un archivo .txt. Selecciona todos los archivos y quita el sufijo .txt para asegurarte de que vas a guardar el archivo como JSONL.
+
     - Seleccione **Siguiente**.
     - **Seleccionar métricas**: coherencia, fluidez
     - **Conexión**: *tu conexión de Servicios de IA*
     - **Nombre y modelo de la implementación**: *el modelo de GPT-3.5 implementado*
-    - **consulta**: selecciona **pregunta** como el origen de datos
+    - **consulta**: selecciona la **consulta** como el origen de datos
     - **respuesta**: selecciona **respuesta** como el origen de datos
       
 1. Selecciona **Siguiente** y, a continuación, revisa tus datos y **envía** la nueva evaluación.
