@@ -1,11 +1,12 @@
 ---
 lab:
-  title: Creación de un Copilot al personalizar con herramientas de desarrollo de orientadas al código
+  title: Creación de una aplicación de IA generativa mediante herramientas de desarrollo orientado al código
+  description: Obtén información sobre cómo usar código para crear y actualizar los elementos de la aplicación de IA generativa para admitir la compilación e implementación automatizadas en un escenario de DevOps.
 ---
 
-# Creación de un Copilot al personalizar con herramientas de desarrollo de orientadas al código
+# Creación de una aplicación de IA generativa mediante herramientas de desarrollo orientado al código
 
-En este ejercicio, clonarás e implementarás una plantilla de Azure Developer CLI que aprovisiona e [implementa el proyecto de IA en un punto de conexión en línea](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) en Azure AI Foundry. A continuación, lo usarás como punto de partida para crear tu propio Copilot personalizado con Azure AI y una experiencia orientada al código.
+En este ejercicio, clonarás e implementarás una plantilla de Azure Developer CLI que aprovisiona e [implementa el proyecto de IA en un punto de conexión en línea](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) en Fundición de IA de Azure. A continuación, lo usarás como punto de partida para crear tu propio copiloto personalizado con Azure AI y una experiencia orientada al código.
 
 Este ejercicio dura aproximadamente **90** minutos.
 
@@ -14,14 +15,14 @@ Este ejercicio dura aproximadamente **90** minutos.
 Para completar este ejercicio, necesitarás lo siguiente:
 
 - Una cuenta de GitHub para bifurcar el repositorio del proyecto y probarlo en un entorno de GitHub Codespaces. Creación de una cuenta gratuita [de GitHub](https://github.com/).
-- El nivel básico de la búsqueda de Azure AI para activar el clasificador semántico. Más información sobre los [detalles de los precios de la búsqueda AI](https://azure.microsoft.com/pricing/details/search/).
+- El nivel básico de la Búsqueda de Azure AI para activar el clasificador semántico. Más información sobre los [detalles de los precios de AI Search](https://azure.microsoft.com/pricing/details/search/).
 - Para implementar tres modelos de OpenAI (`gpt-35-turbo`, `gpt-4`, `text-embedding-ada-002`). Para poder implementar los modelos, debes crear el centro de IA en una región con cuota suficiente. Más información sobre la disponibilidad del [modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?WT.mc_id=academic-140829-cacaste#model-summary-table-and-region-availability).
 
 ## Descripción del escenario
 
-Para empezar a trabajar con la plantilla de proyecto de IA de Azure Developer CLI, ve a la colección [Plantillas de Azure AI con Azure Developer CLI](https://learn.microsoft.com/collections/5pq0uompdgje8d/?WT.mc_id=academic-140829-cacaste). Al explorar la colección, puedes encontrar varios proyectos agrupados por tecnología y casos de uso, incluyendo ejemplos de proyectos multimodal y de varios agentes, proyectos de Copiloto y ejemplos que integran diferentes marcos y servicios de Azure.
+Para empezar a trabajar con la plantilla de proyecto de IA de Azure Developer CLI, ve a la colección [Plantillas de Azure AI con Azure Developer CLI](https://learn.microsoft.com/collections/5pq0uompdgje8d/?WT.mc_id=academic-140829-cacaste). Al explorar la colección, puedes encontrar varios proyectos agrupados por tecnología y casos de uso, incluyendo ejemplos de proyectos multimodal y de varios agentes, proyectos de copiloto y ejemplos que integran diferentes marcos y servicios de Azure.
 
-En este ejercicio, tomarás como punto de partida la plantilla de proyecto **[Copiloto minorista del chat de Contoso con Azure AI Foundry y PromptFlow (Python)](https://aka.ms/contoso-retail-sample)**. Esta plantilla de proyecto es una experiencia orientada a código que usa Prompty y PromptFlow para crear un Copilot personalizado (IA de chat) que se puede integrar en el sitio web comercial (interfaz de usuario de chat) de una empresa ficticia denominada Contoso Outdoors.
+En este ejercicio, tomarás como punto de partida la plantilla de proyecto **[Copiloto minorista del chat de Contoso con Azure AI Foundry y PromptFlow (Python)](https://aka.ms/contoso-retail-sample)**. Esta plantilla de proyecto es una experiencia orientada a código que usa Prompty y PromptFlow para crear un copilot personalizado (IA de chat) que se puede integrar en el sitio web comercial (interfaz de usuario de chat) de una empresa ficticia denominada Contoso Outdoors.
 
 ![Interfaz de usuario/experiencia de usuario del chat de Contoso](./media/contoso_outdoors_website.png)
 

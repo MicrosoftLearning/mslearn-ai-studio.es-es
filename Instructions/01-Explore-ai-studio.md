@@ -1,67 +1,123 @@
 ---
 lab:
-  title: Exploración de los componentes y herramientas de Azure AI Foundry
+  title: Preparación para un proyecto de desarrollo de IA
+  description: Obtén información sobre cómo organizar los recursos en la nube en centros y proyectos para que los desarrolladores estén preparados para tener éxito al crear soluciones de IA.
 ---
 
-# Exploración de los componentes y herramientas de Azure AI Foundry
+# Preparación para un proyecto de desarrollo de IA
 
-En este ejercicio, usarás el portal de Azure AI Foundry para crear un proyecto y explorar un modelo de IA generativa.
+En este ejercicio, usarás el Portal de la Fundición de IA de Azure para crear un centro y un proyecto, listo para que un equipo de desarrolladores cree una solución de IA.
 
 Este ejercicio dura aproximadamente **30** minutos.
 
-## Apertura del portal de Azure AI Foundry
+## Apertura del Portal de la Fundición de IA de Azure
 
-Comencemos por explorar el portal de Azure AI Foundry.
+Comencemos por iniciar sesión en el Portal de la Fundición de IA de Azure.
 
-1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure. La página principal del portal de Azure AI Foundry tiene un aspecto similar al de la siguiente imagen:
+1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen:
 
-    ![Captura de pantalla del portal de Azure AI Foundry.](./media/azure-ai-studio-home.png)
+    ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
-1. Revisa la información de la página principal y mira cada una de las pestañas, teniendo en cuenta las opciones para explorar modelos y funcionalidades, crear proyectos y administrar recursos.
+1. Revisa la información en la página principal.
 
-## Creación de un centro y un proyecto de Azure AI
+## Creación de un centro y un proyecto
 
-Un centro de Azure AI proporciona un área de trabajo de colaboración en la que puedes definir uno o varios *proyectos*. Vamos a crear un proyecto y un centro de Azure AI.
+Un *centro* de Azure AI proporciona un área de trabajo de colaboración en la que puedes definir uno o varios *proyectos*. Crearemos un proyecto y un centro de Azure AI. Además, revisaremos los recursos de Azure que se crean para admitirlos.
 
-1. En la página principal, selecciona **+Crear proyecto**. En el asistente **Crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
-   
-    - **Nombre del centro**: *un nombre único*
-    - **Suscripción**: *suscripción de Azure*
-    - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único o selecciona uno existente*
-    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *selecciona esta opción para crear una nueva instancia de Servicios de IA o usar una existente*
-    - **Conectar Búsqueda de Azure AI**: omitir la conexión
+1. En la página principal, selecciona **+Crear proyecto**.
+1. En el Asistente para **crear un proyecto**, escriba un nombre de proyecto adecuado (como `my-ai-project`) y revisa los recursos de Azure que se crearán automáticamente para admitir el proyecto.
+1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
+    - **Nombre del centro**: *un nombre único; por ejemplo, `my-ai-hub`*
+    - **Suscripción**: *suscripción a Azure*
+    - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único (como `my-ai-resources`) o selecciona uno existente*
+    - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de AI Services con un nombre adecuado (como `my-ai-services`) o usa uno existente.*
+    - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Si has seleccionado **Personalizar**, selecciona **Siguiente** y revisa tu configuración.
-1. Selecciona **Crear** y espera a que se complete el proceso.
-   
-    Una vez creados el centro y el proyecto de Azure AI, debería tener un aspecto similar al de la siguiente imagen:
+1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
+1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
 
-    ![Captura de pantalla de los detalles de un centro de Azure AI en el portal de Azure AI Foundry.](./media/azure-ai-resource.png)
+    ![Captura de pantalla de los detalles de un proyecto de Azure AI en el Portal de la Fundición de IA de Azure.](./media/ai-foundry-project.png)
 
-1. Abre una nueva pestaña del explorador (dejando abierta la pestaña del portal de Azure AI Foundry) y ve a Azure Portal en [https://portal.azure.com](https://portal.azure.com?azure-portal=true), inicia sesión con tus credenciales de Azure si se te solicita.
-1. Ve al grupo de recursos en el que creaste el centro de Azure AI y mira los recursos de Azure que se han creado.
+1. Selecciona **Centro de gestión** en la parte inferior del panel de navegación a la izquierda. El Centro de gestión es donde puedes configurar las opciones a niveles de *centro* y *proyecto*, que se muestran en el panel de navegación.
 
-    ![Captura de pantalla de un centro de Azure AI y recursos relacionados en Azure Portal.](./media/azure-portal.png)
+    ![Captura de pantalla de la página del Centro de gestión del Portal de la Fundición de IA de Azure.](./media/ai-foundry-management.png)
 
-1. Vuelva a la pestaña del explorador del portal de Azure AI Foundry.
-1. Mira cada una de las páginas del panel en el lado izquierdo de la página del centro de Azure AI y anota los artefactos que puedes crear y administrar. En la página **Centro de administración**, puedes seleccionar **Recursos conectados**, ya sea en tu centro o en tu proyecto, y observar que ya se han creado conexiones a los servicios de Azure OpenAI e IA.
-1. Si estás en la página Centro de administración, selecciona **Ir al proyecto**.
+    Observa que en el panel de navegación, puedes ver y administrar recursos a nivel de centro y proyecto en las páginas siguientes:
 
-## Implementación y prueba de un modelo
+    - Información general
+    - Usuarios
+    - Modelos y puntos de conexión
+    - Recursos conectados
+    - Proceso (*solo* a nivel de centro)
 
-Puede usar un proyecto para crear soluciones de inteligencia artificial complejas basadas en modelos de IA generativa. Una exploración completa de todas las opciones de desarrollo disponibles en Inteligencia artificial de Azure AI Foundry excede el propósito de este ejercicio, pero exploraremos algunas formas básicas de trabajar con modelos en un proyecto.
+    > **Nota**: dependiendo de los permisos asignados a tu Entra ID en el inquilino de Azure, es posible que no puedas administrar los recursos a nivel de centro.
 
-1. En el panel de la izquierda de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
-1. En la página **Modelos + puntos de conexión**, en la pestaña **Implementación de modelos**, selecciona **+ Implementación de modelo**.
-1. Busque el modelo **gpt-35-turbo** de la lista, seleccione y confirme.
+1. En el panel de navegación, en la sección del centro, selecciona la página **Información general** para ver los detalles del centro. 
+1. En el panel **Propiedades del centro**, selecciona el vínculo al grupo de recursos asociado al centro para abrir una nueva pestaña del explorador e ir a Azure Portal. Si se te solicita, inicia sesión con las credenciales de Azure.
+1. Mira el grupo de recursos en Azure Portal para ver los recursos de Azure que se han creado para admitir el centro y el proyecto.
+
+    ![Captura de pantalla de un centro de Azure AI y recursos relacionados en Azure Portal.](./media/azure-portal-resources.png)
+
+    Observa que los recursos se han creado en la región que seleccionaste al crear el centro.
+
+## Adición de un recurso conectado
+
+Supongamos que el proyecto necesita acceso a un segundo recurso de **Servicios de Azure AI** en otra región.
+
+1. En Azure Portal, en la página del grupo de recursos, selecciona **+ Crear** y busca `Azure AI Services`. En los resultados, selecciona el recurso de varios servicios de **Servicios de Azure AI**, como se muestra en la imagen siguiente:
+
+    ![Captura de pantalla del icono de recurso de Servicios de Azure AI en Azure Portal.](./media/azure-ai-services.png)
+
+1. Crea un nuevo recurso de **Servicios de Azure AI** con la siguiente configuración:
+    - **Suscripción**: *suscripción a Azure*
+    - **Grupo de recursos**: *selecciona el grupo de recursos que contiene los recursos existentes de Fundición de IA de Azure*.
+    - **Región**: *selecciona cualquier región disponible distinta de la que contenga los recursos existentes*
+    - **Nombre**: *un nombre único*
+    - **Plan de tarifa**: estándar S0
+1. Espera a que se cree el recurso de AI Services.
+1. Vuelve a la pestaña del explorador del Portal de la Fundición de IA de Azure y, en la vista **Centro de gestión**, en el panel de navegación, en la sección del *<u>proyecto</u>*, mira la página **Recursos conectados**. Se muestran los recursos conectados existentes en el proyecto.
+
+    ![Captura de pantalla de los recursos conectados en un proyecto de AI Foundry.](./media/ai-foundry-project-resources.png)
+
+1. Selecciona **+ Nueva conexión** y, después, tipo de recurso **Servicios de Azure AI**. A continuación, examina los recursos disponibles para buscar el recurso de AI Services que creaste en Azure Portal y usa el botón **Agregar conexión** para agregarla al proyecto.
+
+    ![Captura de pantalla del cuadro de diálogo Conectar recursos de Servicios de Azure AI en un proyecto de AI Foundry.](./media/add-resource.png)
+
+1. Cuando esté conectado el nuevo recurso, cierra el cuadro de diálogo **Conectar recursos de Servicios de Azure AI** y comprueba que se muestran los nuevos recursos conectados para los Servicios de Azure AI y Azure OpenAI Service.
+
+## Exploración de AI Services
+
+El proyecto de Fundición de IA de Azure tiene acceso a Servicios de Azure AI. Vamos a probarlo en el portal.
+
+1. En la página Centro de gestión, en el panel de navegación, en el proyecto, selecciona **Ir al proyecto**.
+1. En el panel de navegación del proyecto, selecciona **AI Services** y selecciona el icono **icono Idioma y Traductor**.
+
+    ![Captura de pantalla del icono de Idioma y Traductor en el Portal de la Fundición de IA de Azure.](./media/language-and-translator.png)
+
+1. En la sección **Explorar funcionalidades de idioma**, mira la pestaña **Traducción** y selecciona **Traducción de texto**.
+
+    ![Captura de pantalla del icono Traducción de texto en el Portal de la Fundición de IA de Azure.](./media/text-translation.png)
+
+1. En la página **Traducción de texto**, en la sección **Probarlo**, mira la pestaña **Probar con tus propios**.
+1. Selecciona cualquiera de los recursos de Servicios de Azure AI y, a continuación, intenta traducir texto (por ejemplo, `Hello world`) de un idioma a otro.
+
+    ![Captura de pantalla del icono Traducción de texto en el Portal de la Fundición de IA de Azure.](./media/try-translation.png)
+
+## Implementación y prueba de un modelo de IA generativa
+
+El proyecto también contiene recursos conectados para Azure OpenAI, lo que te permite usar modelos de lenguaje de Azure OpenAI para implementar soluciones de IA generativa.
+
+1. En el panel de la izquierda de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
+1. En la página **Modelos y puntos de conexión**, en la pestaña **Implementaciones de modelos**, en el menú **+ Implementar modelo**, selecciona **Implementar modelo base**.
+1. Busca el modelo **gpt-4** en la lista, selecciona y confirma.
 1. Implementa el modelo con la siguiente configuración mediante la selección de **Personalizar** en los detalles de implementación:
-    - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
+    - **Nombre de implementación**: *nombre único para la implementación de modelo, por ejemplo `gpt-4-model`*
     - **Tipo de implementación**: estándar
-    - **Versión del modelo**: *Selecciona la versión predeterminada*
-    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
+    - **Versión del modelo**: *selecciona la versión predeterminada*
+    - **Recurso de IA conectado**: *selecciona cualquiera de las conexiones de recursos de Azure OpenAI.*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
@@ -70,14 +126,18 @@ Puede usar un proyecto para crear soluciones de inteligencia artificial compleja
 
 1. Una vez implementado el modelo, en la página de información general de implementación, seleccione **Abrir en el área de juegos**.
 1. En la página **Área de juegos de chat**, asegúrese de que la implementación del modelo esté seleccionada en la sección **Implementación**.
-1. En la ventana de chat, escriba una consulta como *¿Qué es la inteligencia artificial?* y vea la respuesta:
+1. En la ventana de chat, escribe una consulta como `How can I use Azure AI Services in a software development project?` y mira la respuesta:
 
-    ![Captura de pantalla del área de juegos en el portal de Azure AI Foundry.](./media/playground.png)
+    ![Captura de pantalla del área de juegos en el Portal de la Fundición de IA de Azure.](./media/ai-foundry-playground.png)
 
-## Limpiar
+## Resumen
 
-Si has terminado de explorar el portal de Azure AI Foundry, deberías eliminar los recursos que has creado en este ejercicio para evitar incurrir en costes innecesarios de Azure.
+En este ejercicio, has explorado Fundición de IA de Azure y has visto cómo crear y administrar centros y proyectos, agregar recursos conectados y explorar los Servicios de Azure AI y los modelos de Azure OpenAI en el Portal de la Fundición de Azure AI.
 
-1. Vuelva a la pestaña del explorador que contiene Azure Portal (o vuelva a abrir [Azure Portal](https://portal.azure.com?azure-portal=true) en una nueva pestaña del explorador) y vea el contenido del grupo de recursos donde implementó los recursos usados en este ejercicio.
-1. Seleccione **Eliminar grupo de recursos** en la barra de herramientas.
+## Limpieza
+
+Si has terminado de explorar el Portal de la Fundición de IA de Azure, debes eliminar los recursos que has creado en este ejercicio para evitar incurrir en costes innecesarios de Azure.
+
+1. Vuelve a la pestaña del explorador que contiene Azure Portal (o vuelve a abrir [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` en una nueva pestaña del explorador) y mira el contenido del grupo de recursos donde implementó los recursos usados en este ejercicio.
+1. Selecciona **Eliminar grupo de recursos** en la barra de herramientas.
 1. Escriba el nombre del grupo de recursos y confirme que desea eliminarlo.

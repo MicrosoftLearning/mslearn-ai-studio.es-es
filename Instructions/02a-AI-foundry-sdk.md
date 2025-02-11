@@ -1,0 +1,176 @@
+---
+lab:
+  title: Creación de una aplicación de chat de IA generativa
+  description: Obtén información sobre cómo usar el SDK de la Fundición de IA de Azure para crear una aplicación que se conecte al proyecto y chats con un modelo de lenguaje.
+---
+
+# Creación de una aplicación de chat de IA generativa
+
+En este ejercicio, usarás el SDK de la Fundición de IA de Azure para crear una aplicación de chat sencilla que se conecte a un proyecto y chats con un modelo de lenguaje.
+
+Este ejercicio dura aproximadamente **30** minutos.
+
+## Creación de un proyecto de Azure AI Foundry
+
+Comencemos creando un proyecto de Fundición de IA de Azure.
+
+1. En un explorador web, abre el [portal de Azure AI Foundry](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen:
+
+    ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
+
+1. En la página principal, selecciona **+Crear proyecto**.
+1. En el Asistente para **crear un proyecto**, escribe un nombre de proyecto adecuado (como `my-ai-project`) y revisa los recursos de Azure que se crearán automáticamente para admitir el proyecto.
+1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
+    - **Nombre del centro**: *un nombre único; por ejemplo, `my-ai-hub`*
+    - **Suscripción**: *suscripción a Azure*
+    - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único (como `my-ai-resources`) o selecciona uno existente*
+    - **Ubicación**: elige de forma aleatoria cualquiera de las siguientes regiones\*:
+        - Este de EE. UU.
+        - Este de EE. UU. 2
+        - Centro-Norte de EE. UU
+        - Centro-sur de EE. UU.
+        - Centro de Suecia
+        - Oeste de EE. UU.
+        - Oeste de EE. UU. 3
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de AI Services con un nombre adecuado (como `my-ai-services`) o usa uno existente.*
+    - **Conectar Búsqueda de Azure AI**: omitir la conexión
+
+    > \* Las cuotas de modelos están restringidas a nivel de inquilino por cuotas regionales. Elegir una región aleatoria ayuda a distribuir la disponibilidad de cuota cuando varios usuarios trabajan en el mismo inquilino. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
+
+1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
+1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
+
+    ![Captura de pantalla de los detalles de un proyecto de Azure AI en el Portal de la Fundición de IA de Azure.](./media/ai-foundry-project.png)
+
+## Implementación de un modelo de IA generativa
+
+Ahora estás listo para implementar un modelo de lenguaje de IA generativa para admitir la aplicación de chat. En este ejemplo, usarás el modelo Microsoft Phi-4; pero los principios son los mismos para cualquier modelo.
+
+1. En la barra de herramientas de la parte superior derecha de la página del proyecto de Fundición de IA de Azure, usa el icono **Características de versión preliminar** para habilitar la característica **Implementar modelos en el servicio de inferencia de modelos de Azure AI**. Esta característica garantiza que la implementación del modelo esté disponible para el servicio de inferencia de Azure AI, que usarás en el código de aplicación.
+1. En el panel de la izquierda de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
+1. En la página **Modelos y puntos de conexión**, en la pestaña **Implementaciones de modelos**, en el menú **+ Implementar modelo**, selecciona **Implementar modelo base**.
+1. Busca el modelo **Phi-4** en la lista y, a continuación, selecciónalo y confírmalo.
+1. Acepta el contrato de licencia si se te solicita y, a continuación, implementa el modelo con la siguiente configuración seleccionando **Personalizar** en los detalles de implementación:
+    - **Nombre de implementación**: *nombre único para la implementación del modelo, por ejemplo `phi-4-model` (recuerda el nombre que asignes, lo necesitarás más adelante*).
+    - **Tipo de implementación**: estándar global
+    - **Detalles de implementación**: *usa la configuración predeterminada*
+1. Espera a que se **complete** el estado de aprovisionamiento de la implementación.
+
+## Creación de una aplicación cliente para chatear con el modelo
+
+Ahora que has implementado un modelo, puedes usar el SDK de la Fundición de IA de Azure para desarrollar una aplicación que chatee con él.
+
+### Preparación de la configuración de aplicación
+
+1. En el Portal de la Fundición de IA de Azure, mira la página **Información general** del proyecto.
+1. En el área **Detalles del proyecto**, anota la **Cadena de conexión del proyecto**. Usarás esta cadena de conexión para conectarte al proyecto en una aplicación cliente.
+1. Abre una nueva pestaña del explorador (mantén el Portal de la Fundición de IA de Azure abierto en la pestaña existente). En la nueva pestaña, explora [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicia sesión con tus credenciales de Azure, si se te solicita.
+1. Usa el botón **[\>_]** situado a la derecha de la barra de búsqueda en la parte superior de la página para crear una nueva instancia de Cloud Shell en Azure Portal, para lo que deberás seleccionar un entorno de ***PowerShell***. Cloud Shell proporciona una interfaz de la línea de comandos en un panel situado en la parte inferior de Azure Portal.
+
+    > **Nota**: si has creado anteriormente una instancia de Cloud Shell que usa un entorno de *Bash*, cámbiala a ***PowerShell***.
+
+1. En la barra de herramientas de Cloud Shell, en el menú **Configuración**, selecciona **Ir a la versión clásica** (esto es necesario para usar el editor de código).
+
+1. En el panel de PowerShell, escribe los siguientes comandos para clonar el repo de GitHub para este ejercicio:
+
+    ```
+    rm -r mslearn-ai-foundry -f
+    git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
+    ```
+
+1. Una vez clonado el repo, ve a la carpeta que contiene los archivos de código de la aplicación de chat:
+
+    ```
+    cd mslearn-ai-foundry/labfiles/chat-app/python
+    ```
+
+1. En el panel de la línea de comandos de Cloud Shell, escribe el siguiente comando para instalar las bibliotecas de Python que usarás y que son:
+    - **python-dotenv**: se usa para cargar la configuración desde un archivo de configuración de la aplicación.
+    - **azure-identity**: se usa para autenticarse con las credencias de Entra ID.
+    - **azure-ai-projects**: se usa para trabajar con un proyecto de Fundición de IA de Azure.
+    - **azure-ai-inference**: se usa para chatear con un modelo de IA generativa.
+
+    ```
+   pip install python-dotenv azure-identity azure-ai-projects azure-ai-inference
+    ```
+
+1. Escribe el siguiente comando para editar el archivo de configuración de Python **.env** que se ha proporcionado:
+
+    ```
+   code .env
+    ```
+
+    El archivo se abre en un editor de código.
+
+1. En el archivo de código, reemplaza el marcador de posición **your_project_endpoint** por la cadena de conexión del proyecto (copiado de la página **Información general** del proyecto en el Portal de la Fundición de IA de Azure) y el marcador de posición **your_model_deployment** por el nombre que asignaste a la implementación del modelo Phi-4.
+1. Después de reemplazar los marcadores de posición, usa el comando **CTRL+S** para guardar los cambios y, a continuación, usa el comando **CTRL+Q** para cerrar el editor de código mientras mantienes abierta la línea de comandos de Cloud Shell.
+
+### Escritura del código para conectarte al proyecto y chatear con el modelo
+
+> **Sugerencia**: al agregar código al archivo de código de Python, asegúrate de mantener la sangría correcta.
+
+1. Escribe el siguiente comando para editar el archivo de código de Python **chat-app.py** que se ha proporcionado:
+
+    ```
+   code chat-app.py
+    ```
+
+1. En el archivo de código, anota las instrucciones de **importación** existentes que se han agregado en la parte superior del archivo. A continuación, en el comentario **# Agregar referencia de proyectos de IA**, agrega el código siguiente para hacer referencia a la biblioteca de proyectos de Azure AI:
+
+    ```python
+   from azure.ai.projects import AIProjectClient
+    ```
+
+1. En la función **principal**, en el comentario **# Obtener valores de configuración**, ten en cuenta que el código carga los valores de nombre de implementación de la cadena de conexión del proyecto e implementación de modelo definidos en el archivo **.env**.
+1. En el comentario **# Inicializar el cliente de proyecto**, agrega el código siguiente para conectarte al proyecto de Fundición de IA de Azure mediante las credenciales de Azure con las que has iniciado sesión actualmente:
+
+    ```python
+   project = AIProjectClient.from_connection_string(
+        conn_str=project_connection,
+        credential=DefaultAzureCredential()
+        )
+    ```
+    
+1. En el comentario **# Obtener un cliente de chat**, agrega el código siguiente para crear un objeto de cliente para chatear con un modelo:
+
+    ```python
+   chat = project.inference.get_chat_completions_client()
+    ```
+
+1. Ten en cuenta que el código incluye un bucle para permitir que un usuario escriba una solicitud hasta que escriba "salir". A continuación, en la sección bucle, en el comentario **# Get a chat completion**, agrega el código siguiente para enviar la solicitud y recuperar la finalización del modelo:
+
+    ```python
+   response = chat.complete(
+        model=model_deployment,
+        messages=[
+            {"role": "system", "content": "You are a helpful AI assistant that answers questions."},
+            {"role": "user", "content": input_text},
+            ],
+        )
+   print(response.choices[0].message.content)
+    ```
+
+1. Usa el comando **CTRL+S** para guardar los cambios en el archivo de código y, a continuación, usa el comando **CTRL+Q** para cerrar el editor de código mientras mantienes abierta la línea de comandos de Cloud Shell.
+
+### Ejecución de la aplicación de chat
+
+1. En el panel de línea de comandos de Cloud Shell, escribe el siguiente comando para ejecutar el código Python:
+
+    ```
+   python chat-app.py
+    ```
+
+1. Cuando se te solicite, escribe una pregunta, como `What is the fastest animal on Earth?` y revisa la respuesta del modelo de IA generativa.
+1. Prueba algunas preguntas más. Cuando hayas terminado, presiona `quit` para salir del programa.
+
+## Resumen
+
+En este ejercicio, has usado el SDK de la Fundición de IA de Azure para crear una aplicación cliente para un modelo de IA generativa que implementaste en un proyecto de Fundición de IA de Azure.
+
+## Limpieza
+
+Si has terminado de explorar el Portal de la Fundición de IA de Azure, deberías eliminar los recursos que has creado en este ejercicio para evitar incurrir en costes innecesarios de Azure.
+
+1. Vuelve a la pestaña del explorador que contiene Azure Portal (o vuelve a abrir [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` en una nueva pestaña del explorador) y mira el contenido del grupo de recursos donde implementó los recursos usados en este ejercicio.
+1. Selecciona **Eliminar grupo de recursos** en la barra de herramientas.
+1. Escribe el nombre del grupo de recursos y confirma que deseas eliminarlo.
