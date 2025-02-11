@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Uso del flujo de solicitudes para el reconocimiento de entidades con nombre (NER) en el portal de Azure AI Foundry
+  title: Uso del flujo de avisos para el Reconocimiento de entidades con nombre (NER)
+  description: 'La IA generativa no solo es para las aplicaciones de chat: aprende a usar el flujo de avisos en un escenario de análisis de texto en el que se deben extraer entidades con nombre del texto.'
 ---
 
-# Uso del flujo de solicitudes para el reconocimiento de entidades con nombre (NER) en el portal de Azure AI Foundry
+# Uso del flujo de avisos para el Reconocimiento de entidades con nombre (NER)
 
 La extracción de información valiosa del texto se conoce como Reconocimiento de entidades con nombre (NER). Las entidades son palabras clave que te interesan en un texto determinado.
 
@@ -11,19 +12,19 @@ La extracción de información valiosa del texto se conoce como Reconocimiento d
 
 Los modelos de lenguaje grande (LLM) se pueden usar para realizar NER. Para crear una aplicación que tome un texto como entidades de entrada y salida, puedes crear un flujo que use un nodo LLM con flujo de solicitud.
 
-En este ejercicio, usarás el flujo de solicitudes del portal de Azure AI Foundry para crear una aplicación LLM que espera un tipo de entidad y texto como entrada. Llama a un modelo GPT de Azure OpenAI a través de un nodo LLM para extraer la entidad necesaria del texto especificado, limpia el resultado y genera las entidades extraídas.
+En este ejercicio, usarás el flujo de solicitudes del Portal de la Fundición de IA de Azure para crear una aplicación LLM que espera un tipo de entidad y texto como entrada. Llama a un modelo GPT de Azure OpenAI a través de un nodo LLM para extraer la entidad necesaria del texto especificado, limpia el resultado y genera las entidades extraídas.
 
 ![Información general del ejercicio](./media/get-started-lab.png)
 
-En primer lugar, debes crear un proyecto en Azure AI Foundry para crear los recursos de Azure necesarios. A continuación, puedes implementar un modelo GPT con el servicio Azure OpenAI. Una vez que tengas los recursos necesarios, puedes crear el flujo. Por último, ejecutarás el flujo para probarlo y ver la salida de ejemplo.
+En primer lugar, debes crear un proyecto en el Portal de la Fundición de IA de Azure para crear los recursos de Azure necesarios. A continuación, puedes implementar un modelo GPT con el servicio Azure OpenAI. Una vez que tengas los recursos necesarios, puedes crear el flujo. Por último, ejecutarás el flujo para probarlo y ver la salida de ejemplo.
 
-## Creación de un proyecto en el portal de Azure AI Foundry
+## Creación de un proyecto en el Portal de la Fundición de IA de Azure
 
-Para empezar, crea un proyecto del portal de Azure AI Foundry y una instancia del Centro de Azure AI para admitirlo.
+Para empezar, crea un proyecto del Portal de la Fundición de IA de Azure y una instancia del Centro de Azure AI para admitirlo.
 
 1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
 1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente **Crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
+1. En el Asistente para **crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
 
     - **Nombre del proyecto**: *un nombre exclusivo para el proyecto*
     - **Concentrador**: *crear un centro con la siguiente configuración:*
@@ -41,7 +42,7 @@ Para empezar, crea un proyecto del portal de Azure AI Foundry y una instancia de
 
 ## Implementación de un modelo GPT
 
-Para usar un modelo LLM en el flujo de solicitud, primero debes implementar un modelo. El portal de Azure AI Foundry permite implementar modelos de OpenAI que puedes usar en los flujos.
+Para usar un modelo LLM en el flujo de solicitud, primero debes implementar un modelo. El Portal de la Fundición de IA de Azure permite implementar modelos de OpenAI que puedes usar en los flujos.
 
 1. En el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
 1. Crea una nueva implementación del modelo **gpt-35-turbo** con la siguiente configuración mediante la selección de **Personalizar** en los detalles de la implementación:
@@ -54,9 +55,9 @@ Para usar un modelo LLM en el flujo de solicitud, primero debes implementar un m
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
    
-Ahora que has implementado tu modelo de lenguaje, puedes crear un flujo en el portal de Azure AI Foundry que llame al modelo implementado.
+Ahora que has implementado tu modelo de lenguaje, puedes crear un flujo en el Portal de la Fundición de IA de Azure que llame al modelo implementado.
 
-## Creación y ejecución de un flujo en el portal de Azure AI Foundry
+## Creación y ejecución de un flujo en el Portal de la Fundición de IA de Azure
 
 Ahora que tiene todos los recursos necesarios aprovisionados, puede crear un flujo.
 

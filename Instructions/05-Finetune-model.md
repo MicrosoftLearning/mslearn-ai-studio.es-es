@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Ajuste de un modelo de lenguaje para la finalización del chat de Azure AI Foundry
+  title: Ajuste de un modelo de lenguaje
+  description: Obtén información sobre cómo usar tus propios datos de entrenamiento adicionales para ajustar un modelo y personalizar su comportamiento.
 ---
 
-# Ajuste de un modelo de lenguaje para la finalización del chat de Azure AI Foundry
+# Ajuste de un modelo de lenguaje
 
 Cuando desees que un modelo de lenguaje se comporte de una manera determinada, puedes usar la ingeniería de avisos para definir el comportamiento deseado. Cuando quieras mejorar la coherencia del comportamiento deseado, puedes optar por ajustar un modelo, comparándolo con el enfoque de ingeniería de petición para evaluar qué método se adapta mejor a tus necesidades.
 
@@ -19,7 +20,7 @@ Para empezar, crea un proyecto de Azure AI Foundry en un concentrador de Azure A
 
 1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
 1. En la página principal, selecciona **+ Crear un recurso**.
-1. En el asistente para **Crear un nuevo proyecto**, crea un proyecto con la siguiente configuración:
+1. En el Asistente para **crear un nuevo proyecto**, crea un proyecto con la siguiente configuración:
     - **Nombre del proyecto**: *un nombre exclusivo para el proyecto*
     - Selecciona **Personalizar**
         - **Hub**: *se autorellena con el nombre predeterminado*

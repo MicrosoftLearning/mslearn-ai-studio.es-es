@@ -1,13 +1,14 @@
 ---
 lab:
-  title: 'Explora, implementa y chatea con modelos de lenguaje de Azure AI Foundry'
+  title: Elección e implementación de un modelo de lenguaje
+  description: Las aplicaciones de IA generativa se basan en uno o varios modelos de lenguaje. Obtén información sobre cómo buscar y seleccionar los modelos adecuados para el proyecto de IA generativa.
 ---
 
-# Explora, implementa y chatea con modelos de lenguaje de Azure AI Foundry
+# Elección e implementación de un modelo de lenguaje
 
-El catálogo de modelos de Azure AI Foundry se usa como repositorio central donde puedes explorar y usar diversos modelos, lo que facilita la creación de tu escenario de IA generativa.
+El catálogo de modelos de Fundición de IA de Azure se usa como repositorio central donde puedes explorar y usar diversos modelos, lo que facilita la creación de tu escenario de IA generativa.
 
-En este ejercicio, explorarás el catálogo de modelos del portal de Azure AI Foundry.
+En este ejercicio, explorarás el catálogo de modelos del Portal de la Fundición de Azure.
 
 Este ejercicio dura aproximadamente **25** minutos.
 
@@ -15,12 +16,12 @@ Este ejercicio dura aproximadamente **25** minutos.
 
 Un centro de Azure AI proporciona un área de trabajo de colaboración en la que puedes definir uno o varios *proyectos*. Vamos a crear un proyecto y un centro de Azure AI.
 
-1. En un explorador web, abre el [portal de Azure AI Foundry](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure.
+1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure.
 
-1. En la página principal, selecciona **+Crear proyecto**. En el asistente **Crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
+1. En la página principal, selecciona **+Crear proyecto**. En el Asistente para **crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
 
     - **Nombre del centro**: *un nombre único*
-    - **Suscripción**: *suscripción de Azure*
+    - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *un nuevo grupo de recursos*
     - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
     - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
@@ -33,16 +34,16 @@ Un centro de Azure AI proporciona un área de trabajo de colaboración en la qu
    
     Una vez creados el centro y el proyecto de Azure AI, debería tener un aspecto similar al de la siguiente imagen:
 
-    ![Captura de pantalla de los detalles de un centro de Azure AI en el portal de Azure AI Foundry.](./media/azure-ai-resource.png)
+    ![Captura de pantalla de los detalles de un centro de Azure AI en el Portal de la Fundición de IA de Azure.](./media/azure-ai-resource.png)
 
-1. Abre una nueva pestaña del explorador (dejando abierta la pestaña del portal de Azure AI Foundry) y ve a Azure Portal en [https://portal.azure.com](https://portal.azure.com?azure-portal=true), inicia sesión con tus credenciales de Azure si se te solicita.
+1. Abre una nueva pestaña del explorador (dejando abierta la pestaña del Portal de la Fundición de IA de Azure) y ve a Azure Portal en [https://portal.azure.com](https://portal.azure.com?azure-portal=true), inicia sesión con tus credenciales de Azure si se te solicita.
 1. Ve al grupo de recursos en el que creaste el centro de Azure AI y mira los recursos de Azure que se han creado.
 
     ![Captura de pantalla de un centro de Azure AI y recursos relacionados en Azure Portal.](./media/azure-portal.png)
 
-1. Vuelva a la pestaña del explorador del portal de Azure AI Foundry.
-1. Mira cada una de las páginas del panel en el lado izquierdo de la página del centro de Azure AI y anota los artefactos que puedes crear y administrar. En la página **Centro de administración**, puedes seleccionar **Recursos conectados**, ya sea en tu centro o en tu proyecto, y observar que ya se han creado conexiones a los servicios de Azure OpenAI e IA.
-1. Si estás en la página Centro de administración, selecciona **Ir al proyecto**.
+1. Vuelve a la pestaña del explorador del Portal de la Fundición de IA de Azure.
+1. Mira cada una de las páginas del panel en el lado izquierdo de la página del centro de Azure AI y anota los artefactos que puedes crear y administrar. En la página **Centro de gestión**, puedes seleccionar **Recursos conectados**, ya sea en tu centro o en tu proyecto, y observar que ya se han creado conexiones a los servicios de Azure OpenAI e IA.
+1. Si estás en la página Centro de gestión, selecciona **Ir al proyecto**.
 
 ## Elige un modelo mediante pruebas comparativas de modelos
 

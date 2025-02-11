@@ -1,24 +1,25 @@
 ---
 lab:
-  title: Creación de copilotos personalizados con el flujo de solicitudes del portal de Azure AI Foundry
+  title: Uso de un flujo de avisos para administrar la conversación en una aplicación de chat
+  description: Obtén información sobre cómo usar los flujos de avisos para administrar diálogos conversacionales y asegurarte de que las indicaciones se construyen y orquestan para obtener los mejores resultados.
 ---
 
-# Creación de copilotos personalizados con el flujo de solicitudes del portal de Azure AI Foundry
+# Uso de un flujo de avisos para administrar la conversación en una aplicación de chat
 
-En este ejercicio, usarás el flujo de solicitudes del portal de Azure AI Foundry para crear un copiloto personalizado que use una solicitud de usuario y el historial de chat como entradas, y use un modelo GPT de Azure OpenAI para generar una salida.
+En este ejercicio, usarás el flujo de avisos del Portal de la Fundición de IA de Azure para crear una aplicación de chat personalizada que use una indicación de usuario y el historial de chat como entradas, y use un modelo GPT de Azure OpenAI para generar una salida.
 
 Este ejercicio dura aproximadamente **30** minutos.
 
-## Creación de un centro de IA en el portal de Azure AI Foundry
+## Creación de un centro de IA en el Portal de la Fundición de IA de Azure
 
-Para empezar, crea un proyecto de Azure AI Foundry en un concentrador de Azure AI:
+Para empezar, crea un proyecto de Portal de la Fundición de IA de Azure en un concentrador de Azure AI:
 
 1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
 1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente **Crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
+1. En el Asistente para **crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
 
     - **Nombre del centro**: *un nombre único*
-    - **Suscripción**: *suscripción de Azure*
+    - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *un nuevo grupo de recursos*
     - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
     - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
@@ -31,7 +32,7 @@ Para empezar, crea un proyecto de Azure AI Foundry en un concentrador de Azure A
 
 ## Implementación de un modelo GPT
 
-Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar un modelo. El portal de Azure AI Foundry permite implementar modelos de OpenAI que puedes usar en los flujos.
+Para usar un modelo de lenguaje en el flujo de avisos, primero debes implementar un modelo. El Portal de la Fundición de IA de Azure permite implementar modelos de OpenAI que puedes usar en los flujos.
 
 1. En el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
 1. Cree una nueva implementación del modelo de **gpt-35-turbo** con la siguiente configuración:
@@ -43,12 +44,12 @@ Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar 
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
 
-    > **Nota**: Si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
+    > **Nota**: si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
 
-1. Espere a que se implemente el modelo. Cuando la implementación esté lista, seleccione **Abrir en el área de juegos**.
-1. En la ventana de chat, escriba la consulta `What can you do?`.
+1. Espera a que se implemente el modelo. Cuando la implementación esté lista, selecciona **Abrir en el área de juegos**.
+1. En la ventana de chat, escribe la consulta `What can you do?`.
 
-    Tenga en cuenta que la respuesta es genérica porque no hay instrucciones específicas para el asistente. Para que se centre en una tarea, puede cambiar el símbolo del sistema.
+    Ten en cuenta que la respuesta es genérica porque no hay instrucciones específicas para el asistente. Para que se centre en una tarea, puedes cambiar el aviso del sistema.
 
 1. Cambia el mensaje **Dar instrucciones y contexto al modelo** a lo siguiente:
 
@@ -70,14 +71,14 @@ Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar 
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Seleccione **Aplicar cambios**.
-1. En la ventana de chat, escriba la misma consulta que antes: `What can you do?` Observe el cambio en respuesta.
+1. Selecciona **Aplicar cambios**.
+1. En la ventana de chat, escribe la misma consulta que antes: `What can you do?` Observa el cambio en respuesta.
 
-Ahora que ha jugado con el mensaje del sistema para el modelo GPT implementado, puede personalizar aún más la aplicación trabajando con el flujo de avisos.
+Ahora que has jugado con el mensaje del sistema para el modelo GPT implementado, puedes personalizar aún más la aplicación trabajando con el flujo de avisos.
 
-## Creación y ejecución de un flujo de chat en el portal de Azure AI Foundry
+## Creación y ejecución de un flujo de chat en el Portal de la Fundición de IA de Azure
 
-Puede crear un flujo a partir de una plantilla o crear un flujo en función de las configuraciones del área de juegos. Puesto que ya estaba experimentando en el área de juegos, usará esta opción para crear un nuevo flujo.
+Puedes crear un flujo a partir de una plantilla o crear un flujo en función de las configuraciones del área de juegos. Puesto que ya estabas experimentando en el área de juegos, usarás esta opción para crear un nuevo flujo.
 
 <details>  
     <summary><b>Sugerencia de solución de problemas: error de permisos</b></summary>

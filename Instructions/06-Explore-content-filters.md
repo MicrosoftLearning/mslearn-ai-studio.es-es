@@ -1,28 +1,29 @@
 ---
 lab:
-  title: Exploración de filtros de contenido para evitar la salida de contenido dañino en Azure AI Foundry
+  title: Aplicación de filtros de contenido para evitar la salida de contenido dañino
+  description: Obtén información sobre cómo aplicar filtros de contenido que mitiguen las salidas potencialmente ofensivas o dañinas en la aplicación de IA generativa.
 ---
 
-# Exploración de filtros de contenido para evitar la salida de contenido dañino en Azure AI Foundry
+# Aplicación de filtros de contenido para evitar la salida de contenido dañino
 
-Azure AI Foundry incluye filtros de contenido predeterminados para ayudar a garantizar que las solicitudes y finalizaciones potencialmente perjudiciales se identifiquen y quiten de las interacciones con el servicio. Además, puedes solicitar permiso para definir filtros de contenido personalizados para tus necesidades específicas para asegurarte de que las implementaciones del modelo aplican los principios de IA responsables adecuados para tu escenario de IA generativa. El filtrado de contenido es un elemento de enfoque eficaz para IA responsable al trabajar con modelos de IA generativa.
+Fundición de IA de Azure incluye filtros de contenido predeterminados para ayudar a garantizar que las solicitudes y finalizaciones potencialmente perjudiciales se identifiquen y quiten de las interacciones con el servicio. Además, puedes solicitar permiso para definir filtros de contenido personalizados para tus necesidades específicas para asegurarte de que las implementaciones del modelo aplican los principios de IA responsables adecuados para tu escenario de IA generativa. El filtrado de contenido es un elemento de enfoque eficaz para IA responsable al trabajar con modelos de IA generativa.
 
-En este ejercicio, explorarás el efecto de los filtros de contenido predeterminados en Azure AI Foundry.
+En este ejercicio, explorarás el efecto de los filtros de contenido predeterminados en Fundición de IA de Azure.
 
 Este ejercicio dura aproximadamente **25** minutos.
 
-## Creación de un centro de IA en el portal de Azure AI Foundry
+## Creación de un centro de IA en el Portal de la Fundición de IA de Azure
 
-Para empezar, crea un proyecto de Azure AI Foundry en un concentrador de Azure AI:
+Para empezar, crea un proyecto de Fundición de IA de Azure en un centro de Azure AI:
 
 1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
 1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente **Crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
+1. En el Asistente para **crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
 
     - **Nombre del centro**: *un nombre único*
-    - **Suscripción**: *suscripción de Azure*
+    - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *un nuevo grupo de recursos*
-    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Ubicación**: selecciona **Ayúdame a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
     - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
     - **Conectar Búsqueda de Azure AI**: omitir la conexión
 
@@ -33,20 +34,20 @@ Para empezar, crea un proyecto de Azure AI Foundry en un concentrador de Azure A
 
 ## Implementación de un modelo
 
-Ahora estás listo para implementar un modelo y usarlo a través del portal de **Azure AI Foundry**. Una vez implementado, usará el modelo para generar contenido de lenguaje natural.
+Ahora estás listo para implementar un modelo y usarlo a través del **Portal de la Fundición de IA de Azure**. Una vez implementado, usarás el modelo para generar contenido de lenguaje natural.
 
-1. En el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
+1. En el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
 1. Crea una nueva implementación del modelo **gpt-35-turbo** con la siguiente configuración mediante la selección de **Personalizar** en el asistente para Implementar modelo:
    
-    - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
+    - **Nombre de implementación**: *un nombre único para la implementación de modelo*
     - **Tipo de implementación**: estándar
-    - **Versión del modelo**: *Selecciona la versión predeterminada*
+    - **Versión del modelo**: *selecciona la versión predeterminada*
     - **Recurso de IA**: *selecciona el recurso creado anteriormente*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
       
-> **Nota**: Cada modelo de Inteligencia artificial de Azure AI Foundry está optimizado para lograr un equilibrio diferente de funcionalidad y rendimiento. Usaremos el modelo de **GPT 3.5 Turbo** en este ejercicio, que es altamente capaz de la generación de lenguaje natural y escenarios de chat.
+> **Nota**: cada modelo de Fundición de IA de Azure está optimizado para lograr un equilibrio diferente de funcionalidad y rendimiento. Usaremos el modelo de **GPT 3.5 Turbo** en este ejercicio, que es altamente capaz de la generación de lenguaje natural y escenarios de chat.
 
 ## Exploración de filtros de contenido
 
@@ -55,16 +56,16 @@ Los filtros de contenido se aplican a solicitudes y finalizaciones para evitar q
 1. En **Evaluar y mejorar** de la barra de navegación izquierda, selecciona **Seguridad + protección** y después, en la pestaña **Filtros de contenido**, selecciona **+ Crear filtro de contenido**.
 
 1. En la pestaña **Información básica**, proporcione la siguiente información: 
-    - **Nombre**: *Un nombre único para el filtro de contenido*
-    - **Conexión**: *Su conexión de Azure OpenAI*
+    - **Nombre**: *un nombre único para el filtro de contenido*
+    - **Conexión**: *tu conexión de Azure OpenAI*
 
-1. Seleccione **Siguiente**.
+1. Selecciona **Siguiente**.
 
-1. En la pestaña **Filtro de entrada**, revise la configuración predeterminada de un filtro de contenido.
+1. En la pestaña **Filtro de entrada**, revisa la configuración predeterminada de un filtro de contenido.
 
     Los filtros de contenido se basan en restricciones para cuatro categorías de contenido potencialmente dañino:
 
-    - **Odio**: Lenguaje que expresa declaraciones peyorativas o discriminatorias.
+    - **Odio**: lenguaje que expresa declaraciones peyorativas o discriminatorias.
     - **Sexual**: Lenguaje sexualmente explícito o abusivo.
     - **Violencia**: Lenguaje que describe, defiende o glorifica la violencia.
     - **Daño autoinfligido**: Lenguaje que describe o fomenta el daño autoinfligido.

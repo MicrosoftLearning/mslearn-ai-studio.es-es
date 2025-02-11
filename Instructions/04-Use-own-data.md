@@ -1,6 +1,7 @@
 ---
 lab:
   title: Creación de una aplicación de IA generativa que use tus propios datos
+  description: Obtén información sobre cómo usar el modelo de generación aumentada de recuperación (RAG) para crear una aplicación de chat que solicite el uso de tus propios datos.
 ---
 
 # Creación de una aplicación de IA generativa que use tus propios datos
@@ -13,15 +14,15 @@ Este ejercicio dura aproximadamente **45** minutos.
 
 ## Creación de un recurso de Búsqueda de Azure AI
 
-Tu solución de aplicación de IA generativa integrará datos personalizados en un flujo de avisos. Para admitir esta integración, necesitará un recurso de Azure AI Search con el que indexar los datos.
+Tu solución de aplicación de IA generativa integrará datos personalizados en un flujo de avisos. Para admitir esta integración, necesitarás un recurso de Búsqueda de Azure AI con el que indexar los datos.
 
-1. En un explorador web, abra [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicie sesión con sus credenciales de Azure.
-1. En la página principal, seleccione **+ Crear un recurso** y busque `Azure AI Search`. A continuación, cree un nuevo recurso de Azure AI Search con la siguiente configuración:
+1. En un explorador web, abre [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicia sesión con tus credenciales de Azure.
+1. En la página principal, selecciona **+ Crear un recurso** y busca `Azure AI Search`. A continuación, crea un nuevo recurso de Búsqueda de Azure AI con la siguiente configuración:
 
-    - **Suscripción**: *Seleccione la suscripción de Azure*
-    - **Grupo de recursos**: *seleccione o cree un grupo de recursos*
-    - **Nombre del servicio**: *Escriba un nombre de servicio único*
-    - **Ubicación**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
+    - **Suscripción**: *selecciona la suscripción a Azure*
+    - **Grupo de recursos**: *selecciona o crea un grupo de recursos*
+    - **Nombre del servicio**: *escribe un nombre de servicio único*
+    - **Ubicación**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
         - Este de Australia
         - Este de Canadá
         - Este de EE. UU.
@@ -33,20 +34,20 @@ Tu solución de aplicación de IA generativa integrará datos personalizados en 
         - Suiza 
     - **Plan de tarifa**: estándar
 
-    > \* Más adelante, va a crear un centro de Azure AI (que incluye una instancia de Azure OpenAI Service) en la misma región que el recurso de Búsqueda de Azure AI. Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro centro de Azure AI en otra región.
+    > \* Más adelante, vas a crear un centro de Azure AI (que incluye una instancia de Azure OpenAI Service) en la misma región que el recurso de Búsqueda de Azure AI. Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro centro de Azure AI en otra región.
 
-1. Espere a que se complete la implementación de recursos de Azure AI Search.
+1. Espera a que se complete la implementación de recursos de Búsqueda de Azure AI.
 
-## Crear un proyecto de Azure AI
+## Creación de un proyecto de Azure AI
 
-Ahora estás listo para crear un proyecto de Azure AI Foundry y los recursos de Azure AI compatibles.
+Ahora estás listo para crear un proyecto de Fundición de IA de Azure y los recursos de Azure AI compatibles.
 
-1. En un explorador web, abre el [portal de Azure AI Foundry](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure.
+1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure.
 1. En la página principal, selecciona **+Crear proyecto**.
 1. En el asistente **Crear un proyecto** podrás ver todos los recursos de Azure que se crearán automáticamente con tu proyecto. Selecciona **Personalizar** y conéctate a tu recurso de Azure AI Search:
 
     - **Nombre del centro**: *un nombre único*
-    - **Suscripción de Azure**: *suscripción de Azure*
+    - **Suscripción de Azure**: *suscripción a Azure*
     - **Grupo de recursos**: *seleccione el grupo de recursos que contiene el recurso Búsqueda de Azure AI*.
     - **Ubicación**: *la misma ubicación que el recurso de Búsqueda de Azure AI*
     - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
@@ -57,7 +58,7 @@ Ahora estás listo para crear un proyecto de Azure AI Foundry y los recursos de 
    
 ## Implementación de modelos
 
-Necesita dos modelos para implementar la solución:
+Necesitas dos modelos para implementar la solución:
 
 - Un modelo de *inserción* para vectorizar datos de texto para una indexación y procesamiento eficaces.
 - Modelo que puede generar respuestas de lenguaje natural a preguntas a partir de sus datos.
@@ -72,7 +73,9 @@ Necesita dos modelos para implementar la solución:
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
-      
+
+    > **Nota**: Si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
+
 1. Repite los pasos anteriores para implementar un modelo de **gpt-35-turbo-16k** con el nombre de implementación `gpt-35-turbo-16k`.
 
     > **Nota**: reducir los tokens por minuto (TPM) ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
