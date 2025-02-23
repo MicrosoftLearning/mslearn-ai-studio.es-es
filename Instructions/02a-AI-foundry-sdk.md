@@ -14,7 +14,7 @@ Este ejercicio dura aproximadamente **30** minutos.
 
 Comencemos creando un proyecto de Fundición de IA de Azure.
 
-1. En un explorador web, abre el [portal de Azure AI Foundry](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen:
+1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen:
 
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
@@ -33,7 +33,7 @@ Comencemos creando un proyecto de Fundición de IA de Azure.
         - Oeste de EE. UU.
         - Oeste de EE. UU. 3
     - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de AI Services con un nombre adecuado (como `my-ai-services`) o usa uno existente.*
-    - **Conectar Búsqueda de Azure AI**: omitir la conexión
+    - **Conectar Búsqueda de Azure AI**: omite la conexión
 
     > \* Las cuotas de modelos están restringidas a nivel de inquilino por cuotas regionales. Elegir una región aleatoria ayuda a distribuir la disponibilidad de cuota cuando varios usuarios trabajan en el mismo inquilino. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
@@ -44,10 +44,10 @@ Comencemos creando un proyecto de Fundición de IA de Azure.
 
 ## Implementación de un modelo de IA generativa
 
-Ahora estás listo para implementar un modelo de lenguaje de IA generativa para admitir la aplicación de chat. En este ejemplo, usarás el modelo Microsoft Phi-4; pero los principios son los mismos para cualquier modelo.
+Ahora ya puedes implementar un modelo de lenguaje de IA generativa compatible con tu aplicación de chat. En este ejemplo, usarás el modelo Microsoft Phi-4; pero los principios son los mismos para cualquier modelo.
 
 1. En la barra de herramientas de la parte superior derecha de la página del proyecto de Fundición de IA de Azure, usa el icono **Características de versión preliminar** para habilitar la característica **Implementar modelos en el servicio de inferencia de modelos de Azure AI**. Esta característica garantiza que la implementación del modelo esté disponible para el servicio de inferencia de Azure AI, que usarás en el código de aplicación.
-1. En el panel de la izquierda de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
+1. En el panel de la izquierda de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
 1. En la página **Modelos y puntos de conexión**, en la pestaña **Implementaciones de modelos**, en el menú **+ Implementar modelo**, selecciona **Implementar modelo base**.
 1. Busca el modelo **Phi-4** en la lista y, a continuación, selecciónalo y confírmalo.
 1. Acepta el contrato de licencia si se te solicita y, a continuación, implementa el modelo con la siguiente configuración seleccionando **Personalizar** en los detalles de implementación:
