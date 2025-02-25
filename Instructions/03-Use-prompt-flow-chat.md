@@ -12,7 +12,7 @@ Este ejercicio dura aproximadamente **30** minutos.
 
 ## Creación de un centro de IA en el Portal de la Fundición de IA de Azure
 
-Para empezar, crea un proyecto de Portal de la Fundición de IA de Azure en un concentrador de Azure AI:
+Para empezar, crea un proyecto de Fundición de IA de Azure en un centro de Azure AI:
 
 1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
 1. En la página principal, selecciona **+Crear proyecto**.
@@ -21,11 +21,11 @@ Para empezar, crea un proyecto de Portal de la Fundición de IA de Azure en un c
     - **Nombre del centro**: *un nombre único*
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *un nuevo grupo de recursos*
-    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4** en la ventana Asistente de ubicación y usa la región recomendada\*
     - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
-    - **Conectar Búsqueda de Azure AI**: omitir la conexión
+    - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Si has seleccionado **Personalizar**, selecciona **Siguiente** y revisa tu configuración.
 1. Selecciona **Crear** y espera a que se complete el proceso.
@@ -35,10 +35,11 @@ Para empezar, crea un proyecto de Portal de la Fundición de IA de Azure en un c
 Para usar un modelo de lenguaje en el flujo de avisos, primero debes implementar un modelo. El Portal de la Fundición de IA de Azure permite implementar modelos de OpenAI que puedes usar en los flujos.
 
 1. En el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
-1. Cree una nueva implementación del modelo de **gpt-35-turbo** con la siguiente configuración:
-    - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
+1. Selecciona **+ Implementar modelo** e **Implementar modelo base**. 
+1. Crea una nueva implementación del modelo **gpt-4** con la siguiente configuración mediante la selección de **Personalizar** en los detalles de la implementación
+    - **Nombre de implementación**: *nombre único para la implementación de modelo*
     - **Tipo de implementación**: estándar
-    - **Versión del modelo**: *Selecciona la versión predeterminada*
+    - **Versión del modelo**: *selecciona la versión predeterminada*
     - **Recurso de IA**: *selecciona el recurso creado anteriormente*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: DefaultV2
@@ -107,7 +108,7 @@ Puedes crear un flujo a partir de una plantilla o crear un flujo en función de 
 
 1. En la sección nodo LLM, para **Conexión**, seleccione la conexión que se creó automáticamente al crear el centro de IA.
 1. Para **API**, seleccione **chat**.
-1. Para **deployment_name**, seleccione el modelo **gpt-35-turbo** que implementó.
+1. En **deployment_name**, selecciona el modelo **gpt-4** que has implementado.
 1. Para **response_format**, seleccione **{"type":"text"}**.
 1. Revise el campo de aviso y asegúrese de que tiene el siguiente aspecto:
 

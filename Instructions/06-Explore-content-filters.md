@@ -23,11 +23,11 @@ Para empezar, crea un proyecto de Fundición de IA de Azure en un centro de Azur
     - **Nombre del centro**: *un nombre único*
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *un nuevo grupo de recursos*
-    - **Ubicación**: selecciona **Ayúdame a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4** en la ventana Asistente de ubicación y usa la región recomendada\*
     - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
-    - **Conectar Búsqueda de Azure AI**: omitir la conexión
+    - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Si has seleccionado **Personalizar**, selecciona **Siguiente** y revisa tu configuración.
 1. Selecciona **Crear** y espera a que se complete el proceso.
@@ -37,9 +37,9 @@ Para empezar, crea un proyecto de Fundición de IA de Azure en un centro de Azur
 Ahora estás listo para implementar un modelo y usarlo a través del **Portal de la Fundición de IA de Azure**. Una vez implementado, usarás el modelo para generar contenido de lenguaje natural.
 
 1. En el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
-1. Crea una nueva implementación del modelo **gpt-35-turbo** con la siguiente configuración mediante la selección de **Personalizar** en el asistente para Implementar modelo:
+1. Crea una nueva implementación del modelo **gpt-4** con la siguiente configuración mediante la selección de **Personalizar** en el asistente para Implementar modelo:
    
-    - **Nombre de implementación**: *un nombre único para la implementación de modelo*
+    - **Nombre de implementación**: *nombre único para la implementación de modelo*
     - **Tipo de implementación**: estándar
     - **Versión del modelo**: *selecciona la versión predeterminada*
     - **Recurso de IA**: *selecciona el recurso creado anteriormente*
@@ -47,7 +47,7 @@ Ahora estás listo para implementar un modelo y usarlo a través del **Portal de
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
       
-> **Nota**: cada modelo de Fundición de IA de Azure está optimizado para lograr un equilibrio diferente de funcionalidad y rendimiento. Usaremos el modelo de **GPT 3.5 Turbo** en este ejercicio, que es altamente capaz de la generación de lenguaje natural y escenarios de chat.
+> **Nota**: cada modelo de Fundición de IA de Azure está optimizado para lograr un equilibrio diferente de funcionalidad y rendimiento. Usaremos el modelo **GPT-4** en este ejercicio, que es altamente capaz de generar lenguaje natural y escenarios de chat.
 
 ## Exploración de filtros de contenido
 
@@ -84,7 +84,7 @@ Los filtros de contenido se aplican a solicitudes y finalizaciones para evitar q
 
 1. Vuelve a la página **Modelos + puntos de conexión** y observa que tu implementación ahora hace referencia al filtro de contenido personalizado que has creado.
 
-    ![Captura de pantalla de la página de implantación en el portal de Azure AI Foundry.](./media/azure-ai-deployment.png)
+    ![Captura de pantalla de la página de implantación en el portal de Azure AI Foundry.](./media/model-gpt-4-custom-filter.png)
 
 ## Generación de una salida de lenguaje natural
 
