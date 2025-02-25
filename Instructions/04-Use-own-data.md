@@ -68,15 +68,15 @@ Necesitas dos modelos para implementar la solución:
 
     - **Nombre de implementación**:`text-embedding-ada-002`
     - **Tipo de implementación**: estándar
-    - **Versión del modelo**: *Selecciona la versión predeterminada*
+    - **Versión del modelo**: *selecciona la versión predeterminada*
     - **Recurso de IA**: *selecciona el recurso creado anteriormente*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
 
-    > **Nota**: Si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
+    > **Nota**: si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
 
-1. Repite los pasos anteriores para implementar un modelo de **gpt-35-turbo-16k** con el nombre de implementación `gpt-35-turbo-16k`.
+1. Repite los pasos anteriores para implementar un modelo de **gpt-4** con el nombre de implementación `gpt-4`.
 
     > **Nota**: reducir los tokens por minuto (TPM) ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
 
@@ -120,7 +120,7 @@ Ahora que has agregado un origen de datos al proyecto, puedes usarlo para crear 
 Antes de usar el índice en un flujo de avisos basado en RAG, vamos a comprobar que se puede usar para afectar a las respuestas de IA generativa.
 
 1. En el panel de navegación de la izquierda, selecciona la página **Área de juegos**.
-1. En la página Chat, en el panel Configuración, asegúrate de que la implementación de modelo **gpt-35-turbo-16k** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
+1. En la página Chat, en el panel Configuración, asegúrate de que la implementación de modelo **gpt-4** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
 1. Revisa la respuesta, que debe ser una respuesta genérica del modelo sin datos procedentes del índice.
 1. En el panel Configuración, expande el campo **Agregue sus datos** y después agrega el índice del proyecto **brochures-index** y selecciona el tipo de búsqueda **híbrido (vector + palabra clave)**.
 
@@ -177,7 +177,7 @@ Tu índice vectorial se ha guardado en tu proyecto de Azure AI Foundry, lo que t
 
     - **Conexión**: *El recurso predeterminado de Azure OpenAI para el centro de IA*
     - **Api**: chat
-    - **deployment_name**: gpt-35-turbo-16k
+    - **deployment_name**: gpt-4
     - **response_format**: {"type":"text"}
 
 1. Espera a que se inicie la sesión de proceso y, a continuación, en la sección **búsqueda**, establece los siguientes valores de parámetro:
@@ -201,9 +201,9 @@ Tu índice vectorial se ha guardado en tu proyecto de Azure AI Foundry, lo que t
 
 1. En la sección **chat_with_context**, seleccione la siguiente configuración (dejando las demás como están):
 
-    - **Conexión**: Default_AzureOpenAI
+    - **Conexión**: *El recurso predeterminado de Azure OpenAI para el centro de IA*
     - **API**: Chat
-    - **deployment_name**: gpt-35-turbo-16k
+    - **deployment_name**: gpt-4
     - **response_format**: {"type":"text"}
 
     A continuación, asegúrese de que las **entradas** de esta herramienta incluyan los parámetros siguientes:

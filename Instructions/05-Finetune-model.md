@@ -16,7 +16,7 @@ Este ejercicio dura aproximadamente **60** minutos.
 
 ## Creación de un centro de IA en el portal de Azure AI Foundry
 
-Para empezar, crea un proyecto de Azure AI Foundry en un concentrador de Azure AI:
+Para empezar, crea un proyecto de Fundición de IA de Azure en un centro de Azure AI:
 
 1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
 1. En la página principal, selecciona **+ Crear un recurso**.
@@ -28,23 +28,23 @@ Para empezar, crea un proyecto de Azure AI Foundry en un concentrador de Azure A
         - **Grupo de recursos**: (nuevo) *se autorrellena con el nombre de tu proyecto*
         - **Ubicación**: elige una de las siguientes regiones **Este de EE. UU. 2**, **Centro-norte de EE. UU.**, **Centro de Suecia**, **Oeste de Suiza**\*
         - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
-        - **Conectar Búsqueda de Azure AI**: omitir la conexión
+        - **Conectar Búsqueda de Azure AI**: omite la conexión
 
     > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre las [regiones de modelo de precisión](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#fine-tuning-models)
 
 1. Revisa la configuración y crea el proyecto.
 1. Espera a que se cree el proyecto.
 
-## Ajuste de un modelo GPT-3.5
+## Ajustar un modelo GPT-4
 
 Dado que el ajuste preciso de un modelo tarda algún tiempo en completarse, primero iniciarás el trabajo de ajuste preciso. Para poder ajustar un modelo, necesitas un conjunto de datos.
 
 1. Descarga el [conjunto de datos de entrenamiento](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl) en `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl`y guárdalo como un archivo JSONL localmente.
 
-    > **Nota**: Es posible que el dispositivo guarde el archivo de forma predeterminada como un archivo .txt. Selecciona todos los archivos y quita el sufijo .txt para asegurarte de que vas a guardar el archivo como JSONL.
+    > **Nota**: es posible que el dispositivo guarde el archivo de forma predeterminada como un archivo .txt. Selecciona todos los archivos y quita el sufijo .txt para asegurarte de que vas a guardar el archivo como JSONL.
 
 1. Ve a la página **Ajuste** de la sección **Crear y personalizar**, con el menú de la izquierda.
-1. Selecciona el botón para agregar un nuevo modelo de ajuste, selecciona el modelo `gpt-35-turbo`, selecciona **Siguiente** y después **Confirmar**.
+1. Selecciona el botón para agregar un nuevo modelo de ajuste, selecciona el modelo `gpt-4`, selecciona **Siguiente** y después **Confirmar**.
 1. **Ajusta** el modelo mediante la siguiente configuración:
     - **Versión del modelo**: *Selecciona la versión predeterminada*
     - **Sufijo del modelo**: `ft-travel`
@@ -72,16 +72,16 @@ Dado que el ajuste preciso de un modelo tarda algún tiempo en completarse, prim
 
 ## Chatear con un modelo base
 
-Mientras esperas a que se complete el trabajo de ajuste, vamos a chatear con un modelo GPT 3.5 base para evaluar cómo funciona.
+Mientras esperas a que se complete el trabajo de ajuste, vamos a chatear con un modelo GPT 4 base para evaluar cómo funciona.
 
 1. Ve a la página **Modelos + puntos de conexión** en la sección **Mis recursos**, mediante el menú de la izquierda.
 1. Selecciona el botón **+ Implementar modelo** y selecciona la opción **Implementar modelo base**.
-1. Implementa un modelo `gpt-35-turbo`, que es el mismo tipo de modelo que usaste al ajustar.
+1. Implementa un modelo `gpt-4`, que es el mismo tipo de modelo que usaste al ajustar.
 
-> **Nota**: Si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
+> **Nota**: si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
 
 1. Cuando la implementación esté lista, selecciona el botón **Abrir en el área de juegos**.
-1. Comprueba que el modelo base `gpt-35-model` implementado está seleccionado en el panel de configuración.
+1. Comprueba que el modelo base `gpt-4` implementado está seleccionado en el panel de configuración.
 1. En la ventana de chat, escribe una consulta como `What can you do?` y analiza la respuesta:
     Las respuestas son muy genéricas. Recuerda que queremos crear una aplicación de chat que inspire a las personas a viajar.
 1. Actualiza el mensaje del sistema en el panel de configuración con la siguiente solicitud:
