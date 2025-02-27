@@ -20,22 +20,22 @@ Se empieza creando un proyecto de Fundición de IA de Azure dentro de un centro 
     - **Nombre del centro**: *un nombre único*
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *un nuevo grupo de recursos*
-    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4** en la ventana Asistente de ubicación y usa la región recomendada\*
     - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
-    - **Conectar Búsqueda de Azure AI**: omitir la conexión
+    - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Selecciona **Siguiente** y revisa tu configuración.
 1. Selecciona **Crear un proyecto** y espera a que se complete el proceso.
 
 ## Implementación de un modelo GPT
 
-Para usar un modelo de lenguaje en el flujo de avisos, primero debe implementar un modelo. El Portal de la Fundición de IA de Azure permite implementar modelos de OpenAI que puedes usar en los flujos.
+Para usar un modelo de lenguaje en el flujo de avisos, primero debes implementar un modelo. El Portal de la Fundición de IA de Azure permite implementar modelos de OpenAI que puedes usar en los flujos.
 
 1. Ve a la página **Modelos + puntos de conexión** en la sección **Mis recursos**, mediante el menú de la izquierda.
 1. Selecciona el botón **+ Implementar modelo** y selecciona la opción **Implementar modelo base**.
-1. Crea una nueva implementación del modelo **gpt-35-turbo** con la siguiente configuración mediante la selección de **Personalizar** en el asistente para **Implementar modelo**:
+1. Crea una nueva implementación del modelo **gpt-4** con la siguiente configuración mediante la selección de **Personalizar** en el asistente para **Implementar modelo**:
     - **Nombre de implementación**: *nombre único para la implementación de modelo*
     - **Tipo de implementación**: estándar
     - **Versión del modelo**: *selecciona la versión predeterminada*
@@ -148,7 +148,7 @@ Para ahorrar tiempo, hemos creado un conjunto de datos de salida por lotes para 
     - Selecciona **Siguiente**.
     - **Seleccionar métricas**: coherencia, fluidez
     - **Conexión**: *tu conexión de Servicios de IA*
-    - **Nombre y modelo de la implementación**: *el modelo de GPT-3.5 implementado*
+    - **Nombre de implementación/modelo**: *tu modelo GPT-4 implementado*
     - **consulta**: selecciona la **consulta** como el origen de datos
     - **respuesta**: selecciona **respuesta** como el origen de datos
       
