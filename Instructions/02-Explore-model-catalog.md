@@ -8,7 +8,7 @@ lab:
 
 El catálogo de modelos de Fundición de IA de Azure se usa como repositorio central donde puedes explorar y usar diversos modelos, lo que facilita la creación de tu escenario de IA generativa.
 
-En este ejercicio, explorarás el catálogo de modelos del Portal de la Fundición de Azure.
+En este ejercicio, explorarás el catálogo de modelos en el Portal de la Fundición de IA de Azure y compararás los modelos potenciales de una aplicación de IA generativa que ayuda a resolver problemas.
 
 Este ejercicio dura aproximadamente **25** minutos.
 
@@ -18,119 +18,168 @@ Un centro de Azure AI proporciona un área de trabajo de colaboración en la qu
 
 1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure.
 
-1. En la página principal, selecciona **+Crear proyecto**. En el Asistente para **crear un proyecto** puedes ver todos los recursos de Azure que se crearán automáticamente con tu proyecto, o puedes personalizar la siguiente configuración al seleccionar **Personalizar** antes de seleccionar **Crear**:
-
-    - **Nombre del centro**: *un nombre único*
+1. En la página principal, selecciona **+Crear proyecto**.
+1. En el Asistente para **crear un proyecto**, escribe un nombre de proyecto adecuado (como `my-ai-project`) y revisa los recursos de Azure que se crearán automáticamente para admitir el proyecto.
+1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
+    - **Nombre del centro**: *un nombre único; por ejemplo, `my-ai-hub`*
     - **Suscripción**: *suscripción a Azure*
-    - **Grupo de recursos**: *un nuevo grupo de recursos*
-    - **Ubicación**: selecciona **Ayúdeme a elegir** y, a continuación, selecciona **gpt-35-turbo** en la ventana Asistente de ubicación y usa la región recomendada\*
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
-    - **Conectar Búsqueda de Azure AI**: omitir la conexión
+    - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único (como `my-ai-resources`) o selecciona uno existente*
+    - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de AI Services con un nombre adecuado (como `my-ai-services`) o usa uno existente.*
+    - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Las cuotas de modelos están restringidas a nivel de inquilino por cuotas regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Si has seleccionado **Personalizar**, selecciona **Siguiente** y revisa tu configuración.
-1. Selecciona **Crear** y espera a que se complete el proceso.
-   
-    Una vez creados el centro y el proyecto de Azure AI, debería tener un aspecto similar al de la siguiente imagen:
+1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
+1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
 
-    ![Captura de pantalla de los detalles de un centro de Azure AI en el Portal de la Fundición de IA de Azure.](./media/azure-ai-resource.png)
+    ![Captura de pantalla de los detalles de un proyecto de Azure AI en el Portal de la Fundición de IA de Azure.](./media/ai-foundry-project.png)
 
-1. Abre una nueva pestaña del explorador (dejando abierta la pestaña del Portal de la Fundición de IA de Azure) y ve a Azure Portal en [https://portal.azure.com](https://portal.azure.com?azure-portal=true), inicia sesión con tus credenciales de Azure si se te solicita.
-1. Ve al grupo de recursos en el que creaste el centro de Azure AI y mira los recursos de Azure que se han creado.
+## Configuración de la implementación del servicio de inferencia de Azure AI
 
-    ![Captura de pantalla de un centro de Azure AI y recursos relacionados en Azure Portal.](./media/azure-portal.png)
+Hay varias opciones para implementar modelos en el Portal de la Fundición de IA de Azure. En este ejercicio, usarás la opción de implementación de **inferencia del modelo de Azure AI**, que admite modelos de *Azure OpenAI* y *Modelo como servicio* del catálogo de modelos de la Fundición de IA de Azure. Dado que todos los modelos se implementan en un punto de conexión común hospedado por el recurso de Servicios de Azure AI, es fácil cambiar entre modelos al probarlos para comparar el comportamiento y el rendimiento.
 
-1. Vuelve a la pestaña del explorador del Portal de la Fundición de IA de Azure.
-1. Mira cada una de las páginas del panel en el lado izquierdo de la página del centro de Azure AI y anota los artefactos que puedes crear y administrar. En la página **Centro de gestión**, puedes seleccionar **Recursos conectados**, ya sea en tu centro o en tu proyecto, y observar que ya se han creado conexiones a los servicios de Azure OpenAI e IA.
-1. Si estás en la página Centro de gestión, selecciona **Ir al proyecto**.
+1. En la barra de herramientas de la parte superior derecha de la página del proyecto de la Fundición de IA de Azure, usa el icono **Características de versión preliminar** para mostrar las características de versión preliminar.
+1. Activa la característica **Implementación de modelos en el servicio de inferencia del modelo de Azure AI**. A continuación, cierrs el panel **Características de versión preliminar**.
 
-## Elige un modelo mediante pruebas comparativas de modelos
+## Revisión de detalles y bancos de pruebas de modelos
 
-Antes de implementar un modelo, puedes explorar pruebas comparativas de modelos para decidir cuál se adapta mejor a tus necesidades.
+Para ayudarte a elegir un modelo, puedes explorar descripciones y bancos de pruebas de modelos para determinar qué modelo se adapta mejor a tus necesidades.
 
-Imagina que quieres crear un copiloto personalizado que actúe como asistente para viajes. En concreto, deseas que el copiloto ayude en consultas relacionadas con viajes, como requisitos de visas, previsiones meteorológicas, atracciones locales y normas culturales.
+1. En el portal del proyecto la Fundición de IA de Azure, en el panel de navegación de la izquierda, selecciona **Catálogo de modelo**.
+1. En la página principal del catálogo de modelos, busca `gpt-4` para encontrar el modelo de finalización de chat **gpt-4**.
 
-El copiloto tendrá que proporcionar información precisa y correcta, por lo que la base es importante. Además, quieres que las respuestas del copiloto sean fáciles de leer y entender. Por lo tanto, también quieres elegir un modelo que tenga tasas altas de fluidez y coherencia.
+    ![Captura de pantalla de una búsqueda de "gpt-4" en el catálogo de modelos.](./media/model-catalog-search-gpt4.png)
 
-1. En el portal de proyectos de Fundición de IA de Azure, ve a **Catálogo de modelo** mediante el menú de la izquierda.
-    En la página del catálogo, selecciona **Comparar con pruebas comparativas**. En la página Pruebas comparativas de modelos, encontrarás un gráfico ya trazado automáticamente que compara diferentes modelos.
-1. Selecciona **+ Modelo para comparar** y agrega **gpt-4-32k** y **gpt-4** al gráfico de métricas. En el menú desplegable **eje X**, en **Calidad**, selecciona las siguientes métricas y observa cada gráfico resultante antes de pasar al siguiente:
+1. Selecciona el modelo **gpt-4** para ver sus detalles. Lee la descripción y revisa la otra información disponible en la página.
+
+    ![Captura de pantalla de la página de detalles del modelo gpt-4.](./media/gpt4-details.png)
+
+1. En la página **gpt-4**, ve la pestaña **Bancos de pruebas** para ver cómo se compara el modelo entre algunos bancos de pruebas de rendimiento estándar con otros modelos que se usan en escenarios similares.
+
+    ![Captura de pantalla de la página de bancos de pruebas de modelos gpt-4.](./media/gpt4-benchmarks.png)
+
+1. Usa la flecha atrás (**&larr;**) junto al título de página **gpt-4** para volver a la página principal del catálogo de modelos.
+1. En el catálogo de modelos, busca `Phi-3.5-mini-instruct` y ve los detalles y los bancos de pruebas del modelo **Phi-3.5-mini-instruct**.
+
+## Comparación de modelos
+
+Has revisado dos modelos diferentes, ambos podrían usarse para implementar una aplicación de chat de IA generativa. Ahora vamos a comparar las métricas de estos dos modelos visualmente.
+
+1. Vuelve a la página principal del **catálogo de modelo**.
+1. Selecciona **Comparar modelos**. Se muestra un gráfico visual para la comparación de modelos con una selección de modelos comunes.
+
+    ![Captura de pantalla de la página de comparación de modelos.](./media/compare-models.png)
+
+1. En el panel **Modelos para comparar** de la izquierda, ten en cuenta que puedes seleccionar tareas populares, como *respuesta a preguntas* para seleccionar automáticamente modelos usados para tareas específicas.
+1. Usa el icono **Borrar todos los modelos** (&#128465;) para eliminar todos los modelos seleccionados previamente.
+1. Usa el botón **+ Modelo para comparar** para agregar el modelo **gpt-4** a la lista. A continuación, usa el mismo botón para agregar el modelo **Phi-3.5-mini-instruct** a la lista.
+1. Revisa el gráfico, que compara los modelos basados en el **índice de calidad** (una puntuación estandarizada que indica la calidad del modelo) y el **coste**. Para ver los valores específicos de un modelo, mantén el mouse sobre el punto que lo representa en el gráfico.
+
+    ![Captura de pantalla del gráfico de comparación de modelos para gpt-4 y Phi-3.5-mini-instruct.](./media/comparison-chart.png)
+
+1. En el menú desplegable **eje X**, en **Calidad**, selecciona las siguientes métricas y observa cada gráfico resultante antes de pasar al siguiente:
+    - Precisión
     - Coherencia
     - Fluidez
-    - Base
-1. Al explorar los resultados, puedes intentar responder a las siguientes preguntas:
-    - ¿Observas diferencias de rendimiento entre los modelos GPT-3.5 y GPT-4?
-    - ¿Hay alguna diferencia entre las versiones del mismo modelo?
-    - ¿En qué se diferencia la variante 32k de GPT-4 del modelo base?
+    - Relevancia
 
-En la colección de Azure OpenAI, puedes elegir entre los modelos GPT-3.5 y GPT-4. Implementemos estos dos modelos y exploremos en qué se diferencian en tu caso de uso.
-
-## Implementación de modelos de Azure OpenAI
+## Implementación de modelos
 
 Ahora que has explorado las opciones a través de pruebas comparativas de modelos, ya tienes todo listo para implementar modelos de lenguaje. Puedes examinar el catálogo de modelos e implementar desde allí, o bien puedes implementar un modelo a través de la página **Implementaciones**. Exploremos ambas opciones.
 
-### Implementación de un modelo del Catálogo de modelos
+### Implementación de un modelo del *Catálogo de modelos*
 
-Comencemos implementando un modelo del Catálogo de modelos. Es posible que prefieras esta opción cuando desees filtrar todos los modelos disponibles.
+Comencemos implementando un modelo del Catálogo de modelos. Es posible que prefieras esta opción cuando desees revisar diversos modelos disponibles.
 
-1. Ve a la página **Catálogo de modelos** con el menú de la izquierda.
-1. Busca e implementa el modelo `gpt-35-turbo`, preparado por Azure AI, con la siguiente configuración al seleccionar **Personalizar** en los detalles de implementación:
-   
-    - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
-    - **Tipo de implementación**: estándar
-    - **Versión del modelo**: *Selecciona la versión predeterminada*
-    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
+1. Vuelve a la página principal del **catálogo de modelo**.
+1. Busca y selecciona el modelo `gpt-4`, tal como hiciste anteriormente.
+1. En la página **gpt-4**, selecciona **Implementar** e implementa el modelo con la siguiente configuración mediante la selección de **Personalizar** en los detalles de implementación:
+    - **Nombre de implementación**: *nombre único para la implementación de modelo, por ejemplo `gpt-4-model`*
+    - **Tipo de implementación**: estándar global
+    - **Versión del modelo**: *selecciona la versión predeterminada*
+    - **Recurso de IA conectado**: *tu conexión de recursos de Azure OpenAI*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: DefaultV2
     - **Habilitación de la cuota dinámica**: deshabilitada
+      
+    > **Nota**: Reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
 
-    > **Nota**: Si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
+1. Espera a que el **estado de aprovisionamiento** de la implementación sea **Correcto**.
 
-### Implementación de un modelo a través de Modelos + puntos de conexión
+### Implementación de un modelo a través de *Modelos + puntos de conexión*
 
 Si ya sabes exactamente qué modelo quieres implementar, es posible que prefieras hacerlo a través de **Modelos + puntos de conexión**.
 
-1. Ve a la página **Modelos + puntos de conexión** en la sección **Mis recursos**, mediante el menú de la izquierda.
-1. En la pestaña **Implementaciones de modelos**, implementa un nuevo modelo base con la siguiente configuración al seleccionar **Personalizar** en los detalles de implementación:
-    - **Modelo**: GPT-4
-    - **Nombre de implementación**: *Un nombre único para la implementación de modelo*
-    - **Tipo de implementación**: estándar
-    - **Versión del modelo**: *Selecciona la versión predeterminada*
-    - **Recurso de IA**: *selecciona el recurso creado anteriormente*
-    - **Límite de frecuencia de tokens por minuto (miles)**: 5000
-    - **Filtro de contenido**: DefaultV2
-    - **Habilitación de la cuota dinámica**: deshabilitada
+1. En el panel de navegación de la izquierda, en la sección **Mis recursos**, selecciona **Modelos + puntos de conexión**.
+1. En la pestaña **Implementaciones de modelos**, en la lista desplegable **+ Implementar modelo**, selecciona **Implementar modelo base**. A continuación, busca `Phi-3.5-mini-instruct` y confirma tu selección.
+1. Acepta la licencia del modelo.
+1. Implementa un modelo **Phi-3.5-mini-instruct** con la siguiente configuración:
+    - **Nombre de implementación**: *nombre único para la implementación de modelo, por ejemplo `phi-35-model`*
+    - **Tipo de implementación**: estándar global
+    - **Detalles de implementación**: *usa la configuración predeterminada*
+
+1. Espera a que el **estado de aprovisionamiento** de la implementación sea **Correcto**.
 
 ## Prueba de modelos en el área de juegos de chat
 
-Ahora que tenemos dos modelos que comparar, veamos cómo se comportan en una interacción conversacional.
+Ahora que tienes dos modelos que comparar, veamos cómo se comportan en una interacción conversacional.
 
-1. Ve a la página **Áreas de juegos** con el menú de la izquierda.
-1. En el **Área de juegos de chat**, selecciona la implementación de GPT-3.5.
-1. En la ventana de chat, escribe una consulta como `What can you do?` y analiza la respuesta:
-    Las respuestas son muy genéricas. Recuerda que queremos crear un copiloto personalizado que actúe como asistente para viajes. Puedes especificar qué tipo de ayuda deseas en la pregunta que hagas.
-1. En la ventana de chat, escribe la consulta `Imagine you're a travel assistant, what can you help me with?`. Las respuestas ya son más específicas. Es posible que no quieras que los usuarios finales tengan que proporcionar el contexto necesario cada vez que interactúen con el copiloto. Para agregar instrucciones globales, puedes editar el mensaje del sistema.
-1. En **Configuración**, actualiza el campo **Proporcionar las instrucciones y el contexto del modelo** con la siguiente solicitud:
+### Preparación para chatear
 
-   ```
-   You are an AI travel assistant that helps people plan their trips. Your objective is to offer support for travel-related inquiries, such as visa requirements, weather forecasts, local attractions, and cultural norms.
-   ```
+1. En la barra de navegación, selecciona **Áreas de juegos**. A continuación, selecciona el **Área de juegos de chat**.
+1. En el panel **Configuración**, en el campo **Dar las instrucciones del modelo y el contexto**, establece el aviso del sistema en `You are an AI assistant that helps solve problems.`
+1. Selecciona **Aplicar cambios**.
 
-1. Seleccione **Aplicar cambios**.
-1. En la ventana de chat, escribe la consulta `What can you do?` y analiza la nueva respuesta. Observa en qué se diferencia de la respuesta que recibiste antes. Ahora, la respuesta es específica sobre viajes.
-1. Continúa la conversación preguntando: `I'm planning a trip to London, what can I do there?`. El copiloto ofrece una gran cantidad de información relacionada con los viajes. Es posible que quieras mejorar más la salida. Por ejemplo, puedes querer que la respuesta sea más concisa.
-1. Actualiza el mensaje del sistema agregando `Answer with a maximum of two sentences.` al final del mensaje. Aplica el cambio, borra el chat y vuelve a probarlo preguntando: `I'm planning a trip to London, what can I do there?`. También puede que quieras que el copiloto continúe la conversación en lugar de simplemente responder a la pregunta.
-1. Actualiza el contexto del modelo al agregar `End your answer with a follow-up question.` al final de la solicitud. Guarda el cambio y vuelve a probar el chat preguntando: `I'm planning a trip to London, what can I do there?`
-1. Cambia la **Implementación** al modelo GPT-4 y repite todos los pasos de esta sección. Observa cómo los modelos pueden ofrecer salidas diferentes.
-1. Por último, prueba ambos modelos con la consulta `Who is the prime minister of the UK?`. El rendimiento de esta pregunta está relacionado con la base (si la respuesta es precisa y real) de los modelos. ¿El rendimiento se pone en correlación con tus conclusiones de las pruebas comparativas de los modelos?
+### Chatear con el modelo *gpt-4*
 
-Ahora que has explorado ambos modelos, reflexiona sobre qué modelo elegirías para tu caso de uso. Al principio, las salidas de los modelos pueden diferir y es posible que prefieras uno al otro. Sin embargo, después de actualizar el mensaje del sistema, puedes observar que la diferencia es mínima. Desde una perspectiva de optimización de costes, puedes optar por el modelo GPT-3.5 sobre el GPT-4, ya que el rendimiento es muy similar.
+En el panel **Configuración**, selecciona el modelo *gpt-4*.
+1. En la ventana de chat, escribe la consulta siguiente
+
+    ```
+    I have a fox, a chicken, and a bag of grain that I need to take over a river in a boat. I can only take one thing at a time. If I leave the chicken and the grain unattended, the chicken will eat the grain. If I leave the fox and the chicken unattended, the fox will eat the chicken. How can I get all three things across the river without anything being eaten?
+    ```
+
+1. Visualice la respuesta. Después, escribe la siguiente consulta de seguimiento:
+
+    ```
+    Explain your reasoning.
+    ```
+
+### Chatear con el modelo *Phi-3.5*
+
+1. En el panel **Configuración**, selecciona el modelo *Phi-3.5*.
+1. Asegúrate de que se inicia una nueva sesión de chat antes de repetir las mismas indicaciones que usaste anteriormente para probar el modelo gpt-4.
+1. En la ventana de chat, escribe la consulta siguiente
+
+    ```
+    I have a fox, a chicken, and a bag of grain that I need to take over a river in a boat. I can only take one thing at a time. If I leave the chicken and the grain unattended, the chicken will eat the grain. If I leave the fox and the chicken unattended, the fox will eat the chicken. How can I get all three things across the river without anything being eaten?
+    ```
+
+1. Visualice la respuesta. Después, escribe la siguiente consulta de seguimiento:
+
+    ```
+    Explain your reasoning.
+    ```
+
+### Realizar una comparación adicional
+
+1. Prueba el siguiente rompecabezas con ambos modelos, pidiendo a los modelos que expliquen su razonamiento (la respuesta correcta es 40!):
+
+    ```
+    I have 53 socks in my drawer: 21 identical blue, 15 identical black and 17 identical red. The lights are out, and it is completely dark. How many socks must I take out to make 100 percent certain I have at least one pair of black socks?
+    ```
+
+## Reflexión sobre los modelos
+
+Has comparado dos modelos, que pueden variar en términos de su capacidad para generar respuestas adecuadas y en su coste. En cualquier escenario generativo, debes encontrar un modelo con el equilibrio adecuado de idoneidad para la tarea que necesitas que realice y el coste de usar el modelo para el número de solicitudes que esperas que tenga que controlar.
+
+Los detalles y bancos de pruebas proporcionados en el catálogo de modelos, junto con la capacidad de comparar modelos visualmente proporcionan un punto de partida útil al identificar modelos candidatos para una solución de IA generativa. A continuación, puedes probar modelos candidatos con una variedad de mensajes del sistema y del usuario en el área de juegos de chat.
 
 ## Limpieza
 
-Si has terminado de explorar el portal de Azure AI Foundry, deberías eliminar los recursos que has creado en este ejercicio para evitar incurrir en costes innecesarios de Azure.
+Si has terminado de explorar el Portal de la Fundición de IA de Azure, deberías eliminar los recursos que has creado en este ejercicio para evitar incurrir en costes innecesarios de Azure.
 
-1. Vuelva a la pestaña del explorador que contiene Azure Portal (o vuelva a abrir [Azure Portal](https://portal.azure.com?azure-portal=true) en una nueva pestaña del explorador) y vea el contenido del grupo de recursos donde implementó los recursos usados en este ejercicio.
-1. Seleccione **Eliminar grupo de recursos** en la barra de herramientas.
-1. Escriba el nombre del grupo de recursos y confirme que desea eliminarlo.
+1. Abre [Azure Portal](https://portal.azure.com) y ve el contenido del grupo de recursos donde implementaste los recursos usados en este ejercicio.
+1. Selecciona **Eliminar grupo de recursos** en la barra de herramientas.
+1. Escribe el nombre del grupo de recursos y confirma que deseas eliminarlo.
