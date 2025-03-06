@@ -27,7 +27,7 @@ Para empezar, crea un proyecto de Fundición de IA de Azure en un centro de Azur
     - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
     - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Si has seleccionado **Personalizar**, selecciona **Siguiente** y revisa tu configuración.
 1. Selecciona **Crear** y espera a que se complete el proceso.
@@ -92,7 +92,7 @@ Veamos cómo se comporta el modelo en una interacción conversacional.
 
 1. Ve a **Área de juegos** en el panel izquierdo.
 
-1. En el modo **Chat**, escribe lo siguiente en la sección **Historial de chats**.
+1. Abre el **Área de juegos de chat** y escribe la siguiente indicación en la sección **Historial de chats**.
 
     ```
    Describe characteristics of Scottish people.
@@ -108,13 +108,13 @@ Veamos cómo se comporta el modelo en una interacción conversacional.
 
 1. Aplique los cambios en el mensaje del sistema.
 
-1. En la sección **Sesión de chat**, vuelva a escribir la siguiente solicitud.
+1. En la sección **Historial de chats**, vuelve a enviar el siguiente mensaje.
 
     ```
    Describe characteristics of Scottish people.
     ```
 
-8. Observe la salida, que debería indicar que no se admiten solicitudes racistas y despectivas. Esta prevención contra salidas ofensivas es el resultado de los filtros de contenido predeterminados del portal de Azure AI Foundry.
+8. Observe la salida, que debería indicar que no se admiten solicitudes racistas y despectivas. Esta prevención contra salidas ofensivas es el resultado de los filtros de contenido.
 
 > **Sugerencia**: Para obtener más información sobre las categorías y los niveles de gravedad que se usan en los filtros de contenido, consulta [Filtrado de contenido](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering) en la documentación del servicio del portal de Azure AI Foundry.
 

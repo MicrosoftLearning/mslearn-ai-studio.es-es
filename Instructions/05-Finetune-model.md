@@ -12,9 +12,11 @@ En este ejercicio, ajustarás un modelo de lenguaje con Azure AI Foundry que qui
 
 Imagina que trabajas para una agencia de viajes y estás desarrollando una aplicación de chat para ayudar a las personas a planificar sus vacaciones. El objetivo es crear un chat sencillo e inspirador que sugiera destinos y actividades. Dado que el chat no está conectado a ningún origen de datos, **no** debe proporcionar recomendaciones específicas para hoteles, vuelos o restaurantes para garantizar la confianza con tus clientes.
 
-Este ejercicio dura aproximadamente **60** minutos.
+Este ejercicio dura aproximadamente **60** minutos\*.
 
-## Creación de un centro de IA en el portal de Azure AI Foundry
+> \***Nota**: este tiempo es una estimación basada en la experiencia media. El ajuste preciso depende de los recursos de infraestructura en la nube, lo que puede tardar una cantidad variable de tiempo en aprovisionar en función de la capacidad del centro de datos y la demanda simultánea. Algunas actividades de este ejercicio pueden tardar <u>mucho</u> tiempo en completarse y requerir paciencia. Si las cosas tardan un rato, considera la posibilidad de revisar la [documentación de ajuste preciso de Fundición de IA de Azure](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) o tomar un descanso.
+
+## Creación de un centro de IA en el Portal de la Fundición de IA de Azure
 
 Para empezar, crea un proyecto de Fundición de IA de Azure en un centro de Azure AI:
 
@@ -26,18 +28,18 @@ Para empezar, crea un proyecto de Fundición de IA de Azure en un centro de Azur
         - **Hub**: *se autorellena con el nombre predeterminado*
         - **Suscripción**: *se autorellena con tu cuenta con la sesión iniciada*
         - **Grupo de recursos**: (nuevo) *se autorrellena con el nombre de tu proyecto*
-        - **Ubicación**: elige una de las siguientes regiones **Este de EE. UU. 2**, **Centro-norte de EE. UU.**, **Centro de Suecia**, **Oeste de Suiza**\*
+        -  **Ubicación**: selecciona **Ayúdame a elegir** y, a continuación, selecciona **gpt-4-finetune** en la ventana Asistente de ubicación y usa la región recomendada\*
         - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
         - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre las [regiones de modelo de precisión](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#fine-tuning-models)
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre las [regiones de modelo de precisión](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#fine-tuning-models)
 
 1. Revisa la configuración y crea el proyecto.
 1. Espera a que se cree el proyecto.
 
 ## Ajustar un modelo GPT-4
 
-Dado que el ajuste preciso de un modelo tarda algún tiempo en completarse, primero iniciarás el trabajo de ajuste preciso. Para poder ajustar un modelo, necesitas un conjunto de datos.
+Dado que el ajuste preciso de un modelo tarda algún tiempo en completarse, iniciarás el trabajo de ajuste preciso ahora y volverás a él después de explorar un modelo base que no se haya ajustado con fines de comparación.
 
 1. Descarga el [conjunto de datos de entrenamiento](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl) en `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl`y guárdalo como un archivo JSONL localmente.
 
@@ -68,7 +70,7 @@ Dado que el ajuste preciso de un modelo tarda algún tiempo en completarse, prim
     - **Parámetros de tarea**: *mantén la configuración predeterminada*
 1. El ajuste se iniciará y puede tardar algún tiempo en completarse.
 
-> **Nota**: el ajuste y la implementación pueden tardar algún tiempo, por lo que es posible que tengas que volver a comprobarlo periódicamente. Ya puedes continuar con el paso siguiente mientras esperas.
+> **Nota**: el ajuste preciso y la implementación pueden tardar un tiempo significativo (30 minutos o más), por lo que es posible que tengas que volver a comprobarlo periódicamente. Ya puedes continuar con el paso siguiente mientras esperas.
 
 ## Chatear con un modelo base
 
@@ -76,7 +78,11 @@ Mientras esperas a que se complete el trabajo de ajuste, vamos a chatear con un 
 
 1. Ve a la página **Modelos + puntos de conexión** en la sección **Mis recursos**, mediante el menú de la izquierda.
 1. Selecciona el botón **+ Implementar modelo** y selecciona la opción **Implementar modelo base**.
-1. Implementa un modelo `gpt-4`, que es el mismo tipo de modelo que usaste al ajustar.
+1. Implementa un modelo `gpt-4` con la siguiente configuración:
+    - **Nombre de implementación**: *un nombre único para el modelo, puedes usar el predeterminado*
+    - **Tipo de implementación**: estándar
+    - **Límite de frecuencia de tokens por minuto (miles)**: 5000
+    - **Filtro de contenido**: valor predeterminado
 
 > **Nota**: si la ubicación actual del recurso de IA no tiene cuota disponible para el modelo que deseas implementar, se te pedirá que elijas otra ubicación donde se creará un nuevo recurso de IA y se conectará al proyecto.
 
@@ -100,36 +106,54 @@ Mientras esperas a que se complete el trabajo de ajuste, vamos a chatear con un 
     ```
 
 1. Selecciona **Aplicar cambios** y **Borrar chat**.
-1. Sigue probando la aplicación de chat para comprobar que no proporciona ninguna información que no se base en los datos recuperados. Por ejemplo, haz las siguientes preguntas y explora las respuestas del modelo:
+1. Sigue probando la aplicación de chat para comprobar que no proporciona ninguna información que no se base en los datos recuperados. Por ejemplo, haz las siguientes preguntas y revisa las respuestas del modelo, con especial atención al estilo de tono y escritura que usa el modelo para responder:
    
     `Where in Rome should I stay?`
     
     `I'm mostly there for the food. Where should I stay to be within walking distance of affordable restaurants?`
 
-    `Give me a list of five bed and breakfasts in Trastevere.`
+    `What are some local delicacies I should try?`
 
-    El modelo puede proporcionarte una lista de hoteles, incluso cuando le indiques que no proporcione recomendaciones sobre hoteles. Este es un ejemplo de comportamiento incoherente. Vamos a explorar si el modelo ajustado funciona mejor en estos casos.
+    `When is the best time of year to visit in terms of the weather?`
 
-1. Ve a la página **Ajuste** en **Crear y personalizar** para encontrar tu trabajo de ajuste y su estado. Si sigue ejecutándose, puedes optar por seguir evaluando manualmente el modelo base implementado. Si se ha completado, puedes continuar con la sección siguiente.
+    `What's the best way to get around the city?`
+
+## Revisión del archivo de entrenamiento
+
+El modelo base parece funcionar lo suficientemente bien, pero es posible que estés buscando un estilo conversacional determinado de la aplicación de IA generativa. Los datos de entrenamiento usados para ajustar te ofrecen la posibilidad de crear ejemplos explícitos de los tipos de respuesta que desees.
+
+1. Abre el archivo JSONL que descargaste anteriormente (puedes abrirlo en cualquier editor de texto).
+1. Examina la lista de documentos JSON en el archivo de datos de entrenamiento. El primero debe ser similar a este (con formato de legibilidad):
+
+    ```json
+    {"messages": [
+        {"role": "system", "content": "You are an AI travel assistant that helps people plan their trips. Your objective is to offer support for travel-related inquiries, such as visa requirements, weather forecasts, local attractions, and cultural norms. You should not provide any hotel, flight, rental car or restaurant recommendations. Ask engaging questions to help someone plan their trip and think about what they want to do on their holiday."},
+        {"role": "user", "content": "What's a must-see in Paris?"},
+        {"role": "assistant", "content": "Oh la la! You simply must twirl around the Eiffel Tower and snap a chic selfie! After that, consider visiting the Louvre Museum to see the Mona Lisa and other masterpieces. What type of attractions are you most interested in?"}
+        ]}
+    ```
+
+    Cada interacción de ejemplo de la lista incluye el mismo mensaje del sistema que has probado con el modelo base, un mensaje de usuario relacionado con una consulta de viaje y una respuesta. El estilo de las respuestas de los datos de entrenamiento ayudará al modelo optimizado a aprender cómo debe responder.
 
 ## Implementación de un modelo con ajuste preciso
 
 Cuando se ha completado correctamente el ajuste preciso, puedes implementar el modelo con ajuste preciso.
 
+1. Ve a la página **Ajuste** en **Crear y personalizar** para encontrar tu trabajo de ajuste y su estado. Si todavía se está ejecutando, puedes optar por seguir chateando con el modelo base implementado o tomar un descanso. Si se completa, puedes continuar.
 1. Selecciona el modelo con ajuste preciso. Selecciona la pestaña **Métricas** y explora las métricas de ajuste preciso.
 1. Implementa el modelo con ajuste preciso con las siguientes configuraciones:
     - **Nombre de implementación**: *un nombre único para el modelo, puedes usar el predeterminado*
     - **Tipo de implementación**: estándar
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: valor predeterminado
-1. Espera a que se complete la implementación para poder probarla, esto puede tardar un tiempo.
+1. Espera a que se complete la implementación para poder probarla, esto puede tardar un tiempo. Comprueba el **estado de aprovisionamiento** hasta que se haya realizado correctamente (es posible que tengas que actualizar el explorador para ver el estado actualizado).
 
 ## Prueba del modelo con ajuste preciso
 
 Ahora que has implementado tu modelo con ajuste preciso, puedes probarlo del mismo modo que probaste tu modelo base implementado.
 
 1. Cuando la implementación esté lista, ve al modelo con ajuste preciso y selecciona **Abrir en área de juegos**.
-1. Actualiza el mensaje del sistema con las siguientes instrucciones:
+1. Asegúrate de que el mensaje del sistema incluye estas instrucciones:
 
     ```md
     You are an AI travel assistant that helps people plan their trips. Your objective is to offer support for travel-related inquiries, such as visa requirements, weather forecasts, local attractions, and cultural norms.
@@ -143,7 +167,13 @@ Ahora que has implementado tu modelo con ajuste preciso, puedes probarlo del mis
     
     `I'm mostly there for the food. Where should I stay to be within walking distance of affordable restaurants?`
 
-    `Give me a list of five bed and breakfasts in Trastevere.`
+    `What are some local delicacies I should try?`
+
+    `When is the best time of year to visit in terms of the weather?`
+
+    `What's the best way to get around the city?`
+
+1. Después de revisar las respuestas, ¿cómo se comparan con las del modelo base?
 
 ## Limpieza
 
