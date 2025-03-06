@@ -12,49 +12,30 @@ En este ejercicio, usarás el portal de Azure AI Foundry para integrar datos per
 
 Este ejercicio dura aproximadamente **45** minutos.
 
-## Creación de un recurso de Búsqueda de Azure AI
+## Creación de un proyecto de Azure AI Foundry
 
-Tu solución de aplicación de IA generativa integrará datos personalizados en un flujo de avisos. Para admitir esta integración, necesitarás un recurso de Búsqueda de Azure AI con el que indexar los datos.
+Empecemos creando un proyecto de Azure AI Foundry y los recursos de servicio que necesita para ser compatible el uso de tus propios datos, incuyendo un recurso de Búsqueda de Azure AI.
 
-1. En un explorador web, abre [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicia sesión con tus credenciales de Azure.
-1. En la página principal, selecciona **+ Crear un recurso** y busca `Azure AI Search`. A continuación, crea un nuevo recurso de Búsqueda de Azure AI con la siguiente configuración:
+1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen:
 
-    - **Suscripción**: *selecciona la suscripción a Azure*
-    - **Grupo de recursos**: *selecciona o crea un grupo de recursos*
-    - **Nombre del servicio**: *escribe un nombre de servicio único*
-    - **Ubicación**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Australia
-        - Este de Canadá
-        - Este de EE. UU.
-        - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
-        - Centro-Norte de EE. UU
-        - Centro de Suecia
-        - Suiza 
-    - **Plan de tarifa**: estándar
+    ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
-    > \* Más adelante, vas a crear un centro de Azure AI (que incluye una instancia de Azure OpenAI Service) en la misma región que el recurso de Búsqueda de Azure AI. Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro centro de Azure AI en otra región.
-
-1. Espera a que se complete la implementación de recursos de Búsqueda de Azure AI.
-
-## Creación de un proyecto de Azure AI
-
-Ahora estás listo para crear un proyecto de Fundición de IA de Azure y los recursos de Azure AI compatibles.
-
-1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure.
 1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente **Crear un proyecto** podrás ver todos los recursos de Azure que se crearán automáticamente con tu proyecto. Selecciona **Personalizar** y conéctate a tu recurso de Azure AI Search:
+1. En el Asistente para **crear un proyecto**, escribe un nombre de proyecto adecuado (como `my-ai-project`) y revisa los recursos de Azure que se crearán automáticamente para admitir el proyecto.
+1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
+    - **Nombre del centro**: *un nombre único; por ejemplo, `my-ai-hub`*
+    - **Suscripción**: *suscripción a Azure*
+    - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único (como `my-ai-resources`) o selecciona uno existente*
+    - **Ubicación**: selecciona **Ayúdame a elegir** y después selecciona **gpt-4** como **text-embedding-ada-002** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de AI Services con un nombre adecuado (como `my-ai-services`) o usa uno existente.*
+    - **Conexión de Búsqueda de Azure AI**: *creación de un nuevo recurso de Búsqueda de Azure AI con un nombre único*
 
-    - **Nombre del centro**: *un nombre único*
-    - **Suscripción de Azure**: *suscripción a Azure*
-    - **Grupo de recursos**: *seleccione el grupo de recursos que contiene el recurso Búsqueda de Azure AI*.
-    - **Ubicación**: *la misma ubicación que el recurso de Búsqueda de Azure AI*
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
-    - **Conectar Búsqueda de Azure AI**: *selecciona el recurso de Búsqueda de Azure AI*
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Selecciona **Siguiente** y revisa tu configuración.
-1. Selecciona **Crear** y espera a que se complete el proceso.
+1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
+1. Cuando se cree el proyecto, cierra las sugerencias que se muestren y revisa la página **Información general** del proyecto en el Portal de Azure AI Foundry, que debe tener un aspecto similar a la siguiente imagen:
+
+    ![Captura de pantalla de los detalles de un proyecto de Azure AI en el Portal de la Fundición de IA de Azure.](./media/ai-foundry-project.png)
    
 ## Implementación de modelos
 
