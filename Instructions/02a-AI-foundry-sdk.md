@@ -55,7 +55,7 @@ Ahora que has implementado un modelo, puedes usar el SDK de la Fundición de IA 
 
 > **Sugerencia**: puedes elegir desarrollar la solución mediante C# de Python o Microsoft. Sigue las instrucciones de la sección adecuada para el idioma elegido.
 
-### Clonación del repositorio de aplicaciones
+### Preparación de la configuración de aplicación
 
 1. En el Portal de la Fundición de IA de Azure, mira la página **Información general** del proyecto.
 1. En el área **Detalles del proyecto**, anota la **Cadena de conexión del proyecto**. Usarás esta cadena de conexión para conectarte al proyecto en una aplicación cliente.
@@ -74,8 +74,6 @@ Ahora que has implementado un modelo, puedes usar el SDK de la Fundición de IA 
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
-
-### Preparación de la configuración de aplicación
 
 > **Nota**: sigue los pasos del lenguaje de programación elegido.
 
