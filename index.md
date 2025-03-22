@@ -6,11 +6,11 @@ layout: home
 
 # Desarrollo de soluciones de IA generativa
 
-Los siguientes ejercicios de inicio rápido han sido diseñados para brindarte una experiencia práctica de aprendizaje en la que explorarás las tareas comunes que realizan los desarrolladores al crear soluciones de IA generativa en Microsoft Azure.
+Los siguientes ejercicios han sido diseñados para brindarte una experiencia práctica de aprendizaje en la que explorarás las tareas comunes que realizan los desarrolladores al crear soluciones de IA generativa en Microsoft Azure.
 
 > **Nota**: para completar los ejercicios, necesitarás una suscripción a Azure en la que tengas permisos y cuota suficientes para aprovisionar los recursos de Azure y modelos de IA generativa necesarios. Si aún no tienes una, puedes registrarte para obtener una [cuenta de Azure](https://azure.microsoft.com/free). Hay una opción de evaluación gratuita para los nuevos usuarios que incluye créditos durante los primeros 30 días.
 
-## Ejercicios de inicio rápido
+## Ejercicios
 
 {% assign labs = site.pages | where_exp:"page", "page.url contains '/Instructions'" %} {% para la actividad en laboratorios %}
 <hr>

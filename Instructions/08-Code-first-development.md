@@ -1,9 +1,3 @@
----
-lab:
-  title: Creación de una aplicación de IA generativa mediante herramientas de desarrollo orientado al código
-  description: Obtén información sobre cómo usar código para crear y actualizar los elementos de la aplicación de IA generativa para admitir la compilación e implementación automatizadas en un escenario de DevOps.
----
-
 # Creación de una aplicación de IA generativa mediante herramientas de desarrollo orientado al código
 
 En este ejercicio, clonarás e implementarás una plantilla de Azure Developer CLI que aprovisiona e [implementa el proyecto de IA en un punto de conexión en línea](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) en Fundición de IA de Azure. A continuación, lo usarás como punto de partida para crear tu propio copiloto personalizado con Azure AI y una experiencia orientada al código.

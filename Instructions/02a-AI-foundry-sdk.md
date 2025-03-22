@@ -24,11 +24,18 @@ Comencemos creando un proyecto de Fundición de IA de Azure.
     - **Nombre del centro**: *un nombre único; por ejemplo, `my-ai-hub`*
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único (como `my-ai-resources`) o selecciona uno existente*
-    - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Ubicación**: selecciona cualquiera de las siguientes regiones\*:
+        - Este de EE. UU.
+        - Este de EE. UU. 2
+        - Centro-Norte de EE. UU
+        - Centro-sur de EE. UU.
+        - Centro de Suecia
+        - Oeste de EE. UU.
+        - Oeste de EE. UU. 3
     - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de AI Services con un nombre adecuado (como `my-ai-services`) o usa uno existente.*
     - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > \* En el momento de escribir esto, el modelo de Microsoft *Phi-4* que usaremos en este ejercicio estaba disponible en estas regiones. Puedes comprobar la disponibilidad regional más reciente de los modelos específicos en la [documentación de Fundición de IA de Azure](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). En caso de que se alcance un límite de cuota regional más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
 1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
 1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
@@ -102,9 +109,9 @@ Ahora que has implementado un modelo, puedes usar el SDK de la Fundición de IA 
     **C#**
 
     ```
-   dotnet add package Azure.AI.Inference --version 1.0.0-beta.3
-   dotnet add package Azure.AI.Projects --version 1.0.0-beta.3
    dotnet add package Azure.Identity
+   dotnet add package Azure.AI.Projects --version 1.0.0-beta.3
+   dotnet add package Azure.AI.Inference --version 1.0.0-beta.3
     ```
     
 
@@ -153,6 +160,7 @@ Ahora que has implementado un modelo, puedes usar el SDK de la Fundición de IA 
    from dotenv import load_dotenv
    from azure.identity import DefaultAzureCredential
    from azure.ai.projects import AIProjectClient
+   from azure.ai.inference.models import SystemMessage, UserMessage
     ```
 
     **C#**
@@ -201,14 +209,13 @@ Ahora que has implementado un modelo, puedes usar el SDK de la Fundición de IA 
 
     ```python
    response = chat.complete(
-        model=model_deployment,
-        messages=[
-            {"role": "system", "content": "You are a helpful AI assistant that answers questions."},
-            {"role": "user", "content": input_text},
-            ],
-        )
-   print(response.choices[0].message.content)
-    ```
+       model=model_deployment,
+       messages=[
+           SystemMessage("You are a helpful AI assistant that answers questions."),
+           UserMessage(input_text)
+       ])
+   print(response.choices[0].message.content
+```
 
     **C#**
 

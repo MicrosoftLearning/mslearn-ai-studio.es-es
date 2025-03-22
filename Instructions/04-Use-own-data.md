@@ -8,7 +8,7 @@ lab:
 
 La generación aumentada de recuperación (RAG) es una técnica que se usa para compilar aplicaciones que integran datos de orígenes de datos personalizados en un aviso de un modelo de IA generativa. La RAG es un patrón que se usa habitualmente para desarrollar aplicaciones de IA generativa: aplicaciones basadas en chat que usan un modelo de lenguaje para interpretar entradas y generar respuestas adecuadas.
 
-En este ejercicio, usarás el portal de Azure AI Foundry para integrar datos personalizados en un flujo de consultas de IA generativa. También explorarás cómo implementar el patrón RAG en una aplicación cliente mediante los SDK de Fundición de IA de Azure y Azure OpenAI.
+En este ejercicio, usarás el portal de los SDK de la Fundición de IA de Azure y Azure OpenAI para integrar datos personalizados en una aplicación de IA generativa.
 
 Este ejercicio dura aproximadamente **45** minutos.
 
@@ -21,7 +21,7 @@ Empecemos creando un proyecto de Azure AI Foundry y los recursos de servicio que
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
 1. En la página principal, selecciona **+Crear proyecto**.
-1. En el Asistente para **crear un proyecto**, escribe un nombre de proyecto adecuado (como `my-ai-project`) y revisa los recursos de Azure que se crearán automáticamente para admitir el proyecto.
+1. En el asistente para **crear un proyecto**, escribe un nombre de proyecto adecuado para, por ejemplo, `my-ai-project`, y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
 1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
     - **Nombre del centro**: *un nombre único; por ejemplo, `my-ai-hub`*
     - **Suscripción**: *suscripción a Azure*
@@ -44,7 +44,7 @@ Necesitas dos modelos para implementar la solución:
 - Un modelo de *inserción* para vectorizar datos de texto para una indexación y procesamiento eficaces.
 - Modelo que puede generar respuestas de lenguaje natural a preguntas a partir de sus datos.
 
-1. En el portal de Azure AI Foundry, en tu proyecto, en el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
+1. En el portal de Fundición de IA de Azure, en tu proyecto, en el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
 1. Crea una nueva implementación del modelo **text-embedding-ada-002** con la siguiente configuración mediante la selección de **Personalizar** en el asistente para Implementar modelo:
 
     - **Nombre de implementación**:`text-embedding-ada-002`
@@ -75,140 +75,44 @@ Los datos del copiloto constan de un conjunto de folletos de viaje en formato PD
 
 ## Creación de un índice para los datos
 
-Ahora que has agregado un origen de datos al proyecto, puedes usarlo para crear un índice en el recurso de Azure AI Search.
+Ahora que has agregado un origen de datos al proyecto, puedes usarlo para crear un índice en el recurso de Búsqueda de Azure AI.
 
-1. En el portal de Azure AI Foundry, en tu proyecto, en el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Datos + índices**.
+1. En el Portal de la Fundición de IA de Azure, en tu proyecto, en el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Datos + índices**.
 1. En la pestaña **Índices**, agrega un nuevo índice con la siguiente configuración:
     - **Ubicación de origen**:
-        - **Origen de los datos**: datos del portal de Azure AI Foundry
+        - **Origen de los datos**: datos del Portal de la Fundición de IA de Azure
             - *Selecciona el origen de datos **folletos***
     - **Configuración de índice**:
-        - **Selecciona el servicio Azure AI Search**: *Selecciona la conexión de **AzureAISearch** al recurso de Azure AI Search*
+        - **Selecciona el servicio Búsqueda de Azure AI**: *selecciona la conexión de **AzureAISearch** al recurso de Búsqueda de Azure AI*
         - **Índice vectorial**: `brochures-index`
         - **Máquina virtual**: selección automática
     - **Configuración de búsqueda**:
         - **Configuración de vectores**: agregación de una búsqueda vectorial a este recurso de búsqueda
         - **Conexión de Azure OpenAI**: *selecciona el recurso predeterminado de Azure OpenAI para tu centro.*
 
-1. Espera a que se complete el proceso de indexación, lo cual puede tardar varios minutos. La operación de creación de índices consta de los siguientes trabajos:
+1. Espera a que se complete el proceso de indexación, lo que puede tardar un tiempo en función de los recursos de proceso disponibles en la suscripción. La operación de creación de índices consta de los siguientes trabajos:
 
     - Descifra, fragmenta e inserta los tokens de texto en los datos de los folletos.
     - Crea el índice de Búsqueda de Azure AI.
     - Registra el recurso de índice.
 
-## Prueba del índice
+## Prueba del índice en el área de juegos
 
 Antes de usar el índice en un flujo de avisos basado en RAG, vamos a comprobar que se puede usar para afectar a las respuestas de IA generativa.
 
-1. En el panel de navegación de la izquierda, selecciona la página **Área de juegos**.
-1. En la página Chat, en el panel Configuración, asegúrate de que la implementación de modelo **gpt-4** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
+1. En el panel de navegación de la izquierda, selecciona la página **Área de juegos** y abre el área de juegos **Chat**.
+1. En la página de área de juegos Chat, en el panel Configuración, asegúrate de que la implementación de modelo **gpt-4** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
 1. Revisa la respuesta, que debe ser una respuesta genérica del modelo sin datos procedentes del índice.
 1. En el panel Configuración, expande el campo **Agregue sus datos** y después agrega el índice del proyecto **brochures-index** y selecciona el tipo de búsqueda **híbrido (vector + palabra clave)**.
 
-   > **Nota**: algunos usuarios se encuentran que los índices recién creados no están disponibles inmediatamente. La actualización del explorador suele ser útil, pero si sigues experimentando el problema por el que no encuentras el índice, es posible que tengas que esperar hasta que se reconozca el índice.
+   > **Sugerencia**: en algunos casos, es posible que los índices recién creados no estén disponibles inmediatamente. La actualización del explorador suele ser útil, pero si sigues experimentando el problema por el que no encuentras el índice, es posible que tengas que esperar hasta que se reconozca el índice.
 
 1. Después de agregar el índice y de reiniciar la sesión de chat, vuelve a enviar el mensaje `Where can I stay in New York?`.
 1. Revisa la respuesta, que debe basarse en los datos del índice.
 
-## Uso del índice en un flujo de avisos
+## Creación de una aplicación cliente RAG con los SDK de la Fundición de IA de Azure y Azure OpenAI
 
-Tu índice vectorial se ha guardado en tu proyecto de Azure AI Foundry, lo que te permite usarlo fácilmente en un flujo de solicitudes.
-
-1. En el portal de Azure AI Foundry, en tu proyecto, en el panel de navegación de la izquierda, en **Crear y personalizar**, selecciona la página **Flujo de solicitudes**.
-1. Cree un nuevo flujo de avisos mediante la clonación del ejemplo de **Multi-Round Q&A on Your Data** de la galería. Guarde el clon de este ejemplo en una carpeta denominada `brochure-flow`.
-
-    <details> 
-        <summary><font color="red"><b>Sugerencia de solución de problemas</b>: error de permisos</font></summary>
-        <p>Si recibes un error de permisos al crear un nuevo flujo de avisos, prueba lo siguiente para solucionar los problemas:</p>
-        <ul>
-            <li>En Azure Portal, en el grupo de recursos del centro de Fundición de IA de Azure, selecciona el recurso de Servicios de IA.</li>
-            <li>En <b>Administración de recursos</b>, en la pestaña <b>Identidad</b>, confirma que el estado de la identidad administrada <b>asignada por el sistema</b> se establece en <b>Activado</b>.</li>
-            <li>En el grupo de recursos del centro de Fundición de IA de Azure, selecciona la cuenta de almacenamiento</li>
-            <li>En la página <b>Control de acceso (IAM),</b> agrega una asignación de roles para asignar el rol <b>lector de datos de Storage Blob</b> a la identidad administrada para el recurso de servicios de Azure AI.</li>
-            <li>Espera a que se asigne el rol y vuelve a intentar realizar el paso anterior.</li>
-        </ul>
-    </details>
-
-1. Cuando se abra la página del diseñador de flujos de avisos, revise **brochure-flow**. Su grafo debe ser similar a la imagen siguiente:
-
-    ![Captura de pantalla de un grafo de flujo de avisos](./media/chat-flow.png)
-
-    El flujo de avisos de ejemplo que usa implementa la lógica de avisos de una aplicación de chat en la que el usuario puede enviar de forma iterativa la entrada de texto a la interfaz del chat. El historial de conversaciones se conserva y se incluye en el contexto de cada iteración. El flujo de avisos organiza una secuencia de *herramientas* para:
-
-    - Anexe el historial a la entrada de chat para definir un aviso como forma contextualizada de una pregunta.
-    - Recupere el contexto mediante el índice y un tipo de consulta de su propia elección en función de la pregunta.
-    - Genere el contexto del aviso mediante el uso de los datos recuperados del índice para aumentar la pregunta.
-    - Cree variantes de aviso agregando un mensaje del sistema y estructurando el historial de chats.
-    - Envíe el aviso a un modelo de lenguaje para generar una respuesta de lenguaje natural.
-
-1. Use el botón **Iniciar sesión de proceso** para iniciar el proceso del entorno de ejecución para el flujo.
-
-    Espere a que se inicie la sesión de proceso. Esto proporciona un contexto de proceso para el flujo de avisos. Mientras espera, en la pestaña **Flujo**, revise las secciones de las herramientas del flujo.
-
-    >**Nota**: Debido a las limitaciones de infraestructura y capacidad, es posible que la sesión de proceso no se inicie durante períodos de alta demanda. Si esto sucede, puedes omitir el flujo de avisos e iniciar la tarea **Creación de una aplicación cliente RAG con los SDK de Fundición de IA de Azure y Azure OpenAI**.
-
-    A continuación, cuando se haya iniciado la sesión de proceso...
-
-1. En la sección **Entradas**, asegúrese de que las entradas incluyen:
-    - **chat_history**
-    - **chat_input**
-
-    El historial de chat predeterminado de este ejemplo incluye alguna conversación sobre IA.
-
-1. En la sección **Salidas**, asegúrese de que la salida incluye:
-
-    - **chat_output** con valor ${chat_with_context.output}
-
-1. En la sección **modify_query_with_history**, seleccione la siguiente configuración (dejando las demás como están):
-
-    - **Conexión**: *El recurso predeterminado de Azure OpenAI para el centro de IA*
-    - **Api**: chat
-    - **deployment_name**: gpt-4
-    - **response_format**: {"type":"text"}
-
-1. En la sección **lookup**, establezca los siguientes valores de parámetro:
-
-    - **mlindex_content**: *Seleccione el campo vacío para abrir el panel Generar*
-        - **index_type**: Índice registrado
-        - **mlindex_asset_id**: brochures-index:1
-    - **queries**: ${modify_query_with_history.output}
-    - **query_type**: Híbrido (vector + palabra clave)
-    - **top_k**: 2
-
-1. En la sección **generate_prompt_context**, revise el script de Python y asegúrese de que las **entradas** de esta herramienta incluyan el parámetro siguiente:
-
-    - **search_result** *(objeto)*: ${lookup.output}
-
-1. En la sección **Prompt_variants**, revise el script de Python y asegúrese de que las **entradas** de esta herramienta incluyan los parámetros siguientes:
-
-    - **contexts** *(string)*: ${generate_prompt_context.output}
-    - **chat_history** *(string)*: ${inputs.chat_history}
-    - **chat_input** *(string)*: ${inputs.chat_input}
-
-1. En la sección **chat_with_context**, seleccione la siguiente configuración (dejando las demás como están):
-
-    - **Conexión**: *El recurso predeterminado de Azure OpenAI para el centro de IA*
-    - **API**: Chat
-    - **deployment_name**: gpt-4
-    - **response_format**: {"type":"text"}
-
-    A continuación, asegúrese de que las **entradas** de esta herramienta incluyan los parámetros siguientes:
-    - **prompt_text** *(string)*: ${Prompt_variants.output}
-
-1. En la barra de herramientas, use el botón **Guardar** para guardar los cambios realizados en las herramientas del flujo de avisos.
-1. En la barra de herramientas, seleccione **Chat**. Se abrirá un panel de chat con el historial de conversaciones de ejemplo y la entrada ya rellenada en función de los valores de ejemplo. Puede pasarlos por alto.
-1. En el panel del chat, reemplace la entrada predeterminada por la pregunta `Where can I stay in London?` y envíela.
-1. Revise la respuesta, que debe basarse en los datos del índice.
-1. Revise las salidas de cada herramienta del flujo.
-1. En el panel del chat, escriba la pregunta `What can I do there?`.
-1. Revise la respuesta, que debe basarse en los datos del índice y debe tener en cuenta el historial del chat (por lo que "allí" se entiende como "en Londres").
-1. Revise las salidas de cada herramienta del flujo, teniendo en cuenta cómo operaba cada herramienta del flujo en sus entradas para preparar un mensaje contextualizado y obtener una respuesta adecuada.
-
-    Ahora tienes un flujo de avisos funcionando que usa tu índice de Búsqueda de Azure AI para implementar el patrón RAG. Para más información sobre cómo implementar y consumir el flujo de avisos, consulta la [documentación de Fundición de IA de Azure](https://learn.microsoft.com/azure/ai-foundry/how-to/flow-deploy).
-
-## Creación de una aplicación cliente RAG con los SDK de Fundición de IA de Azure y Azure OpenAI
-
-Aunque un flujo de avisos es una excelente manera de encapsular el modelo y los datos en una aplicación basada en RAG, también puedes usar los SDK de Fundición de IA de Azure y Azure OpenAI para implementar el patrón RAG en una aplicación cliente. Vamos a explorar el código para hacerlo en un ejemplo sencillo.
+Ahora que tienes un índice de trabajo, puedes usar los SDK de la Fundición de IA de Azure y Azure OpenAI para implementar el patrón RAG en una aplicación cliente. Vamos a explorar el código para hacerlo en un ejemplo sencillo.
 
 > **Sugerencia**: puedes elegir desarrollar tu solución RAG mediante C# de Python o Microsoft. Sigue las instrucciones de la sección adecuada para el idioma elegido.
 
@@ -282,7 +186,7 @@ Aunque un flujo de avisos es una excelente manera de encapsular el modelo y los 
     El archivo se abre en un editor de código.
 
 1. En el código siguiente, reemplaza estos marcadores de posición: 
-    - **** your_project_endpoint: reemplázalo por la cadena de conexión del proyecto (copiado de la página **Información general** del proyecto en el portal de la Fundición de IA de Azure).
+    - **** your_project_endpoint: reemplázalo por la cadena de conexión del proyecto (copiado de la página **Información general** del proyecto en el Portal de la Fundición de IA de Azure).
     - **your_model_deployment**: reemplázala por el nombre que asignaste a la implementación del modelo (que debe ser `gpt-4`)
     - **your_index**: reemplázala por el nombre del índice (que debe ser `brochures-index`)
 1. Después de reemplazar los marcadores de posición, usa el comando **CTRL+S** para guardar los cambios y, a continuación, usa el comando **CTRL+Q** para cerrar el editor de código mientras mantienes abierta la línea de comandos de Cloud Shell.
@@ -307,7 +211,7 @@ Aunque un flujo de avisos es una excelente manera de encapsular el modelo y los 
     - Usa el SDK de la Fundición de IA de Azure para conectarse al proyecto (mediante el cadena de conexión del proyecto)
     - Recupera la conexión predeterminada de la Búsqueda de Azure AI del proyecto para que pueda determinar el punto de conexión y la clave del servicio de la Búsqueda de Azure AI.
     - Crea un cliente de Azure OpenAI autenticado basado en la conexión predeterminada de Azure OpenAI Service en el proyecto.
-    - Envía un aviso (incluido un sistema y un mensaje de usuario) al cliente de Azure OpenAI y agrega información adicional sobre el índice de Azure AI Search que se usará para fundamentar el aviso.
+    - Envía un aviso (incluido un sistema y un mensaje de usuario) al cliente de Azure OpenAI y agrega información adicional sobre el índice de Búsqueda de Azure AI que se usará para fundamentar el aviso.
     - Muestra la respuesta desde el símbolo del sistema en la base.
 1. Usa el comando **CTRL+Q** para cerrar el editor de código, sin guardar ningún cambio, mientras mantienes abierta la línea de comandos de Cloud Shell.
 
@@ -339,18 +243,18 @@ Aunque un flujo de avisos es una excelente manera de encapsular el modelo y los 
 
 ## Desafío
 
-Ahora que has experimentado cómo integrar tus propios datos en una aplicación de Ia generativa creada con el portal de Azure AI Foundry, vamos a explorar más.
+Ahora que has experimentado cómo integrar tus propios datos en una aplicación de IA generativa creada con el Portal de la Fundición de IA de Azure, vamos a explorar más.
 
-Prueba a agregar un nuevo origen de datos a través del portal de Azure AI Foundry, indéxalo e integra los datos indexados en un flujo de solicitudes. Algunos conjuntos de datos que podría probar son:
+Prueba a agregar un nuevo origen de datos a través del Portal de la Fundición de IA de Azure, indéxalo e integra los datos indexados en una aplicación cliente. Algunos conjuntos de datos que podría probar son:
 
 - Una colección de artículos (de investigación) que tiene en su ordenador.
 - Un conjunto de presentaciones de conferencias anteriores.
 - Cualquiera de los conjuntos de datos disponibles en el repositorio de [datos de ejemplo de Azure Search](https://github.com/Azure-Samples/azure-search-sample-data).
 
-Usa todos los recursos que puedas para crear el origen de datos e integrarlo en el flujo de avisos o la aplicación cliente. Prueba la solución mediante el envío de avisos que solo podrían ser respondidos por el conjunto de datos que elegiste.
+Prueba la solución mediante el envío de avisos que solo podrían ser respondidos por el conjunto de datos que elegiste.
 
 ## Limpieza
 
-Para evitar costos innecesarios de Azure y uso de recursos, debe quitar los recursos que implementó en este ejercicio.
+Para evitar costes innecesarios de Azure y uso de recursos, debe quitar los recursos que implementó en este ejercicio.
 
 1. Si has terminado de explorar Azure AI Foundry, vuelve a [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicia sesión con tus credenciales de Azure si es necesario. A continuación, elimine los recursos del grupo de recursos donde aprovisionó los recursos de Búsqueda de Azure AI y Azure AI.
