@@ -10,6 +10,8 @@ En este ejercicio, usarás el modelo de IA generativa *Phi-4-multimodal-instruct
 
 Este ejercicio dura aproximadamente **30** minutos.
 
+> **Nota**: Este ejercicio se basa en los SDK de la versión preliminar, que podrían cambiar. Cuando ha sido necesario, hemos usado versiones específicas de paquetes; que pueden no ser las versiones disponibles más recientes.
+
 ## Creación de un proyecto de Azure AI Foundry
 
 Comencemos creando un proyecto de Fundición de IA de Azure.
@@ -129,7 +131,7 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
     El archivo se abre en un editor de código.
 
 10. En el archivo de código, reemplaza el marcador de posición **your_project_endpoint** por la cadena de conexión del proyecto (copiado de la página **Información general** del proyecto en el Portal de la Fundición de IA de Azure) y el marcador de posición **your_model_deployment** por el nombre que asignaste a la implementación de modelo Phi-4-multimodal-instruct.
-11. Después de reemplazar los marcadores de posición, usa el comando **CTRL+S** para guardar los cambios y, a continuación, usa el comando **CTRL+Q** para cerrar el editor de código mientras mantienes abierta la línea de comandos de Cloud Shell.
+11. Después de reemplazar los marcadores de posición, en el editor de código, usa el comando **CTRL+S** o usa la acción de **hacer clic con el botón derecho > Guardar** para guardar los cambios y, a continuación, usa el comando **CTRL+Q** o la acción de **hacer clic con el botón derecho > Salir** para cerrar el editor de código mientras mantienes abierta la línea de comandos de Cloud Shell.
 
 ### Escritura de código para conectarte al proyecto y obtener un cliente de chat para el modelo
 
@@ -212,7 +214,7 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
 
 ### Escritura de código para usar una indicación basada en texto
 
-1. Ten en cuenta que el código incluye un bucle para permitir que un usuario escriba una solicitud hasta que escriba "salir". A continuación, en la sección bucle, en el comentario **Obtener una respuesta para una entrada de texto**, agrega el código siguiente para enviar una indicación de texto y recuperar la respuesta del modelo:
+1. Ten en cuenta que el código incluye un bucle para permitir que un usuario escriba una indicación hasta que escriba "salir". A continuación, en la sección bucle, en el comentario **Obtener una respuesta para una entrada de texto**, agrega el código siguiente para enviar una indicación de texto y recuperar la respuesta del modelo:
 
     **Python**
 

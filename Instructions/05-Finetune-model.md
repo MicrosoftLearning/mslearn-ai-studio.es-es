@@ -20,7 +20,7 @@ Este ejercicio dura aproximadamente **60** minutos\*.
 
 Para empezar, crea un proyecto de Fundición de IA de Azure en un centro de Azure AI:
 
-1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
+1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure.
 1. En la página principal, selecciona **+ Crear un recurso**.
 1. En el Asistente para **crear un nuevo proyecto**, crea un proyecto con la siguiente configuración:
     - **Nombre del proyecto**: *un nombre exclusivo para el proyecto*
@@ -46,7 +46,7 @@ Dado que el ajuste preciso de un modelo tarda algún tiempo en completarse, inic
     > **Nota**: es posible que el dispositivo guarde el archivo de forma predeterminada como un archivo .txt. Selecciona todos los archivos y quita el sufijo .txt para asegurarte de que vas a guardar el archivo como JSONL.
 
 1. Ve a la página **Ajuste** de la sección **Crear y personalizar**, con el menú de la izquierda.
-1. Selecciona el botón para agregar un nuevo modelo de ajuste, selecciona el modelo `gpt-4`, selecciona **Siguiente** y después **Confirmar**.
+1. Selecciona el botón para agregar un nuevo modelo de ajuste, selecciona el modelo `gpt-4` y, a continuación, selecciona **Siguiente**.
 1. **Ajusta** el modelo mediante la siguiente configuración:
     - **Versión del modelo**: *Selecciona la versión predeterminada*
     - **Sufijo del modelo**: `ft-travel`
