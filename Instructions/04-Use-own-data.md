@@ -12,6 +12,8 @@ En este ejercicio, usarás el portal de los SDK de la Fundición de IA de Azure 
 
 Este ejercicio dura aproximadamente **45** minutos.
 
+> **Nota**: Este ejercicio se basa en los SDK de la versión preliminar, que podrían cambiar. Cuando ha sido necesario, hemos usado versiones específicas de paquetes; que pueden no ser las versiones disponibles más recientes.
+
 ## Creación de un proyecto de Azure AI Foundry
 
 Empecemos creando un proyecto de Azure AI Foundry y los recursos de servicio que necesita para ser compatible el uso de tus propios datos, incuyendo un recurso de Búsqueda de Azure AI.
@@ -30,7 +32,7 @@ Empecemos creando un proyecto de Azure AI Foundry y los recursos de servicio que
     - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de AI Services con un nombre adecuado (como `my-ai-services`) o usa uno existente.*
     - **Conexión de Búsqueda de Azure AI**: *creación de un nuevo recurso de Búsqueda de Azure AI con un nombre único*
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. En caso de que se alcance un límite de cuota y no se recomiende ninguna región para ambos modelos, selecciona solo una de ellas y usa su región recomendada. Creará otro recurso en otra región para el segundo modelo más adelante en el ejercicio.
 
 1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
 1. Cuando se cree el proyecto, cierra las sugerencias que se muestren y revisa la página **Información general** del proyecto en el Portal de Azure AI Foundry, que debe tener un aspecto similar a la siguiente imagen:
@@ -189,7 +191,7 @@ Ahora que tienes un índice de trabajo, puedes usar los SDK de la Fundición de 
     - **** your_project_endpoint: reemplázalo por la cadena de conexión del proyecto (copiado de la página **Información general** del proyecto en el Portal de la Fundición de IA de Azure).
     - **your_model_deployment**: reemplázala por el nombre que asignaste a la implementación del modelo (que debe ser `gpt-4`)
     - **your_index**: reemplázala por el nombre del índice (que debe ser `brochures-index`)
-1. Después de reemplazar los marcadores de posición, usa el comando **CTRL+S** para guardar los cambios y, a continuación, usa el comando **CTRL+Q** para cerrar el editor de código mientras mantienes abierta la línea de comandos de Cloud Shell.
+1. Después de reemplazar los marcadores de posición, en el editor de código, usa el comando **CTRL+S** o usa la acción de **hacer clic con el botón derecho > Guardar** para guardar los cambios y, a continuación, usa el comando **CTRL+Q** o la acción de **hacer clic con el botón derecho > Salir** para cerrar el editor de código mientras mantienes abierta la línea de comandos de Cloud Shell.
 
 ### Exploración del código para implementar el patrón RAG
 

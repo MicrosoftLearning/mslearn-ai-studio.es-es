@@ -39,8 +39,8 @@ Un centro de Azure AI proporciona un área de trabajo de colaboración en la qu
 
 Hay varias opciones para implementar modelos en el Portal de la Fundición de IA de Azure. En este ejercicio, usarás la opción de implementación de **inferencia del modelo de Azure AI**, que admite modelos de *Azure OpenAI* y *Modelo como servicio* del catálogo de modelos de la Fundición de IA de Azure. Dado que todos los modelos se implementan en un punto de conexión común hospedado por el recurso de Servicios de Azure AI, es fácil cambiar entre modelos al probarlos para comparar el comportamiento y el rendimiento.
 
-1. En la barra de herramientas de la parte superior derecha de la página del proyecto de la Fundición de IA de Azure, usa el icono **Características de versión preliminar** para mostrar las características de versión preliminar.
-1. Activa la característica **Implementación de modelos en el servicio de inferencia del modelo de Azure AI**. A continuación, cierrs el panel **Características de versión preliminar**.
+1. En la barra de herramientas de la parte superior derecha de la página del proyecto de la Fundición de IA de Azure, usa el icono **Características de versión preliminar** (📣) para mostrar las características de versión preliminar.
+1. Comprueba que la característica **Implementación de modelos en el servicio de inferencia del modelo de Azure AI** está habilitada. A continuación, cierrs el panel **Características de versión preliminar**.
 
 ## Revisión de detalles y bancos de pruebas de modelos
 
@@ -101,7 +101,6 @@ Comencemos implementando un modelo del Catálogo de modelos. Es posible que pref
     - **Recurso de IA conectado**: *tu conexión de recursos de Azure OpenAI*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: DefaultV2
-    - **Habilitación de la cuota dinámica**: deshabilitada
       
     > **Nota**: Reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
 

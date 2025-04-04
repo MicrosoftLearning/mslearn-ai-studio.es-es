@@ -10,24 +10,28 @@ En este ejercicio, explorarás las evaluaciones integradas y personalizadas para
 
 Este ejercicio dura aproximadamente **30** minutos.
 
-## Crear un centro y un proyecto de IA en Fundición de IA de Azure
+## Creación de un centro y un proyecto de Azure AI
 
-Se empieza creando un proyecto de Fundición de IA de Azure dentro de un centro de Azure AI:
+Un centro de Azure AI proporciona un área de trabajo de colaboración en la que puedes definir uno o varios *proyectos*. Vamos a crear un proyecto y un centro de Azure AI.
 
-1. En un explorador web, abre [https://ai.azure.com](https://ai.azure.com) e inicia sesión con tus credenciales de Azure.
-1. Selecciona la página **Inicio** y luego **+ Nuevo proyecto**.
-1. En el Asistente para **crear un proyecto**, asigna un nombre único al proyecto y, después, selecciona **Personalizar** y establece la siguiente configuración:
-    - **Nombre del centro**: *un nombre único*
+1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure.
+
+1. En la página principal, selecciona **+Crear proyecto**.
+1. En el Asistente para **crear un proyecto**, escribe un nombre de proyecto adecuado (como `my-ai-project`) y revisa los recursos de Azure que se crearán automáticamente para admitir el proyecto.
+1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
+    - **Nombre del centro**: *un nombre único; por ejemplo, `my-ai-hub`*
     - **Suscripción**: *suscripción a Azure*
-    - **Grupo de recursos**: *un nuevo grupo de recursos*
+    - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único (como `my-ai-resources`) o selecciona uno existente*
     - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4** en la ventana Asistente de ubicación y usa la región recomendada\*
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: (nuevo) *se rellena automáticamente con el nombre del centro seleccionado*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de AI Services con un nombre adecuado (como `my-ai-services`) o usa uno existente.*
     - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos en el nivel de inquilino por cuotas regionales. Las regiones enumeradas en el asistente de ubicación incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región. Más información sobre la [disponibilidad del modelo por región](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
+    > \* Las cuotas de modelos están restringidas a nivel de inquilino por cuotas regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Selecciona **Siguiente** y revisa tu configuración.
-1. Selecciona **Crear un proyecto** y espera a que se complete el proceso.
+1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
+1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
+
+    ![Captura de pantalla de los detalles de un proyecto de Azure AI en el Portal de la Fundición de IA de Azure.](./media/ai-foundry-project.png)
 
 ## Implementación de un modelo GPT
 
@@ -155,7 +159,7 @@ Para ahorrar tiempo, hemos creado un conjunto de datos de salida por lotes para 
 1. Selecciona **Siguiente** y, a continuación, revisa tus datos y **envía** la nueva evaluación.
 1. Espera a que se completen las evaluaciones; es posible que tengas que actualizar.
 1. Selecciona la ejecución de la evaluación que acabas de crear.
-1. Explora el **panel Métricas** y **Resultado detallado de métricas**.
+1. Explora el **panel Métrica** en la pestaña **Informe** y el **resultado de métricas detalladas** en la pestaña **Datos**.
 
 ## Eliminación de recursos de Azure
 
