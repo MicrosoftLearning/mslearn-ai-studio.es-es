@@ -1,7 +1,7 @@
 ---
 lab:
   title: Desarrollo de una aplicación de IA generativa multimodal
-  description: 'Aprenda a usar Fundición de IA de Azure para crear una aplicación de IA generativa que admita entradas de texto, imagen y audio.'
+  description: 'Aprende a usar Fundición de IA de Azure para crear una aplicación de IA generativa que admita entradas de texto, imagen y audio.'
 ---
 
 # Desarrollo de una aplicación de IA generativa multimodal
@@ -10,9 +10,9 @@ En este ejercicio, usarás el modelo de IA generativa *Phi-4-multimodal-instruct
 
 Este ejercicio dura aproximadamente **30** minutos.
 
-> **Nota**: Este ejercicio se basa en los SDK de la versión preliminar, que podrían cambiar. Cuando ha sido necesario, hemos usado versiones específicas de paquetes; que pueden no ser las versiones disponibles más recientes.
+> **Nota**: este ejercicio se basa en los SDK de la versión preliminar, que podrían cambiar. Cuando ha sido necesario, hemos usado versiones específicas de paquetes; que pueden no ser las versiones disponibles más recientes.
 
-## Creación de un proyecto de Azure AI Foundry
+## Creación de un proyecto de Fundición de IA de Azure
 
 Comencemos creando un proyecto de Fundición de IA de Azure.
 
@@ -21,7 +21,7 @@ Comencemos creando un proyecto de Fundición de IA de Azure.
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
 2. En la página principal, selecciona **+Crear proyecto**.
-3. En el Asistente para **crear un proyecto**, escribe un nombre de proyecto adecuado (como `my-ai-project`) y revisa los recursos de Azure que se crearán automáticamente para admitir el proyecto.
+3. En el asistente para **crear un proyecto**, escribe un nombre de proyecto adecuado (por ejemplo, `my-ai-project`) y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
 4. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
     - **Nombre del centro**: *un nombre único; por ejemplo, `my-ai-hub`*
     - **Suscripción**: *suscripción a Azure*
@@ -46,7 +46,7 @@ Comencemos creando un proyecto de Fundición de IA de Azure.
 
 ## Implementación de un modelo
 
-Ahora está listo para implementar un modelo *Phi-4-multimodal-instruct* para admitir indicaciones bidireccionales.
+Ahora estás listo para implementar un modelo *Phi-4-multimodal-instruct* para admitir indicaciones bidireccionales.
 
 1. En la barra de herramientas de la parte superior derecha de la página del proyecto de Fundición de IA de Azure, usa el icono **Características de versión preliminar** para habilitar la característica **Implementar modelos en el servicio de inferencia de modelos de Azure AI**. Esta característica garantiza que la implementación del modelo esté disponible para el servicio de inferencia de Azure AI, que usarás en el código de aplicación.
 2. En el panel de la izquierda de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
@@ -75,7 +75,7 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
 
 5. En la barra de herramientas de Cloud Shell, en el menú **Configuración**, selecciona **Ir a la versión clásica** (esto es necesario para usar el editor de código).
 
-6. En el panel de PowerShell, escribe los siguientes comandos para clonar el repo de GitHub para este ejercicio:
+6. En el panel de PowerShell, escribe los siguientes comandos para clonar el repo de GitHub que contiene archivos de código para este ejercicio:
 
     ```
     rm -r mslearn-ai-foundry -f
@@ -130,7 +130,7 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
 
     El archivo se abre en un editor de código.
 
-10. En el archivo de código, reemplaza el marcador de posición **your_project_endpoint** por la cadena de conexión del proyecto (copiado de la página **Información general** del proyecto en el Portal de la Fundición de IA de Azure) y el marcador de posición **your_model_deployment** por el nombre que asignaste a la implementación de modelo Phi-4-multimodal-instruct.
+10. En el archivo de código, reemplaza el marcador de posición **your_project_connection_string** por la cadena de conexión del proyecto (copiado de la página **Información general** del proyecto en el Portal de la Fundición de IA de Azure) y el marcador de posición **your_model_deployment** por el nombre que asignaste a la implementación de modelo Phi-4-multimodal-instruct.
 11. Después de reemplazar los marcadores de posición, en el editor de código, usa el comando **CTRL+S** o usa la acción de **hacer clic con el botón derecho > Guardar** para guardar los cambios y, a continuación, usa el comando **CTRL+Q** o la acción de **hacer clic con el botón derecho > Salir** para cerrar el editor de código mientras mantienes abierta la línea de comandos de Cloud Shell.
 
 ### Escritura de código para conectarte al proyecto y obtener un cliente de chat para el modelo

@@ -16,10 +16,12 @@ Este ejercicio dura aproximadamente **25** minutos.
 
 Un centro de Azure AI proporciona un área de trabajo de colaboración en la que puedes definir uno o varios *proyectos*. Vamos a crear un proyecto y un centro de Azure AI.
 
-1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure.
+1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen:
+
+    ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
 1. En la página principal, selecciona **+Crear proyecto**.
-1. En el Asistente para **crear un proyecto**, escribe un nombre de proyecto adecuado (como `my-ai-project`) y revisa los recursos de Azure que se crearán automáticamente para admitir el proyecto.
+1. En el asistente para **crear un proyecto**, escribe un nombre de proyecto adecuado (por ejemplo, `my-ai-project`) y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
 1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
     - **Nombre del centro**: *un nombre único; por ejemplo, `my-ai-hub`*
     - **Suscripción**: *suscripción a Azure*
@@ -95,16 +97,18 @@ Comencemos implementando un modelo del Catálogo de modelos. Es posible que pref
 1. Vuelve a la página principal del **catálogo de modelo**.
 1. Busca y selecciona el modelo `gpt-4`, tal como hiciste anteriormente.
 1. En la página **gpt-4**, selecciona **Implementar** e implementa el modelo con la siguiente configuración mediante la selección de **Personalizar** en los detalles de implementación:
-    - **Nombre de implementación**: *nombre único para la implementación de modelo, por ejemplo `gpt-4-model`*
-    - **Tipo de implementación**: estándar global
-    - **Versión del modelo**: *selecciona la versión predeterminada*
-    - **Recurso de IA conectado**: *tu conexión de recursos de Azure OpenAI*
+1. Implementa el modelo con la siguiente configuración mediante la selección de **Personalizar** en los detalles de implementación:
+    - **Nombre de implementación**: *nombre único para la implementación de modelo, por ejemplo `gpt-4`*
+    - **Tipo de implementación**: estándar
+    - **Versión del modelo**: 0613
+    - **Recurso de IA conectado**: *selecciona tu conexión de recursos de Azure OpenAI*
     - **Límite de frecuencia de tokens por minuto (miles)**: 5000
     - **Filtro de contenido**: DefaultV2
+    - **Habilitación de la cuota dinámica**: deshabilitada
       
-    > **Nota**: Reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
+    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 5000 TPM es suficiente para los datos que se usan en este ejercicio.
 
-1. Espera a que el **estado de aprovisionamiento** de la implementación sea **Correcto**.
+1. Espera a que la implementación se complete.
 
 ### Implementación de un modelo a través de *Modelos + puntos de conexión*
 
@@ -114,11 +118,11 @@ Si ya sabes exactamente qué modelo quieres implementar, es posible que prefiera
 1. En la pestaña **Implementaciones de modelos**, en la lista desplegable **+ Implementar modelo**, selecciona **Implementar modelo base**. A continuación, busca `Phi-3.5-mini-instruct` y confirma tu selección.
 1. Acepta la licencia del modelo.
 1. Implementa un modelo **Phi-3.5-mini-instruct** con la siguiente configuración:
-    - **Nombre de implementación**: *nombre único para la implementación de modelo, por ejemplo `phi-35-model`*
+    - **Nombre de implementación**: *nombre único para la implementación de modelo, por ejemplo `Phi-3.5-mini-instruct`*
     - **Tipo de implementación**: estándar global
     - **Detalles de implementación**: *usa la configuración predeterminada*
 
-1. Espera a que el **estado de aprovisionamiento** de la implementación sea **Correcto**.
+1. Espera a que la implementación se complete.
 
 ## Prueba de modelos en el área de juegos de chat
 
