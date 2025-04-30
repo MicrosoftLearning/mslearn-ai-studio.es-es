@@ -10,7 +10,7 @@ En este ejercicio, usarás el modelo de IA generativa *Phi-4-multimodal-instruct
 
 Este ejercicio dura aproximadamente **30** minutos.
 
-> **Nota**: este ejercicio se basa en los SDK de la versión preliminar, que podrían cambiar. Cuando ha sido necesario, hemos usado versiones específicas de paquetes; que pueden no ser las versiones disponibles más recientes.
+> **Nota**: este ejercicio se basa en los SDK de la versión preliminar, que podrían cambiar. Cuando ha sido necesario, hemos usado versiones específicas de paquetes; que pueden no ser las versiones disponibles más recientes. Puede que se produzcan algunos errores, comportamientos o advertencias inesperados.
 
 ## Creación de un proyecto de Fundición de IA de Azure
 
@@ -21,11 +21,11 @@ Comencemos creando un proyecto de Fundición de IA de Azure.
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
 2. En la página principal, selecciona **+Crear proyecto**.
-3. En el asistente para **crear un proyecto**, escribe un nombre de proyecto adecuado (por ejemplo, `my-ai-project`) y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
+3. En el asistente para **crear un proyecto**, escribe un nombre válido y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
 4. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
-    - **Nombre del centro**: *un nombre único; por ejemplo, `my-ai-hub`*
+    - **Nombre del centro**: *proporciona un nombre para el centro*.
     - **Suscripción**: *suscripción a Azure*
-    - **Grupo de recursos**: *crea un nuevo grupo de recursos con un nombre único (como `my-ai-resources`) o selecciona uno existente*
+    - **Grupo de recursos**: *crea o selecciona un grupo de recursos*.
     - **Ubicación**: selecciona cualquiera de las siguientes regiones\*:
         - Este de EE. UU.
         - Este de EE. UU. 2
@@ -34,7 +34,7 @@ Comencemos creando un proyecto de Fundición de IA de Azure.
         - Centro de Suecia
         - Oeste de EE. UU.
         - Oeste de EE. UU. 3
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de AI Services con un nombre adecuado (como `my-ai-services`) o usa uno existente.*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *Crear un nuevo servicio de IA*
     - **Conectar Búsqueda de Azure AI**: omite la conexión
 
     > \* En el momento de escribir esto, el modelo de Microsoft *Phi-4-multimodal-instruct* que usaremos en este ejercicio estaba disponible en estas regiones. Puedes comprobar la disponibilidad regional más reciente de los modelos específicos en la [documentación de Fundición de IA de Azure](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). En caso de que se alcance un límite de cuota regional más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
@@ -48,12 +48,12 @@ Comencemos creando un proyecto de Fundición de IA de Azure.
 
 Ahora estás listo para implementar un modelo *Phi-4-multimodal-instruct* para admitir indicaciones bidireccionales.
 
-1. En la barra de herramientas de la parte superior derecha de la página del proyecto de Fundición de IA de Azure, usa el icono **Características de versión preliminar** para habilitar la característica **Implementar modelos en el servicio de inferencia de modelos de Azure AI**. Esta característica garantiza que la implementación del modelo esté disponible para el servicio de inferencia de Azure AI, que usarás en el código de aplicación.
+1. En la barra de herramientas de la parte superior derecha de la página del proyecto de Fundición de IA de Azure, usa el icono **Características de versión preliminar** (**&#9215;**) para asegurarte de que está habilitada la característica **Implementar modelos en el servicio de inferencia de modelos de Azure AI**. Esta característica garantiza que la implementación del modelo esté disponible para el servicio de inferencia de Azure AI, que usarás en el código de aplicación.
 2. En el panel de la izquierda de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
 3. En la página **Modelos y puntos de conexión**, en la pestaña **Implementaciones de modelos**, en el menú **+ Implementar modelo**, selecciona **Implementar modelo base**.
 4. Busca el modelo **Phi-4-multimodal-instruct** en la lista y, a continuación, selecciónalo y confírmalo.
 5. Acepta el contrato de licencia si se te solicita y, a continuación, implementa el modelo con la siguiente configuración seleccionando **Personalizar** en los detalles de implementación:
-    - **Nombre de implementación**: *nombre único para la implementación del modelo, por ejemplo `Phi-4-multimodal` (recuerda el nombre que asignes, lo necesitarás más adelante*).
+    - **Nombre de implementación**: *nombre válido para la implementación de modelo*
     - **Tipo de implementación**: estándar global
     - **Detalles de implementación**: *usa la configuración predeterminada*
 6. Espera a que se **complete** el estado de aprovisionamiento de la implementación.
@@ -62,20 +62,27 @@ Ahora estás listo para implementar un modelo *Phi-4-multimodal-instruct* para a
 
 Ahora que has implementado el modelo, puedes usar la implementación en una aplicación cliente.
 
-> **Sugerencia**: puedes elegir desarrollar la solución mediante Phyton o Microsoft #C *(próximamente)*. Sigue las instrucciones de la sección adecuada para el idioma elegido.
+> **Sugerencia**: puedes elegir desarrollar la solución mediante C# de Python o Microsoft. Sigue las instrucciones de la sección adecuada para el idioma elegido.
 
 ### Preparación de la configuración de aplicación
 
 1. En el Portal de la Fundición de IA de Azure, mira la página **Información general** del proyecto.
 2. En el área **Detalles del proyecto**, anota la **Cadena de conexión del proyecto**. Usarás esta cadena de conexión para conectarte al proyecto en una aplicación cliente.
 3. Abre una nueva pestaña del explorador (mantén el Portal de la Fundición de IA de Azure abierto en la pestaña existente). En la nueva pestaña, explora [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicia sesión con tus credenciales de Azure, si se te solicita.
-4. Usa el botón **[\>_]** situado a la derecha de la barra de búsqueda en la parte superior de la página para crear una nueva instancia de Cloud Shell en Azure Portal, para lo que deberás seleccionar un entorno de ***PowerShell***. Cloud Shell proporciona una interfaz de la línea de comandos en un panel situado en la parte inferior de Azure Portal.
+
+    Cierra las notificaciones de bienvenida para ver la página principal de Azure Portal.
+
+1. Usa el botón **[\>_]** situado a la derecha de la barra de búsqueda en la parte superior de la página para crear una nueva instancia de Cloud Shell en Azure Portal, para lo que deberás seleccionar un entorno de ***PowerShell*** sin almacenamiento en tu suscripción.
+
+    Cloud Shell proporciona una interfaz de la línea de comandos en un panel situado en la parte inferior de Azure Portal. Puedes cambiar el tamaño o maximizar este panel para facilitar el trabajo.
 
     > **Nota**: si has creado anteriormente una instancia de Cloud Shell que usa un entorno de *Bash*, cámbiala a ***PowerShell***.
 
 5. En la barra de herramientas de Cloud Shell, en el menú **Configuración**, selecciona **Ir a la versión clásica** (esto es necesario para usar el editor de código).
 
-6. En el panel de PowerShell, escribe los siguientes comandos para clonar el repo de GitHub que contiene archivos de código para este ejercicio:
+    **<font color="red">Asegúrate de que has cambiado a la versión clásica de Cloud Shell antes de continuar.</font>**
+
+1. En el panel de Cloud Shell, escribe los siguientes comandos para clonar el repositorio de GitHub que contiene los archivos de código de este ejercicio (escribe el comando o cópialo en el Portapapeles y haz clic con el botón derecho en la línea de comandos y pega como texto sin formato):
 
     ```
     rm -r mslearn-ai-foundry -f
@@ -103,6 +110,8 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
     **Python**
 
     ```
+   python -m venv labenv
+   ./labenv/bin/Activate.ps1
    pip install python-dotenv azure-identity azure-ai-projects azure-ai-inference
     ```
 
@@ -155,7 +164,8 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
 
     **Python**
 
-    ```
+    ```python
+   # Add references
    from dotenv import load_dotenv
    from azure.identity import DefaultAzureCredential
    from azure.ai.projects import AIProjectClient
@@ -173,18 +183,20 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
 
     **C#**
 
-    ```
+    ```csharp
+   // Add references
    using Azure.Identity;
    using Azure.AI.Projects;
    using Azure.AI.Inference;
     ```
 
 3. En la función **principal**, en el comentario **Obtener ajustes de configuración**, observa que el código carga los valores de la cadena de conexión del proyecto y del nombre de implementación del modelo que has definido en el archivo de configuración.
-4. En el comentario **Inicializar el cliente del proyecto**, agrega el siguiente código para conectarte a tu proyecto de Azure AI Foundry usando las credenciales de Azure con las que has iniciado sesión:
+4. En el comentario **Inicializar el cliente del proyecto**, agrega el siguiente código para conectarte a tu proyecto de Fundición de IA de Azure usando las credenciales de Azure con las que has iniciado sesión:
 
     **Python**
 
-    ```
+    ```python
+   # Get configuration settings
    project_client = AIProjectClient.from_connection_string(
         conn_str=project_connection,
         credential=DefaultAzureCredential())
@@ -192,7 +204,8 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
 
     **C#**
 
-    ```
+    ```csharp
+   // Get configuration settings
    var projectClient = new AIProjectClient(project_connection,
                         new DefaultAzureCredential());
     ```
@@ -201,13 +214,15 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
 
     **Python**
 
-    ```
+    ```python
+   # Get a chat client
    chat_client = project_client.inference.get_chat_completions_client(model=model_deployment)
     ```
 
     **C#**
 
-    ```
+    ```csharp
+   // Get a chat client
    ChatCompletionsClient chat = projectClient.GetChatCompletionsClient();
     ```
 
@@ -219,6 +234,7 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
     **Python**
 
     ```python
+   # Get a response to text input
    response = chat_client.complete(
        messages=[
            SystemMessage(system_message),
@@ -229,7 +245,8 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
 
     **C#**
 
-    ```
+    ```csharp
+   // Get a response to text input
    var requestOptions = new ChatCompletionsOptions()
    {
    Model = model_deployment,
@@ -272,6 +289,7 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
     **Python**
 
     ```python
+   # Get a response to image input
    image_url = "https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/orange.jpg"
    image_format = "jpeg"
    request = Request(image_url, headers={"User-Agent": "Mozilla/5.0"})
@@ -293,7 +311,8 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
     **C#**
 
     ```csharp
-  string imageUrl = "https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/orange.jpg";
+  // Get a response to image input
+   string imageUrl = "https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/orange.jpg";
    ChatCompletionsOptions requestOptions = new ChatCompletionsOptions()
    {
        Messages = {
@@ -337,6 +356,7 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
     **Python**
 
     ```python
+   # Get a response to audio input
    file_path="https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/manzanas.mp3"
    response = chat_client.complete(
            messages=[
@@ -358,6 +378,7 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
     **C#**
 
     ```csharp
+   // Get a response to audio input
    string audioUrl="https://github.com/microsoftlearning/mslearn-ai-studio/raw/refs/heads/main/labfiles/multimodal/manzanas.mp3";
    var requestOptions = new ChatCompletionsOptions()
    {
@@ -373,7 +394,6 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
    var response = chat.Complete(requestOptions);
    Console.WriteLine(response.Value.Content);
     ```
-
 
 2. Usa el comando **CTRL+S** para guardar los cambios en el archivo de código. También puedes cerrar el editor de código (**CTRL+Q**) si lo deseas.
 
