@@ -10,8 +10,6 @@ En este ejercicio, usarás el Portal de la Fundición de IA de Azure para crear 
 
 Este ejercicio dura aproximadamente **30** minutos.
 
-> **Nota**: Algunas de las tecnologías que se usan en este ejercicio se encuentran en versión preliminar o en desarrollo activo. Puede que se produzcan algunos comportamientos, advertencias o errores inesperados.
-
 ## Apertura del Portal de la Fundición de IA de Azure
 
 Comencemos por iniciar sesión en el Portal de la Fundición de IA de Azure.
@@ -27,16 +25,16 @@ Comencemos por iniciar sesión en el Portal de la Fundición de IA de Azure.
 Un *centro* de Azure AI proporciona un área de trabajo de colaboración en la que puedes definir uno o varios *proyectos*. Crearemos un proyecto y un centro de Azure AI. Además, revisaremos los recursos de Azure que se crean para admitirlos.
 
 1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente para **crear un proyecto**, escribe un nombre válido y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
+1. En el asistente para **Crear un proyecto**, escribe un nombre válido para tu proyecto y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
 1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
-    - **Nombre del centro**: *proporciona un nombre para el centro*.
+    - **Nombre del centro**: *un nombre válido para el centro*
     - **Suscripción**: *suscripción a Azure*
-    - **Grupo de recursos**: *crea o selecciona un grupo de recursos*.
-    - **Ubicación**: selecciona **Ayudarme a elegir** y luego selecciona **gpt-4o** en la ventana Asistente de ubicación y usa la región recomendada\*
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *Crear un nuevo servicio de IA*
+    - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
+    - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de servicios de IA*
     - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. En caso de que se alcance un límite de cuota más adelante durante el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. En caso de que se supere un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
 1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
 1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
@@ -77,7 +75,7 @@ Supongamos que el proyecto necesita acceso a un segundo recurso de **Servicios d
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *selecciona el grupo de recursos que contiene los recursos existentes de Fundición de IA de Azure*.
     - **Región**: *selecciona cualquier región disponible distinta de la que contenga los recursos existentes*
-    - **Nombre**: *nombre adecuado para el segundo recurso de Servicios de Azure AI *
+    - **Nombre**: *un nombre adecuado para el segundo recurso de Servicios de Azure AI*
     - **Plan de tarifa**: estándar S0
 1. Espera a que se cree el recurso de AI Services.
 1. Vuelve a la pestaña del explorador del Portal de la Fundición de IA de Azure y, en la vista **Centro de gestión**, en el panel de navegación, en la sección del *<u>proyecto</u>*, mira la página **Recursos conectados**. Se muestran los recursos conectados existentes en el proyecto.
@@ -114,17 +112,17 @@ El proyecto también contiene recursos conectados para Azure OpenAI, lo que te p
 
 1. En el panel de la izquierda de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
 1. En la página **Modelos y puntos de conexión**, en la pestaña **Implementaciones de modelos**, en el menú **+ Implementar modelo**, selecciona **Implementar modelo base**.
-1. Busca el modelo **gpt-4o** en la lista, selecciona y confirma.
+1. Busca el modelo **gpt-4** en la lista, selecciona y confirma.
 1. Implementa el modelo con la siguiente configuración mediante la selección de **Personalizar** en los detalles de implementación:
-    - **Nombre de implementación**: *nombre válido para la implementación de modelo*
+    - **Nombre de implementación**: *un nombre válido para la implementación de modelo*
     - **Tipo de implementación**: estándar global
     - **Actualización automática de la versión**: habilitado
     - **** Versión del modelo: *selecciona la versión disponible más reciente*
     - **Recurso de IA conectado**: *selecciona tu conexión de recursos de Azure OpenAI*
-    - **Límite de velocidad de tokens por minuto (miles):** 50 000 *(o el máximo disponible en la suscripción si es inferior a 50 000)*
+    - **Límite de velocidad de tokens por minuto (miles):** 50 000 *(o el máximo disponible si tu suscripción es inferior a 50 000*)
     - **Filtro de contenido**: DefaultV2
 
-    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM es suficiente para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero se pueden producir errores si se supera el límite de velocidad.
+    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM deben ser suficientes para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero puedes experimentar errores si se supera el límite de velocidad.
 
 1. Espera a que la implementación se complete.
 

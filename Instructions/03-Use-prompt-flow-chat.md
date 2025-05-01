@@ -10,8 +10,6 @@ En este ejercicio, usarás el flujo de avisos del Portal de la Fundición de IA 
 
 Este ejercicio dura aproximadamente **30** minutos.
 
-> **Nota**: Algunas de las tecnologías que se usan en este ejercicio se encuentran en versión preliminar o en desarrollo activo. Puede que se produzcan algunos comportamientos, advertencias o errores inesperados.
-
 ## Creación de un proyecto de Fundición de IA de Azure
 
 Comencemos creando un proyecto de Fundición de IA de Azure.
@@ -21,40 +19,40 @@ Comencemos creando un proyecto de Fundición de IA de Azure.
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
 1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente para **crear un proyecto**, escribe un nombre válido y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
+1. En el asistente para **Crear un proyecto**, escribe un nombre válido para tu proyecto y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
 1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
-    - **Nombre del centro**: *proporciona un nombre para el centro*.
+    - **Nombre del centro**: *un nombre válido para el centro*
     - **Suscripción**: *suscripción a Azure*
-    - **Grupo de recursos**: *crea o selecciona un grupo de recursos*.
-    - **Ubicación**: selecciona **Ayudarme a elegir** y luego selecciona **gpt-4o** en la ventana Asistente de ubicación y usa la región recomendada\*
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *Crear un nuevo servicio de IA*
+    - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
+    - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4** en la ventana Asistente de ubicación y usa la región recomendada\*
+    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de servicios de IA*
     - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. En caso de que se alcance un límite de cuota más adelante durante el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. En caso de que se supere un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
 1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
 1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
 
     ![Captura de pantalla de los detalles de un proyecto de Azure AI en el Portal de la Fundición de IA de Azure.](./media/ai-foundry-project.png)
 
-## Configuración de la autorización de recursos
+## Configuración de autorización de recurso
 
-Las herramientas de flujo de avisos de Fundición de IA de Azure crean recursos basados en archivos que definen el flujo de avisos en una carpeta de Blob Storage. Antes de explorar el flujo de avisos, asegúrate de que el recurso de Servicios de Azure AI tiene el acceso necesario al almacén de Blob Storage para que pueda leerlos.
+Las herramientas de flujo de avisos de la Fundición de IA de Azure crean recursos basados en archivos que definen el flujo de avisos en una carpeta de Blob Storage. Antes de explorar el flujo de avisos, asegúrate de que el recurso de los Servicios de Azure IA tiene el acceso necesario a Blob Storage para que pueda leerlos.
 
-1. En el portal de la Fundición de IA de Azure, en el panel de navegación, selecciona el **centro de gestión** y visualiza la página de detalles del proyecto, que tiene un aspecto similar a esta imagen:
+1. En el Portal de la Fundición de IA de Azure, en el panel de navegación, selecciona el **Centro de administración** y visualiza la página de detalles del proyecto, que tiene un aspecto similar a esta imagen:
 
-    ![Captura de pantalla del centro de gestión.](./media/ai-foundry-manage-project.png)
+    ![Captura de pantalla del centro de administración.](./media/ai-foundry-manage-project.png)
 
-1. En **Grupo de recursos**, selecciona el grupo de recursos para abrirlo en Azure Portal, en una nueva pestaña del explorador; inicia sesión con tus credenciales de Azure si se te solicita y cierra las notificaciones de bienvenida para ver la página del grupo de recursos.
+1. En **Grupo de recursos**, selecciona tu grupo de recursos para abrirlo en Azure Portal en una nueva pestaña del explorador; inicia sesión con tus credenciales de Azure si se te solicita y cierra las notificaciones de bienvenida para ver la página del grupo de recursos.
 
     El grupo de recursos contiene todos los recursos de Azure para admitir el centro y el proyecto.
 
-1. Selecciona el recurso de **Servicios de Azure AI** para tu centro y así poder abrirlo. Luego, expande su sección **En administración de recursos** y selecciona la página **Identidad**:
+1. Selecciona el recurso de **Servicios de Azure AI** para el centro para abrirlo. A continuación, expande su sección en **Administración de recursos** y selecciona la página **Identidad**:
 
-    ![Captura de pantalla de la página de identidad de Servicios de Azure AI en Azure Portal.](./media/ai-services-identity.png)
+    ![Captura de pantalla de la página de identidad de Servicios de Azure IA en Azure Portal.](./media/ai-services-identity.png)
 
-1. Si el estado de la identidad asignada por el sistema es **Desactivado**, cámbialo a **Activado** y guarda los cambios. Espera a que se confirme el cambio de estado.
-1. Vuelve a la página del grupo de recursos y, luego, selecciona el recurso de la **Cuenta de almacenamiento** del centro y visualiza su página **Control de acceso (IAM)**:
+1. Si el estado de la identidad asignada por el sistema es **Desactivado**, cámbialo a **Activado** y guarda los cambios. A continuación, espera a que se confirme el cambio de estado.
+1. Vuelve a la página del grupo de recursos y, a continuación, selecciona el recurso de **Cuenta de almacenamiento** del centro y visualiza su página **Control de acceso (IAM)**:
 
     ![Captura de pantalla de la página de control de acceso de la cuenta de almacenamiento en Azure Portal.](./media/storage-access-control.png)
 
@@ -71,43 +69,43 @@ Ahora ya puedes implementar un modelo de lenguaje de IA generativa compatible co
 
 1. En el panel de la izquierda de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
 1. En la página **Modelos y puntos de conexión**, en la pestaña **Implementaciones de modelos**, en el menú **+ Implementar modelo**, selecciona **Implementar modelo base**.
-1. Busca el modelo **gpt-4o** en la lista, selecciona y confirma.
+1. Busca el modelo **gpt-4** en la lista, selecciona y confirma.
 1. Implementa el modelo con la siguiente configuración mediante la selección de **Personalizar** en los detalles de implementación:
-    - **Nombre de implementación**: *nombre válido para la implementación de modelo*
+    - **Nombre de implementación**: *un nombre válido para la implementación de modelo*
     - **Tipo de implementación**: estándar global
     - **Actualización automática de la versión**: habilitado
     - **** Versión del modelo: *selecciona la versión disponible más reciente*
     - **Recurso de IA conectado**: *selecciona tu conexión de recursos de Azure OpenAI*
-    - **Límite de velocidad de tokens por minuto (miles):** 50 000 *(o el máximo disponible en la suscripción si es inferior a 50 000)*
+    - **Límite de velocidad de tokens por minuto (miles):** 50 000 *(o el máximo disponible si tu suscripción es inferior a 50 000*)
     - **Filtro de contenido**: DefaultV2
 
-    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM es suficiente para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero se pueden producir errores si se supera el límite de velocidad.
+    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM deben ser suficientes para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero puedes experimentar errores si se supera el límite de velocidad.
 
 1. Espera a que la implementación se complete.
 
-## Creación del flujo de avisos
+## Creación de un flujo de avisos
 
-El flujo de avisos proporciona una manera de orquestar las indicaciones y otras actividades para definir una interacción con un modelo de IA generativa. En este ejercicio, usarás una plantilla para crear un flujo de chat básico para un asistente de IA en una agencia de viajes.
+Un flujo de avisos proporciona una manera de orquestar las indicaciones y otras actividades para definir una interacción con un modelo de IA generativa. En este ejercicio, usarás una plantilla para crear un flujo de chat básico para un asistente de IA en una agencia de viajes.
 
-1. En la barra de navegación del Portal de la Fundición de IA de Azure, en la sección **Compilar y personalizar**, selecciona **Flujo de avisos**.
-1. Crea un nuevo flujo basado en la plantilla **Flujo de chat** y específica `Travel-Chat` como nombre de carpeta.
+1. En la barra de navegación del Portal de la Fundición de IA de Azure, en la sección **Compilación y personalización**, selecciona **Flujo de avisos**.
+1. Crea un nuevo flujo basado en la plantilla **Flujo de chat**; especifica `Travel-Chat` como nombre de carpeta.
 
     Se crea un flujo de chat sencillo automáticamente.
 
-1. Para poder probar el flujo, necesitas un proceso y puede tardar un tiempo en empezar; por lo tanto, selecciona **Iniciar sesión de proceso** para empezar mientras exploras y modificas el flujo predeterminado.
+1. Para poder probar el flujo, necesitas procesar y esto puede tardar un tiempo en empezar; por lo tanto, selecciona **Iniciar sesión de proceso** para empezar mientras exploras y modificas el flujo predeterminado.
 
-1. Visualiza el flujo de avisos, que consta de una serie de *entradas*, *salidas* y *herramientas*. Puedes expandir y editar las propiedades de estos objetos en los paneles de edición de la izquierda y ver el flujo general como un gráfico a la derecha:
+1. Visualiza el flujo de avisos, que consta de una serie de *entradas*, *salidas* y *herramientas*. Puedes expandir y editar las propiedades de estos objetos en los paneles de edición de la izquierda y ver el flujo general como gráfico a la derecha:
 
     ![Captura de pantalla del editor de flujo de avisos.](./media/prompt-flow.png)
 
-1. Visualiza el panel **Entradas** y observa que hay dos entradas (historial de chats y la pregunta del usuario)
+1. Visualiza el panel **Entradas** y observa que hay dos entradas (historial de chat y la pregunta del usuario)
 1. Visualiza el panel **Salidas** y observa que hay una salida para reflejar la respuesta del modelo.
 1. Visualiza el panel de herramientas LLM de **Chat**, que contiene la información necesaria para enviar una indicación al modelo.
-1. En el panel de herramientas LLM de **Chat** LLM, en **Conexión**, selecciona la conexión para el recurso Azure OpenAI Service en el Centro de IA. A continuación, configura las siguientes propiedades de conexión:
+1. En el panel de herramientas LLM de **Chat**, en **Conexión**, selecciona la conexión para el recurso de Azure OpenAI Service en el centro de IA. A continuación, configura las siguientes propiedades de conexión:
     - **Api**: chat
-    - **deployment_name**: *el modelo gpt-4o que has implementado*
+    - **deployment_name**: *el modelo gpt-4 que has implementado*
     - **response_format**: {"type":"text"}
-1. Modifique el campo **Indicación** como se indica a continuación:
+1. Modifique el campo **Prompt** como se indica a continuación:
 
    ```yml
    # system:
@@ -138,23 +136,23 @@ El flujo de avisos proporciona una manera de orquestar las indicaciones y otras 
    {{question}}
    ```
 
-    Lee la indicación que agregaste para que estés familiarizado con ella. Consta de un mensaje del sistema (que incluye un objetivo, una definición de sus funcionalidades y algunas instrucciones) y el historial de chats (en orden para mostrar cada entrada de preguntas de usuario y cada salida de respuesta del asistente anterior).
+    Lee la indicación que agregaste para que estés familiarizado con ella. Consta de un mensaje del sistema (que incluye un objetivo, una definición de sus funcionalidades y algunas instrucciones) y el historial de chat (ordenado para mostrar cada entrada de preguntas de usuario y cada salida de respuesta del asistente anterior)
 
-1. En la sección **Entradas** de la herramienta LLM de **Chat** (en la indicación), asegúrate de que se establecen las siguientes variables:
+1. En la sección **Entradas** de la herramienta LLM de **Chat** (bajo la indicación), asegúrate de que se establecen las siguientes variables:
     - **question** (string): ${inputs.question}
     - **chat_history** (string): ${inputs.chat_history}
 
 1. Guarda los cambios en el flujo.
 
-    > **Nota**: en este ejercicio, nos ceñiremos a un flujo de chat sencillo, pero ten en cuenta que el editor de flujo de avisos incluye muchas otras herramientas que puedes agregar al flujo, lo que te permite crear una lógica compleja para orquestar las conversaciones.
+    > **Nota**: en este ejercicio, nos ceñiremos a un flujo de chat sencillo, pero ten en cuenta que el editor de flujo de avisos incluye muchas otras herramientas que puedes agregar al flujo, lo que te permite crear una lógica compleja para organizar conversaciones.
 
 ## Prueba del flujo
 
 Ahora que has desarrollado el flujo, puedes usar la ventana de chat para probarlo.
 
-1. Asegúrese de que la sesión de proceso se está ejecutando. De lo contrario, espera a que se inicie.
-1. En la barra de herramientas, selecciona **Chat** para abrir el panel de **Chat** y espera a que el chat se inicialice.
-1. Escriba la consulta: `I have one day in London, what should I do?` y revise la salida. El panel de Chat debe tener un aspecto similar al siguiente:
+1. Asegúrese de que la sesión de proceso se está ejecutando. A continuación, espera a que se inicie.
+1. En la barra de herramientas, selecciona **Chat** para abrir el panel **Chat** y espera a que el chat se inicialice.
+1. Escriba la consulta: `I have one day in London, what should I do?` y revise la salida. El panel Chat debe tener un aspecto similar al siguiente:
 
     ![Captura de pantalla del panel de chat del flujo de avisos.](./media/prompt-flow-chat.png)
 
@@ -162,9 +160,9 @@ Ahora que has desarrollado el flujo, puedes usar la ventana de chat para probarl
 
 Cuando esté satisfecho con el comportamiento del flujo que creó, puede implementarlo.
 
-> **Nota**: la implementación puede tardar mucho tiempo y puede verse afectada por las restricciones de capacidad en tu suscripción o inquilino.
+> **Nota**: la implementación puede tardar mucho tiempo y puede verse afectada por restricciones de capacidad en tu suscripción o inquilino.
 
-1. En la barra de herramientas, selecciona **Implementar** para implementar el flujo con la siguiente configuración:
+1. En la barra de herramientas, selecciona **Implementar** e implementa el flujo con la siguiente configuración:
     - **Configuración básica**:
         - **Punto de conexión**: Nuevo
         - **Nombre del punto de conexión**: *Escriba un nombre único*
@@ -174,23 +172,23 @@ Cuando esté satisfecho con el comportamiento del flujo que creó, puede impleme
         - **Recopilación de datos de inferencia**: deshabilitado
     - **Configuración avanzada**:
         - *Use la configuración predeterminada*
-1. En el Portal de la Fundición de IA de Azure, en el panel de navegación, en la sección **Mis recursos**, selecciona la página **Modelos + puntos de conexión**.
+1. En el Portal de la Fundición de IA de Azure, en el panel de navegación, en la sección **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
 
-    Si la página se abre para el modelo gpt-4o, usa su botón **Atrás** para ver todos los modelos y puntos de conexión.
+    Si la página se abre para tu modelo gpt-4o, usa su botón **Atrás** para ver todos los modelos y puntos de conexión.
 
 1. Inicialmente, la página solo puede mostrar las implementaciones del modelo. La implementación puede tardar algún tiempo antes de que se muestre e incluso más antes de que se cree correctamente.
-1. Cuando la implementación se haya realizado *correctamente*, selecciónala. A continuación, visualiza su página **Prueba**.
+1. Cuando la implementación se haya realizado *correctamente*, selecciónela. A continuación, visualice su página **Prueba**.
 
-    > **Sugerencia**: si la página de prueba describe el punto de conexión como incorrecto, vuelve a los **modelos y puntos de conexión** y espera un minuto o así antes de actualizar la vista y volver a seleccionar el punto de conexión.
+    > **Sugerencia**: si la página de prueba describe el punto de conexión como incorrecto, vuelve a los **modelos y puntos de conexión** y espera un minuto aproximadamente antes de actualizar la vista y volver a seleccionar el punto de conexión.
 
 1. Escriba el aviso `What is there to do in San Francisco?` y revise la respuesta.
 1. Escriba el aviso `Tell me something about the history of the city.` y revise la respuesta.
 
-    El panel de Prueba debe ser similar a este:
+    El panel de prueba debe ser similar a este:
 
-    ![Captura de pantalla de la página de prueba del punto de conexión del flujo de avisos implementado.](./media/deployed-flow.png)
+    ![Captura de pantalla de la página de prueba del punto de conexión de flujo de avisos implementado.](./media/deployed-flow.png)
 
-1. Visualiza la página **Consumir** del punto de conexión y ten en cuenta que contiene información de la conexión y código de ejemplo que puedes usar para compilar una aplicación cliente para el punto de conexión, lo que te permite integrar la solución del flujo de avisos en una aplicación como una aplicación de IA generativa.
+1. Visualiza la página **Consumir** del punto de conexión y ten en cuenta que contiene información de la conexión y código de ejemplo que puedes usar para compilar una aplicación cliente para el punto de conexión, lo que te permite integrar la solución del flujo de avisos en una aplicación como aplicación de IA generativa.
 
 ## Limpieza
 
