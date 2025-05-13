@@ -10,6 +10,8 @@ En este ejercicio, usarás evaluaciones manuales y automatizadas para evaluar el
 
 Este ejercicio dura aproximadamente **30** minutos.
 
+> **Nota**: Algunas de las tecnologías que se usan en este ejercicio se encuentran en versión preliminar o en desarrollo activo. Puede que se produzcan algunos comportamientos, advertencias o errores inesperados.
+
 ## Creación de un proyecto de Fundición de IA de Azure
 
 Comencemos creando un proyecto de Fundición de IA de Azure.
@@ -19,7 +21,7 @@ Comencemos creando un proyecto de Fundición de IA de Azure.
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
 1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente para **Crear un proyecto**, escribe un nombre válido para tu proyecto y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
+1. En el asistente para **crear un proyecto**, escribe un nombre válido y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
 1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
     - **Nombre del centro**: *un nombre válido para el centro*
     - **Suscripción**: *suscripción a Azure*
@@ -32,7 +34,7 @@ Comencemos creando un proyecto de Fundición de IA de Azure.
     - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de servicios de IA*
     - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* En el momento de redactar, estas regiones admiten la evaluación de las métricas de seguridad de inteligencia artificial.
+    > \* En el momento de redactar este documento, estas regiones admiten la evaluación de las métricas de seguridad de la inteligencia artificial. La disponibilidad del modelo está restringida por cuotas regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro proyecto en otra región.
 
 1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
 1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
@@ -45,17 +47,17 @@ En este ejercicio, evaluarás el rendimiento de un modelo gpt-4o-mini. También 
 
 1. En el panel de navegación izquierdo de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
 1. En la página **Modelos y puntos de conexión**, en la pestaña **Implementaciones de modelos**, en el menú **+ Implementar modelo**, selecciona **Implementar modelo base**.
-1. Busca el modelo **gpt-4** en la lista, selecciona y confirma.
+1. Busca el modelo **gpt-4o** en la lista, selecciona y confirma.
 1. Implementa el modelo con la siguiente configuración mediante la selección de **Personalizar** en los detalles de implementación:
-    - **Nombre de implementación**: *un nombre válido para la implementación de modelo*
+    - **Nombre de implementación**: *nombre válido para la implementación de modelo*
     - **Tipo de implementación**: estándar global
     - **Actualización automática de la versión**: habilitado
     - **** Versión del modelo: *selecciona la versión disponible más reciente*
     - **Recurso de IA conectado**: *selecciona tu conexión de recursos de Azure OpenAI*
-    - **Límite de velocidad de tokens por minuto (miles):** 50 000 *(o el máximo disponible si tu suscripción es inferior a 50 000*)
+    - **Límite de velocidad de tokens por minuto (miles):** 50 000 *(o el máximo disponible en la suscripción si es inferior a 50 000)*
     - **Filtro de contenido**: DefaultV2
 
-    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM deben ser suficientes para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero puedes experimentar errores si se supera el límite de velocidad.
+    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM es suficiente para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero se pueden producir errores si se supera el límite de velocidad.
 
 1. Espera a que la implementación se complete.
 1. Vuelve a la página **Modelos y puntos de conexión** y repite los pasos anteriores para implementar un modelo **gpt-4o-mini** con la misma configuración.
@@ -64,31 +66,17 @@ En este ejercicio, evaluarás el rendimiento de un modelo gpt-4o-mini. También 
 
 Puedes revisar manualmente las respuestas del modelo en función de los datos de prueba. La revisión manual te permite probar entradas diferentes para evaluar si el modelo funciona según lo previsto.
 
-1. En una nueva pestaña del explorador, descarga el archivo [travel_evaluation_data.csv](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.csv) de `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.csv` y guárdalo en una carpeta local.
+1. En una nueva pestaña del explorador, descarga el archivo [travel_evaluation_data.jsonl](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl) de `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl` y guárdalo en una carpeta local como **travel_evaluation_data.jsonl** (asegúrate de guardarlo como archivo .jsonl, no como archivo .txt).
 1. De nuevo en la pestaña Portal de la Fundición de IA de Azure, en el panel de navegación, en la sección **Evaluar y mejorar**, selecciona **Evaluación**.
 1. En la página **Evaluación**, visualiza la pestaña **Evaluaciones manuales** y selecciona **+ Nueva evaluación manual**.
+1. En la sección **Configuraciones**, en la lista **Modelo**, selecciona la implementación de tu modelo **gpt-4o-mini**.
 1. Cambia el **mensaje del sistema** a las siguientes instrucciones para un asistente de viajes de IA:
 
    ```
-   Objective: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
-
-   Capabilities:
-   - Provide up-to-date travel information, including destinations, accommodations, transportation, and local attractions.
-   - Offer personalized travel suggestions based on user preferences, budget, and travel dates.
-   - Share tips on packing, safety, and navigating travel disruptions.
-   - Help with itinerary planning, including optimal routes and must-see landmarks.
-   - Answer common travel questions and provide solutions to potential travel issues.
-    
-   Instructions:
-   1. Engage with the user in a friendly and professional manner, as a travel agent would.
-   2. Use available resources to provide accurate and relevant travel information.
-   3. Tailor responses to the user's specific travel needs and interests.
-   4. Ensure recommendations are practical and consider the user's safety and comfort.
-   5. Encourage the user to ask follow-up questions for further assistance.
+   Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. En la sección **Configuraciones**, en la lista **Modelo**, selecciona la implementación de tu modelo **gpt-4o-mini**.
-1. En la sección **Resultado de evaluación manual**, selecciona **Importar datos de prueba** y carga el archivo **travel_evaluation_data.csv** que descargaste anteriormente; asigna los campos del conjunto de datos de la siguiente manera:
+1. En la sección **Resultado de evaluación manual**, selecciona **Importar datos de prueba** y carga el archivo **travel_evaluation_data.jsonl** que has descargado anteriormente; asigna los campos del conjunto de datos de la siguiente manera:
     - **Entrada**: pregunta
     - **Respuesta esperada**: ExpectedResponse
 1. Revisa las preguntas y las respuestas esperadas en el archivo de prueba: las usarás para evaluar las respuestas que genera el modelo.
@@ -112,24 +100,10 @@ La evaluación automatizada es un enfoque que intenta abordar estas deficiencias
 1. Cambia el **mensaje del sistema** a las mismas instrucciones para un asistente de viajes de IA que usaste anteriormente:
 
    ```
-   Objective: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
-
-   Capabilities:
-   - Provide up-to-date travel information, including destinations, accommodations, transportation, and local attractions.
-   - Offer personalized travel suggestions based on user preferences, budget, and travel dates.
-   - Share tips on packing, safety, and navigating travel disruptions.
-   - Help with itinerary planning, including optimal routes and must-see landmarks.
-   - Answer common travel questions and provide solutions to potential travel issues.
-    
-   Instructions:
-   1. Engage with the user in a friendly and professional manner, as a travel agent would.
-   2. Use available resources to provide accurate and relevant travel information.
-   3. Tailor responses to the user's specific travel needs and interests.
-   4. Ensure recommendations are practical and consider the user's safety and comfort.
-   5. Encourage the user to ask follow-up questions for further assistance.
+   Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. En la sección **Configurar datos de prueba**, ten en cuenta que puedes usar un modelo GPT para generar datos de prueba automáticamente (que puedes editar y complementar para que coincidan con tus propias expectativas), usar un conjunto de datos existente o cargar un archivo. En este ejercicio, selecciona **Usar conjunto de datos existente** y, a continuación, selecciona el conjunto de datos **travel_evaluation_data_csv_*xxxx...*** (que se creó al cargar el archivo .csv anteriormente).
+1. En la sección **Configurar datos de prueba**, ten en cuenta que puedes usar un modelo GPT para generar datos de prueba automáticamente (que puedes editar y complementar para que coincidan con tus propias expectativas), usar un conjunto de datos existente o cargar un archivo. En este ejercicio, selecciona **Usar conjunto de datos existente** y después selecciona el conjunto de datos **travel_evaluation_data_jsonl_*xxxx...*** (que se ha creado al cargar el archivo .jsonl anteriormente).
 1. Revisa las filas de ejemplo del conjunto de datos y, a continuación, en la sección **Elegir la columna de datos**, selecciona las siguientes asignaciones de columnas:
     - **Consulta**: pregunta
     - **Contexto**: *deja este espacio en blanco. Se usa para evaluar la "base" al asociar un origen de datos contextual con el modelo.*
@@ -138,7 +112,7 @@ La evaluación automatizada es un enfoque que intenta abordar estas deficiencias
     - Calidad de IA (asistida por IA)
     - Riesgo y seguridad (asistido por IA)
     - Calidad de IA (NLP)
-1. En la lista **Elegir una implementación de modelo como juez**, selecciona el modelo **gpt-4o**. Este modelo se usará para evaluar las respuestas del modelo ***gpt-4o-mini** para las métricas de comparación de IA generativa y de calidad relacionadas con el lenguaje.
+1. En la lista **Elegir una implementación de modelo como juez**, selecciona el modelo **gpt-4o**. Este modelo se usará para evaluar las respuestas del modelo **gpt-4o-mini** para las métricas de comparación de IA generativa y de calidad relacionadas con el lenguaje.
 1. Selecciona **Crear** para iniciar el proceso de evaluación y espera a que se complete. Esto puede tardar unos minutos.
 
     > **Sugerencia**: si se produce un error que indica que los permisos del proyecto se han establecido, espera un minuto y, a continuación, selecciona **Crear** de nuevo. Los permisos de recursos para un proyecto recién creado pueden tardar algún tiempo en propagarse.
