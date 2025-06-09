@@ -4,50 +4,39 @@ lab:
   description: Obtén información sobre cómo usar los flujos de avisos para administrar diálogos conversacionales y asegurarte de que las indicaciones se construyen y orquestan para obtener los mejores resultados.
 ---
 
-# Uso de un flujo de avisos para administrar la conversación en una aplicación de chat
+## Uso de un flujo de avisos para administrar la conversación en una aplicación de chat
 
 En este ejercicio, usarás el flujo de avisos del Portal de la Fundición de IA de Azure para crear una aplicación de chat personalizada que use una indicación de usuario y el historial de chat como entradas, y use un modelo GPT de Azure OpenAI para generar una salida.
 
 Este ejercicio dura aproximadamente **30** minutos.
 
-## Creación de un proyecto de Fundición de IA de Azure
+> **Nota**: Algunas de las tecnologías que se usan en este ejercicio se encuentran en versión preliminar o en desarrollo activo. Puede que se produzcan algunos comportamientos, advertencias o errores inesperados.
 
-Comencemos creando un proyecto de Fundición de IA de Azure.
+## Creación de un centro y un proyecto de Fundición de IA de Azure
 
-1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen:
+Las características de Fundición de IA de Azure que usaremos en este ejercicio requieren un proyecto basado en un recurso del *centro* de Fundición de IA de Azure.
+
+1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen (cierra el panel **Ayuda** si está abierto):
 
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
-1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente para **Crear un proyecto**, escribe un nombre válido para tu proyecto y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
-1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
-    - **Nombre del centro**: *un nombre válido para el centro*
+1. En el explorador, ve a `https://ai.azure.com/managementCenter/allResources` y selecciona **Crear**. A continuación, elige la opción para crear un nuevo **recurso del centro de IA**.
+1. En el asistente para **crear un proyecto**, escribe un nombre válido para el proyecto y si se te sugiere un centro existente, selecciona la opción para crear uno nuevo y expande **Opciones avanzadas** para especificar la siguiente configuración para el proyecto:
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
-    - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4** en la ventana Asistente de ubicación y usa la región recomendada\*
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de servicios de IA*
-    - **Conectar Búsqueda de Azure AI**: omite la conexión
+    - **Nombre del centro**: un nombre válido para el centro
+    - **Ubicación**: Este de EE. UU. 2 o Centro de Suecia\*
 
-    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. En caso de que se supere un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > \* Algunos de los recursos de Azure AI están restringidos por cuotas de modelo regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
-1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
-
-    ![Captura de pantalla de los detalles de un proyecto de Azure AI en el Portal de la Fundición de IA de Azure.](./media/ai-foundry-project.png)
+1. Espera a que se cree el proyecto.
 
 ## Configuración de autorización de recurso
 
-Las herramientas de flujo de avisos de la Fundición de IA de Azure crean recursos basados en archivos que definen el flujo de avisos en una carpeta de Blob Storage. Antes de explorar el flujo de avisos, asegúrate de que el recurso de los Servicios de Azure IA tiene el acceso necesario a Blob Storage para que pueda leerlos.
+Las herramientas de flujo de avisos de la Fundición de IA de Azure crean recursos basados en archivos que definen el flujo de avisos en una carpeta de Blob Storage. Antes de explorar el flujo de avisos, asegúrate de que el recurso de Fundición de IA de Azure tiene el acceso necesario a Blob Storage para que pueda leerlos.
 
-1. En el Portal de la Fundición de IA de Azure, en el panel de navegación, selecciona el **Centro de administración** y visualiza la página de detalles del proyecto, que tiene un aspecto similar a esta imagen:
-
-    ![Captura de pantalla del centro de administración.](./media/ai-foundry-manage-project.png)
-
-1. En **Grupo de recursos**, selecciona tu grupo de recursos para abrirlo en Azure Portal en una nueva pestaña del explorador; inicia sesión con tus credenciales de Azure si se te solicita y cierra las notificaciones de bienvenida para ver la página del grupo de recursos.
-
-    El grupo de recursos contiene todos los recursos de Azure para admitir el centro y el proyecto.
-
-1. Selecciona el recurso de **Servicios de Azure AI** para el centro para abrirlo. A continuación, expande su sección en **Administración de recursos** y selecciona la página **Identidad**:
+1. En una nueva pestaña del explorador, abre [Azure Portal](https://portal.azure.com) en `https://portal.azure.com`, inicia sesión con tus credenciales de Azure si se te solicita y visualiza el grupo de recursos que contiene los recursos del centro de Azure AI.
+1. Selecciona el recurso de **Fundición de IA de Azure** para el centro para abrirlo. A continuación, expande su sección en **Administración de recursos** y selecciona la página **Identidad**:
 
     ![Captura de pantalla de la página de identidad de Servicios de Azure IA en Azure Portal.](./media/ai-services-identity.png)
 
@@ -56,12 +45,11 @@ Las herramientas de flujo de avisos de la Fundición de IA de Azure crean recurs
 
     ![Captura de pantalla de la página de control de acceso de la cuenta de almacenamiento en Azure Portal.](./media/storage-access-control.png)
 
-1. Agrega una asignación de roles al rol `Storage blob data reader` para la identidad administrada que usa el recurso de Servicios de Azure AI:
+1. Agrega una asignación de roles al rol `Storage blob data reader` para la identidad administrada que usa el recurso de Fundición de IA de Azure:
 
     ![Captura de pantalla de la página de control de acceso de la cuenta de almacenamiento en Azure Portal.](./media/assign-role-access.png)
 
-1. Cuando hayas revisado y asignado el acceso al rol para permitir que la identidad administrada de Servicios de Azure AI lea blobs en la cuenta de almacenamiento, cierra la pestaña Azure Portal y vuelve al Portal de la Fundición de IA de Azure.
-1. En el Portal de la Fundición de IA de Azure, en el panel de navegación, selecciona **Ir al proyecto** para volver a la página principal del proyecto.
+1. Cuando hayas revisado y asignado el acceso al rol para permitir que la identidad administrada de Fundición de IA de Azure lea blobs en la cuenta de almacenamiento, cierra la pestaña Azure Portal y vuelve al Portal de la Fundición de IA de Azure.
 
 ## Implementación de un modelo de IA generativa
 
@@ -69,17 +57,17 @@ Ahora ya puedes implementar un modelo de lenguaje de IA generativa compatible co
 
 1. En el panel de la izquierda de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
 1. En la página **Modelos y puntos de conexión**, en la pestaña **Implementaciones de modelos**, en el menú **+ Implementar modelo**, selecciona **Implementar modelo base**.
-1. Busca el modelo **gpt-4** en la lista, selecciona y confirma.
+1. Busca el modelo **gpt-4o** en la lista, selecciona y confirma.
 1. Implementa el modelo con la siguiente configuración mediante la selección de **Personalizar** en los detalles de implementación:
-    - **Nombre de implementación**: *un nombre válido para la implementación de modelo*
+    - **Nombre de implementación**: *nombre válido para la implementación de modelo*
     - **Tipo de implementación**: estándar global
     - **Actualización automática de la versión**: habilitado
     - **** Versión del modelo: *selecciona la versión disponible más reciente*
     - **Recurso de IA conectado**: *selecciona tu conexión de recursos de Azure OpenAI*
-    - **Límite de velocidad de tokens por minuto (miles):** 50 000 *(o el máximo disponible si tu suscripción es inferior a 50 000*)
+    - **Límite de velocidad de tokens por minuto (miles):** 50 000 *(o el máximo disponible en la suscripción si es inferior a 50 000)*
     - **Filtro de contenido**: DefaultV2
 
-    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM deben ser suficientes para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero puedes experimentar errores si se supera el límite de velocidad.
+    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM es suficiente para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero se pueden producir errores si se supera el límite de velocidad.
 
 1. Espera a que la implementación se complete.
 
@@ -91,6 +79,8 @@ Un flujo de avisos proporciona una manera de orquestar las indicaciones y otras 
 1. Crea un nuevo flujo basado en la plantilla **Flujo de chat**; especifica `Travel-Chat` como nombre de carpeta.
 
     Se crea un flujo de chat sencillo automáticamente.
+
+    > **Sugerencia**: si se produce un error de permisos. Espera unos minutos e inténtalo de nuevo, especificando un nombre de flujo diferente si es necesario.
 
 1. Para poder probar el flujo, necesitas procesar y esto puede tardar un tiempo en empezar; por lo tanto, selecciona **Iniciar sesión de proceso** para empezar mientras exploras y modificas el flujo predeterminado.
 
