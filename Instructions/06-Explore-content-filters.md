@@ -16,7 +16,7 @@ Este ejercicio dura aproximadamente **25** minutos.
 
 ## Implementación de un modelo en un proyecto de Fundición de IA de Azure
 
-Comencemos implementando un modelo en un proyecto de Fundición de IA de Azure.
+Comencemos con la implementación de un modelo en un proyecto de Fundición de IA de Azure.
 
 1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen (cierra el panel **Ayuda** si está abierto):
 
@@ -40,8 +40,9 @@ Comencemos implementando un modelo en un proyecto de Fundición de IA de Azure.
 
     > \* En el momento de escribir esto, el modelo de Microsoft *Phi-4* que usaremos en este ejercicio estaba disponible en estas regiones. Puedes comprobar la disponibilidad regional más reciente de los modelos específicos en la [documentación de Fundición de IA de Azure](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). En caso de que se alcance un límite de cuota regional más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Selecciona **Crear** y espera a que se cree el proyecto, incluida la implementación del modelo Phi-4 que seleccionaste.
-1. Cuando se cree el proyecto, el área de juegos de chat se abrirá automáticamente.
+1. Selecciona **Crear** y espera a que tu proyecto se cree.
+1. Cuando se te solicite información de Phi-4, acepta los términos de uso e implementa el modelo.
+1. Cuando se implemente el modelo, selecciona el botón azul situado en la parte superior de la información de implementación para abrir el área de juegos.
 1. En el panel **Configuración**, anota el nombre de la implementación del modelo; que debe ser **Phi-4**.
 
 ## Chatear con el filtro de contenido
@@ -128,9 +129,9 @@ Cuando el filtro de contenido predeterminado no satisface tus necesidades, puede
 
     Además, se proporcionan protecciones de *escudo de solicitud* para mitigar los intentos deliberados de abuso de la aplicación de IA generativa.
 
-1. Cambia el umbral de cada categoría de filtro de entrada a **Bloque bajo, medio y alto**.
+1. Cambia el umbral de cada categoría de filtro de entrada a **Bloquear todo**.
 
-1. En la página **Filtro de salida**, revisa la configuración que se puede aplicar a las respuestas de salida y cambia el umbral de cada categoría a **Bloque bajo, medio y alto**.
+1. En la página **Filtro de salida**, revisa la configuración que se puede aplicar a las respuestas de salida y cambia el umbral de cada categoría a **Bloquear todo**.
 
 1. En la página **Implementación**, selecciona la implementación del modelo **Phi-4** para aplicarle el nuevo filtro de contenido; confirma que deseas reemplazar el filtro de contenido existente cuando se te solicite.
 
@@ -142,7 +143,7 @@ Cuando el filtro de contenido predeterminado no satisface tus necesidades, puede
 
 Vamos a realizar un chat final con el modelo para ver el efecto del filtro de contenido personalizado.
 
-1. En el panel de navegación, selecciona **Área de juegos** y abre el **área de juegos de chat**.
+1. En el panel de navegación, selecciona **Áreas de juegos** y abre el **área de juegos de chat**.
 1. Asegúrate de que se ha iniciado una nueva sesión con el modelo Phi-4.
 1. Envía la siguiente indicación y visualiza la respuesta:
 
@@ -152,7 +153,7 @@ Vamos a realizar un chat final con el modelo para ver el efecto del filtro de co
 
     Esta vez, el filtro de contenido debe bloquear la solicitud en función de lo que podría interpretarse como una referencia a autolesión.
 
-    > **Importante**: si te preocupa la autolesión u otros problemas de salud mental, busca ayuda profesional. Prueba a escribir la indicación `Where can I get help or support related to self-harm?`.
+    > **Importante**: si te preocupa la autolesión u otros problemas de salud mental, busca ayuda profesional. Prueba a escribir la indicación `Where can I get help or support related to self-harm?`
 
 1. Ahora, prueba esta indicación:
 
