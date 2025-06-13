@@ -25,7 +25,7 @@ Comencemos con la implementación de un modelo en un proyecto de Fundición de I
 1. En la página principal, en la sección **Explorar modelos y funcionalidades**, busca el modelo `Phi-4`, que usaremos en nuestro proyecto.
 1. En los resultados de la búsqueda, selecciona el modelo **Phi-4** para ver sus detalles y, a continuación, en la parte superior de la página del modelo, selecciona **Usar este modelo**.
 1. Cuando se te pida que crees un proyecto, escribe un nombre válido para el proyecto y expande **Opciones avanzadas**.
-1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
+1. Selecciona **Personalizar** y especifica la siguiente configuración para el proyecto:
     - **Recurso de Fundición de IA de Azure**: *un nombre válido para el recurso de Fundición de IA de Azure*
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea o selecciona un grupo de recursos*

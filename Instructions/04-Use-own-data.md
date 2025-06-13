@@ -14,22 +14,25 @@ Este ejercicio dura aproximadamente **45** minutos.
 
 > **Nota**: este ejercicio se basa en servicios de versión preliminar, que están sujetos a cambios.
 
-## Creación de un recurso de Fundición de IA de Azure
+## Creación de un centro y un proyecto de Fundición de IA de Azure
 
-Comencemos creando un recurso de Fundición de IA de Azure.
+Las características de Fundición de IA de Azure que usaremos en este ejercicio requieren un proyecto basado en un recurso del *centro* de Fundición de IA de Azure.
 
-1. En un explorador web, abre [Azure Portal](https://portal.azure.com) en `https://portal.azure` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicies sesión.
-1. Crea un nuevo recurso `Azure AI Foundry` con los valores siguientes:
+1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen (cierra el panel **Ayuda** si está abierto):
+
+    ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
+
+1. En el explorador, ve a `https://ai.azure.com/managementCenter/allResources` y selecciona **Crear**. A continuación, elige la opción para crear un nuevo **recurso del centro de IA**.
+1. En el asistente para **crear un proyecto**, escribe un nombre válido para el proyecto y usa el vínculo **Cambiar nombre del centro** para especificar un nombre válido para el nuevo centro. Expande **Opciones avanzadas** y especifica los siguientes valores para el proyecto:
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
-    - **Nombre**: *un nombre válido para el recurso de Fundición de IA de Azure*
-    - **Región**: selecciona una de las siguientes regiones:
-        - Este de EE. UU. 2
-        - Centro de Suecia
-    - **Nombre de proyecto predeterminado**: *un nombre válido para el proyecto*
+    - **Región**: Este de EE. UU. 2 o Centro de Suecia (*En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región*).
 
-1. Espera a que se cree el recurso y ve a su página en Azure Portal.
-1. En la página del recurso de Fundición de IA de Azure, selecciona **Ir al Portal de la Fundición de IA de Azure**.
+    > **Nota**: Si trabajas en una suscripción a Azure en la que se usan directivas para restringir los nombres de recursos permitidos, es posible que tengas que usar el vínculo situado en la parte inferior del cuadro de diálogo **Crear un nuevo proyecto** para crear el centro con Azure Portal.
+
+    > **Sugerencia**: si el botón **Crear** sigue deshabilitado, asegúrate de cambiar el nombre del centro a un valor alfanumérico único.
+
+1. Espera a que se cree el proyecto y ve al proyecto.
 
 ## Implementación de modelos
 
@@ -59,40 +62,47 @@ Necesitas dos modelos para implementar la solución:
 Los datos para tu aplicación constan de un conjunto de folletos de viaje en formato PDF de la agencia de viajes ficticia *Margie's Travel*. Vamos a agregarlos al proyecto.
 
 1. En la pestaña del nuevo explorador, descarga el [archivo comprimido de los folletos](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) desde `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` y extráelo en una carpeta denominada **folletos** en tu sistema de archivos local.
-1. En el Portal de la Fundición de IA de Azure, en el proyecto, en el panel de navegación de la izquierda, selecciona **Áreas de juegos** y, después, selecciona **Probar el área de juegos de chat**.
-1. En el panel **Configuración** del área de juegos, expande la sección **Agregar los datos** y selecciona **Agregar un origen de datos**.
-1. En el asistente para **Agregar datos**, expande el menú desplegable para seleccionar **Cargar archivos**.
-1. Crea un nuevo recurso de Azure Blob Storage con la siguiente configuración:
-    - **Suscripción**: *suscripción a Azure*
-    - **Grupo de recursos**: *el mismo grupo de recursos que el recurso de Fundición de IA de Azure*
-    - **Nombre de la cuenta de almacenamiento**: *un nombre válido para el recurso de la cuenta de almacenamiento*
-    - **Región**: *misma región que el recurso de Fundición de IA de Azure*
-    - **Rendimiento**: Estándar
-    - **Redundancia**: LRS
-1. Crea el recurso y espera hasta que se complete la implementación.
-1. Vuelva a la pestaña Fundición de IA de Azure, actualiza la lista de recursos de Azure Blob Storage y selecciona la cuenta recién creada.
+1. En el Portal de la Fundición de IA de Azure, en tu proyecto, en el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Datos e índices**.
+1. Selecciona **+Nuevos datos**.
+1. En el asistente **Agregar datos**, expande el menú desplegable para seleccionar **Cargar archivos o carpetas**.
+1. Selecciona **Cargar carpeta** y selecciona la carpeta **folletos**. Espera hasta que se muestren todos los archivos de la carpeta.
+1. Selecciona **Siguiente** y establece el nombre de los datos en `brochures`.
+1. Espera a que se cargue la carpeta y observa que contiene varios archivos .pdf.
 
-    > **Nota**: si recibes una advertencia de que Azure OpenAI necesita permiso para acceder al recurso, selecciona **Activar CORS**.
+## Creación de un índice para los datos
 
-1. Crea un nuevo recurso de Búsqueda de Azure AI con la siguiente configuración:
-    - **Suscripción**: *suscripción a Azure*
-    - **Grupo de recursos**: *el mismo grupo de recursos que el recurso de Fundición de IA de Azure*
-    - **Nombre del servicio**: *un nombre válido para el recurso de Búsqueda de Azure AI*
-    - **Región**: *misma región que el recurso de Fundición de IA de Azure*
-    - **Plan de tarifa**: básico
+Ahora que has agregado un origen de datos al proyecto, puedes usarlo para crear un índice en el recurso de Búsqueda de Azure AI.
 
-1. Crea el recurso y espera hasta que se complete la implementación.
-1. Vuelve a la pestaña Fundición de IA de Azure, actualiza la lista de recursos de Búsqueda de Azure AI y selecciona la cuenta recién creada.
-1. Asigna un nombre al índice `brochures-index`.
-1. Habilita la opción **Agregar búsqueda vectorial a este recurso de búsqueda** y selecciona el modelo de inserción que implementaste anteriormente. Seleccione **Siguiente**.
+1. En el Portal de la Fundición de IA de Azure, en tu proyecto, en el panel de navegación de la izquierda, en **Mis recursos**, selecciona la página **Datos e índices**.
+1. En la pestaña **Índices**, agrega un nuevo índice con la siguiente configuración:
+    - **Ubicación de origen**:
+        - **Origen de datos**: datos en la Fundición de IA de Azure
+            - *Selecciona el origen de datos **folletos***
+    - **Configuración de índice**:
+        - **Seleccionar servicio de Búsqueda de Azure AI**: *crea un nuevo recurso de Búsqueda de Azure AI con la siguiente configuración*:
+            - **Suscripción**: *suscripción a Azure*
+            - **Grupo de recursos**: *el mismo grupo de recursos que el del Centro de IA*.
+            - **Nombre del servicio**: *un nombre válido para el recurso de búsqueda de IA*
+            - **Ubicación**: *la misma ubicación que la del Centro de IA*
+            - **Plan de tarifa**: básico
+            
+            Espera a que se cree el recurso de Búsqueda de IA. A continuación, vuelve a Fundición de IA de Azure y termina de configurar el índice mediante la selección de **Conectar otro recurso de Búsqueda de Azure AI** y agrega una conexión al recurso de Búsqueda de IA que acabas de crear.
+ 
+        - **Índice vectorial**: `brochures-index`
+        - **Máquina virtual**: selección automática
+    - **Configuración de búsqueda**:
+        - **Configuración de vectores**: agregación de una búsqueda vectorial a este recurso de búsqueda
+        - **Conexión de Azure OpenAI**: *selecciona el recurso predeterminado de Azure OpenAI para tu centro.*
+        - **Modelo de inserción**: text-embedding-ada-002
+        - **Implementación de modelo de inserción **: *la implementación del* modelo *modelo* text-embeding-ada-002
 
-   >**Nota**: puede tardar un tiempo hasta que el asistente para **agregar datos** reconozca el modelo de inserción implementado, por lo que si no puedes habilitar la opción de vector de búsqueda, cancela el asistente, espera unos minutos e inténtalo de nuevo.
+1. Crea el índice vectorial y espera a que se complete el proceso de indexación, lo que puede tardar un tiempo en función de los recursos de proceso disponibles en la suscripción.
 
-1. Carga todos los archivos .pdf de la carpeta **brochures** que extrajiste anteriormente y selecciona **Siguiente**.
-1. En el paso **Administración de datos**, selecciona el tipo de búsqueda **Híbrido (vector + palabra clave)** y un tamaño del fragmento de **1024**. Seleccione **Siguiente**.
-1. En el paso **Conexión de datos**, selecciona **Clave de API** como tipo de autenticación. Seleccione **Siguiente**.
-1. Revisa todos los pasos de configuración y, después, selecciona **Guardar y cerrar**.
-1. Espera a que se complete el proceso de indexación, lo que puede tardar un tiempo en función de los recursos de proceso disponibles en la suscripción.
+    La operación de creación de índices consta de los siguientes trabajos:
+
+    - Descifra, fragmenta e inserta los tokens de texto en los datos de los folletos.
+    - Crea el índice de Búsqueda de Azure AI.
+    - Registra el recurso de índice.
 
     > **Sugerencia**: mientras esperas a que se cree el índice, ¿por qué no echas un vistazo a los folletos que descargaste para familiarizarte con su contenido?
 
@@ -100,7 +110,14 @@ Los datos para tu aplicación constan de un conjunto de folletos de viaje en for
 
 Antes de usar el índice en un flujo de avisos basado en RAG, vamos a comprobar que se puede usar para afectar a las respuestas de IA generativa.
 
-1. En la página de área de juegos de chat, en el panel Configuración, asegúrate de que la implementación de modelo **gpt-4o** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
+1. En el panel de navegación de la izquierda, selecciona la página **Área de juegos** y abre el área de juegos **Chat**.
+1. En la página de área de juegos Chat, en el panel Configuración, asegúrate de que la implementación de modelo **gpt-4o** esté seleccionada. Después, en el panel Sesión de chat, envía el mensaje `Where can I stay in New York?`.
+1. Revisa la respuesta, que debe ser una respuesta genérica del modelo sin datos procedentes del índice.
+1. En el panel Configuración, expande el campo **Agregue sus datos** y después agrega el índice del proyecto **brochures-index** y selecciona el tipo de búsqueda **híbrido (vector + palabra clave)**.
+
+   > **Sugerencia**: en algunos casos, es posible que los índices recién creados no estén disponibles inmediatamente. La actualización del explorador suele ser útil, pero si sigues experimentando el problema por el que no encuentras el índice, es posible que tengas que esperar hasta que se reconozca el índice.
+
+1. Después de agregar el índice y de reiniciar la sesión de chat, vuelve a enviar el mensaje `Where can I stay in New York?`.
 1. Revisa la respuesta, que debe basarse en los datos del índice.
 
 ## Creación de una aplicación cliente RAG
