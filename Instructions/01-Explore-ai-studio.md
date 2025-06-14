@@ -72,7 +72,7 @@ Un *proyecto* de Azure AI proporciona un área de trabajo de colaboración para 
 
 El proyecto de Fundición de IA de Azure y el recurso de Fundición de IA de Azure al que pertenece incluyen conexiones a recursos que puedes usar en aplicaciones de IA.
 
-1. En la página Centro de gestión, en el panel de navegación, en el proyecto, selecciona **Ir al proyecto**.
+1. En la página Centro de gestión, en el panel de navegación, en el proyecto, selecciona **Ir al recurso**.
 1. En la página **Información general** del proyecto, visualiza la sección **Puntos de conexión y claves**; que contiene puntos de conexión y claves de autorización que puedes usar en el código de la aplicación para acceder a:
     - El proyecto de Fundición de IA de Azure y los modelos implementados en él.
     - Azure OpenAI en los modelos de Fundición de IA de Azure.
