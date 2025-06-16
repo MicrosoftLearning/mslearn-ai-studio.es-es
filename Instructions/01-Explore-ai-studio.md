@@ -31,7 +31,7 @@ Un *proyecto* de Azure AI proporciona un área de trabajo de colaboración para 
 1. En la página principal, en la sección **Explorar modelos y funcionalidades**, busca el modelo `gpt-4o`, que usaremos en nuestro proyecto.
 1. En los resultados de la búsqueda, selecciona el modelo **gpt-4o** para ver sus detalles y, a continuación, en la parte superior de la página del modelo, selecciona **Usar este modelo**.
 1. Cuando se te pida que crees un proyecto, escribe un nombre válido para el proyecto y expande **Opciones avanzadas**.
-1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
+1. Selecciona **Personalizar** y especifica la siguiente configuración para el proyecto:
     - **Recurso de Fundición de IA de Azure**: *un nombre válido para el recurso de Fundición de IA de Azure*
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
@@ -72,7 +72,7 @@ Un *proyecto* de Azure AI proporciona un área de trabajo de colaboración para 
 
 El proyecto de Fundición de IA de Azure y el recurso de Fundición de IA de Azure al que pertenece incluyen conexiones a recursos que puedes usar en aplicaciones de IA.
 
-1. En la página Centro de gestión, en el panel de navegación, en el proyecto, selecciona **Ir al recurso**.
+1. En la página Centro de gestión, en el panel de navegación, en el proyecto, selecciona **Ir al proyecto recurso**.
 1. En la página **Información general** del proyecto, visualiza la sección **Puntos de conexión y claves**; que contiene puntos de conexión y claves de autorización que puedes usar en el código de la aplicación para acceder a:
     - El proyecto de Fundición de IA de Azure y los modelos implementados en él.
     - Azure OpenAI en los modelos de Fundición de IA de Azure.

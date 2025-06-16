@@ -69,7 +69,7 @@ Para usar un modelo, debes crear un *proyecto* de Fundición de IA de Azure.
 
 1. En la parte superior de la página de información general del modelo **gpt-4o**, selecciona **Usar este modelo**.
 1. Cuando se te pida que crees un proyecto, escribe un nombre válido para el proyecto y expande **Opciones avanzadas**.
-1. En la sección **Opciones avanzadas**, especifica la siguiente configuración para el centro:
+1. En la sección **Opciones avanzadas**, especifica la siguiente configuración para el proyecto:
     - **Recurso de Fundición de IA de Azure**: *un nombre válido para el recurso de Fundición de IA de Azure*
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
