@@ -21,7 +21,7 @@ Las características de Fundición de IA de Azure que usaremos en este ejercicio
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
 1. En el explorador, ve a `https://ai.azure.com/managementCenter/allResources` y selecciona **Crear**. A continuación, elige la opción para crear un nuevo **recurso del centro de IA**.
-1. En el asistente para **crear un proyecto**, escribe un nombre válido para el proyecto y usa el vínculo **Cambiar nombre del centro** para especificar un nombre válido para el nuevo centro. Expande **Opciones avanzadas** y especifica los siguientes valores para el proyecto:
+1. En el asistente para **crear un proyecto**, escribe un nombre válido para tu proyecto y selecciona la opción para crear un centro. A continuación, usa el vínculo **Cambiar nombre del centro** para especificar un nombre válido para el nuevo centro, expande **Opciones avanzadas** y especifica la siguiente configuración para el proyecto:
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
     - **Región**: Este de EE. UU. 2 o Centro de Suecia (*En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región*).

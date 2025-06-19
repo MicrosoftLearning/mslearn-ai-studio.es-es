@@ -23,13 +23,12 @@ Las características de Fundición de IA de Azure que usaremos en este ejercicio
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
 1. En el explorador, ve a `https://ai.azure.com/managementCenter/allResources` y selecciona **Crear**. A continuación, elige la opción para crear un nuevo **recurso del centro de IA**.
-1. En el asistente para **crear un proyecto**, escribe un nombre válido para el proyecto y si se te sugiere un centro existente, selecciona la opción para crear uno nuevo y expande **Opciones avanzadas** para especificar la siguiente configuración para el proyecto:
+1. En el asistente para **crear un proyecto**, escribe un nombre válido para tu proyecto y selecciona la opción para crear un centro. A continuación, usa el vínculo **Cambiar nombre del centro** para especificar un nombre válido para el nuevo centro, expande **Opciones avanzadas** y especifica la siguiente configuración para el proyecto:
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
-    - **Nombre del centro**: un nombre válido para el centro
-    - **Ubicación**: Este de EE. UU. 2 o Centro de Suecia (*En caso de que se alcance un límite de cuota más adelante durante el ejercicio, es posible que tengas que crear otro recurso en otra región.*)
+    - **Región**: Este de EE. UU. 2 o Centro de Suecia (*En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región*).
 
-    > **Nota**: si estás trabajando en una suscripción a Azure en la que se usan directivas para restringir los nombres de recursos permitidos, es posible que tengas que usar el vínculo situado en la parte inferior del cuadro de diálogo **Crear un nuevo proyecto** para crear el centro mediante Azure Portal.
+    > **Nota**: Si trabajas en una suscripción a Azure en la que se usan directivas para restringir los nombres de recursos permitidos, es posible que tengas que usar el vínculo situado en la parte inferior del cuadro de diálogo **Crear un nuevo proyecto** para crear el centro con Azure Portal.
 
     > **Sugerencia**: si el botón **Crear** sigue deshabilitado, asegúrate de cambiar el nombre del centro a un valor alfanumérico único.
 
