@@ -43,8 +43,6 @@ Comencemos con la implementación de un modelo en un proyecto de Fundición de I
 1. En el panel **Configuración**, anota el nombre de la implementación del modelo; que debe ser **gpt-4o**. Para confirmarlo, mira la implementación en la página **Modelos y puntos de conexión** (simplemente abre esa página en el panel de navegación de la izquierda).
 1. En el panel de navegación de la izquierda, selecciona **Información general** para ver la página principal del proyecto; que tiene este aspecto:
 
-    > **Nota**: si se muestra un error de *permisos insuficientes**, usa el botón **Reparar** para resolverlo.
-
     ![Captura de pantalla de la página de información general de un proyecto de Fundición de IA de Azure.](./media/ai-foundry-project.png)
 
 ## Ajuste con precisión de un modelo

@@ -46,8 +46,6 @@ Un *proyecto* de Azure AI proporciona un área de trabajo de colaboración para 
 
 1. En el panel de navegación de la izquierda, selecciona **Información general** para ver la página principal del proyecto; que tiene este aspecto:
 
-    > **Nota**: si se muestra un error de *permisos insuficientes*, usa el botón **Reparar** para resolverlo.
-
     ![Captura de pantalla de la página de información general de un proyecto de Fundición de IA de Azure.](./media/ai-foundry-project.png)
 
 1. Selecciona **Centro de gestión** en la parte inferior del panel de navegación a la izquierda. El centro de gestión es donde puedes configurar las opciones a niveles de *recurso* y *proyecto*, que se muestran en el panel de navegación.
