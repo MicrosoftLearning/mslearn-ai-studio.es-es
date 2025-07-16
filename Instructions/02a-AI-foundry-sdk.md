@@ -12,51 +12,33 @@ Este ejercicio dura aproximadamente **40** minutos.
 
 > **Nota**: este ejercicio se basa en los SDK de la versión preliminar, que podrían cambiar. Cuando ha sido necesario, hemos usado versiones específicas de paquetes; que pueden no ser las versiones disponibles más recientes. Puede que se produzcan algunos errores, comportamientos o advertencias inesperados.
 
-## Creación de un proyecto de Fundición de IA de Azure
+## Implementación de un modelo en un proyecto de Fundición de IA de Azure
 
-Comencemos creando un proyecto de Fundición de IA de Azure.
+Comencemos con la implementación de un modelo en un proyecto de Fundición de IA de Azure.
 
 1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen (cierra el panel **Ayuda** si está abierto):
 
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
-1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente para **crear un proyecto**, escribe un nombre válido y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
-1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
-    - **Nombre del centro**: *proporciona un nombre para el centro*.
+1. En la página principal, en la sección **Explorar modelos y funcionalidades**, busca el modelo `gpt-4o`, que usaremos en nuestro proyecto.
+1. En los resultados de la búsqueda, selecciona el modelo **gpt-4o** para ver sus detalles y, a continuación, en la parte superior de la página del modelo, selecciona **Usar este modelo**.
+1. Cuando se te pida que crees un proyecto, escribe un nombre válido para el proyecto y expande **Opciones avanzadas**.
+1. Selecciona **Personalizar** y especifica la siguiente configuración para el proyecto:
+    - **Recurso de Fundición de IA de Azure**: *un nombre válido para el recurso de Fundición de IA de Azure*
     - **Suscripción**: *suscripción a Azure*
-    - **Grupo de recursos**: *crea o selecciona un grupo de recursos*.
-    - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4o** en la ventana Asistente de ubicación y usa la región recomendada\*
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *Crear un nuevo servicio de IA*
-    - **Conectar Búsqueda de Azure AI**: omite la conexión
+    - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
+    - **Región**: *selecciona cualquier ubicación compatible con los servicios de IA***\*
 
-    > \* Los recursos de Azure OpenAI están restringidos por cuotas de modelo regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > \* Algunos de los recursos de Azure AI están restringidos por cuotas de modelo regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
-1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
+1. Selecciona **Crear** y espera a que se cree el proyecto, incluida la implementación del modelo gpt-4 que seleccionaste.
+1. Cuando se cree el proyecto, el área de juegos de chat se abrirá automáticamente.
+1. En el panel **Configuración**, anota el nombre de la implementación del modelo; que debe ser **gpt-4o**. Para confirmarlo, mira la implementación en la página **Modelos y puntos de conexión** (simplemente abre esa página en el panel de navegación de la izquierda).
+1. En el panel de navegación de la izquierda, selecciona **Información general** para ver la página principal del proyecto; que tiene este aspecto:
 
-    ![Captura de pantalla de los detalles de un proyecto de Azure AI en el Portal de la Fundición de IA de Azure.](./media/ai-foundry-project.png)
+    > **Nota**: si se muestra un error de *permisos insuficientes**, usa el botón **Reparar** para resolverlo.
 
-## Implementación de un modelo de IA generativa
-
-Ahora ya puedes implementar un modelo de lenguaje de IA generativa compatible con tu aplicación de chat. En este ejemplo, usarás el modelo gpt-4o de OpenAI; pero los principios son los mismos para cualquier modelo.
-
-1. En la barra de herramientas de la parte superior derecha de la página del proyecto de Fundición de IA de Azure, usa el icono **Características de versión preliminar** (**&#9215;**) para asegurarte de que está habilitada la característica **Implementar modelos en el servicio de inferencia de modelos de Azure AI**. Esta característica garantiza que la implementación del modelo esté disponible para el servicio de inferencia de Azure AI, que usarás en el código de aplicación.
-1. En el panel de la izquierda de tu proyecto, en la sección **Mis recursos**, selecciona la página **Modelos y puntos de conexión**.
-1. En la página **Modelos y puntos de conexión**, en la pestaña **Implementaciones de modelos**, en el menú **+ Implementar modelo**, selecciona **Implementar modelo base**.
-1. Busca el modelo **gpt-4o** en la lista, selecciona y confirma.
-1. Implementa el modelo con la siguiente configuración mediante la selección de **Personalizar** en los detalles de implementación:
-    - **Nombre de implementación**: *nombre válido para la implementación de modelo*
-    - **Tipo de implementación**: estándar global
-    - **Actualización automática de la versión**: habilitado
-    - **** Versión del modelo: *selecciona la versión disponible más reciente*
-    - **Recurso de IA conectado**: *selecciona tu conexión de recursos de Azure OpenAI*
-    - **Límite de velocidad de tokens por minuto (miles):** 50 000 *(o el máximo disponible en la suscripción si es inferior a 50 000)*
-    - **Filtro de contenido**: DefaultV2
-
-    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM es suficiente para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero se pueden producir errores si se supera el límite de velocidad.
-
-1. Espera a que la implementación se complete.
+    ![Captura de pantalla de la página de información general de un proyecto de Fundición de IA de Azure.](./media/ai-foundry-project.png)
 
 ## Creación de una aplicación cliente para chatear con el modelo
 
@@ -67,7 +49,7 @@ Ahora que has implementado un modelo, puedes usar los SDK de la Fundición de IA
 ### Preparación de la configuración de aplicación
 
 1. En el Portal de la Fundición de IA de Azure, mira la página **Información general** del proyecto.
-1. En el área **Detalles del proyecto**, anota la **Cadena de conexión del proyecto**. Usarás esta cadena de conexión para conectarte al proyecto en una aplicación cliente.
+1. En el área **Detalles del proyecto**, anota el **punto de conexión del proyecto de Fundición de IA de Azure**. Usarás este punto de conexión para conectarte al proyecto en una aplicación cliente.
 1. Abre una nueva pestaña del explorador (mantén el Portal de la Fundición de IA de Azure abierto en la pestaña existente). En la nueva pestaña, explora [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicia sesión con tus credenciales de Azure, si se te solicita.
 
     Cierra las notificaciones de bienvenida para ver la página principal de Azure Portal.
@@ -85,8 +67,8 @@ Ahora que has implementado un modelo, puedes usar los SDK de la Fundición de IA
 1. En el panel de Cloud Shell, escribe los siguientes comandos para clonar el repositorio de GitHub que contiene los archivos de código de este ejercicio (escribe el comando o cópialo en el Portapapeles y haz clic con el botón derecho en la línea de comandos y pega como texto sin formato):
 
     ```
-    rm -r mslearn-ai-foundry -f
-    git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
+   rm -r mslearn-ai-foundry -f
+   git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
 
     > **Sugerencia**: al pegar comandos en CloudShell, la salida puede ocupar una gran cantidad del búfer de pantalla. Puedes despejar la pantalla al escribir el comando `cls` para que te resulte más fácil centrarte en cada tarea.
@@ -121,8 +103,8 @@ Ahora que has implementado un modelo, puedes usar los SDK de la Fundición de IA
 
     ```
    dotnet add package Azure.Identity
-   dotnet add package Azure.AI.Projects --version 1.0.0-beta.3
-   dotnet add package Azure.AI.Inference --version 1.0.0-beta.3
+   dotnet add package Azure.AI.Projects --version 1.0.0-beta.9
+   dotnet add package Azure.AI.Inference --version 1.0.0-beta.5
     ```
     
 
@@ -142,7 +124,7 @@ Ahora que has implementado un modelo, puedes usar los SDK de la Fundición de IA
 
     El archivo se abre en un editor de código.
 
-1. En el archivo de código, reemplaza el marcador de posición **your_project_connection_string** por la cadena de conexión del proyecto (copiado de la página **Información general** del proyecto en el Portal de la Fundición de IA de Azure) y el marcador de posición **your_model_deployment** por el nombre que asignaste a tu implementación del modelo GPT-4.
+1. En el archivo de código, reemplaza el marcador de posición **your_project_endpoint** por el punto de conexión del proyecto (copiado de la página **Información general** del proyecto en el Portal de la Fundición de IA de Azure) y el marcador de posición **your_model_deployment** por el nombre de la implementación del modelo gpt-4.
 1. Después de reemplazar los marcadores de posición, en el editor de código, usa el comando **CTRL+S** o usa la acción de **hacer clic con el botón derecho > Guardar** para guardar los cambios y, a continuación, usa el comando **CTRL+Q** o la acción de **hacer clic con el botón derecho > Salir** para cerrar el editor de código mientras mantienes abierta la línea de comandos de Cloud Shell.
 
 ### Escritura del código para conectarte al proyecto y chatear con el modelo
@@ -193,17 +175,25 @@ Ahora que has implementado un modelo, puedes usar los SDK de la Fundición de IA
 
     ```python
    # Initialize the project client
-   projectClient = AIProjectClient.from_connection_string(
-        conn_str=project_connection,
-        credential=DefaultAzureCredential())
+   projectClient = AIProjectClient(            
+            credential=DefaultAzureCredential(
+                exclude_environment_credential=True,
+                exclude_managed_identity_credential=True
+            ),
+            endpoint=project_connection,
+        )
     ```
 
     **C#**
 
     ```csharp
    // Initialize the project client
-   var projectClient = new AIProjectClient(project_connection,
-                        new DefaultAzureCredential());
+   DefaultAzureCredentialOptions options = new()
+       { ExcludeEnvironmentCredential = true,
+        ExcludeManagedIdentityCredential = true };
+   var projectClient = new AIProjectClient(
+        new Uri(project_connection),
+        new DefaultAzureCredential(options));
     ```
 
 1. Busca el comentario **Get a chat client** y agrega el siguiente código para crear un objeto de cliente para chatear con un modelo:
@@ -278,9 +268,20 @@ Ahora que has implementado un modelo, puedes usar los SDK de la Fundición de IA
 
 1. Usa el comando **CTRL+S** para guardar los cambios en el archivo de código.
 
-### Ejecución de la aplicación de chat
+### Inicie sesión en Azure y ejecuta la aplicación.
 
-1. En el panel de la línea de comandos de Cloud Shell, debajo del editor de código, escribe el siguiente comando para ejecutar la aplicación:
+1. En el panel de línea de comandos de Cloud Shell, escribe el siguiente comando para iniciar sesión en Azure.
+
+    ```
+   az login
+    ```
+
+    **<font color="red">Debes iniciar sesión en Azure, aunque la sesión de Cloud Shell ya esté autenticada.</font>**
+
+    > **Nota**: en la mayoría de los escenarios, el uso de *inicio de sesión de az* será suficiente. Sin embargo, si tienes suscripciones en varios inquilinos, es posible que tengas que especificar el inquilino mediante el parámetro *--tenant*. Consulta [Inicio de sesión en Azure de forma interactiva mediante la CLI de Azure](https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively) para obtener más información.
+    
+1. Cuando se te solicite, sigue las instrucciones para abrir la página de inicio de sesión en una nueva pestaña y escribe el código de autenticación proporcionado y las credenciales de Azure. A continuación, completa el proceso de inicio de sesión en la línea de comandos y selecciona la suscripción que contiene el centro de Fundición de IA de Azure si se te solicita.
+1. Después de iniciar sesión, escribe el siguiente comando para ejecutar la aplicación:
 
     **Python**
 
@@ -300,150 +301,14 @@ Ahora que has implementado un modelo, puedes usar los SDK de la Fundición de IA
 
 > **Sugerencia**: si se produce un error en la aplicación porque se supera el límite de velocidad. Espere unos segundos y vuelve a intentarlo. Si no hay cuota suficiente disponible en la suscripción, es posible que el modelo no pueda responder.
 
-## Uso del SDK de OpenAI
-
-La aplicación cliente se compila mediante el SDK de inferencia del modelo de Azure AI, lo que significa que se puede usar con cualquier modelo implementado en el servicio de inferencia del modelo de Azure AI. El modelo implementado es un modelo GPT de OpenAI, que también puedes consumir mediante el SDK de OpenAI.
-
-Vamos a realizar algunas modificaciones del código para ver cómo implementar una aplicación de chat mediante el SDK de OpenAI.
-
-1. En la línea de comandos de Cloud Shell para la carpeta de código (*python* o *c-sharp*), escribe el siguiente comando para instalar el paquete necesario:
-
-    **Python**
-
-    ```
-   pip install openai
-    ```
-
-    **C#**
-
-    ```
-   dotnet add package Azure.AI.Projects --version 1.0.0-beta.6
-   dotnet add package Azure.AI.OpenAI --prerelease
-    ```
-
-> **Nota**: Se requiere una versión preliminar diferente del paquete Azure.AI.Projects como solución alternativa provisional ante algunas incompatibilidades con el SDK de inferencia del modelo de Azure AI.
-
-1. Si el archivo de código (*chat-app.py* o *Program.cs*) aún no está abierto, escribe el siguiente comando para abrirlo en el editor de código:
-
-    **Python**
-
-    ```
-   code chat-app.py
-    ```
-
-    **C#**
-
-    ```
-   code Program.cs
-    ```
-
-1. Agrega la o las referencias siguientes en la parte superior del archivo de código:
-
-    **Python**
-
-    ```python
-   import openai
-    ```
-
-    **C#**
-
-    ```csharp
-   using OpenAI.Chat;
-   using Azure.AI.OpenAI;
-    ```
-
-1. Busca el comentario **Get a chat client** y modifica el código usado para crear un objeto de cliente de la siguiente manera:
-
-    **Python**
-
-    ```python
-   # Get a chat client 
-   openai_client = projectClient.inference.get_azure_openai_client(api_version="2024-10-21")
-    ```
-
-    **C#**
-
-    ```csharp
-   // Get a chat client
-   ChatClient openaiClient = projectClient.GetAzureOpenAIChatClient(model_deployment);
-    ```
-
-    > **Nota**: Este código usa el cliente del proyecto de Fundición de IA de Azure para crear una conexión segura al punto de conexión predeterminado de Azure OpenAI Service asociado al proyecto. También puedes conectarte *directamente* al punto de conexión mediante el SDK de Azure OpenAI, especificando el URI del punto de conexión que se muestra para la conexión de servicio en el Portal de la Fundición de IA de Azure o en la página de recursos de Azure OpenAI o de servicios de AI correspondiente en Azure Portal, y mediante una clave de autenticación o un token de credencial de Entra. Para más información sobre cómo conectarse a Azure OpenAI Service, consulta [Lenguajes de programación compatibles con Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/supported-languages).
-
-1. Busca el comentario **Initialize prompt with system message** y modifica el código para inicializar una colección de mensajes con una indicación del sistema como se indica a continuación:
-
-    **Python**
-
-    ```python
-   # Initialize prompt with system message
-   prompt=[
-        {"role": "system", "content": "You are a helpful AI assistant that answers questions."}
-    ]
-    ```
-
-    **C#**
-
-    ```csharp
-   // Initialize prompt with system message
-    var prompt = new List<ChatMessage>(){
-        new SystemChatMessage("You are a helpful AI assistant that answers questions.")
-    };
-    ```
-
-1. Busca el comentario **Obtener finalización de chat** y modifica el código para agregar la entrada de usuario a la indicación, recuperar la finalización del modelo y agregar la finalización a la indicación como se indica a continuación:
-
-    **Python**
-
-    ```python
-   # Get a chat completion
-   prompt.append({"role": "user", "content": input_text})
-   response = openai_client.chat.completions.create(
-        model=model_deployment,
-        messages=prompt)
-   completion = response.choices[0].message.content
-   print(completion)
-   prompt.append({"role": "assistant", "content": completion})
-    ```
-
-    **C#**
-
-    ```csharp
-   // Get a chat completion
-   prompt.Add(new UserChatMessage(input_text));
-   ChatCompletion completion = openaiClient.CompleteChat(prompt);
-   var completionText = completion.Content[0].Text;
-   Console.WriteLine(completionText);
-   prompt.Add(new AssistantChatMessage(completionText));
-    ```
-
-1. Usa el comando **CTRL+S** para guardar los cambios en el archivo de código.
-
-1. En el panel de la línea de comandos de Cloud Shell, debajo del editor de código, escribe el siguiente comando para ejecutar la aplicación:
-
-    **Python**
-
-    ```
-   python chat-app.py
-    ```
-
-    **C#**
-
-    ```
-   dotnet run
-    ```
-
-1. Prueba la aplicación haciendo preguntas como antes. Cuando hayas terminado, presiona `quit` para salir del programa.
-
-    > **Nota**: El SDK de inferencia del modelo de Azure AI y los SDK de OpenAI usan clases y construcciones de código similares, por lo que el código requiere cambios mínimos. Puedes usar el SDK de inferencia del modelo de Azure AI con *cualquier* modelo que se implemente en un punto de conexión de servicio de inferencia del modelo de Azure AI. El SDK de OpenAI solo funciona con modelos de OpenAI, pero puedes usarlo para los modelos implementados en un punto de conexión de servicio de inferencia del modelo de Azure AI o en un punto de conexión de Azure OpenAI.  
-
 ## Resumen
 
-En este ejercicio, has usado el SDK de la Fundición de IA de Azure, la inferencia del modelo de Azure IA y los SDK de Azure OpenAI para crear una aplicación cliente para un modelo de IA generativa que implementaste en un proyecto de Fundición de IA de Azure.
+En este ejercicio, has usado el SDK de la Fundición de IA de Azure para crear una aplicación cliente para un modelo de IA generativa que implementaste en un proyecto de Fundición de IA de Azure.
 
 ## Limpieza
 
 Si has terminado de explorar el Portal de la Fundición de IA de Azure, deberías eliminar los recursos que has creado en este ejercicio para evitar incurrir en costes innecesarios de Azure.
 
-1. Vuelve a la pestaña del explorador que contiene Azure Portal (o vuelve a abrir [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` en una nueva pestaña del explorador) y mira el contenido del grupo de recursos donde implementó los recursos usados en este ejercicio.
+1. Abre [Azure Portal](https://portal.azure.com) y ve el contenido del grupo de recursos donde implementaste los recursos usados en este ejercicio.
 1. Selecciona **Eliminar grupo de recursos** en la barra de herramientas.
 1. Escribe el nombre del grupo de recursos y confirma que deseas eliminarlo.

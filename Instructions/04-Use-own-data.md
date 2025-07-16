@@ -8,36 +8,31 @@ lab:
 
 La generación aumentada de recuperación (RAG) es una técnica que se usa para compilar aplicaciones que integran datos de orígenes de datos personalizados en un aviso de un modelo de IA generativa. La RAG es un patrón que se usa habitualmente para desarrollar aplicaciones de IA generativa: aplicaciones basadas en chat que usan un modelo de lenguaje para interpretar entradas y generar respuestas adecuadas.
 
-En este ejercicio, usarás el portal de los SDK de la Fundición de IA de Azure y Azure OpenAI para integrar datos personalizados en una aplicación de IA generativa.
+En este ejercicio, usarás Fundición de IA de Azure para integrar datos personalizados en una solución de IA generativa.
 
 Este ejercicio dura aproximadamente **45** minutos.
 
-> **Nota**: este ejercicio se basa en los SDK de la versión preliminar, que podrían cambiar. Cuando ha sido necesario, hemos usado versiones específicas de paquetes; que pueden no ser las versiones disponibles más recientes. Puede que se produzcan algunos comportamientos, advertencias o errores inesperados.
+> **Nota**: este ejercicio se basa en servicios de versión preliminar, que están sujetos a cambios.
 
-## Creación de un proyecto de Fundición de IA de Azure
+## Creación de un centro y un proyecto de Fundición de IA de Azure
 
-Empecemos creando un proyecto de Azure AI Foundry y los recursos de servicio que necesita para ser compatible el uso de tus propios datos, incuyendo un recurso de Búsqueda de Azure AI.
+Las características de Fundición de IA de Azure que usaremos en este ejercicio requieren un proyecto basado en un recurso del *centro* de Fundición de IA de Azure.
 
-1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen:
+1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen (cierra el panel **Ayuda** si está abierto):
 
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
-1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente para **crear un proyecto**, escribe un nombre válido y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
-1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
-    - **Nombre del centro**: *proporciona un nombre para el centro*.
+1. En el explorador, ve a `https://ai.azure.com/managementCenter/allResources` y selecciona **Crear**. A continuación, elige la opción para crear un nuevo **recurso del centro de IA**.
+1. En el asistente para **crear un proyecto**, escribe un nombre válido para tu proyecto y selecciona la opción para crear un centro. A continuación, usa el vínculo **Cambiar nombre del centro** para especificar un nombre válido para el nuevo centro, expande **Opciones avanzadas** y especifica la siguiente configuración para el proyecto:
     - **Suscripción**: *suscripción a Azure*
-    - **Grupo de recursos**: *crea o selecciona un grupo de recursos*.
-    - **Ubicación**: selecciona **Ayudarme a elegir** y, a continuación, selecciona **gpt-4o** en la ventana Asistente de ubicación y usa la región recomendada\*
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *Crear un nuevo servicio de IA*
-    - **Conexión de Búsqueda de Azure AI**: *crea de un nuevo recurso de Búsqueda de Azure AI con un nombre único*
+    - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
+    - **Región**: Este de EE. UU. 2 o Centro de Suecia (*En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región*).
 
-    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. En caso de que se supere un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > **Nota**: Si trabajas en una suscripción a Azure en la que se usan directivas para restringir los nombres de recursos permitidos, es posible que tengas que usar el vínculo situado en la parte inferior del cuadro de diálogo **Crear un nuevo proyecto** para crear el centro con Azure Portal.
 
-1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
-1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
+    > **Sugerencia**: si el botón **Crear** sigue deshabilitado, asegúrate de cambiar el nombre del centro a un valor alfanumérico único.
 
-    ![Captura de pantalla de los detalles de un proyecto de Azure AI en el Portal de la Fundición de IA de Azure.](./media/ai-foundry-project.png)
+1. Espera a que se cree el proyecto y ve al proyecto.
 
 ## Implementación de modelos
 
@@ -84,7 +79,15 @@ Ahora que has agregado un origen de datos al proyecto, puedes usarlo para crear 
         - **Origen de datos**: datos en la Fundición de IA de Azure
             - *Selecciona el origen de datos **folletos***
     - **Configuración de índice**:
-        - **Selecciona el servicio Búsqueda de Azure AI**: *selecciona la conexión de **AzureAISearch** al recurso de Búsqueda de Azure AI*
+        - **Seleccionar servicio de Búsqueda de Azure AI**: *crea un nuevo recurso de Búsqueda de Azure AI con la siguiente configuración*:
+            - **Suscripción**: *suscripción a Azure*
+            - **Grupo de recursos**: *el mismo grupo de recursos que el del Centro de IA*.
+            - **Nombre del servicio**: *un nombre válido para el recurso de búsqueda de IA*
+            - **Ubicación**: *la misma ubicación que la del Centro de IA*
+            - **Plan de tarifa**: básico
+            
+            Espera a que se cree el recurso de Búsqueda de IA. A continuación, vuelve a Fundición de IA de Azure y termina de configurar el índice mediante la selección de **Conectar otro recurso de Búsqueda de Azure AI** y agrega una conexión al recurso de Búsqueda de IA que acabas de crear.
+ 
         - **Índice vectorial**: `brochures-index`
         - **Máquina virtual**: selección automática
     - **Configuración de búsqueda**:
@@ -117,20 +120,15 @@ Antes de usar el índice en un flujo de avisos basado en RAG, vamos a comprobar 
 1. Después de agregar el índice y de reiniciar la sesión de chat, vuelve a enviar el mensaje `Where can I stay in New York?`.
 1. Revisa la respuesta, que debe basarse en los datos del índice.
 
-## Creación de una aplicación cliente RAG con los SDK de la Fundición de IA de Azure y Azure OpenAI
+## Creación de una aplicación cliente RAG
 
-Ahora que tienes un índice de trabajo, puedes usar los SDK de la Fundición de IA de Azure y Azure OpenAI para implementar el patrón RAG en una aplicación cliente. Vamos a explorar el código para hacerlo en un ejemplo sencillo.
+Ahora que tienes un índice de trabajo, puedes usar el SDK de la Azure OpenAI para implementar el patrón RAG en una aplicación cliente. Vamos a explorar el código para hacerlo en un ejemplo sencillo.
 
 > **Sugerencia**: puedes elegir desarrollar tu solución RAG mediante C# de Python o Microsoft. Sigue las instrucciones de la sección adecuada para el idioma elegido.
 
 ### Preparación de la configuración de aplicación
 
-1. En el Portal de la Fundición de IA de Azure, mira la página **Información general** del proyecto.
-1. En el área **Detalles del proyecto**, anota la **Cadena de conexión del proyecto**. Usarás esta cadena de conexión para conectarte al proyecto en una aplicación cliente.
-1. Abre una nueva pestaña del explorador (mantén el Portal de la Fundición de IA de Azure abierto en la pestaña existente). En la nueva pestaña, explora [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicia sesión con tus credenciales de Azure, si se te solicita.
-
-    Cierra las notificaciones de bienvenida para ver la página principal de Azure Portal.
-
+1. Vuelve a la pestaña del explorador que contiene Azure Portal (mantén el Portal de la Fundición de IA de Azure abierto en la pestaña existente).
 1. Usa el botón **[\>_]** situado a la derecha de la barra de búsqueda en la parte superior de la página para crear una nueva instancia de Cloud Shell en Azure Portal, para lo que deberás seleccionar un entorno de ***PowerShell*** sin almacenamiento en tu suscripción.
 
     Cloud Shell proporciona una interfaz de la línea de comandos en un panel situado en la parte inferior de Azure Portal. Puedes cambiar el tamaño o maximizar este panel para facilitar el trabajo.
@@ -166,22 +164,20 @@ Ahora que tienes un índice de trabajo, puedes usar los SDK de la Fundición de 
    cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
     ```
 
-1. En el panel de la línea de comandos de Cloud Shell, escribe el siguiente comando para instalar las bibliotecas que vas a usar:
+1. En el panel de la línea de comandos de Cloud Shell, escribe el siguiente comando para instalar la biblioteca del SDK de OpenAI:
 
     **Python**
 
     ```
    python -m venv labenv
    ./labenv/bin/Activate.ps1
-   pip install python-dotenv azure-ai-projects azure-identity openai
+   pip install -r requirements.txt openai
     ```
 
     **C#**
 
     ```
-   dotnet add package Azure.Identity
-   dotnet add package Azure.AI.Projects --prerelease
-   dotnet add package Azure.AI.OpenAI --prerelease
+   dotnet add package Azure.AI.OpenAI
     ```
     
 
@@ -202,10 +198,13 @@ Ahora que tienes un índice de trabajo, puedes usar los SDK de la Fundición de 
     El archivo se abre en un editor de código.
 
 1. En el código siguiente, reemplaza estos marcadores de posición: 
-    - **your_project_connection_string**: reemplázalo por la cadena de conexión del proyecto (copiado de la página **Información general** del proyecto en el Portal de la Fundición de IA de Azure).
-    - **your_model_deployment**: reemplázalo por el nombre que asignaste a la implementación del modelo **gpt-4o**.
-    - **your_embedding_model_deployment**: reemplázalo por el nombre que asignaste a la implementación del modelo**text-embedding-ada-002**.
-    - **your_index**: reemplázalo por el nombre del índice (que debe ser `brochures-index`).
+    - **your_openai_endpoint**: el punto de conexión de OpenAI de la página **Información general** de tu proyecto en el Portal de la Fundición de IA de Azure (asegúrate de seleccionar la pestaña de la funcionalidad **Azure OpenAI**, no la funcionalidad de inferencia de Azure AI o Servicios de Azure AI).
+    - **your_openai_api_key** la clave de API de OpenAI de la página **Información general** de tu proyecto en el Portal de la Fundición de IA de Azure (asegúrate de seleccionar la pestaña de la funcionalidad **Azure OpenAI**, no la funcionalidad de inferencia de Azure AI o Servicios de Azure AI).
+    - **your_chat_model**: el nombre que asignaste a tu implementación de modelo **gpt-4o**, en la página **Modelos y puntos de conexión** en el Portal de la Fundición de IA de Azure (el nombre predeterminado es `gpt-4o`).
+    - **your_embedding_model**: el nombre que asignaste a tu implementación de modelo **text-embedding-ada-002**, en la página **Modelos y puntos de conexión** en el Portal de la Fundición de IA de Azure (el nombre predeterminado es `text-embedding-ada-002`).
+    - **your_search_endpoint**: la dirección URL para el recurso de Búsqueda de Azure AI. Lo encontrarás en el **Centro de gestión** en el Portal de la Fundición de IA de Azure.
+    - **your_search_api_key**: la clave de API del recurso de Búsqueda de Azure AI. Lo encontrarás en el **Centro de gestión** en el Portal de la Fundición de IA de Azure.
+    - **your_index**: reemplaza por el nombre del índice de la página **Datos e índices** para tu proyecto en el Portal de la Fundición de IA de Azure AI (debería ser `brochures-index`).
 1. Después de reemplazar los marcadores de posición, en el editor de código, usa el comando **CTRL+S** o usa la acción de **hacer clic con el botón derecho > Guardar** para guardar los cambios y, a continuación, usa el comando **CTRL+Q** o la acción de **hacer clic con el botón derecho > Salir** para cerrar el editor de código mientras mantienes abierta la línea de comandos de Cloud Shell.
 
 ### Exploración del código para implementar el patrón RAG
@@ -225,10 +224,8 @@ Ahora que tienes un índice de trabajo, puedes usar los SDK de la Fundición de 
     ```
 
 1. Revisa el código del archivo, teniendo en cuenta que:
-    - Usa el SDK de la Fundición de IA de Azure para conectarse al proyecto (mediante el cadena de conexión del proyecto)
-    - Crea un cliente de Azure OpenAI autenticado a partir de la conexión del proyecto.
-    - Recupera la conexión predeterminada de la Búsqueda de Azure AI del proyecto para que pueda determinar el punto de conexión y la clave del servicio de la Búsqueda de Azure AI.
-    - Crea un mensaje del sistema adecuado.
+    - Crea un cliente de Azure OpenAI mediante el punto de conexión, la clave y el modelo de chat.
+    - Crea un mensaje del sistema adecuado para una solución de chat relacionado con viajes.
     - Envía una indicación (incluido el sistema y un mensaje de usuario basado en la entrada de usuario) al cliente de Azure OpenAI y agrega lo siguiente:
         - Detalles de conexión del índice de Búsqueda de Azure AI que se va a consultar.
         - Detalles del modelo de inserción que se usará para vectorizar la consulta\*.

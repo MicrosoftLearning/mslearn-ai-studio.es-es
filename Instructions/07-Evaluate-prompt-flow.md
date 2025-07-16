@@ -12,34 +12,29 @@ Este ejercicio dura aproximadamente **30** minutos.
 
 > **Nota**: Algunas de las tecnologías que se usan en este ejercicio se encuentran en versión preliminar o en desarrollo activo. Puede que se produzcan algunos comportamientos, advertencias o errores inesperados.
 
-## Creación de un proyecto de Fundición de IA de Azure
+## Creación de un centro y un proyecto de Fundición de IA de Azure
 
-Comencemos creando un proyecto de Fundición de IA de Azure.
+Las características de Fundición de IA de Azure que usaremos en este ejercicio requieren un proyecto basado en un recurso del *centro* de Fundición de IA de Azure.
 
 1. En un explorador web, abre el [Portal de la Fundición de IA de Azure](https://ai.azure.com) en `https://ai.azure.com` e inicia sesión con tus credenciales de Azure. Cierra las sugerencias o paneles de inicio rápido que se abran la primera vez que inicias sesión y, si es necesario, usa el logotipo de **Fundición de IA de Azure** en la parte superior izquierda para navegar a la página principal, que es similar a la siguiente imagen (cierra el panel **Ayuda** si está abierto):
 
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
-1. En la página principal, selecciona **+Crear proyecto**.
-1. En el asistente para **crear un proyecto**, escribe un nombre válido y si se te sugiere un centro existente, elige la opción para crear uno nuevo. A continuación, revisa los recursos de Azure que se crearán automáticamente para admitir el centro y el proyecto.
-1. Selecciona **Personalizar** y especifica la siguiente configuración para el centro:
-    - **Nombre del centro**: *un nombre válido para el centro*
+1. En el explorador, ve a `https://ai.azure.com/managementCenter/allResources` y selecciona **Crear**. A continuación, elige la opción para crear un nuevo **recurso del centro de IA**.
+1. En el asistente para **crear un proyecto**, escribe un nombre válido para tu proyecto y selecciona la opción para crear un centro. A continuación, usa el vínculo **Cambiar nombre del centro** para especificar un nombre válido para el nuevo centro, expande **Opciones avanzadas** y especifica la siguiente configuración para el proyecto:
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
-    - **Ubicación**: selecciona una de las siguientes regiones\*
+    - **Región**: selecciona una de las regiones que se indican a continuación (*en caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región*).
         - Este de EE. UU. 2
         - Centro de Francia
         - Sur de Reino Unido 2
         - Centro de Suecia
-    - **Conectar Servicios de Azure AI o Azure OpenAI**: *crea un nuevo recurso de servicios de IA*
-    - **Conectar Búsqueda de Azure AI**: omite la conexión
 
-    > \* En el momento de redactar este documento, estas regiones admiten la evaluación de las métricas de seguridad de la inteligencia artificial. La disponibilidad del modelo está restringida por cuotas regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro proyecto en otra región.
+    > **Nota**: si estás trabajando en una suscripción a Azure en la que se usan directivas para restringir los nombres de recursos permitidos, es posible que tengas que usar el vínculo situado en la parte inferior del cuadro de diálogo **Crear un nuevo proyecto** para crear el centro mediante Azure Portal.
 
-1. Selecciona **Siguiente** y revisa tu configuración. Luego, selecciona **Crear** y espera a que se complete el proceso.
-1. Cuando se cree el proyecto, cierra las sugerencias que se muestran y revisa la página del proyecto en el Portal de la Fundición de IA de Azure, que debe tener un aspecto similar a la siguiente imagen:
+    > **Sugerencia**: si el botón **Crear** sigue deshabilitado, asegúrate de cambiar el nombre del centro a un valor alfanumérico único.
 
-    ![Captura de pantalla de los detalles de un proyecto de Azure AI en el Portal de la Fundición de IA de Azure.](./media/ai-foundry-project.png)
+1. Espere a que se cree el proyecto.
 
 ## Implementación de modelos
 
@@ -67,16 +62,17 @@ En este ejercicio, evaluarás el rendimiento de un modelo gpt-4o-mini. También 
 Puedes revisar manualmente las respuestas del modelo en función de los datos de prueba. La revisión manual te permite probar entradas diferentes para evaluar si el modelo funciona según lo previsto.
 
 1. En una nueva pestaña del explorador, descarga el archivo [travel_evaluation_data.jsonl](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl) de `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl` y guárdalo en una carpeta local como **travel_evaluation_data.jsonl** (asegúrate de guardarlo como archivo .jsonl, no como archivo .txt).
-1. De nuevo en la pestaña Portal de la Fundición de IA de Azure, en el panel de navegación, en la sección **Evaluar y mejorar**, selecciona **Evaluación**.
+1. De nuevo en la pestaña Portal de la Fundición de IA de Azure, en el panel de navegación, en la sección **Protección y gobernanza**, selecciona **Evaluación**.
+1. Si el panel **Crear una nueva evaluación** se abre automáticamente, selecciona **Cancelar** para cerrarlo.
 1. En la página **Evaluación**, visualiza la pestaña **Evaluaciones manuales** y selecciona **+ Nueva evaluación manual**.
-1. En la sección **Configuraciones**, en la lista **Modelo**, selecciona la implementación de tu modelo **gpt-4o-mini**.
+1. En la sección **Configuraciones**, en la lista **Modelo**, selecciona la implementación de tu modelo **gpt-4o**.
 1. Cambia el **mensaje del sistema** a las siguientes instrucciones para un asistente de viajes de IA:
 
    ```
    Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. En la sección **Resultado de evaluación manual**, selecciona **Importar datos de prueba** y carga el archivo **travel_evaluation_data.jsonl** que has descargado anteriormente; asigna los campos del conjunto de datos de la siguiente manera:
+1. En la sección **Resultado de evaluación manual**, selecciona **Importar datos de prueba** y carga el archivo **travel_evaluation_data.jsonl** que descargaste anteriormente; desplázate hacia abajo para asignar los campos del conjunto de datos de la siguiente manera:
     - **Entrada**: pregunta
     - **Respuesta esperada**: ExpectedResponse
 1. Revisa las preguntas y las respuestas esperadas en el archivo de prueba: las usarás para evaluar las respuestas que genera el modelo.
@@ -95,39 +91,48 @@ La evaluación automatizada es un enfoque que intenta abordar estas deficiencias
 
 1. Usa la flecha atrás (**&larr;**) situada junto al título de página **Evaluación manual** para volver a la página **Evaluación**.
 1. Visualiza la pestaña **Evaluaciones automatizadas**.
-1. Selecciona **Crear una nueva evaluación** y, cuando se te solicite, selecciona la opción para evaluar un **Modelo e indicación**
-1. En la página **Crear una nueva evaluación**, en la sección **Información básica**, revisa el nombre de evaluación generado automáticamente predeterminado (puedes cambiarlo si quieres) y selecciona la implementación de modelo **gpt-40-mini**.
-1. Cambia el **mensaje del sistema** a las mismas instrucciones para un asistente de viajes de IA que usaste anteriormente:
+1. Selecciona **Crear una nueva evaluación** y, cuando se te solicite, selecciona la opción para **Evaluar un modelo** y selecciona **Siguiente**.
+1. En la página **Seleccionar origen de datos**, selecciona **Usar el conjunto de datos** y selecciona el conjunto de datos **travel_evaluation_data_jsonl_*xxxx...*** basado en el archivo que cargaste anteriormente y selecciona **Siguiente**.
+1. En la página **Probar el modelo**, selecciona el modelo **gpt-4o-mini** y cambia el **mensaje del sistema** a las mismas instrucciones del asistente de viajes de IA que usaste anteriormente:
 
    ```
    Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. En la sección **Configurar datos de prueba**, ten en cuenta que puedes usar un modelo GPT para generar datos de prueba automáticamente (que puedes editar y complementar para que coincidan con tus propias expectativas), usar un conjunto de datos existente o cargar un archivo. En este ejercicio, selecciona **Usar conjunto de datos existente** y después selecciona el conjunto de datos **travel_evaluation_data_jsonl_*xxxx...*** (que se ha creado al cargar el archivo .jsonl anteriormente).
-1. Revisa las filas de ejemplo del conjunto de datos y, a continuación, en la sección **Elegir la columna de datos**, selecciona las siguientes asignaciones de columnas:
-    - **Consulta**: pregunta
-    - **Contexto**: *deja este espacio en blanco. Se usa para evaluar la "base" al asociar un origen de datos contextual con el modelo.*
-    - **Verdad fundamental**: ExpectedAnswer
-1. En la sección **Elegir lo que deseas evaluar**, selecciona <u>todas</u> las siguientes categorías de evaluación:
-    - Calidad de IA (asistida por IA)
-    - Riesgo y seguridad (asistido por IA)
-    - Calidad de IA (NLP)
-1. En la lista **Elegir una implementación de modelo como juez**, selecciona el modelo **gpt-4o**. Este modelo se usará para evaluar las respuestas del modelo **gpt-4o-mini** para las métricas de comparación de IA generativa y de calidad relacionadas con el lenguaje.
-1. Selecciona **Crear** para iniciar el proceso de evaluación y espera a que se complete. Esto puede tardar unos minutos.
+1. Para el campo **Consulta**, selecciona **\{\{item.question\}\}**.
+1. Seleccione **Siguiente** para ir a la página siguiente.
+1. En la página **Configurar evaluadores**, usa el botón **+Agregar** para agregar los siguientes evaluadores, configurando cada uno de ellos de la siguiente manera:
+    - **Puntuador de modelos**:
+        - **Nombre de criterios**: Semantic_similarity
+        - **Calificar con**: *selecciona el modelo **gpt-4o***
+        - **Configuración del usuario** (en la parte inferior):
 
-    > **Sugerencia**: si se produce un error que indica que los permisos del proyecto se han establecido, espera un minuto y, a continuación, selecciona **Crear** de nuevo. Los permisos de recursos para un proyecto recién creado pueden tardar algún tiempo en propagarse.
 
-1. Cuando se haya completado la evaluación, desplázate hacia abajo si es necesario para ver el área **Panel de métrica** y ver las métricas de **Calidad de IA (asistida por IA)**:
+            Salida: \{\{sample.output_text\}\}<br>
+            Verdad fundamental: \{\{item. ExpectedResponse\}\}<br>
+            <br>
+        
+    - **Evaluador de escala de Likert**:
+        - **Nombre de criterios**: relevancia
+        - **Calificar con**: *selecciona el modelo **gpt-4o***
+        - **Consulta**: \{\{item.question\}\}
 
-    ![Captura de pantalla de métrica de calidad de IA en el Portal de la Fundición de IA de Azure.](./media/ai-quality-metrics.png)
+    - **Similitud de texto**:
+        - **Nombre de criterios**: F1_Score
+        - **Verdad fundamental**: \{\{item.ExpectedResponse\}\}
 
-    Usa los iconos **<sup>(i) </sup>** para ver las definiciones de métricas.
+    - **Contenido injusto y de odio**:
+        - **Nombre de criterios**: Hate_and_unfairness
+        - **Consulta**: \{\{item.question\}\}
 
-1. Visualiza la pestaña **Riesgo y seguridad** para ver las métricas asociadas al contenido potencialmente perjudicial.
-1. Consulta la pestaña **Calidad de IA (NLP**) para ver las métricas estándar para los modelos de IA generativa.
-1. Desplázate hacia atrás hasta la parte superior de la página si es necesario y selecciona la pestaña **Datos** para ver los datos sin procesar de la evaluación. Los datos incluyen las métricas de cada entrada, así como explicaciones del razonamiento del modelo gpt-4o aplicado al evaluar las respuestas.
+1. Selecciona **Siguiente** y revisa la configuración de la evaluación. Debes haber configurado la evaluación para usar el conjunto de datos de evaluación de viajes para evaluar el modelo **gpt-4o-mini** para la similitud semántica, relevancia, puntuación F1 y lenguaje de odio e injusto.
+1. Asigna un nombre adecuado a la evaluación y selecciona el campo **Enviar** para iniciar el proceso de evaluación y espera a que se complete. Esto puede tardar unos minutos. Puedes usar el botón **Actualizar** de la barra de herramientas para comprobar su estado.
 
-    ![Captura de pantalla de datos de evaluación en el Portal de la Fundición de IA de Azure.](./media/evaluation-data.png)
+1. Cuando se haya completado la evaluación, desplázate hacia abajo si es necesario para revisar los resultados.
+
+    ![Captura de pantalla de las métricas de evaluación.](./media/ai-quality-metrics.png)
+
+1. Desplázate a la parte superior de la página y selecciona la pestaña **Datos** para ver los datos sin procesar de la evaluación. Los datos incluyen las métricas de cada entrada, así como explicaciones del razonamiento del modelo gpt-4o aplicado al evaluar las respuestas.
 
 ## Limpieza
 
