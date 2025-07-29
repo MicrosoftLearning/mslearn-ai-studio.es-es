@@ -36,8 +36,6 @@ Comencemos con la implementación de un modelo en un proyecto de Fundición de I
 1. En el panel **Configuración**, anota el nombre de la implementación del modelo; que debe ser **gpt-4o**. Para confirmarlo, mira la implementación en la página **Modelos y puntos de conexión** (simplemente abre esa página en el panel de navegación de la izquierda).
 1. En el panel de navegación de la izquierda, selecciona **Información general** para ver la página principal del proyecto; que tiene este aspecto:
 
-    > **Nota**: si se muestra un error de *permisos insuficientes**, usa el botón **Reparar** para resolverlo.
-
     ![Captura de pantalla de la página de información general de un proyecto de Fundición de IA de Azure.](./media/ai-foundry-project.png)
 
 ## Creación de una aplicación cliente para chatear con el modelo
@@ -152,8 +150,9 @@ Ahora que has implementado un modelo, puedes usar los SDK de la Fundición de IA
     ```python
    # Add references
    from dotenv import load_dotenv
+   from urllib.parse import urlparse
    from azure.identity import DefaultAzureCredential
-   from azure.ai.projects import AIProjectClient
+   from azure.ai.inference import ChatCompletionsClient
    from azure.ai.inference.models import SystemMessage, UserMessage, AssistantMessage
     ```
 
@@ -167,48 +166,36 @@ Ahora que has implementado un modelo, puedes usar los SDK de la Fundición de IA
     ```
 
 1. En la función **principal**, en el comentario **Obtener ajustes de configuración**, observa que el código carga los valores de la cadena de conexión del proyecto y del nombre de implementación del modelo que has definido en el archivo de configuración.
-1. Busca el comentario **Inicializar el cliente de proyecto** y agrega el siguiente código para conectarte a tu proyecto de Fundición de IA de Azure mediante las credenciales de Azure con las que has iniciado sesión:
+1. Busca el comentario **Get a chat client** y agrega el siguiente código para crear un objeto de cliente para chatear con un modelo:
 
     > **Sugerencia**: Ten cuidado de mantener el nivel de sangría correcto del código.
 
     **Python**
 
     ```python
-   # Initialize the project client
-   projectClient = AIProjectClient(            
-            credential=DefaultAzureCredential(
-                exclude_environment_credential=True,
-                exclude_managed_identity_credential=True
-            ),
-            endpoint=project_connection,
-        )
-    ```
-
-    **C#**
-
-    ```csharp
-   // Initialize the project client
-   DefaultAzureCredentialOptions options = new()
-       { ExcludeEnvironmentCredential = true,
-        ExcludeManagedIdentityCredential = true };
-   var projectClient = new AIProjectClient(
-        new Uri(project_connection),
-        new DefaultAzureCredential(options));
-    ```
-
-1. Busca el comentario **Get a chat client** y agrega el siguiente código para crear un objeto de cliente para chatear con un modelo:
-
-    **Python**
-
-    ```python
    # Get a chat client
-   chat = projectClient.inference.get_chat_completions_client()
+   inference_endpoint = f"https://{urlparse(project_endpoint).netloc}/models"
+
+   credential = DefaultAzureCredential(exclude_environment_credential=True,
+                                        exclude_managed_identity_credential=True,
+                                        exclude_interactive_browser_credential=False)
+
+   chat = ChatCompletionsClient(
+            endpoint=inference_endpoint,
+            credential=credential,
+            credential_scopes=["https://ai.azure.com/.default"])
     ```
 
     **C#**
 
     ```csharp
    // Get a chat client
+   DefaultAzureCredentialOptions options = new()More actions
+           { ExcludeEnvironmentCredential = true,
+            ExcludeManagedIdentityCredential = true };
+   var projectClient = new AIProjectClient(
+            new Uri(project_connection),
+            new DefaultAzureCredential(options));
    ChatCompletionsClient chat = projectClient.GetChatCompletionsClient();
     ```
 
@@ -294,6 +281,8 @@ Ahora que has implementado un modelo, puedes usar los SDK de la Fundición de IA
     ```
    dotnet run
     ```
+
+    > **Sugerencia**: Si se produce un error de compilación porque la versión 9.0 de .NET no está instalada, usa el comando `dotnet --version` para determinar la versión de .NET instalada en tu entorno y, a continuación, edita el archivo **chat_app.csproj** en la carpeta de código para actualizar la configuración de **TargetFramework** según proceda.
 
 1. Cuando se te solicite, escribe una pregunta, como `What is the fastest animal on Earth?` y revisa la respuesta del modelo de IA generativa.
 1. Prueba algunas preguntas de seguimiento, como `Where can I see one?` o `Are they endangered?`. La conversación debe continuar, usando el historial de chats como contexto para cada iteración.
