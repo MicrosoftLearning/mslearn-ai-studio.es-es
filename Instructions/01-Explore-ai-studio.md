@@ -66,9 +66,9 @@ Un *proyecto* de Azure AI proporciona un área de trabajo de colaboración para 
 
 1. Cierra la pestaña Azure Portal y vuelve al Portal de la Fundición de IA de Azure.
 
-## Revisión de las conexiones del proyecto
+## Revisión de los puntos de conexión del proyecto
 
-El proyecto de Fundición de IA de Azure y el recurso de Fundición de IA de Azure al que pertenece incluyen conexiones a recursos que puedes usar en aplicaciones de IA.
+El proyecto de la Fundición de IA de Azure incluye una serie de *puntos de conexión* que las aplicaciones cliente pueden utilizar para conectarse al proyecto y a los modelos y los servicios de IA que incluye.
 
 1. En la página Centro de gestión, en el panel de navegación, en el proyecto, selecciona **Ir al proyecto recurso**.
 1. En la página **Información general** del proyecto, visualiza la sección **Puntos de conexión y claves**; que contiene puntos de conexión y claves de autorización que puedes usar en el código de la aplicación para acceder a:

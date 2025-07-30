@@ -22,7 +22,7 @@ Las características de Fundición de IA de Azure que usaremos en este ejercicio
 
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
-1. En el explorador, ve a `https://ai.azure.com/managementCenter/allResources` y selecciona **Crear**. A continuación, elige la opción para crear un nuevo **recurso del centro de IA**.
+1. En el explorador, accede a `https://ai.azure.com/managementCenter/allResources` y selecciona **Crear nuevo**. A continuación, elige la opción para crear un nuevo **recurso del centro de IA**.
 1. En el asistente para **crear un proyecto**, escribe un nombre válido para tu proyecto y selecciona la opción para crear un centro. A continuación, usa el vínculo **Cambiar nombre del centro** para especificar un nombre válido para el nuevo centro, expande **Opciones avanzadas** y especifica la siguiente configuración para el proyecto:
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
@@ -251,6 +251,8 @@ Ahora que tienes un índice de trabajo, puedes usar el SDK de la Azure OpenAI pa
     ```
    dotnet run
     ```
+
+    > **Sugerencia**: Si se produce un error de compilación porque la versión 9.0 de .NET no está instalada, usa el comando `dotnet --version` para determinar la versión de .NET instalada en tu entorno y, a continuación, edita el archivo **rag_app.csproj** en la carpeta de código para actualizar la configuración de **TargetFramework** según proceda.
 
 1. Cuando se te solicite, escribe una pregunta, como `Where should I go on vacation to see architecture?` y revisa la respuesta del modelo de IA generativa.
 

@@ -34,7 +34,7 @@ Vamos a comenzar iniciando sesión en el Portal de la Fundición de IA de Azure 
     ![Captura de pantalla de la página de bancos de pruebas de modelos gpt-4o.](./media/gpt4-benchmarks.png)
 
 1. Usa la flecha atrás (**&larr;**) junto al título de página **gpt-4o** para volver al catálogo de modelos.
-1. Busca `Phi-3.5-mini-instruct` y visualiza los detalles y los bancos de pruebas del modelo **Phi-3.5-mini-instruct**.
+1. Busca `Phi-4-mini-instruct` y visualiza los detalles y los bancos de pruebas del modelo **Phi-4-mini-instruct**.
 
 ## Comparación de modelos
 
@@ -47,16 +47,14 @@ Has revisado dos modelos diferentes, ambos podrían usarse para implementar una 
 
 1. En el panel **Modelos para comparar**, ten en cuenta que puedes seleccionar tareas populares, como *respuesta a preguntas* para seleccionar automáticamente modelos usados para tareas específicas.
 1. Usa el icono **Borrar todos los modelos** (&#128465;) para eliminar todos los modelos seleccionados previamente.
-1. Usa el botón **+ Modelo para comparar** para agregar el modelo **gpt-4o** a la lista. A continuación, usa el mismo botón para agregar el modelo **Phi-3.5-mini-instruct** a la lista.
+1. Usa el botón **+ Modelo para comparar** para agregar el modelo **gpt-4o** a la lista. A continuación, usa el mismo botón para agregar el modelo **Phi-4-mini-instruct** a la lista.
 1. Revisa el gráfico, que compara los modelos basados en el **índice de calidad** (una puntuación estandarizada que indica la calidad del modelo) y el **coste**. Para ver los valores específicos de un modelo, mantén el mouse sobre el punto que lo representa en el gráfico.
 
-    ![Captura de pantalla del gráfico de comparación de modelos para gpt-4o y Phi-3.5-mini-instruct.](./media/comparison-chart.png)
+    ![Captura de pantalla del gráfico de comparación de modelos para gpt-4o y Phi-4-mini-instruct.](./media/comparison-chart.png)
 
 1. En el menú desplegable **eje X**, en **Calidad**, selecciona las siguientes métricas y observa cada gráfico resultante antes de pasar al siguiente:
     - Precisión
-    - Coherencia
-    - Fluidez
-    - Relevancia
+    - Índice de calidad
 
     En función de los bancos de pruebas, el modelo gpt-4o parece ofrecer el mejor rendimiento general, pero a un coste mayor.
 
@@ -103,27 +101,25 @@ Ahora que tienes una implementación del modelo, puedes usar el área de juegos 
 
 ## Implementación de otro modelo
 
-Al crear el proyecto, el modelo **gpt-4o** seleccionado se implementó automáticamente. Vamos a implementar el modelo ***Phi-3.5-mini-instruct** que también has considerado.
+Al crear el proyecto, el modelo **gpt-4o** seleccionado se implementó automáticamente. Vamos a implementar el modelo ***Phi-4-mini-instruct** que también has considerado.
 
 1. En el panel de navegación de la izquierda, en la sección **Mis recursos**, selecciona **Modelos + puntos de conexión**.
-1. En la pestaña **Implementaciones de modelos**, en la lista desplegable **+ Implementar modelo**, selecciona **Implementar modelo base**. A continuación, busca `Phi-3.5-mini-instruct` y confirma tu selección.
+1. En la pestaña **Implementaciones de modelos**, en la lista desplegable **+ Implementar modelo**, selecciona **Implementar modelo base**. A continuación, busca `Phi-4-mini-instruct` y confirma tu selección.
 1. Acepta la licencia del modelo.
-1. Implementa un modelo **Phi-3.5-mini-instruct** con la siguiente configuración:
-    - **Nombre de implementación**: *un nombre válido para la implementación de modelo*
+1. Implementa un modelo **Phi-4-mini-instruct** con la siguiente configuración:
+    - **Nombre de implementación**: *nombre válido para la implementación de modelo*
     - **Tipo de implementación**: estándar global
     - **Detalles de implementación**: *usa la configuración predeterminada*
 
 1. Espera a que la implementación se complete.
 
-## Chatear con el modelo *Phi-3.5*
+## Chatear con el modelo *Phi-4*
 
 Ahora vamos a chatear con el nuevo modelo en el área de juegos.
 
 1. En la barra de navegación, selecciona **Áreas de juegos**. A continuación, selecciona el **Área de juegos de chat**.
-1. En el área de juegos de chat, en el panel **Configuración**, asegúrate de que el modelo **Phi-3.5-mini-instruct** esté seleccionado y, en el campo **Proporcionar las instrucciones del modelo y el contexto**, establece el aviso del sistema en `You are an AI assistant that helps solve problems.` (el mismo aviso del sistema que usaste para probar el modelo gpt-4o).
-1. Selecciona **Aplicar cambios** para actualizar el aviso del sistema.
-1. Asegúrate de que se inicia una nueva sesión de chat antes de repetir las mismas indicaciones que usaste anteriormente para probar el modelo gpt-4.
-1. En la ventana de chat, escribe la consulta siguiente
+1. En el sitio de prueba de chat, en el panel **Configuración**, asegúrate de que el modelo **Phi-4-mini-instruct** está seleccionado y, en el cuadro de chat, proporciona la primera línea como `System message: You are an AI assistant that helps solve problems.` (el mismo aviso del sistema que usaste para probar el modelo gpt-4o, pero, dado que no hay ninguna configuración de mensajes del sistema, lo proporcionamos en el primer chat para fines de contexto).
+1. En una nueva línea de la ventana de chat (debajo del mensaje del sistema), escribe la siguiente consulta.
 
     ```
    I have a fox, a chicken, and a bag of grain that I need to take over a river in a boat. I can only take one thing at a time. If I leave the chicken and the grain unattended, the chicken will eat the grain. If I leave the fox and the chicken unattended, the fox will eat the chicken. How can I get all three things across the river without anything being eaten?
