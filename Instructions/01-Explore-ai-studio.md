@@ -1,7 +1,7 @@
 ---
 lab:
   title: Preparación para un proyecto de desarrollo de IA
-  description: Obtén información sobre cómo organizar los recursos en la nube en centros y proyectos para que los desarrolladores estén preparados para tener éxito al crear soluciones de IA.
+  description: Obtenga información sobre cómo organizar los recursos en la nube en proyectos de Fundición de IA de Azure a fin de que los desarrolladores estén preparados crear soluciones de IA correctas.
 ---
 
 # Preparación para un proyecto de desarrollo de IA
@@ -39,7 +39,10 @@ Un *proyecto* de Azure AI proporciona un área de trabajo de colaboración para 
 
     > \* Algunos de los recursos de Azure AI están restringidos por cuotas de modelo regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Selecciona **Crear** y espera a que se cree el proyecto, incluida la implementación del modelo gpt-4 que seleccionaste.
+1. Selecciona **Crear** y espera a que tu proyecto se cree. Si se te solicita, implementa el modelo gpt-4o mediante el tipo de implementación **Estándar global** y personaliza los detalles de la implementación para establecer un **Límite de velocidad de tokens por minuto** de 50 000 (o el máximo disponible si es inferior a 50 000).
+
+    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM es suficiente para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero se pueden producir errores si se supera el límite de velocidad.
+
 1. Cuando se cree el proyecto, el área de juegos de chat se abrirá automáticamente para que puedas probar el modelo:
 
     ![Captura de pantalla del área de juegos de chat en Fundición de IA de Azure.](./media/ai-foundry-chat-playground.png)
