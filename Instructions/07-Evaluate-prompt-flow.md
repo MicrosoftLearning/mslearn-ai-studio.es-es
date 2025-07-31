@@ -103,7 +103,7 @@ La evaluación automatizada es un enfoque que intenta abordar estas deficiencias
 1. Seleccione **Siguiente** para ir a la página siguiente.
 1. En la página **Configurar evaluadores**, usa el botón **+Agregar** para agregar los siguientes evaluadores, configurando cada uno de ellos de la siguiente manera:
     - **Puntuador de modelos**:
-        - **Nombre de criterios**: Semantic_similarity
+        - **Nombre de criterios**: *Seleccione el valor predeterminado **Semantic_similarity***
         - **Calificar con**: *selecciona el modelo **gpt-4o***
         - **Configuración del usuario** (en la parte inferior):
 
@@ -113,12 +113,12 @@ La evaluación automatizada es un enfoque que intenta abordar estas deficiencias
             <br>
         
     - **Evaluador de escala de Likert**:
-        - **Nombre de criterios**: relevancia
+        - **Nombre de criterios**: *Seleccione el valor predeterminado **Relevance***
         - **Calificar con**: *selecciona el modelo **gpt-4o***
         - **Consulta**: \{\{item.question\}\}
 
     - **Similitud de texto**:
-        - **Nombre de criterios**: F1_Score
+        - **Nombre de criterios**: *Seleccione el valor predeterminado **F1_Score***
         - **Verdad fundamental**: \{\{item.ExpectedResponse\}\}
 
     - **Contenido injusto y de odio**:
