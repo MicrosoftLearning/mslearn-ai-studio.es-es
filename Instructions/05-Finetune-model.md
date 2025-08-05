@@ -38,11 +38,8 @@ Comencemos con la implementación de un modelo en un proyecto de Fundición de I
 
     > \* En el momento de escribir, estas regiones admitían el ajuste del modelo gpt-4o.
 
-1. Selecciona **Crear** y espera a que tu proyecto se cree. Si se te solicita, implementa el modelo gpt-4o mediante el tipo de implementación **Estándar global** y personaliza los detalles de la implementación para establecer un **Límite de velocidad de tokens por minuto** de 50 000 (o el máximo disponible si es inferior a 50 000).
-
-    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM es suficiente para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero se pueden producir errores si se supera el límite de velocidad.
-
-1. Cuando se cree el proyecto, el área de juegos de chat se abrirá automáticamente para que puedas probar el modelo:
+1. Selecciona **Crear** y espera a que se cree el proyecto, incluida la implementación del modelo gpt-4 que seleccionaste.
+1. Cuando se cree el proyecto, el área de juegos de chat se abrirá automáticamente.
 1. En el panel **Configuración**, anota el nombre de la implementación del modelo; que debe ser **gpt-4o**. Para confirmarlo, mira la implementación en la página **Modelos y puntos de conexión** (simplemente abre esa página en el panel de navegación de la izquierda).
 1. En el panel de navegación de la izquierda, selecciona **Información general** para ver la página principal del proyecto; que tiene este aspecto:
 
