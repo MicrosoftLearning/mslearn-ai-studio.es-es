@@ -147,7 +147,7 @@ Ahora que ha implementado un modelo, puede usar los SDK de la Fundición de IA d
 
     ```python
    # Get a chat client
-   openai_client = project_client.inference.get_azure_openai_client(api_version="2024-10-21")
+   openai_client = project_client.get_openai_client(api_version="2024-10-21")
     ```
 
 1. Busca el comentario **Initialize prompt with system message** y agrega el código siguiente para inicializar una colección de mensajes con una indicación del sistema.
