@@ -1,7 +1,7 @@
 ---
 lab:
   title: Preparación para un proyecto de desarrollo de IA
-  description: Obtén información sobre cómo organizar los recursos en la nube en centros y proyectos para que los desarrolladores estén preparados para tener éxito al crear soluciones de IA.
+  description: Obtenga información sobre cómo organizar los recursos en la nube en proyectos de Fundición de IA de Azure a fin de que los desarrolladores estén preparados crear soluciones de IA correctas.
 ---
 
 # Preparación para un proyecto de desarrollo de IA
@@ -35,11 +35,14 @@ Un *proyecto* de Azure AI proporciona un área de trabajo de colaboración para 
     - **Recurso de Fundición de IA de Azure**: *un nombre válido para el recurso de Fundición de IA de Azure*
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
-    - **Región**: *selecciona cualquier ubicación compatible con los servicios de IA***\*
+    - **Región**: *seleccione cualquiera (se recomienda Fundición de IA\*).
 
     > \* Algunos de los recursos de Azure AI están restringidos por cuotas de modelo regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Selecciona **Crear** y espera a que se cree el proyecto, incluida la implementación del modelo gpt-4 que seleccionaste.
+1. Selecciona **Crear** y espera a que tu proyecto se cree. Si se te solicita, implementa el modelo gpt-4o mediante el tipo de implementación **Estándar global** y personaliza los detalles de la implementación para establecer un **Límite de velocidad de tokens por minuto** de 50 000 (o el máximo disponible si es inferior a 50 000).
+
+    > **Nota**: reducir el TPM ayuda a evitar el uso excesivo de la cuota disponible en la suscripción que está usando. 50 000 TPM es suficiente para los datos que se usan en este ejercicio. Si la cuota disponible es inferior a esta, podrás completar el ejercicio, pero se pueden producir errores si se supera el límite de velocidad.
+
 1. Cuando se cree el proyecto, el área de juegos de chat se abrirá automáticamente para que puedas probar el modelo:
 
     ![Captura de pantalla del área de juegos de chat en Fundición de IA de Azure.](./media/ai-foundry-chat-playground.png)
@@ -66,9 +69,9 @@ Un *proyecto* de Azure AI proporciona un área de trabajo de colaboración para 
 
 1. Cierra la pestaña Azure Portal y vuelve al Portal de la Fundición de IA de Azure.
 
-## Revisión de las conexiones del proyecto
+## Revisión de los puntos de conexión del proyecto
 
-El proyecto de Fundición de IA de Azure y el recurso de Fundición de IA de Azure al que pertenece incluyen conexiones a recursos que puedes usar en aplicaciones de IA.
+El proyecto de la Fundición de IA de Azure incluye una serie de *puntos de conexión* que las aplicaciones cliente pueden utilizar para conectarse al proyecto y a los modelos y los servicios de IA que incluye.
 
 1. En la página Centro de gestión, en el panel de navegación, en el proyecto, selecciona **Ir al proyecto recurso**.
 1. En la página **Información general** del proyecto, visualiza la sección **Puntos de conexión y claves**; que contiene puntos de conexión y claves de autorización que puedes usar en el código de la aplicación para acceder a:
