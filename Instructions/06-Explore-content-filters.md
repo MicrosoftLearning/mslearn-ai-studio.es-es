@@ -8,7 +8,7 @@ lab:
 
 Fundición de IA de Azure incluye filtros de contenido predeterminados para ayudar a garantizar que las solicitudes y finalizaciones potencialmente perjudiciales se identifiquen y quiten de las interacciones con el servicio. Además, puedes definir filtros de contenido personalizados para tus necesidades específicas para asegurarte de que las implementaciones del modelo aplican los principios de IA responsables adecuados para tu escenario de IA generativa. El filtrado de contenido es un elemento de enfoque eficaz para IA responsable al trabajar con modelos de IA generativa.
 
-En este ejercicio, explorarás el efecto de los filtros de contenido predeterminados en Fundición de IA de Azure.
+En este ejercicio, explorará los efectos de los filtros de contenido de Fundición de IA de Azure.
 
 Este ejercicio dura aproximadamente **25** minutos.
 
@@ -22,34 +22,26 @@ Comencemos con la implementación de un modelo en un proyecto de Fundición de I
 
     ![Captura de pantalla del Portal de la Fundición de IA de Azure.](./media/ai-foundry-home.png)
 
-1. En la página principal, en la sección **Explorar modelos y funcionalidades**, busca el modelo `Phi-4`, que usaremos en nuestro proyecto.
-1. En los resultados de la búsqueda, selecciona el modelo **Phi-4** para ver sus detalles y, a continuación, en la parte superior de la página del modelo, selecciona **Usar este modelo**.
+1. En la página principal, en la sección **Explorar modelos y funcionalidades**, busca el modelo `gpt-4o`, que usaremos en nuestro proyecto.
+1. En los resultados de la búsqueda, selecciona el modelo **gpt-4o** para ver sus detalles y, a continuación, en la parte superior de la página del modelo, selecciona **Usar este modelo**.
 1. Cuando se te pida que crees un proyecto, escribe un nombre válido para el proyecto y expande **Opciones avanzadas**.
 1. Selecciona **Personalizar** y especifica la siguiente configuración para el proyecto:
     - **Recurso de Fundición de IA de Azure**: *un nombre válido para el recurso de Fundición de IA de Azure*
     - **Suscripción**: *suscripción a Azure*
     - **Grupo de recursos**: *crea o selecciona un grupo de recursos*
-    - **Región**: selecciona cualquiera de las siguientes regiones\*:
-        - Este de EE. UU.
-        - Este de EE. UU. 2
-        - Centro-Norte de EE. UU
-        - Centro-sur de EE. UU.
-        - Centro de Suecia
-        - Oeste de EE. UU.
-        - Oeste de EE. UU. 3
+    - **Región**: *seleccione cualquiera (se recomienda Fundición de IA\*).
 
-    > \* En el momento de escribir esto, el modelo de Microsoft *Phi-4* que usaremos en este ejercicio estaba disponible en estas regiones. Puedes comprobar la disponibilidad regional más reciente de los modelos específicos en la [documentación de Fundición de IA de Azure](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). En caso de que se alcance un límite de cuota regional más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
+    > \* Algunos de los recursos de Azure AI están restringidos por cuotas de modelo regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Selecciona **Crear** y espera a que tu proyecto se cree.
-1. Cuando se te solicite información de Phi-4, acepta los términos de uso e implementa el modelo.
-1. Cuando se implemente el modelo, selecciona el botón azul situado en la parte superior de la información de implementación para abrir el área de juegos.
-1. En el panel **Configuración**, anota el nombre de la implementación del modelo; que debe ser **Phi-4**.
+1. Selecciona **Crear** y espera a que tu proyecto se cree. Si se le solicita, implemente el modelo gpt-4o mediante el tipo de implementación **estándar global**.
+1. Cuando se implementa el modelo, se muestra en el área de juegos.
+1. En el panel **Configuración**, anota el nombre de la implementación del modelo; que debe ser **gpt-4o**.
 
 ## Chatear con el filtro de contenido
 
-El modelo Phi-4 que implementaste tiene aplicado un filtro de contenido predeterminado, que tiene un conjunto equilibrado de filtros que no permitirá el contenido más nocivo, al tiempo que permite el lenguaje de entrada y salida considerado razonablemente seguro.
+El modelo que implementó tiene aplicado un filtro de contenido predeterminado, que tiene un conjunto equilibrado de filtros que impedirán el contenido más dañino al tiempo y permitirán que el lenguaje de entrada y salida se considere razonablemente seguro.
 
-1. En el área de juegos de chat, asegúrate de que el modelo Phi-4 está seleccionado.
+1. En el área de juegos de chat, asegúrese de que el modelo gpt-4o está seleccionado.
 1. Envía la siguiente indicación y visualiza la respuesta:
 
     ```
@@ -93,15 +85,15 @@ Cuando el filtro de contenido predeterminado no satisface tus necesidades, puede
     - **Sexual**: Lenguaje sexualmente explícito o abusivo.
     - **Daño autoinfligido**: Lenguaje que describe o fomenta el daño autoinfligido.
 
-    Los filtros se aplican para cada una de estas categorías a indicaciones y finalizaciones, con base en umbrales de bloqueo de gravedad de **bloque bajo**, **bloque medio** y **bloque alto**, que se usan para determinar qué tipos específicos de lenguaje se interceptan e impiden mediante el filtro.
+    Los filtros de cada una de estas categorías se aplican a indicaciones y finalizaciones, en función de los umbrales de bloqueo que se usan para determinar qué tipos específicos de lenguaje intercepta y evita el filtro.
 
     Además, se proporcionan protecciones de *escudo de solicitud* para mitigar los intentos deliberados de abuso de la aplicación de IA generativa.
 
-1. Cambia el umbral de cada categoría de filtro de entrada a **Bloquear todo**.
+1. Cambie el umbral de cada categoría de filtro de entrada al umbral de bloqueo ***más alto***.
 
-1. En la página **Filtro de salida**, revisa la configuración que se puede aplicar a las respuestas de salida y cambia el umbral de cada categoría a **Bloquear todo**.
+1. En la página **Filtro de salida**, revise la configuración que se puede aplicar a las respuestas de salida y cambie el umbral de cada categoría al umbral de bloqueo ***más alto***.
 
-1. En la página **Implementación**, selecciona la implementación del modelo **Phi-4** para aplicarle el nuevo filtro de contenido; confirma que deseas reemplazar el filtro de contenido existente cuando se te solicite.
+1. En la página **Implementación**, seleccione la implementación del modelo **gpt-4o** para aplicarle el nuevo filtro de contenido y, cuando se le solicite, confirme que desea reemplazar el filtro de contenido existente.
 
 1. En la página **Revisar**, selecciona **Crear filtro** y espera a que se cree el filtro de contenido.
 
@@ -119,7 +111,7 @@ Vamos a realizar un chat final con el modelo para ver el efecto del filtro de co
    What should I do if I cut myself?
     ```
 
-    Esta vez, el filtro de contenido debe bloquear la solicitud en función de lo que podría interpretarse como una referencia a autolesión.
+    Esta vez, el filtro de contenido puede bloquear la indicación sobre la base de que podría interpretarse como que incluye una referencia a daños propios.
 
     > **Importante**: si te preocupa la autolesión u otros problemas de salud mental, busca ayuda profesional. Prueba a escribir la indicación `Where can I get help or support related to self-harm?`
 
